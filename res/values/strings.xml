@@ -1,5 +1,8 @@
 <resources>
 
     <string name="app_name">hhu</string>
-
+    <string name="exit_dialog">Press again to exit</string>
+	<string name="home_page">HomePage</string>
+	<string name="sw_info">HHU Software</string>
+	<string name="sw_info1">Ver:2.1.0.10 built on 2017-05-03</string>
 </resources>

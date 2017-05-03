@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string-array name="img_text" translatable="false">
+        <item>read data</item>  
+        <item>settings</item> 
+        <item>set time</item> 
+        <item>read log</item>
+        <item>account management</item>
+        <item>communication settings</item>
+        <item>sign out</item>
+    </string-array>
+    
+</resources>

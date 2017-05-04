@@ -1,6 +1,8 @@
 <resources>
 
     <string name="app_name">hhu</string>
+    <string name="load_more">load more ...</string>
+    
     <string name="exit_dialog">Press again to exit</string>
 	<string name="home_page">HomePage</string>
 	<string name="sw_info">HHU Software</string>

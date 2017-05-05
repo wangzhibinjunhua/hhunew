@@ -7,19 +7,19 @@
     <TextView
         android:id="@+id/ammeter_sn"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:textSize="15sp"
 		/>    
 	<TextView
         android:id="@+id/ammeter_location"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:textSize="15sp"
 		/> 
 	<TextView
         android:id="@+id/ammeter_model"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:textSize="15sp"
 		/> 
 

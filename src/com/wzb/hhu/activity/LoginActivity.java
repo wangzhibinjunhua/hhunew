@@ -22,7 +22,7 @@ import android.widget.Toast;
  * @author wzb<wangzhibin_x@qq.com>
  * @date May 3, 2017 2:50:41 PM	
  */
-public class LoginActivity extends Activity {  
+public class LoginActivity extends BaseActivity {  
     
     private EditText userName, password;  
     private CheckBox rem_pw, auto_login;  

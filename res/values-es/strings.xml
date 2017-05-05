@@ -2,5 +2,5 @@
 
     <string name="app_name">hhu</string>
     <string name="exit_dialog">Press again to exit</string>
-
+	 <string name="add">Añadir:</string>
 </resources>

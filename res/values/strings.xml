@@ -2,9 +2,12 @@
 
     <string name="app_name">hhu</string>
     <string name="load_more">load more ...</string>
-    
+     <string name="wating">Please wating</string>
+    <string name="add">Add:</string>
     <string name="exit_dialog">Press again to exit</string>
 	<string name="home_page">HomePage</string>
 	<string name="sw_info">HHU Software</string>
 	<string name="sw_info1">Ver:2.1.0.10 built on 2017-05-03</string>
+	<string name="ammeter_list">Ammeter List</string>
+	
 </resources>

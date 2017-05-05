@@ -23,7 +23,7 @@ import android.widget.Toast;
  * @author wzb<wangzhibin_x@qq.com>
  * @date May 3, 2017 10:55:01 AM	
  */
-public class MainActivity extends Activity implements OnClickListener{
+public class MainActivity extends BaseActivity implements OnClickListener{
 	
 	private MyGridView mGridView;
 

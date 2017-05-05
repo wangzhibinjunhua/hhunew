@@ -4,6 +4,79 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <include
+        android:id="@+id/tape_title"
+        layout="@layout/title_layout" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/add"
+            android:layout_centerVertical="true"
+             />
+
+        <EditText
+            android:id="@+id/ammeter_et"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+           android:layout_centerVertical="true"
+             />
+
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="8.0dip"
+            android:src="@drawable/search_icon" />
+
+        <ImageView
+            android:id="@+id/add_btn"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="8.0dip"
+            android:src="@drawable/add_icon" />
+
+        <ImageView
+            android:id="@+id/delete_btn"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="8.0dip"
+            android:src="@drawable/delete_icon" />
+
+        <ImageView
+            android:id="@+id/ok_btn"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="8.0dip"
+            android:src="@drawable/ok_icon" />
+
+        <ImageView
+            android:id="@+id/stop_btn"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="8.0dip"
+            android:src="@drawable/stop_icon" />
+    </LinearLayout>
+    
+    <View 
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"/>"
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -27,11 +100,13 @@
             android:text="model"
             android:textSize="20sp" />
     </LinearLayout>
+    <View 
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"/>
 
     <ListView
         android:id="@+id/ammeter_lv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
-"
 
 </LinearLayout>

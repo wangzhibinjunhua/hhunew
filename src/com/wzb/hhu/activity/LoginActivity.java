@@ -1,6 +1,7 @@
 package com.wzb.hhu.activity;
 
 import com.wzb.hhu.R;
+import com.wzb.hhu.util.CustomDialog;
 
 import android.app.Activity;
 import android.content.Context;
@@ -96,6 +97,7 @@ public class LoginActivity extends BaseActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     LoginActivity.this.startActivity(intent);  
                     finish(); 
+                   
                 }  
                   
             }  

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="80dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/sw_info"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/sw_info1"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="15dp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tv_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="35dip"
+            android:layout_marginLeft="12dip"
+            android:layout_marginTop="10dip"
+            android:gravity="bottom"
+            android:text="帐号:"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_acc"
+            android:layout_width="280dp"
+            android:layout_height="40dip"
+            android:layout_below="@id/tv_acc"
+            android:layout_marginLeft="12dip"
+            android:layout_marginRight="10dip" />
+        
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/et_acc"
+            android:layout_below="@id/tv_acc"
+            android:background="@null"
+            android:padding="5.0dip"
+            android:src="@drawable/more_acc" />
+
+        <TextView
+            android:id="@+id/tv_ps"
+            android:layout_width="wrap_content"
+            android:layout_height="35dip"
+            android:layout_below="@id/et_acc"
+            android:layout_marginLeft="12dip"
+            android:layout_marginTop="10dip"
+            android:gravity="bottom"
+            android:text="密码:"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_ps"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_below="@id/tv_ps"
+            android:layout_marginLeft="12dip"
+            android:layout_marginRight="10dip"
+            android:maxLines="200"
+            android:password="true"
+            android:scrollHorizontally="true" />
+    </RelativeLayout>
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="100dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="100dip"
+            android:layout_height="60dip"
+            android:layout_marginLeft="60dip"
+            android:gravity="center"
+            android:text="登录"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_exit"
+            android:layout_width="100dip"
+            android:layout_height="60dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginLeft="30dip"
+            android:gravity="center"
+            android:text="退出"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

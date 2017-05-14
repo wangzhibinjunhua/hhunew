@@ -3,6 +3,7 @@ package com.wzb.hhu.activity;
 import java.lang.ref.WeakReference;
 
 import com.wzb.hhu.R;
+import com.wzb.hhu.interf.WApplication;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -21,6 +22,7 @@ public class BaseActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
+		WApplication.activityList.add(this);
 		instance = this;
 	}
 	

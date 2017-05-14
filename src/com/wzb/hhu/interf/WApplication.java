@@ -1,9 +1,13 @@
 package com.wzb.hhu.interf;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.wzb.hhu.util.DatabaseHelper;
 import com.wzb.hhu.util.LogUtil;
@@ -39,7 +43,7 @@ public class WApplication extends Application {
     /**
      * 保存全部activity,便于管理
      */
-   // public static List<Activity> activityList = new ArrayList<>();
+    public static List<Activity> activityList = new ArrayList<Activity>();
 
 
     public static boolean isNetWork=true;

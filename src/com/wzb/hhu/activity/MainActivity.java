@@ -1,6 +1,7 @@
 package com.wzb.hhu.activity;
 
 import com.wzb.hhu.R;
+import com.wzb.hhu.interf.WApplication;
 import com.wzb.hhu.view.MyGridAdapter;
 import com.wzb.hhu.view.MyGridView;
 
@@ -77,15 +78,17 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 				//intent.setClass(MainActivity.this, DeviceManagerActivity.class);
 				//startActivity(intent);
 				break;
-			case 7:
-				//intent.setClass(MainActivity.this, CallFragment.class);
-				//startActivity(intent);
+			case 6:
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.setClass(MainActivity.this, LoginNewActivity.class);
+				startActivity(intent);
 				break;
 			case 1:
 				//intent.setClass(MainActivity.this, MainActivity.class);
 				//startActivity(intent);
 				break;
 			case 0:
+				
 				intent.setClass(MainActivity.this, AmmeterListActivity.class);
 				startActivity(intent);
 				break;
@@ -110,8 +113,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 				firstTime = secondTime;// 更新firstTime
 				return true;
 			} else {// 两次按键小于2秒时，退出应用
-				System.exit(0);
-				System.gc();
+				exit();
 				return false;
 			}
 		} else {
@@ -124,6 +126,15 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private void exit() {
+		for (Activity activity : WApplication.activityList) {
+			activity.finish();
+		}
+		finish();
+		System.exit(0);
+		System.gc();
 	}
 
 }

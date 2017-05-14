@@ -27,6 +27,7 @@ public class WApplication extends Application {
      * SP读写工具.
      */
     public static SharedPreferencesUtil sp;
+    public static SharedPreferencesUtil sp_user;
     /**
      * 用户信息.
      */
@@ -61,6 +62,7 @@ public class WApplication extends Application {
         super.onCreate();
         CONTEXT = getApplicationContext();
         sp = new SharedPreferencesUtil(SP_NAME, SharedPreferencesUtil.PRIVATE, CONTEXT);
+        sp_user = new SharedPreferencesUtil("hhu_user", SharedPreferencesUtil.PRIVATE, CONTEXT);
         db=new DatabaseHelper(CONTEXT, "hhu").getWritableDatabase();
         LogUtil.openLog(); // 正式发布请注释次程序语句.
 

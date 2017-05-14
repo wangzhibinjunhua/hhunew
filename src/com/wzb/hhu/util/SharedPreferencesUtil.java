@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -351,5 +352,10 @@ public class SharedPreferencesUtil {
 			}
 		}
 		return null;
+	}
+
+	public Map<String, ?> getAll() {
+		// TODO Auto-generated method stub
+		return sp.getAll();
 	}
 }

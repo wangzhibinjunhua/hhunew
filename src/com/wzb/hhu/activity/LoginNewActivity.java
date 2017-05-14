@@ -1,5 +1,11 @@
 package com.wzb.hhu.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.impl.conn.tsccm.WaitingThread;
+
 import com.wzb.hhu.R;
 import com.wzb.hhu.interf.WApplication;
 
@@ -32,6 +38,7 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 	private PopupWindow pw;
 	private ListView lv;
 	private LinearLayout parent, option;
+	private Map<String, String> map;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +61,13 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 
 		accSelect = (ImageView) findViewById(R.id.acc_select);
 		accSelect.setOnClickListener(this);
-
+		
+		map = (Map<String, String>) WApplication.sp_user.getAll();
+		List<String> list = new ArrayList<String>();
+		for (int i = 0; i < (map.size()/2); i++) {
+			String name = WApplication.sp_user.get("name" + i, "");
+			list.add(name);
+		}
 	}
 
 	@Override

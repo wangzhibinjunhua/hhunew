@@ -57,6 +57,8 @@ public class WApplication extends Application {
     
     public static SQLiteDatabase db;
     
+    public static int USER_LEVEL=0;
+    
     @Override
     public void onCreate() {
         super.onCreate();

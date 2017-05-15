@@ -15,7 +15,6 @@ import android.widget.TextView;
 public class BaseActivity extends Activity{
 
 	public static BaseActivity instance;
-	private Dialog progressDialog;
 	
 	
 	@Override
@@ -34,53 +33,7 @@ public class BaseActivity extends Activity{
 		}
 	}
 	
-	public Dialog getDialog() {
-		if (progressDialog == null) {
-			progressDialog = new Dialog(this, R.style.dialog);
-			progressDialog.setContentView(R.layout.progress_dialog);
-		}
-		return progressDialog;
-	}
 
-	public void showDialog(String title, String message, boolean cancelable) {
-		if (isFinishing()) {
-			return;
-		}
-
-		try {
-			progressDialog = getDialog();
-			TextView dialogMsg = (TextView) progressDialog.findViewById(R.id.tv_dialog_msg);
-			dialogMsg.setText(message);
-			progressDialog.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void showDialog(String title, String message) {
-		showDialog(title, message, true);
-	}
-	
-	public void showDialog(){
-		if (isFinishing()) {
-			return;
-		}
-		
-		try {
-			progressDialog = getDialog();
-			progressDialog.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	public void dismisssDialog() {
-		if (progressDialog != null && progressDialog.isShowing()) {
-			progressDialog.dismiss();
-		}
-	}
-	
 	@Override
 	protected void onStart() {
 		super.onStart();

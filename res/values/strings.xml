@@ -14,5 +14,6 @@
 	<string name="cancel">cancel</string>
 	<string name="ok">ok</string>
 	<string name="wait">Loding...</string>
+	<string name="read_data">Read Data</string>
 	
 </resources>

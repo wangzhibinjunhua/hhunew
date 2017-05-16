@@ -146,9 +146,9 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		userNameValue=userName.getText().toString();
 		passwordValue=passWord.getText().toString();
 		
-		String passw=WApplication.sp_user.get(userNameValue, "");
+		String passw=WApplication.sp_user.get(userNameValue, "123");
 		if(passw.equals(EncryptionUtil.md5Encrypt(passwordValue))){
-			Intent intent = new Intent(LoginNewActivity.this, MainActivity.class);
+			Intent intent = new Intent(LoginNewActivity.this, ReadDataActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			LoginNewActivity.this.startActivity(intent);
 			finish();

@@ -66,12 +66,6 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener{
 		//elec list item
 		ElecList=new ArrayList<HashMap<String,Object>>();
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		 map.put("item_tv_name", "elec");  
-		 map.put("item_tv_value", "value");
-		 map.put("item_tv_state", "state");
-         map.put("item_cb", false);
-         ElecList.add(map);
-         updateAdapter();
 		for(int i=0;i<name.length;i++){
 			
 			 map.put("item_tv_name", name[i]);  
@@ -79,20 +73,11 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener{
 			 map.put("item_tv_state", "");
 	         map.put("item_cb", false);
 	         ElecList.add(map);
-	         updateAdapter();
+	         
 		}
-		map.put("item_tv_name", "demand");  
-		map.put("item_tv_value", "value");
-		map.put("item_tv_state", "state");
-        map.put("item_cb", false);
-        ElecList.add(map);
-        updateAdapter();
-
-		
-		
-		
-		
-		
+		for(int i=0;i<ElecList.size();i++)
+		LogUtil.logMessage("wzb", "list:"+ElecList.get(1));
+		updateAdapter();
 	}
 	
 	private void updateAdapter(){

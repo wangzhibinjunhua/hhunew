@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.wzb.hhu.R;
+import com.wzb.hhu.bean.AmmeterBean;
+import com.wzb.hhu.bean.DataItemBean;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
 import com.wzb.hhu.view.DataViewHolder;
@@ -122,7 +124,54 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener{
 			}
 		});
 	}
+	
+	class DataAdapter extends BaseAdapter {
 
+		List<DataItemBean> dataItems;
+
+		public DataAdapter(List<DataItemBean> dataItems) {
+			// TODO Auto-generated constructor stub
+			this.dataItems = dataItems;
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return dataItems.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return dataItems.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+			if (convertView == null) {
+				convertView = getLayoutInflater().inflate(R.layout.data_list_item, null);
+			}
+
+			TextView tvName = (TextView) convertView.findViewById(R.id.data_item_name);
+			TextView tvValue = (TextView) convertView.findViewById(R.id.data_item_value);
+			TextView tvState = (TextView) convertView.findViewById(R.id.data_item_state);
+			CheckBox cb = (CheckBox) convertView.findViewById(R.id.data_item_cb);
+
+			return convertView;
+		}
+
+
+
+	}
+
+	/*
 	class DataAdapter extends BaseAdapter {
 		public HashMap<Integer, Boolean> isSelected;
 		private Context context = null;
@@ -190,7 +239,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener{
 			holder.cb.setChecked(isSelected.get(position));
 			return view;
 		}
-	}
+	}*/
 
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {

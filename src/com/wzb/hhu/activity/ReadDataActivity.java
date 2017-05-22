@@ -13,6 +13,7 @@ import com.wzb.hhu.view.DataViewHolder;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -33,7 +34,7 @@ import android.widget.TextView;
  * @author wzb<wangzhibin_x@qq.com>
  * @date May 9, 2017 9:51:19 AM
  */
-public class ReadDataActivity extends BaseActivity implements OnScrollListener{
+public class ReadDataActivity extends BaseActivity implements OnScrollListener,OnClickListener{
 
 	private ImageView backView;
 	private TextView titleView;
@@ -42,7 +43,6 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener{
 	String name[] = { "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9",  
             "G10", "G11", "G12", "G13", "G14" };
 	
-	String name1[] = { "A1", "A2", "A3", "A4", "A5"};
 	
 	ArrayList<String> ElecListStr = null;  
     private List<HashMap<String, Object>> ElecList = null;  
@@ -61,53 +61,46 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener{
 	}
 	
 	private void initView() {
-		
+		ElecListStr=new ArrayList<String>();
 		
 		ElecListView=(ListView)findViewById(R.id.lv_data);
 		
-		//elec list item
-		ElecList=new ArrayList<HashMap<String,Object>>();
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		for(int i=0;i<name.length;i++){
-			
-			 map.put("item_tv_name", name[i]);  
-			 map.put("item_tv_value", "");
-			 map.put("item_tv_state", "");
-	         map.put("item_cb", false);
-	         ElecList.add(map);
-	         
-		}
-		for(int i=0;i<ElecList.size();i++)
-		LogUtil.logMessage("wzb", "list:"+ElecList.get(1));
-		updateAdapter();
-	}
-	
-	private void updateAdapter(){
-		ElecAdapter=new DataAdapter(this, ElecList, R.layout.data_list_item, 
-				new String[]{"item_tv_name","item_tv_value","item_tv_state","item_cb"},
-				new int[]{R.id.data_item_name,R.id.data_item_value,R.id.data_item_state,R.id.data_item_cb});
+		initAdapter();
+		
 		ElecListView.setAdapter(ElecAdapter);
 		ElecListView.setOnScrollListener(this);
-		ElecListStr=new ArrayList<String>();
 		ElecListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				DataViewHolder holder=(DataViewHolder)view.getTag();
-				holder.cb.toggle();
-				ElecAdapter.isSelected.put(position,holder.cb.isChecked());
-				if(holder.cb.isChecked()){
-					ElecListStr.add(name[position]);
-				}else{
-					ElecListStr.remove(name[position]);
-				}
-				
-				for(int i=0;i<ElecListStr.size();i++){
-					LogUtil.logMessage("wzb", "elec select:"+ElecListStr.get(i));
-				}
+				ElecAdapter.getDataItem(arg2).cbToggle();
+				ElecListStr.add(""+arg2);
+				LogUtil.logMessage("wzb", "cb:"+arg2+" "+ElecAdapter.getDataItem(arg2).getItemSelect());
+				ElecAdapter.notifyDataSetChanged();
 			}
 		});
+	}
+	
+	private void initAdapter(){
+		List<DataItemBean> dataItems=new ArrayList<DataItemBean>();
+		DataItemBean items=new DataItemBean();
+		items.setItemName("Item name");
+		items.setItemValue("Value");
+		items.setItemState("State");
+		items.setItemSelect(false);
+		dataItems.add(items);
+		String x[]=ResTools.getResStringArray(ReadDataActivity.this, R.array.elec);
+		for(int i=0;i<x.length;i++){
+			
+			
+			items.setItemName(x[i]);
+			items.setItemValue("");
+			items.setItemState("");
+			items.setItemSelect(false);
+			dataItems.add(items);
+		}
+		ElecAdapter=new DataAdapter(dataItems);
 		
 	}
 
@@ -123,6 +116,21 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener{
 				finish();
 			}
 		});
+		
+		ReadBtn=(Button)findViewById(R.id.data_read_btn);
+		ReadBtn.setOnClickListener(this);
+	}
+	
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch(v.getId()){
+		case R.id.data_read_btn:
+			LogUtil.logMessage("wzb", ""+ElecListStr);
+			break;
+		default:
+			break;
+		}
 	}
 	
 	class DataAdapter extends BaseAdapter {
@@ -163,11 +171,18 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener{
 			TextView tvValue = (TextView) convertView.findViewById(R.id.data_item_value);
 			TextView tvState = (TextView) convertView.findViewById(R.id.data_item_state);
 			CheckBox cb = (CheckBox) convertView.findViewById(R.id.data_item_cb);
-
+			tvName.setText(dataItems.get(position).getItemName());
+			tvValue.setText(dataItems.get(position).getItemValue());
+			tvState.setText(dataItems.get(position).getItemState());
+			cb.setChecked(dataItems.get(position).getItemSelect());
 			return convertView;
 		}
 
-
+		
+		public DataItemBean getDataItem(int id){
+			
+			return dataItems.get(id);
+		}
 
 	}
 
@@ -252,4 +267,6 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 }

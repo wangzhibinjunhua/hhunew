@@ -12,4 +12,9 @@ public class ResTools {
 		Resources res=context.getResources();
 		return res.getString(id);
 	}
+	
+	public static String[] getResStringArray(Context context,int id){
+		Resources res=context.getResources();
+		return res.getStringArray(id);
+	}
 }

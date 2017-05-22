@@ -10,4 +10,14 @@
         <item>sign out</item>
     </string-array>
     
+     <string-array name="elec" translatable="false">
+        <item>Electricity</item>  
+        <item>Combined total active power</item> 
+        <item>Combined with the total active power</item> 
+        <item>read log</item>
+        <item>account management</item>
+        <item>communication settings</item>
+        <item>sign out</item>
+    </string-array>
+    
 </resources>

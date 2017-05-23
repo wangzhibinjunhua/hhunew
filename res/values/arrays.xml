@@ -11,6 +11,7 @@
     </string-array>
     
      <string-array name="elec" translatable="false">
+        <item>Item Name</item> <!-- 0 --> 
         <item>Electricity</item>  
         <item>Combined total active power</item> 
         <item>Combined with the total active power</item> 

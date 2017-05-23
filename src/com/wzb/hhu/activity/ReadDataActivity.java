@@ -75,7 +75,11 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener,O
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				ElecAdapter.getDataItem(arg2).cbToggle();
-				ElecListStr.add(""+arg2);
+				if(ElecAdapter.getDataItem(arg2).getItemSelect()){
+					ElecListStr.add(""+arg2);
+				}else{
+					ElecListStr.remove(""+arg2);
+				}
 				LogUtil.logMessage("wzb", "cb:"+arg2+" "+ElecAdapter.getDataItem(arg2).getItemSelect());
 				ElecAdapter.notifyDataSetChanged();
 			}
@@ -92,14 +96,20 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener,O
 		dataItems.add(items);
 		String x[]=ResTools.getResStringArray(ReadDataActivity.this, R.array.elec);
 		for(int i=0;i<x.length;i++){
-			
-			
-			items.setItemName(x[i]);
-			items.setItemValue("");
-			items.setItemState("");
-			items.setItemSelect(false);
-			dataItems.add(items);
+			DataItemBean item=new DataItemBean();
+			LogUtil.logMessage("wzb", "x="+x[i]);
+			item.setItemName(x[i]);
+			item.setItemValue("");
+			item.setItemState("");
+			item.setItemSelect(false);
+			dataItems.add(item);
 		}
+		
+		items.setItemName("Aaa");
+		items.setItemValue("Value");
+		items.setItemState("State");
+		items.setItemSelect(false);
+		dataItems.add(items);
 		ElecAdapter=new DataAdapter(dataItems);
 		
 	}

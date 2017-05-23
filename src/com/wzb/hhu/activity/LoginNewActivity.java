@@ -149,10 +149,10 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		String passw=WApplication.sp_user.get(userNameValue, "123");
 		//if(passw.equals(EncryptionUtil.md5Encrypt(passwordValue))){
 		if(true){
-			Intent intent = new Intent(LoginNewActivity.this, ReadDataActivity.class);
+			Intent intent = new Intent(LoginNewActivity.this, MainActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			LoginNewActivity.this.startActivity(intent);
-			finish();
+			//finish();
 		}else{
 			ToastUtil.showLongToast(LoginNewActivity.this,"帐号或密码不正确");
 		}

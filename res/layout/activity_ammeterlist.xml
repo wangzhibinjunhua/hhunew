@@ -82,25 +82,46 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
+        
+        <View
+        android:layout_width="1px"
+        android:layout_height="70dp"
+        android:background="#000000"
+        android:visibility="visible" />
 
         <TextView
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="sn"
             android:layout_marginLeft="10dp"
             android:textSize="20sp" />
+        <View
+        android:layout_width="1px"
+        android:layout_height="70dp"
+        android:background="#000000"
+        android:visibility="visible" />
 
         <TextView
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="location"
             android:textSize="20sp" />
+        <View
+        android:layout_width="1px"
+        android:layout_height="70dp"
+        android:background="#000000"
+        android:visibility="visible" />
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="model"
             android:textSize="20sp" />
+        <View
+        android:layout_width="1px"
+        android:layout_height="70dp"
+        android:background="#000000"
+        android:visibility="visible" />
     </LinearLayout>
     <View 
         android:layout_width="fill_parent"

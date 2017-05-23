@@ -39,7 +39,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 
 	private ImageView backView;
 	private TextView titleView;
-	private Button ReadBtn, StopBtn;
+	private Button readBtn, stopBtn,exportBtn,returnBtn;
 
 	String name[] = { "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10", "G11", "G12", "G13", "G14" };
 
@@ -123,8 +123,14 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			}
 		});
 
-		ReadBtn = (Button) findViewById(R.id.data_read_btn);
-		ReadBtn.setOnClickListener(this);
+		readBtn = (Button) findViewById(R.id.data_read_btn);
+		readBtn.setOnClickListener(this);
+		stopBtn=(Button)findViewById(R.id.data_stop_btn);
+		stopBtn.setOnClickListener(this);
+		exportBtn=(Button)findViewById(R.id.data_export_btn);
+		exportBtn.setOnClickListener(this);
+		returnBtn=(Button)findViewById(R.id.data_back_btn);
+		returnBtn.setOnClickListener(this);
 	}
 
 	@Override
@@ -133,6 +139,13 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		switch (v.getId()) {
 		case R.id.data_read_btn:
 			LogUtil.logMessage("wzb", "" + ElecListStr);
+			break;
+		case R.id.data_back_btn:
+			finish();
+			break;
+		case R.id.data_export_btn:
+			break;
+		case R.id.data_stop_btn:
 			break;
 		default:
 			break;

@@ -3,13 +3,15 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="0.0dip"
-    android:background="@color/griditems_bg" >
+    android:background="#87CEFA"
+     >
+     <!-- android:background="@color/griditems_bg" -->
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_centerInParent="true"
-        android:background="@drawable/bg_gv"
+        android:background="#87CEFA"
         android:padding="12.0dip" >
 
         <ImageView

@@ -3,11 +3,15 @@ package com.wzb.hhu.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.client.RedirectException;
+
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.AmmeterBean;
 import com.wzb.hhu.util.ResTools;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -89,7 +93,10 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				Log.d("wzb", "arg2=" + arg2 + " " + adapter.getAmmeterBean(arg2).getSn());
-
+				Intent intent = new Intent(AmmeterListActivity.this, ReadDataActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				AmmeterListActivity.this.startActivity(intent);
+				finish();
 			}
 		});
 	}
@@ -186,7 +193,9 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 
 			TextView meter_model = (TextView) convertView.findViewById(R.id.ammeter_model);
 			meter_model.setText(ammeterItems.get(position).getModel());
+			int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };// RGB颜色
 
+			convertView.setBackgroundColor(colors[position % 2]);// 每隔item之间颜色不同
 			return convertView;
 		}
 

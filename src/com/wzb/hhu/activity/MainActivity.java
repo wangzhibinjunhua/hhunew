@@ -87,7 +87,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 				//intent.setClass(MainActivity.this, MainActivity.class);
 				//startActivity(intent);
 				break;
-			case 0:
+			case 0://read data
 				
 				intent.setClass(MainActivity.this, AmmeterListActivity.class);
 				startActivity(intent);

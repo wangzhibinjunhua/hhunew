@@ -36,5 +36,25 @@
             android:layout_marginLeft="10dp"
             android:text="Stop" />
     </LinearLayout>
+    
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/data_export_btn"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Export" />
+
+        <Button
+            android:id="@+id/data_back_btn"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Return" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,24 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-     <string-array name="img_text" translatable="false">
-        <item>read data</item>  
-        <item>settings</item> 
-        <item>set time</item> 
+
+    <string-array name="img_text" translatable="false">
+        <item>read data</item>
+        <item>settings</item>
+        <item>set time</item>
         <item>read log</item>
         <item>account management</item>
         <item>communication settings</item>
         <item>sign out</item>
     </string-array>
-    
-     <string-array name="elec" translatable="false">
-        <item>Item Name</item> <!-- 0 --> 
-        <item>Electricity</item>  
-        <item>Combined total active power</item> 
-        <item>Combined with the total active power</item> 
-        <item>read log</item>
-        <item>account management</item>
-        <item>communication settings</item>
-        <item>sign out</item>
+    <string-array name="elec" translatable="false">
+        <item>Item Name</item>
+ <!-- 0 -->
+
+        <item>Energy</item>
+ <!-- 1 电量 -->
+        <item>Total Active Energy</item>
+ <!-- 2 合相总有功电量 -->
+        <item>合相总有功历史电量</item>
+ <!-- 3 合相总有功历史电量 -->
+        <item>合相正向有功电量</item>
+ <!-- 4 合相正向有功电量 -->
+        <item>合相正向有功历史电量</item>
+ <!-- 5 合相正向有功历史电量 -->
+        <item>合相反向有功电量</item>
+ <!-- 6 合相反向有功电量 -->
+        <item>合相反向有功历史电量</item>
+ <!-- 7 合相反向有功历史电量 -->
+        <item>合相总无功电量</item>
+ <!-- 8 合相总无功电量 -->
+        <item>合相总无功历史电量</item>
+ <!-- 9 合相总无功历史电量 -->
+        <item>合相总感性无功电量</item>
+ <!-- 10 合相总感性无功电量 -->
+        <item>合相总感性无功历史电量</item>
+ <!-- 11 合相总感性无功历史电量 -->
+        <item>合相感性无功电量</item>
+ <!-- 12 合相感性无功电量 -->
+        <item>合相感性无功历史电量</item>
+ <!-- 13 合相感性无功历史电量 -->
+
+        <item>分费率</item>
+ <!-- 14 分费率 -->
+        <item>合相总有功电量分费率</item>
+ <!-- 15 合相总有功电量分费率 -->
+        <item>合相总有功历史电量分费率</item>
+ <!-- 16 合相总有功历史电量分费率 -->
+        <item>合相正向有功电量分费率</item>
+ <!-- 17 合相正向有功电量分费率 -->
+        <item>合相正向有功历史电量分费率</item>
+ <!-- 18 合相正向有功历史电量分费率 -->
+        <item>合相反向有功电量分费率</item>
+ <!-- 19 合相反向有功电量分费率 -->
+        <item>合相反向有功历史电量分费率</item>
+ <!-- 20 合相反向有功历史电量分费率 -->
+        <item>合相总无功电量分费率</item>
+ <!-- 21 合相总无功电量分费率 -->
+        <item>合相总无功历史电量分费率</item>
+ <!-- 22 合相总无功历史电量分费率 -->
+
+        <item>需量</item>
+ <!-- 23 需量 -->
+        <item>总有功最大需量</item>
+ <!-- 24 总有功最大需量 -->
+        <item>总有功历史最大需量</item>
+ <!-- 25 总有功历史最大需量 -->
+        <item>总无功最大需量</item>
+ <!-- 26 总无功最大需量 -->
+
+        <item>Voltage</item>
+ <!-- 27 电压 -->
+        <item>Phase A Voltage</item>
+ <!-- 28 A相电压 -->
+        <item>Phase B Voltage</item>
+ <!-- 29 B相电压 -->
+        <item>Phase C Voltage</item>
+ <!-- 30 C相电压 -->
+
+        <item>Current</item>
+ <!-- 31  电流 -->
+        <item>Phase A Current</item>
+ <!-- 32 A相电流 -->
+        <item>Phase B Current</item>
+ <!-- 33 B相电流 -->
+        <item>Phase C Current</item>
+ <!-- 34 C相电流 -->
+        <item>Neutral Line Current</item>
+ <!-- 35 零线电流 -->
+
+        <item>Power</item>
+ <!-- 36 功率 -->
+        <item>总有功功率</item>
+ <!-- 37 总有功功率 -->
+        <item>A相有功功率</item>
+ <!-- 38 A相有功功率 -->
+        <item>B相有功功率</item>
+ <!-- 39 B相有功功率 -->
+        <item>C相有功功率</item>
+ <!-- 40 C相有功功率 -->
+        <item>总无功功率</item> <!-- 41 总无功功率 -->
+        <item>A相无功功率</item><!-- 42 A相无功功率 -->
+        <item>B相无功功率</item><!-- 43 B相无功功率 -->
+        <item>C相无功功率</item><!-- 44 C相无功功率 -->
+        <item>总视在功率</item> <!-- 45 总视在功率 -->
+        <item>A相视在功率</item><!-- 46 A相视在功率 -->
+        <item>B相视在功率</item><!-- 47 B相视在功率 -->
+        <item>C相视在功率</item><!-- 48 C相视在功率 -->
+         <item>总功率因数</item><!-- 49 总功率因数 -->
+        <item>A相功率因数</item> <!-- 50 A相功率因数 -->
+        <item>B相功率因数</item> <!-- 51 B相功率因数 -->
+        <item>C相功率因数</item> <!-- 52 C相功率因数 -->
+        
+        <item>电表当前频率</item> <!-- 53 电表当前频率 -->
+        
+        <item>电表表号</item> <!-- 54 电表表号 -->
+         <item>软件版本号</item> <!-- 55 软件版本号 -->
+        <item>额定电压</item><!-- 56 额定电压 -->
+        <item>额定电流</item><!-- 57 额定电流 -->
+        <item>额定频率</item> <!-- 58 额定频率 -->
+         <item>最大电流</item> <!--59 最大电流 -->
+  
     </string-array>
-    
+
 </resources>

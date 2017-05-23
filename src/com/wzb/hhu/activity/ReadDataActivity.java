@@ -87,28 +87,25 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 
 	private void initAdapter() {
 		List<DataItemBean> dataItems = new ArrayList<DataItemBean>();
-		DataItemBean items = new DataItemBean();
-		items.setItemName("Item name");
-		items.setItemValue("Value");
-		items.setItemState("State");
-		items.setItemSelect(false);
-		dataItems.add(items);
+
 		String x[] = ResTools.getResStringArray(ReadDataActivity.this, R.array.elec);
 		for (int i = 0; i < x.length; i++) {
 			DataItemBean item = new DataItemBean();
 			LogUtil.logMessage("wzb", "x=" + x[i]);
-			item.setItemName(x[i]);
-			item.setItemValue("");
-			item.setItemState("");
-			item.setItemSelect(false);
+			if(i==0){
+				item.setItemName(x[i]);
+				item.setItemValue("Value");
+				item.setItemState("State");
+				item.setItemSelect(false);
+			}else{
+				item.setItemName(x[i]);
+				item.setItemValue("");
+				item.setItemState("");
+				item.setItemSelect(false);
+			}
 			dataItems.add(item);
 		}
 
-		items.setItemName("Aaa");
-		items.setItemValue("Value");
-		items.setItemState("State");
-		items.setItemSelect(false);
-		dataItems.add(items);
 		ElecAdapter = new DataAdapter(dataItems);
 
 	}
@@ -188,6 +185,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };// RGB颜色
 
 			convertView.setBackgroundColor(colors[position % 2]);// 每隔item之间颜色不同
+			
 			return convertView;
 		}
 

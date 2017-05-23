@@ -2,13 +2,13 @@
 <resources>
 
     <string-array name="img_text" translatable="false">
-        <item>read data</item>
-        <item>settings</item>
-        <item>set time</item>
-        <item>read log</item>
-        <item>account management</item>
-        <item>communication settings</item>
-        <item>sign out</item>
+        <item>Readout</item>
+        <item>Settings</item>
+        <item>Setting Date\u0026Time</item>
+        <item>Event Log</item>
+        <item>User management</item>
+        <item>Comm Setting</item>
+        <item>Sign out</item>
     </string-array>
     <string-array name="elec" translatable="false">
         <item>Item Name</item>

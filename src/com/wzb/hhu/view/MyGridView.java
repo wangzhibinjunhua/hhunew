@@ -1,7 +1,10 @@
 package com.wzb.hhu.view;
 
+import com.wzb.hhu.util.LogUtil;
+
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.GridView;
 
 /**

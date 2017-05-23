@@ -198,7 +198,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };// RGB颜色
 
 			convertView.setBackgroundColor(colors[position % 2]);// 每隔item之间颜色不同
-			
+
 			return convertView;
 		}
 
@@ -215,24 +215,24 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	 * inflater = null; private List<HashMap<String, Object>> list = null;
 	 * private String keyString[] = null; private String itemString = null; //
 	 * 记录每个item中textview的值 private int idValue[] = null;// id值
-	 * 
+	 *
 	 * public DataAdapter(Context context, List<HashMap<String, Object>> list,
 	 * int resource, String[] from, int[] to) { this.context = context;
 	 * this.list = list; keyString = new String[from.length]; idValue = new
 	 * int[to.length]; System.arraycopy(from, 0, keyString, 0, from.length);
 	 * System.arraycopy(to, 0, idValue, 0, to.length); inflater =
 	 * LayoutInflater.from(context); init(); }
-	 * 
+	 *
 	 * // 初始化 设置所有checkbox都为未选择 public void init() { isSelected = new
 	 * HashMap<Integer, Boolean>(); for (int i = 0; i < list.size(); i++) {
 	 * isSelected.put(i, false); } }
-	 * 
+	 *
 	 * @Override public int getCount() { return list.size(); }
-	 * 
+	 *
 	 * @Override public Object getItem(int arg0) { return list.get(arg0); }
-	 * 
+	 *
 	 * @Override public long getItemId(int arg0) { return 0; }
-	 * 
+	 *
 	 * @Override public View getView(int position, View view, ViewGroup arg2) {
 	 * DataViewHolder holder = null; if (holder == null) { holder = new
 	 * DataViewHolder(); if (view == null) { view =

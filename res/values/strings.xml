@@ -15,5 +15,6 @@
 	<string name="ok">ok</string>
 	<string name="wait">Loding...</string>
 	<string name="read_data">Read Data</string>
+	<string name="event_log">Event Log</string>
 	
 </resources>

@@ -27,6 +27,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:background="@color/btn_default"
             android:text="Read" />
 
         <Button
@@ -34,6 +35,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:background="@color/btn_default"
             android:text="Stop" />
     </LinearLayout>
     
@@ -47,6 +49,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:background="@color/btn_default"
             android:text="Export" />
 
         <Button
@@ -54,6 +57,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:background="@color/btn_default"
             android:text="Return" />
     </LinearLayout>
 

@@ -162,25 +162,28 @@
         <Button
             android:id="@+id/time_read_btn"
             android:layout_width="90dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginLeft="10dp"
             android:textSize="20sp"
+            android:background="@color/btn_default"
             android:text="Read" />
         
          <Button
             android:id="@+id/time_write_btn"
             android:layout_width="90dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginLeft="10dp"
             android:textSize="20sp"
+            android:background="@color/btn_default"
             android:text="Write" />
 
         <Button
             android:id="@+id/time_back_btn"
             android:layout_width="90dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginLeft="10dp"
             android:textSize="20sp"
+            android:background="@color/btn_default"
             android:text="Return" />
     </LinearLayout>
 

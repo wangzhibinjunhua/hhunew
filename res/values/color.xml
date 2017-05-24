@@ -12,7 +12,9 @@
         <color name="line">#ffd3dde6</color>
          <!-- 透明 -->
     <color name="transparent">#00000000</color>
-
+    	
+    	
+	<color name="btn_default">#B0C4DE</color>
     <!-- 背景灰-->
     <color name="background_gray">#fff0f0f0</color>
     <color name="gray">#AAAA</color>

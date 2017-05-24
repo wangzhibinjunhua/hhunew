@@ -8,14 +8,14 @@
         android:id="@+id/tape_title"
         layout="@layout/title_layout" />
 
-
     <ListView
         android:id="@+id/lv_eventlog"
         android:layout_width="fill_parent"
         android:layout_height="400dp" >
     </ListView>
-
-
+    
+    <View android:layout_width="fill_parent"
+        android:layout_height="4dp"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -25,7 +25,7 @@
         <Button
             android:id="@+id/event_read_btn"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@color/btn_default"
             android:text="Read" />
@@ -33,13 +33,17 @@
         <Button
             android:id="@+id/event_stop_btn"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@color/btn_default"
             android:text="Stop" />
     </LinearLayout>
-    
-     <LinearLayout
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
@@ -47,7 +51,7 @@
         <Button
             android:id="@+id/event_export_btn"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@color/btn_default"
             android:text="Export" />
@@ -55,7 +59,7 @@
         <Button
             android:id="@+id/event_back_btn"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@color/btn_default"
             android:text="Return" />

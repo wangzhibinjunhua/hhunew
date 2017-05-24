@@ -15,7 +15,8 @@
         android:layout_height="400dp" >
     </ListView>
 
-
+<View android:layout_width="fill_parent"
+        android:layout_height="4dp"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -25,7 +26,7 @@
         <Button
             android:id="@+id/data_read_btn"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@color/btn_default"
             android:text="Read" />
@@ -33,11 +34,14 @@
         <Button
             android:id="@+id/data_stop_btn"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@color/btn_default"
             android:text="Stop" />
     </LinearLayout>
+    
+    <View android:layout_width="fill_parent"
+        android:layout_height="10dp"/>"
     
      <LinearLayout
         android:layout_width="fill_parent"
@@ -47,7 +51,7 @@
         <Button
             android:id="@+id/data_export_btn"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@color/btn_default"
             android:text="Export" />
@@ -55,7 +59,7 @@
         <Button
             android:id="@+id/data_back_btn"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@color/btn_default"
             android:text="Return" />

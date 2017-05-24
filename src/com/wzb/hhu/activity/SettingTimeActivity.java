@@ -2,9 +2,11 @@ package com.wzb.hhu.activity;
 import java.util.Calendar;
 
 import com.wzb.hhu.R;
+import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
 
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -61,6 +63,10 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		writeBtn.setOnClickListener(this);
 		returnBtn=(Button)findViewById(R.id.time_back_btn);
 		returnBtn.setOnClickListener(this);
+		
+		String[] dateTime=getSysDateTime();
+		sysDate.setText(dateTime[0]+"-"+dateTime[1]+"-"+dateTime[2]);
+		sysTime.setText(dateTime[3]+":"+dateTime[4]+":"+dateTime[5]);
 	}
 	
 	private void initTitleView() {
@@ -101,6 +107,20 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 
 	private void updateSysTimeValue(String hour,String minute){
 		sysTime.setText(hour+":"+minute+":"+"30");
+	}
+	
+	private String[] getSysDateTime(){
+		String[] dateTime=new String[6];
+		Time t=new Time();
+		t.setToNow();
+		dateTime[0]=""+t.year;
+		dateTime[1]=""+(t.month+1);
+		dateTime[2]=""+t.monthDay;
+		dateTime[3]=""+t.hour;
+		dateTime[4]=""+t.minute;
+		dateTime[5]=""+t.second;
+		LogUtil.logMessage("wzb", "month="+t.month);
+		return dateTime;
 	}
 	
 	public void onYearMonthDayPicker() {

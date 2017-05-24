@@ -59,7 +59,6 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 
 	void testdata() {
 		WApplication.sp_user.set("admin", EncryptionUtil.md5Encrypt("123456"));
-		WApplication.sp_user.set("test", EncryptionUtil.md5Encrypt("12345"));
 	}
 
 	private void init() {

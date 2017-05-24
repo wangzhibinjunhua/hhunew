@@ -60,6 +60,15 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	}
 
 	private void initView() {
+		readBtn = (Button) findViewById(R.id.data_read_btn);
+		readBtn.setOnClickListener(this);
+		stopBtn=(Button)findViewById(R.id.data_stop_btn);
+		stopBtn.setOnClickListener(this);
+		exportBtn=(Button)findViewById(R.id.data_export_btn);
+		exportBtn.setOnClickListener(this);
+		returnBtn=(Button)findViewById(R.id.data_back_btn);
+		returnBtn.setOnClickListener(this);
+
 		ElecListStr = new ArrayList<String>();
 
 		ElecListView = (ListView) findViewById(R.id.lv_data);
@@ -123,14 +132,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			}
 		});
 
-		readBtn = (Button) findViewById(R.id.data_read_btn);
-		readBtn.setOnClickListener(this);
-		stopBtn=(Button)findViewById(R.id.data_stop_btn);
-		stopBtn.setOnClickListener(this);
-		exportBtn=(Button)findViewById(R.id.data_export_btn);
-		exportBtn.setOnClickListener(this);
-		returnBtn=(Button)findViewById(R.id.data_back_btn);
-		returnBtn.setOnClickListener(this);
+
 	}
 
 	@Override

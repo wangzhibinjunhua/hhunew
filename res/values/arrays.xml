@@ -122,5 +122,19 @@
          <item>最大电流</item> <!--59 最大电流 -->
   
     </string-array>
+    
+     <string-array name="event" translatable="false">
+        <item>Item Name</item> <!-- 0 -->
+        <item>开端盖事件发生次数</item><!-- 1开端盖事件发生次数 -->
+        <item>开端盖事件记录</item><!-- 2 开端盖事件记录 -->
+        <item>开面盖事件发生次数</item><!-- 3 开面盖事件发生次数 -->
+        <item>开面盖事件记录</item><!-- 4 开面盖事件记录 -->
+        <item>反向事件发生次数</item><!-- 5 反向事件发生次数 -->
+        <item>反向事件记录</item><!-- 6 反向事件记录 -->
+        <item>磁场事件发生次数</item><!-- 7 磁场事件发生次数 -->
+        <item>磁场事件记录</item><!-- 8 磁场事件记录 -->
+        <item>需量复位事件发生次数</item><!-- 9 需量复位事件发生次数 -->
+        <item>需量复位事件记录</item><!-- 10 需量复位事件记录 -->
+    </string-array>
 
 </resources>

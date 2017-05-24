@@ -74,18 +74,18 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			Intent intent = new Intent();
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			switch (arg2) {
-			case 2:
-				//intent.setClass(MainActivity.this, DeviceManagerActivity.class);
-				//startActivity(intent);
+			case 3:
+				intent.setClass(MainActivity.this, EventLogActivity.class);
+				startActivity(intent);
 				break;
 			case 6:
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.setClass(MainActivity.this, LoginNewActivity.class);
 				startActivity(intent);
 				break;
-			case 1:
-				//intent.setClass(MainActivity.this, MainActivity.class);
-				//startActivity(intent);
+			case 2:
+				intent.setClass(MainActivity.this, SettingTimeActivity.class);
+				startActivity(intent);
 				break;
 			case 0://read data
 				

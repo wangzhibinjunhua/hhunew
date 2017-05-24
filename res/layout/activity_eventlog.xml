@@ -23,14 +23,14 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/data_read_btn"
+            android:id="@+id/event_read_btn"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="Read" />
 
         <Button
-            android:id="@+id/data_stop_btn"
+            android:id="@+id/event_stop_btn"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -43,14 +43,14 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/data_export_btn"
+            android:id="@+id/event_export_btn"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="Export" />
 
         <Button
-            android:id="@+id/data_back_btn"
+            android:id="@+id/event_back_btn"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

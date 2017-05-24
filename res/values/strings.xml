@@ -16,5 +16,6 @@
 	<string name="wait">Loding...</string>
 	<string name="read_data">Read Data</string>
 	<string name="event_log">Event Log</string>
+	<string name="setting_time">Setting Date\u0026Time</string>
 	
 </resources>

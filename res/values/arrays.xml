@@ -136,5 +136,10 @@
         <item>需量复位事件发生次数</item><!-- 9 需量复位事件发生次数 -->
         <item>需量复位事件记录</item><!-- 10 需量复位事件记录 -->
     </string-array>
-
+    
+     <string-array name="user_title" translatable="false">
+          <item>Account</item>
+           <item>Name</item>
+            <item>Access level</item>
+ </string-array>
 </resources>

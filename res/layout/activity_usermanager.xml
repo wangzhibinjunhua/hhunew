@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+      <include
+        android:id="@+id/tape_title"
+        layout="@layout/title_layout" />
+      <ListView
+        android:id="@+id/lv_user"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp" >
+    </ListView>
+    
+          <View android:layout_width="fill_parent"
+        android:layout_height="10dp"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/user_add_btn"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/btn_default"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/user_edit_btn"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/btn_default"
+            android:text="Edit" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/user_del_btn"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/btn_default"
+            android:text="Delete" />
+
+        <Button
+            android:id="@+id/event_back_btn"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/btn_default"
+            android:text="Return" />
+    </LinearLayout>
+
+</LinearLayout>

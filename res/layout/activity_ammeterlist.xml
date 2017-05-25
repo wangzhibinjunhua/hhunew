@@ -117,15 +117,9 @@
             android:layout_height="60dp"
             android:text="model"
             android:textSize="20sp" />
-        <View
-        android:layout_width="1px"
-        android:layout_height="70dp"
-        android:background="#000000"
-        android:visibility="visible" />
+
     </LinearLayout>
-    <View 
-        android:layout_width="fill_parent"
-        android:layout_height="10dp"/>
+
 
     <ListView
         android:id="@+id/ammeter_lv"

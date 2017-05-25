@@ -16,7 +16,7 @@
     </ListView>
 
 <View android:layout_width="fill_parent"
-        android:layout_height="4dp"/>
+        android:layout_height="40dp"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -27,7 +27,7 @@
             android:id="@+id/data_read_btn"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="50dp"
             android:background="@color/btn_default"
             android:text="Read" />
 
@@ -35,7 +35,7 @@
             android:id="@+id/data_stop_btn"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:background="@color/btn_default"
             android:text="Stop" />
     </LinearLayout>
@@ -52,7 +52,7 @@
             android:id="@+id/data_export_btn"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="50dp"
             android:background="@color/btn_default"
             android:text="Export" />
 
@@ -60,7 +60,7 @@
             android:id="@+id/data_back_btn"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:background="@color/btn_default"
             android:text="Return" />
     </LinearLayout>

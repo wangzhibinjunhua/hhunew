@@ -29,7 +29,7 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 	private ImageView backView;
 	private TextView titleView;
 	
-	private Button 
+	//private Button 
 	
 	private UserAdapter userAdapter;
 

@@ -71,11 +71,19 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				eventAdapter.getDataItem(arg2).cbToggle();
-				if (eventAdapter.getDataItem(arg2).getItemSelect()) {
-					eventListStr.add("" + arg2);
+				if (arg2 == 0) {
+						if(eventAdapter.getDataItem(arg2).getItemSelect()){
+							eventAdapter.unSelectAll();
+						}else{
+							eventAdapter.selectAll();
+						}
 				} else {
-					eventListStr.remove("" + arg2);
+					eventAdapter.getDataItem(arg2).cbToggle();
+					if (eventAdapter.getDataItem(arg2).getItemSelect()) {
+						eventListStr.add("" + arg2);
+					} else {
+						eventListStr.remove("" + arg2);
+					}
 				}
 				LogUtil.logMessage("wzb", "cb:" + arg2 + " " + eventAdapter.getDataItem(arg2).getItemSelect());
 				eventAdapter.notifyDataSetChanged();
@@ -195,6 +203,18 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 		public DataItemBean getDataItem(int id) {
 
 			return dataItems.get(id);
+		}
+		
+		public void selectAll(){
+			for(int i=0;i<dataItems.size();i++){
+				dataItems.get(i).setItemSelect(true);
+			}
+		}
+		
+		public void unSelectAll(){
+			for(int i=0;i<dataItems.size();i++){
+				dataItems.get(i).setItemSelect(false);
+			}
 		}
 
 	}

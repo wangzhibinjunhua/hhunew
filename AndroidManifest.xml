@@ -38,6 +38,9 @@
            <activity
               android:name=".activity.UserManagerActivity"/>
            
+           <activity
+              android:name=".activity.SettingActivity"/>
+           
         <activity
             android:name=".activity.AmmeterListActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"

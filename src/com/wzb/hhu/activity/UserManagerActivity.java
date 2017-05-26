@@ -75,6 +75,11 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 		userTitle.setLevel(x[2]);
 		users.add(userTitle);
 		
+		UserBean admin=new UserBean();
+		admin.setAccount("admin");
+		admin.setName("system");
+		admin.setLevel("AdminUser");
+		users.add(admin);
 
 		userAdapter=new UserAdapter(users);
 	}

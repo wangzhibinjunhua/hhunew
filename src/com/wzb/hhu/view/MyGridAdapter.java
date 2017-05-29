@@ -68,6 +68,10 @@ public class MyGridAdapter extends BaseAdapter{
 		
 		iv.setBackgroundResource(img_icon[position]);
 		tv.setText(img_text[position]);
+		
+		if(position==6){
+			convertView.setVisibility(View.GONE);
+		}
 		return convertView;
 	}
 	

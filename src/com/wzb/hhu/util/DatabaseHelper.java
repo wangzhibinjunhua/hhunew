@@ -26,8 +26,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		db.execSQL("create table meter(id integer primary key autoincrement,sn varchar(45),location varchar(45),model varchar(45))"); 
-		db.execSQL("create table user(id integer primary key autoincrement,account varchar(45),name varchar(45),permission varchar(45))");  
+		db.execSQL("create table meter(id integer primary key autoincrement,sn varchar(45),location varchar(45),model varchar(45),password varchar(45))"); 
+		db.execSQL("create table user(id integer primary key autoincrement,account varchar(45),password varchar(45),name varchar(45),permission varchar(45))");  
 	}
 
 	@Override

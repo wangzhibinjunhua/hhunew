@@ -4,6 +4,7 @@ public class UserBean {
 	private String account;
 	private String name;
 	private String level;
+	private String password;
 
 	public UserBean() {
 
@@ -25,6 +26,14 @@ public class UserBean {
 
 	public String getLevel() {
 		return level;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password){
+		this.password=password;
 	}
 
 	public void setAccount(String account) {

@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	
 	private String[] img_text;
 	private int[] img_icon={R.drawable.form,R.drawable.set,R.drawable.clock,
-			R.drawable.warning,R.drawable.account,R.drawable.set_con,R.drawable.logout};
+			R.drawable.warning,R.drawable.account,R.drawable.logout,R.drawable.set_con};
 	
 	
 	@Override
@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 				intent.setClass(MainActivity.this, UserManagerActivity.class);
 				startActivity(intent);
 				break;
-			case 6:
+			case 5:
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.setClass(MainActivity.this, LoginNewActivity.class);
 				startActivity(intent);

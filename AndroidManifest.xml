@@ -6,6 +6,9 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
+    
+     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:name=".interf.WApplication"
@@ -45,6 +48,12 @@
             android:name=".activity.AmmeterListActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
             />
+        
+        <activity
+            android:name="com.wzb.spp.DeviceList"/>
+        
+        <activity
+            android:name="com.wzb.spp.test.SimpleActivity"/>
     </application>
 
 </manifest>

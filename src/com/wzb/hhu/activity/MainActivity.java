@@ -4,6 +4,7 @@ import com.wzb.hhu.R;
 import com.wzb.hhu.interf.WApplication;
 import com.wzb.hhu.view.MyGridAdapter;
 import com.wzb.hhu.view.MyGridView;
+import com.wzb.spp.test.SimpleActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -97,7 +98,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 				startActivity(intent);
 				break;
 			case 1:
-				intent.setClass(MainActivity.this, SettingActivity.class);
+				intent.setClass(MainActivity.this, SimpleActivity.class);
 				startActivity(intent);
 				break;
 			default:

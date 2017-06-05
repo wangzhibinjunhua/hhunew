@@ -15,7 +15,6 @@ public class DbUtil {
 		values.put("name", name);
 		values.put("permission", permission);
 		WApplication.db.insert("user", null, values);
-		WApplication.db.close();
 		
 	}
 	

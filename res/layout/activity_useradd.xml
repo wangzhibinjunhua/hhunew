@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#87CEFA"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/tape_title"
+        layout="@layout/title_layout" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="20dp" />
+
+    <TextView
+        android:id="@+id/account_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Account:"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/account_et"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:focusable="false"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/password_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Password:"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/password_et"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:focusable="false"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Name:"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/name_et"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:focusable="false"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/permission_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Permission:"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/permission_admin"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:id="@+id/admin_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="Admin"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/permission_rw"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+             />
+
+        <TextView
+            android:id="@+id/rw_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="ReadWrite"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/permission_r"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            />
+
+        <TextView
+            android:id="@+id/r_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="ReadOnly"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -8,6 +8,7 @@ import com.wzb.hhu.bean.UserBean;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -24,12 +25,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class UserManagerActivity extends BaseActivity implements OnScrollListener{
+public class UserManagerActivity extends BaseActivity implements OnScrollListener, OnClickListener{
 	
 	private ImageView backView;
 	private TextView titleView;
 	
-	//private Button 
+	private Button btnAdd,btnEdit,btnDelete,btnBack;
 	
 	private UserAdapter userAdapter;
 
@@ -64,6 +65,15 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 			}
 			
 		});
+		
+		btnAdd=(Button)findViewById(R.id.user_add_btn);
+		btnAdd.setOnClickListener(this);
+		btnEdit=(Button)findViewById(R.id.user_edit_btn);
+		btnEdit.setOnClickListener(this);
+		btnDelete=(Button)findViewById(R.id.user_del_btn);
+		btnDelete.setOnClickListener(this);
+		btnBack=(Button)findViewById(R.id.user_back_btn);
+		btnBack.setOnClickListener(this);
 	}
 	
 	private void initAdapter(){
@@ -96,6 +106,43 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 				finish();
 			}
 		});
+	}
+	
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch(v.getId()){
+		case R.id.user_back_btn:
+			finish();
+			break;
+		case R.id.user_add_btn:
+			addUser();
+			break;
+		case R.id.user_del_btn:
+			delUser();
+			break;
+		case R.id.user_edit_btn:
+			editUser();
+			break;
+			default:
+				break;
+		}
+	}
+	
+	private void editUser(){
+		
+		
+	}
+	
+	private void delUser(){
+		
+	}
+	
+	private void addUser(){
+		Intent intent = new Intent();
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.setClass(UserManagerActivity.this, UserAddActivity.class);
+		startActivity(intent);
 	}
 	
 	class UserAdapter extends BaseAdapter{
@@ -177,5 +224,7 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

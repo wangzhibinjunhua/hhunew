@@ -1,6 +1,7 @@
 package com.wzb.hhu.util;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 
 import android.util.Log;
 
@@ -26,8 +27,28 @@ public class Common {
         return stringBuilder.toString();  
     }  
 	
+	private final static char[] mChars = "0123456789ABCDEF".toCharArray(); 
+	 public static String str2HexStr(String str){    
+	        StringBuilder sb = new StringBuilder();  
+	        byte[] bs = str.getBytes();    
+	          
+	        for (int i = 0; i < bs.length; i++){    
+	            sb.append(mChars[(bs[i] & 0xFF) >> 4]);    
+	            sb.append(mChars[bs[i] & 0x0F]);  
+	            //sb.append(' ');  
+	        }    
+	        return sb.toString().trim();    
+	    }  
+	
 	public static byte[] parseHexStringToBytes(final String hex) {
-		String tmp = hex.substring(2).replaceAll("[^[0-9][a-f]]", "");
+		//String tmp = hex.substring(2).replaceAll("[^[0-9][a-f]]", "");
+		String newValue =  hex.toLowerCase(Locale.getDefault());
+		String tmp ="";
+		if(newValue.substring(0,2).equals("0x")){
+			tmp=newValue.substring(2);
+		}else{
+			tmp=newValue;
+		}
 		Log.d("wzb","tmp="+tmp);
 		byte[] bytes = new byte[tmp.length() / 2]; // every two letters in the string are one byte finally
 		

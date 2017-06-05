@@ -43,7 +43,7 @@ public class Common {
 	}
 	
 	public static String getMeterPw(String randPw,String meterPw){
-		String passWord="";
+		//String passWord="";
 		//string s = "FF20012B";
 		//string psw = "12345678";
 		byte[] px = new byte[8];
@@ -55,17 +55,12 @@ public class Common {
 		    //依次到8轮
 		    //第八轮则是s的最后一个字符拼接上密码的8个字符即"B12345678"
 		    String temp = randPw.substring(i) + meterPw.substring(0, i+1);
-		    try {
-				px[i] = crc((byte)0x5A, temp.getBytes("US-ASCII"));
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}  //crc8算法，算法在后面
+		    px[i] = crc((byte)0x5A, temp.getBytes());
 		}
 		//这个data就是上位机通过P1帧下发给电表的数据
 		String data = "2"+MakeBCDstr(px)+"00000000";
 		
-		return passWord;
+		return data;
 	}
 	
 	/********CRC算法************/
@@ -82,11 +77,13 @@ public class Common {
 	   // foreach (byte b in buf)
 	    for(i=0;i<buf.length;i++)
 	    {
-	        tmp = (byte)(crc >> 4);
-	        crc <<= 4;
-	        crc ^= CRC8Tbl[tmp ^ (buf[i] >> 4)];
-	        tmp = (byte)(crc >> 4);
-	        crc <<= 4;
+	        tmp = (byte)((crc&0xff) >> 4);
+	        crc =(byte)((crc&0xff) << 4);
+	        crc ^= CRC8Tbl[tmp ^ ((buf[i]&0xff) >> 4)];
+	        tmp = (byte)((crc&0xff) >> 4);
+	        crc =(byte)((crc&0xff)<< 4);
+	        byte test=(byte)(tmp ^ (buf[i] & 0x0F));
+	        System.out.println(test);
 	        crc ^= CRC8Tbl[tmp ^ (buf[i] & 0x0F)];
 	    }
 	    return crc;
@@ -105,7 +102,7 @@ public class Common {
 	    for(i=0;i<buf.length;i++)
 	    {
 	        //字节的高4位+0x30转换为ASCII码
-	        sb.append((char)((buf[i] >> 4) + 0x0030));
+	        sb.append((char)(((buf[i]&0xff) >> 4) + 0x0030));
 	        //字节的低4位+0x30转换为ASCII码
 	        sb.append((char)((buf[i] & 0x0f) + 0x0030));
 	    }

@@ -58,8 +58,10 @@ public class SimpleActivity extends Activity {
 				String dataString=Common.bytesToHexString(data);
 				LogUtil.logMessage("wzb", "datarec:"+dataString+" msg:"+message);
 				if(dataString.startsWith("0150300228")){
-					password=dataString.substring(10,18);
+					password=dataString.substring(dataString.indexOf("28")+2,dataString.indexOf("29"));
 					LogUtil.logMessage("wzb", "password="+password);
+					password=Common.asciiToString(password);
+					LogUtil.logMessage("wzb", "ascii password="+password);
 				}
 				//Toast.makeText(SimpleActivity.this, message, Toast.LENGTH_SHORT).show();
 			}
@@ -122,9 +124,12 @@ public class SimpleActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String sendV="0x"+Common.getMeterPw(password, "12345678");
+				String crcPw=Common.getMeterPw(password, "12345678");
+				LogUtil.logMessage("wzb","crcpw="+crcPw);
+				String pwHeadHex="0150320228";
+				String pwEndHex="29035D";
 				
-				sppSend(sendV);
+				sppSend(pwHeadHex+Common.str2HexStr(crcPw)+pwEndHex);
 			}
 		});
 		

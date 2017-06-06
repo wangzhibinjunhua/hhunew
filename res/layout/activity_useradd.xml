@@ -26,6 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
+        android:maxLines="1"
+        android:singleLine="true"
         android:textSize="20sp" />
 
     <TextView
@@ -41,6 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
+        android:maxLines="1"
+        android:singleLine="true"
         android:textSize="20sp" />
 
     <TextView
@@ -56,6 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
+        android:maxLines="1"
+        android:singleLine="true"
         android:textSize="20sp" />
 
     <TextView

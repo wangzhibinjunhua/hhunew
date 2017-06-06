@@ -53,6 +53,8 @@
             android:layout_marginLeft="10dp"
             android:clickable="false"
             android:focusable="false"
+            android:maxLines="1"
+        	android:singleLine="true"
             android:textColor="#FF0000"
             android:textSize="20sp" />
 
@@ -85,6 +87,8 @@
             android:layout_marginLeft="10dp"
             android:clickable="false"
             android:focusable="false"
+            android:maxLines="1"
+        	android:singleLine="true"
             android:textColor="#FF0000"
             android:textSize="20sp" />
 

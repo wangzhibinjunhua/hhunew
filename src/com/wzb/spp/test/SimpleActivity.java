@@ -114,7 +114,7 @@ public class SimpleActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				sppSend("0x063033310d0a");
+				sppSend("0x063036310d0a");
 			}
 		});
 		
@@ -124,12 +124,13 @@ public class SimpleActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String crcPw=Common.getMeterPw(password, "12345678");
+				String crcPw=Common.getMeterPw(password, "87153668");
 				LogUtil.logMessage("wzb","crcpw="+crcPw);
 				String pwHeadHex="0150320228";
-				String pwEndHex="29035D";
-				
-				sppSend(pwHeadHex+Common.str2HexStr(crcPw)+pwEndHex);
+				String pwEndHex="2903";
+				String pwV=pwHeadHex+Common.str2HexStr(crcPw)+pwEndHex;
+				String pwVxor=Common.xorHex(pwV.substring(2));
+				sppSend(pwV+pwVxor);
 			}
 		});
 		
@@ -139,7 +140,9 @@ public class SimpleActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				sppSend("0x0152310239362e312e3028290361");
+				String r96e1e0="0152310239362e312e30282903";
+				String r96e1e0Xor=Common.xorHex(r96e1e0.substring(2));
+				sppSend(r96e1e0+r96e1e0Xor);
 			}
 		});
 		
@@ -173,7 +176,7 @@ public class SimpleActivity extends Activity {
         	public void onClick(View v){
         		//bt.send("Text", true);
         		LogUtil.logMessage("wzb", "send");
-        		String s="0x2f3f313233343536373839303132210d0a";
+        		String s="0x2f3f31323334353638210d0a";
         		bt.send(Common.parseHexStringToBytes(s), false);
         	}
         });

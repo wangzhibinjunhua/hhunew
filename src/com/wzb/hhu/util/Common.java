@@ -11,6 +11,17 @@ import android.util.Log;
  */
 public class Common {
 	
+	
+	public static String xorHex(String strhex){
+		byte[] bs=parseHexStringToBytes(strhex);
+		byte b=bs[0];
+		for(int i=1;i<bs.length;i++){
+			b=(byte) (b^bs[i]);
+		}
+	
+		return Integer.toHexString(b);
+	} 
+	
 	   /**
      * 字符串转换为Ascii
      * @param value

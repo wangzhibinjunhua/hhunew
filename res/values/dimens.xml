@@ -16,10 +16,10 @@
     <!-- 默认字体大小 -->
     <dimen name="font_size_default">16sp</dimen>
     <!-- 大号字体大小 -->
-    <dimen name="font_size_small">14sp</dimen>
+    <dimen name="font_size_small">16sp</dimen>
     <dimen name="font_size_mini">11sp</dimen>
     <!-- 小号字体大小 -->
-    <dimen name="font_size_big">18sp</dimen>
+    <dimen name="font_size_big">26sp</dimen>
     <!-- 等待框边距 -->
     <dimen name="paddin_wait_dialog">30dp</dimen>
     <!-- listview分割线高度   -->

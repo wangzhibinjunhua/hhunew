@@ -5,13 +5,17 @@ import java.util.List;
 
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.UserBean;
+import com.wzb.hhu.util.CustomDialog;
 import com.wzb.hhu.util.DbUtil;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
+import com.wzb.hhu.util.ToastUtil;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -38,12 +42,14 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 	private ListView userListView = null;
 	private int curPosition = -1;
 	private int titlePosition = 0;
+	private Context mContext;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_usermanager);
+		mContext=UserManagerActivity.this;
 		initTitleView();
 		initView();
 	}
@@ -157,7 +163,8 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 			delUser();
 			break;
 		case R.id.user_edit_btn:
-			editUser();
+			//editUser();
+			delUser();
 			break;
 			default:
 				break;
@@ -165,11 +172,21 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 	}
 	
 	private void editUser(){
-		
-		
+		LogUtil.logMessage("wzb", "curPosition="+curPosition);
+		CustomDialog.showWaitDialog(mContext, "测试一下");
+		new Handler().postDelayed(new  Runnable() {
+			public void run() {
+				CustomDialog.dismissDialog();
+			}
+		}, 3000);
 	}
 	
 	private void delUser(){
+		if(curPosition<1){
+			ToastUtil.showLongToast(mContext, "没有选中内容");
+		}else{
+			CustomDialog.showOkAndCalcelDialog(mContext, "删除用户", "你确定要删除这个用户吗?", okListener, cancleListener);
+		}
 		
 	}
 	
@@ -179,6 +196,36 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 		intent.setClass(UserManagerActivity.this, UserAddActivity.class);
 		startActivity(intent);
 	}
+	
+	OnClickListener okListener=new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			CustomDialog.dismissDialog();
+			CustomDialog.showWaitDialog(mContext, "删除中");
+			new Handler().postDelayed(new  Runnable() {
+				public void run() {
+					curPosition=-1;
+					updateAllUsers();
+					CustomDialog.dismissDialog();
+				}
+			}, 3000);
+			String account=userAdapter.getUser(curPosition).getAccount();
+			DbUtil.deleteUser(account);
+		}
+	};
+	
+OnClickListener cancleListener=new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			CustomDialog.dismissDialog();
+		}
+	};
+	
+	
 	
 	class UserAdapter extends BaseAdapter{
 		

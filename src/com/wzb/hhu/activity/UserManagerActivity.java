@@ -163,8 +163,7 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 			delUser();
 			break;
 		case R.id.user_edit_btn:
-			//editUser();
-			delUser();
+			editUser();
 			break;
 			default:
 				break;
@@ -172,18 +171,21 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 	}
 	
 	private void editUser(){
-		LogUtil.logMessage("wzb", "curPosition="+curPosition);
-		CustomDialog.showWaitDialog(mContext, "测试一下");
-		new Handler().postDelayed(new  Runnable() {
-			public void run() {
-				CustomDialog.dismissDialog();
-			}
-		}, 3000);
+		if(curPosition<1){
+			ToastUtil.showLongToast(mContext, "你还没有选中内容");
+		}else{
+			String account=userAdapter.getUser(curPosition).getAccount();
+			Intent intent = new Intent();
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.setClass(UserManagerActivity.this, UserEditActivity.class);
+			intent.putExtra("account", account);
+			startActivity(intent);
+		}
 	}
 	
 	private void delUser(){
 		if(curPosition<1){
-			ToastUtil.showLongToast(mContext, "没有选中内容");
+			ToastUtil.showLongToast(mContext, "你还没有选中内容");
 		}else{
 			CustomDialog.showOkAndCalcelDialog(mContext, "删除用户", "你确定要删除这个用户吗?", okListener, cancleListener);
 		}

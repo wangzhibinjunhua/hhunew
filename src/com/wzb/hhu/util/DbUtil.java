@@ -60,8 +60,19 @@ public class DbUtil {
 		return list;
 	}
 	
-	public static UserBean searchUser(String account){
+	public static UserBean getUser(String account){
 		
+		Cursor cursor = WApplication.db.rawQuery("select * from user where account=?",  
+                new String[]{account});  
+        if(cursor.moveToNext()){  
+        	UserBean user=new UserBean(); 
+        	user.setAccount(cursor.getString(1));  
+        	user.setPassword(cursor.getString(2));  
+        	user.setName(cursor.getString(3));  
+        	user.setLevel(cursor.getString(4));  
+            return user;  
+        }  
+        cursor.close();  
 		return null;
 	}
 

@@ -46,6 +46,8 @@
            
            <activity
               android:name=".activity.UserAddActivity"/>
+           <activity
+              android:name=".activity.UserEditActivity"/>
            
         <activity
             android:name=".activity.AmmeterListActivity"

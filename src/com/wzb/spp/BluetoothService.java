@@ -22,6 +22,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.wzb.hhu.util.LogUtil;
+
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -356,8 +358,11 @@ public class BluetoothService {
             while (true) {
                 try {
                     int data = mmInStream.read();
+                    //LogUtil.logMessage("wzb", "listen data="+Integer.toHexString(data));
                     if(data == 0x0A) { 
+                    	//LogUtil.logMessage("wzb", "listen 111");
                     } else if(data == 0x0D) {
+                    	//LogUtil.logMessage("wzb", "listen 222");
                         buffer = new byte[arr_byte.size()];
                         for(int i = 0 ; i < arr_byte.size() ; i++) {
                             buffer[i] = arr_byte.get(i).byteValue();
@@ -367,9 +372,41 @@ public class BluetoothService {
                                 , buffer.length, -1, buffer).sendToTarget();
                         arr_byte = new ArrayList<Integer>();
                     } else {
+                    	//LogUtil.logMessage("wzb", "listen 333");
                         arr_byte.add(data);
+                        
+                        //add by wzb 20170609
+                        if((arr_byte.size()>=3)&& (arr_byte.get(arr_byte.size()-2)==0x03)){
+                        	//int xor=arr_byte.get(1);
+                        	//for(int i=2;i<arr_byte.size()-1;i++){
+                        	//	xor=xor^arr_byte.get(i);
+                        	//}
+                        	//LogUtil.logMessage("wzb", "listen data="+Integer.toHexString(data) +"xor="+Integer.toHexString(xor));
+                        	//if(data+1 == xor){
+                        	if(true){
+                        		 buffer = new byte[arr_byte.size()];
+                                 for(int i = 0 ; i < arr_byte.size() ; i++) {
+                                     buffer[i] = arr_byte.get(i).byteValue();
+                                 }
+                                 // Send the obtained bytes to the UI Activity
+                                 mHandler.obtainMessage(BluetoothState.MESSAGE_READ
+                                         , buffer.length, -1, buffer).sendToTarget();
+                                 arr_byte = new ArrayList<Integer>();
+                        	}
+                        }else if(data == 0x06 && arr_byte.size()==1){ //06 is ACK
+                        	 buffer = new byte[arr_byte.size()];
+                             for(int i = 0 ; i < arr_byte.size() ; i++) {
+                                 buffer[i] = arr_byte.get(i).byteValue();
+                             }
+                             // Send the obtained bytes to the UI Activity
+                             mHandler.obtainMessage(BluetoothState.MESSAGE_READ
+                                     , buffer.length, -1, buffer).sendToTarget();
+                             arr_byte = new ArrayList<Integer>();
+                        }
+                        //end
                     }
                 } catch (IOException e) {
+                	//LogUtil.logMessage("wzb", "listen 444");
                     connectionLost();
                     // Start the service over to restart listening mode
                     BluetoothService.this.start(BluetoothService.this.isAndroid);
@@ -377,7 +414,7 @@ public class BluetoothService {
                 }
             }
         }
-
+        
         // Write to the connected OutStream.
         // @param buffer  The bytes to write
         public void write(byte[] buffer) {

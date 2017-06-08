@@ -54,6 +54,13 @@
         android:layout_height="wrap_content"
 
         android:text="read data" />
+      
+      <Button
+        android:id="@+id/temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="temp" />
     
 
 

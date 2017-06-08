@@ -98,7 +98,7 @@ public class Common {
 		}else{
 			tmp=newValue;
 		}
-		Log.d("wzb","tmp="+tmp);
+		//Log.d("wzb","tmp="+tmp);
 		byte[] bytes = new byte[tmp.length() / 2]; // every two letters in the string are one byte finally
 		
 		String part = "";

@@ -114,7 +114,7 @@ public class SimpleActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				sppSend("0x063036310d0a");
+				sppSend("0x063033310d0a");
 			}
 		});
 		
@@ -143,6 +143,26 @@ public class SimpleActivity extends Activity {
 				String r96e1e0="0152310239362e312e30282903";
 				String r96e1e0Xor=Common.xorHex(r96e1e0.substring(2));
 				sppSend(r96e1e0+r96e1e0Xor);
+			}
+		});
+		
+		Button btnTemp=(Button)findViewById(R.id.temp);
+		btnTemp.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String test="01523102302e392e31282903";
+				String testXor=Common.xorHex(test.substring(2));
+				sppSend(test+testXor);
+				android.os.SystemClock.sleep(500);
+				test="01523102302e392e32282903";
+				testXor=Common.xorHex(test.substring(2));
+				sppSend(test+testXor);
+				android.os.SystemClock.sleep(500);
+				test="01523102302e392e35282903";
+				testXor=Common.xorHex(test.substring(2));
+				sppSend(test+testXor);
 			}
 		});
 		
@@ -176,7 +196,7 @@ public class SimpleActivity extends Activity {
         	public void onClick(View v){
         		//bt.send("Text", true);
         		LogUtil.logMessage("wzb", "send");
-        		String s="0x2f3f31323334353638210d0a";
+        		String s="0x2f3f303030303031323334353638210d0a";
         		bt.send(Common.parseHexStringToBytes(s), false);
         	}
         });

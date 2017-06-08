@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.UserBean;
+import com.wzb.hhu.util.DbUtil;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
 
@@ -47,6 +48,35 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 		initView();
 	}
 	
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		updateAllUsers();
+		
+	}
+	
+	private void updateAllUsers(){
+		List<UserBean> users = new ArrayList<UserBean>();
+		String x[] = ResTools.getResStringArray(UserManagerActivity.this, R.array.user_title);
+		UserBean userTitle=new UserBean();
+		userTitle.setAccount(x[0]);
+		userTitle.setName(x[1]);
+		userTitle.setLevel(x[2]);
+		users.add(userTitle);
+		
+		ArrayList<UserBean> allUser=new ArrayList<UserBean>();
+		allUser=DbUtil.getAllUser();
+		for(int i=0;i<allUser.size();i++){
+			users.add(allUser.get(i));
+		}
+		userAdapter.clearAlldata();
+		userAdapter.updateList(users);
+		userAdapter.notifyDataSetChanged();
+	}
+	
 	private void initView(){
 		userListView = (ListView) findViewById(R.id.lv_user);
 		initAdapter();
@@ -85,11 +115,16 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 		userTitle.setLevel(x[2]);
 		users.add(userTitle);
 		
-		UserBean admin=new UserBean();
-		admin.setAccount("admin");
-		admin.setName("system");
-		admin.setLevel("AdminUser");
-		users.add(admin);
+		ArrayList<UserBean> allUser=new ArrayList<UserBean>();
+		allUser=DbUtil.getAllUser();
+		for(int i=0;i<allUser.size();i++){
+			users.add(allUser.get(i));
+		}
+		//UserBean admin=new UserBean();
+		//admin.setAccount("admin");
+		//admin.setName("system");
+		//admin.setLevel("AdminUser");
+		//users.add(admin);
 
 		userAdapter=new UserAdapter(users);
 	}
@@ -209,6 +244,14 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 		public UserBean getUser(int id) {
 
 			return users.get(id);
+		}
+		
+		public void clearAlldata(){
+			users.clear();
+		}
+		
+		public void updateList(List<UserBean> list){
+			this.users=list;
 		}
 
 	}

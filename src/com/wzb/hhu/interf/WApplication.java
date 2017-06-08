@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wzb.hhu.util.DatabaseHelper;
+import com.wzb.hhu.util.DbUtil;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.SharedPreferencesUtil;
 
@@ -62,12 +63,25 @@ public class WApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        
         CONTEXT = getApplicationContext();
         sp = new SharedPreferencesUtil(SP_NAME, SharedPreferencesUtil.PRIVATE, CONTEXT);
         sp_user = new SharedPreferencesUtil("hhu_user", SharedPreferencesUtil.PRIVATE, CONTEXT);
         db=new DatabaseHelper(CONTEXT, "hhu").getWritableDatabase();
         LogUtil.openLog(); // 正式发布请注释次程序语句.
+        initAdminUser();
+        
 
+    }
+    
+    
+    private void initAdminUser(){
+    	if(DbUtil.getAllUserCount()==0){
+    		LogUtil.logMessage("wzb", "first use this app create admin user");
+    		DbUtil.addUser("Admin", "123456", "admin", "AdminUser");
+    	}else{
+    		LogUtil.logMessage("wzb", "not first use app");
+    	}
     }
 
    

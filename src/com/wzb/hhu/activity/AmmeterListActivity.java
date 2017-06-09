@@ -7,9 +7,12 @@ import org.apache.http.client.RedirectException;
 
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.AmmeterBean;
+import com.wzb.hhu.util.CustomDialog;
+import com.wzb.hhu.util.DbUtil;
 import com.wzb.hhu.util.ResTools;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -44,10 +47,12 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 	private int visibleItemCount;// 当前窗口可见项总数
 	private int datasize = 38;// 模拟数据
 
+	private int curPosition = -1;
 	private AmmeterAdapter adapter;
 	private View loadMoreView;
 	private Button loadMoreBtn;
 	private Handler mHandler = new Handler();
+	private Context mContext;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_ammeterlist);
-
+		mContext=AmmeterListActivity.this;
 		initTitleView();
 
 		loadMoreView = getLayoutInflater().inflate(R.layout.loadmore, null);
@@ -93,13 +98,39 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				Log.d("wzb", "arg2=" + arg2 + " " + adapter.getAmmeterBean(arg2).getSn());
-				Intent intent = new Intent(AmmeterListActivity.this, ReadDataActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				AmmeterListActivity.this.startActivity(intent);
-				finish();
+				curPosition=arg2;
+				adapter.notifyDataSetChanged();
+				startReadData(adapter.getAmmeterBean(arg2).getSn());
+				//Intent intent = new Intent(AmmeterListActivity.this, ReadDataActivity.class);
+				//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				//AmmeterListActivity.this.startActivity(intent);
+				//finish();
 			}
 		});
 	}
+	
+	private void startReadData(String sn){
+		CustomDialog.showOkAndCalcelDialog(mContext, "读取数据", "你确定要操作这个电表吗?"+"\n SN:"+sn, okListener, cancleListener);
+	}
+	
+	OnClickListener okListener=new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			CustomDialog.dismissDialog();
+
+		}
+	};
+	
+	OnClickListener cancleListener=new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			CustomDialog.dismissDialog();
+		}
+	};
 
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
@@ -120,6 +151,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		for (int i = 1; i <= 10; i++) {
 			AmmeterBean items = new AmmeterBean();
 			items.setSn("sn" + i);
+			items.setPassword("pw" + i);
 			items.setLocation("location" + i);
 			items.setModel("model" + i);
 			ammeters.add(items);
@@ -137,6 +169,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				items.setSn("sn" + i);
 				items.setLocation("location" + i);
 				items.setModel("model" + i);
+				items.setPassword("pw"+i);
 				adapter.addAmmeterItem(items);
 			}
 		} else {
@@ -145,6 +178,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				items.setSn("sn" + i);
 				items.setLocation("location" + i);
 				items.setModel("model" + i);
+				items.setPassword("pw"+i);
 				adapter.addAmmeterItem(items);
 			}
 		}
@@ -187,6 +221,10 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 
 			TextView meter_sn = (TextView) convertView.findViewById(R.id.ammeter_sn);
 			meter_sn.setText(ammeterItems.get(position).getSn());
+			
+			TextView meter_pw = (TextView) convertView.findViewById(R.id.ammeter_password);
+			meter_pw.setText(ammeterItems.get(position).getPassword());
+
 
 			TextView meter_location = (TextView) convertView.findViewById(R.id.ammeter_location);
 			meter_location.setText(ammeterItems.get(position).getLocation());
@@ -196,6 +234,10 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };// RGB颜色
 
 			convertView.setBackgroundColor(colors[position % 2]);// 每隔item之间颜色不同
+			
+			if(curPosition==position){
+				convertView.setBackgroundColor(Color.YELLOW);
+			}
 			return convertView;
 		}
 

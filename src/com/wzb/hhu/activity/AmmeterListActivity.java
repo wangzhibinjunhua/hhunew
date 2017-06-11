@@ -32,6 +32,7 @@ import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 /**
  * @author wzb<wangzhibin_x@qq.com>
@@ -105,6 +106,17 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				//AmmeterListActivity.this.startActivity(intent);
 				//finish();
+			}
+		});
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				Log.d("wzb", "long click arg2=" + arg2 + " " + adapter.getAmmeterBean(arg2).getSn());
+				curPosition=arg2;
+				adapter.notifyDataSetChanged();
+				return true;
 			}
 		});
 	}

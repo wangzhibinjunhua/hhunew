@@ -25,86 +25,83 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class UserAddActivity extends BaseActivity implements OnClickListener{
-	
+public class UserAddActivity extends BaseActivity implements OnClickListener {
+
 	private ImageView backView;
 	private TextView titleView;
-	
-	private EditText accountEt,passwordEt,nameEt;
-	private CheckBox adminCb,rwCb,roCb;
-	
-	
-	private Button okBtn,cancleBtn;
-	
-	
-	private String account,password,name,permission;
-	
+
+	private EditText accountEt, passwordEt, nameEt;
+	private CheckBox adminCb, rwCb, roCb;
+
+	private Button okBtn, cancleBtn;
+
+	private String account, password, name, permission;
+
 	private Context mContext;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
+
 		setContentView(R.layout.activity_useradd);
-		mContext=UserAddActivity.this;
+		mContext = UserAddActivity.this;
 		initTitleView();
 		initView();
 	}
-	
-	private void initView(){
-		okBtn=(Button)findViewById(R.id.user_add_ok_btn);
+
+	private void initView() {
+		okBtn = (Button) findViewById(R.id.user_add_ok_btn);
 		okBtn.setOnClickListener(this);
-		cancleBtn=(Button)findViewById(R.id.user_add_cancle_btn);
+		cancleBtn = (Button) findViewById(R.id.user_add_cancle_btn);
 		cancleBtn.setOnClickListener(this);
-		
-		accountEt=(EditText)findViewById(R.id.account_et);
-		passwordEt=(EditText)findViewById(R.id.password_et);
-		nameEt=(EditText)findViewById(R.id.name_et);
-		
-		adminCb=(CheckBox)findViewById(R.id.permission_admin);
-		rwCb=(CheckBox)findViewById(R.id.permission_rw);
-		roCb=(CheckBox)findViewById(R.id.permission_r);
+
+		accountEt = (EditText) findViewById(R.id.account_et);
+		passwordEt = (EditText) findViewById(R.id.password_et);
+		nameEt = (EditText) findViewById(R.id.name_et);
+
+		adminCb = (CheckBox) findViewById(R.id.permission_admin);
+		rwCb = (CheckBox) findViewById(R.id.permission_rw);
+		roCb = (CheckBox) findViewById(R.id.permission_r);
 		adminCb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
-				if(adminCb.isChecked()){
+				if (adminCb.isChecked()) {
 					rwCb.setChecked(false);
 					roCb.setChecked(false);
 				}
 			}
 		});
-		
+
 		rwCb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
-				if(rwCb.isChecked()){
+				if (rwCb.isChecked()) {
 					adminCb.setChecked(false);
 					roCb.setChecked(false);
 				}
 			}
 		});
-		
+
 		roCb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
-				if(roCb.isChecked()){
+				if (roCb.isChecked()) {
 					adminCb.setChecked(false);
 					rwCb.setChecked(false);
 				}
 			}
 		});
-		
+
 	}
-	
-	
+
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
@@ -118,29 +115,29 @@ public class UserAddActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 	}
-	
-	private void addNewUser(){
-		String account=accountEt.getText().toString();
-		String password=passwordEt.getText().toString();
-		String name=nameEt.getText().toString();
-		String permission="";
-		if(adminCb.isChecked()){
-			permission="AdminUser";
-		}else if(rwCb.isChecked()){
-			permission="ProgramUser";
-		}else if(roCb.isChecked()){
-			permission="ReadUser";
+
+	private void addNewUser() {
+		String account = accountEt.getText().toString();
+		String password = passwordEt.getText().toString();
+		String name = nameEt.getText().toString();
+		String permission = "";
+		if (adminCb.isChecked()) {
+			permission = "AdminUser";
+		} else if (rwCb.isChecked()) {
+			permission = "ProgramUser";
+		} else if (roCb.isChecked()) {
+			permission = "ReadUser";
 		}
-		
-		if(!TextUtils.isEmpty(account) && !TextUtils.isEmpty(password)
-				&& !TextUtils.isEmpty(name) && !TextUtils.isEmpty(permission)){
-			
-			if(DbUtil.getUser(account)!=null){
-				ToastUtil.showShortToast(mContext,"帐号重复");
-			}else{
-				CustomDialog.showWaitDialog(mContext,"创建中");
+
+		if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(name)
+				&& !TextUtils.isEmpty(permission)) {
+
+			if (DbUtil.getUser(account) != null) {
+				ToastUtil.showShortToast(mContext, "帐号重复");
+			} else {
+				CustomDialog.showWaitDialog(mContext, "创建中");
 				new Handler().postDelayed(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
@@ -150,11 +147,11 @@ public class UserAddActivity extends BaseActivity implements OnClickListener{
 				}, 2000);
 				DbUtil.addUser(account, password, name, permission);
 			}
-			
-		}else{
-			ToastUtil.showShortToast(mContext,"资料填写不完整");
+
+		} else {
+			ToastUtil.showShortToast(mContext, "资料填写不完整");
 		}
-		
+
 	}
 
 	@Override

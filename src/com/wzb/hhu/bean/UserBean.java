@@ -27,13 +27,13 @@ public class UserBean {
 	public String getLevel() {
 		return level;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-	
-	public void setPassword(String password){
-		this.password=password;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setAccount(String account) {

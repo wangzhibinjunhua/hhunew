@@ -7,9 +7,16 @@ import org.apache.http.client.RedirectException;
 
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.AmmeterBean;
+import com.wzb.hhu.interf.WApplication;
+import com.wzb.hhu.util.Common;
 import com.wzb.hhu.util.CustomDialog;
 import com.wzb.hhu.util.DbUtil;
+import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
+import com.wzb.spp.BluetoothState;
+import com.wzb.spp.DeviceList;
+import com.wzb.spp.BluetoothSPP.BluetoothConnectionListener;
+import com.wzb.spp.BluetoothSPP.OnDataReceivedListener;
 
 import android.app.Activity;
 import android.content.Context;
@@ -61,9 +68,9 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_ammeterlist);
-		mContext=AmmeterListActivity.this;
+		mContext = AmmeterListActivity.this;
 		initTitleView();
-
+		setBtListener();
 		loadMoreView = getLayoutInflater().inflate(R.layout.loadmore, null);
 		loadMoreBtn = (Button) loadMoreView.findViewById(R.id.load_more_btn);
 
@@ -83,6 +90,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 						adapter.notifyDataSetChanged();
 						loadMoreBtn.setText("load more ...");
 						loadMoreBtn.setClickable(true);
+						// listView.setSelection(0);
 					}
 				}, 2000);
 			}
@@ -99,13 +107,14 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				Log.d("wzb", "arg2=" + arg2 + " " + adapter.getAmmeterBean(arg2).getSn());
-				curPosition=arg2;
+				curPosition = arg2;
 				adapter.notifyDataSetChanged();
 				startReadData(adapter.getAmmeterBean(arg2).getSn());
-				//Intent intent = new Intent(AmmeterListActivity.this, ReadDataActivity.class);
-				//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				//AmmeterListActivity.this.startActivity(intent);
-				//finish();
+				// Intent intent = new Intent(AmmeterListActivity.this,
+				// ReadDataActivity.class);
+				// intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				// AmmeterListActivity.this.startActivity(intent);
+				// finish();
 			}
 		});
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -114,19 +123,24 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				Log.d("wzb", "long click arg2=" + arg2 + " " + adapter.getAmmeterBean(arg2).getSn());
-				curPosition=arg2;
+				curPosition = arg2;
 				adapter.notifyDataSetChanged();
 				return true;
 			}
 		});
-	}
-	
-	private void startReadData(String sn){
-		CustomDialog.showOkAndCalcelDialog(mContext, "读取数据", "你确定要操作这个电表吗?"+"\n SN:"+sn, okListener, cancleListener);
-	}
-	
-	OnClickListener okListener=new OnClickListener() {
 		
+		//test
+		Intent intent = new Intent(getApplicationContext(), DeviceList.class);
+		startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+	}
+
+	private void startReadData(String sn) {
+		CustomDialog.showOkAndCalcelDialog(mContext, "读取数据", "你确定要操作这个电表吗?" + "\n SN:" + sn, okListener,
+				cancleListener);
+	}
+
+	OnClickListener okListener = new OnClickListener() {
+
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
@@ -134,9 +148,9 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 
 		}
 	};
-	
-	OnClickListener cancleListener=new OnClickListener() {
-		
+
+	OnClickListener cancleListener = new OnClickListener() {
+
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
@@ -169,10 +183,49 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			ammeters.add(items);
 
 		}
+
 		adapter = new AmmeterAdapter(ammeters);
+	}
+	
+	String password="";
+	private void setBtListener(){
+		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
+			public void onDataReceived(byte[] data, String message) {
+				String dataString = Common.bytesToHexString(data);
+				LogUtil.logMessage("wzb", "11 datarec:" + dataString + " msg:" + message);
+				if (dataString.startsWith("0150300228")) {
+					password = dataString.substring(dataString.indexOf("28") + 2, dataString.indexOf("29"));
+					LogUtil.logMessage("wzb", "password=" + password);
+					password = Common.asciiToString(password);
+					LogUtil.logMessage("wzb", "ascii password=" + password);
+				}
+				// Toast.makeText(SimpleActivity.this, message,
+				// Toast.LENGTH_SHORT).show();
+			}
+		});
+
+		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
+			public void onDeviceConnected(String name, String address) {
+				LogUtil.logMessage("wzb", "11 onDeviceConnected");
+
+			}
+
+			public void onDeviceDisconnected() {
+				LogUtil.logMessage("wzb", "11 onDeviceDisconnected");
+			}
+
+			public void onDeviceConnectionFailed() {
+				LogUtil.logMessage("wzb", "11 onDeviceConnectionFailed");
+			}
+		});
+		
 	}
 
 	private void loadMoreData() {
+		//test
+		String s = "0x2f3f303030303031323334353638210d0a";
+		WApplication.bt.send(Common.parseHexStringToBytes(s), false);
+		
 		int count = adapter.getCount();
 
 		if (count + 10 <= datasize) {
@@ -181,7 +234,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				items.setSn("sn" + i);
 				items.setLocation("location" + i);
 				items.setModel("model" + i);
-				items.setPassword("pw"+i);
+				items.setPassword("pw" + i);
 				adapter.addAmmeterItem(items);
 			}
 		} else {
@@ -190,7 +243,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				items.setSn("sn" + i);
 				items.setLocation("location" + i);
 				items.setModel("model" + i);
-				items.setPassword("pw"+i);
+				items.setPassword("pw" + i);
 				adapter.addAmmeterItem(items);
 			}
 		}
@@ -233,10 +286,9 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 
 			TextView meter_sn = (TextView) convertView.findViewById(R.id.ammeter_sn);
 			meter_sn.setText(ammeterItems.get(position).getSn());
-			
+
 			TextView meter_pw = (TextView) convertView.findViewById(R.id.ammeter_password);
 			meter_pw.setText(ammeterItems.get(position).getPassword());
-
 
 			TextView meter_location = (TextView) convertView.findViewById(R.id.ammeter_location);
 			meter_location.setText(ammeterItems.get(position).getLocation());
@@ -246,8 +298,8 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };// RGB颜色
 
 			convertView.setBackgroundColor(colors[position % 2]);// 每隔item之间颜色不同
-			
-			if(curPosition==position){
+
+			if (curPosition == position) {
 				convertView.setBackgroundColor(Color.YELLOW);
 			}
 			return convertView;

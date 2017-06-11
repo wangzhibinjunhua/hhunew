@@ -9,8 +9,10 @@ import com.wzb.hhu.interf.WApplication;
 import com.wzb.hhu.util.EncryptionUtil;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ToastUtil;
+import com.wzb.spp.BluetoothState;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -68,8 +70,8 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		btn_exit = (Button) findViewById(R.id.btn_exit);
 		btn_login.setOnClickListener(this);
 		btn_exit.setOnClickListener(this);
-		
-		parent=(LinearLayout) findViewById(R.id.llayout);
+
+		parent = (LinearLayout) findViewById(R.id.llayout);
 
 		accSelect = (ImageView) findViewById(R.id.acc_select);
 		accSelect.setOnClickListener(this);
@@ -78,9 +80,8 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		List<String> list = new ArrayList<String>();
 		LogUtil.logMessage("wzb", "" + map.size());
 		for (Object obj : map.keySet()) {
-			 Object value = map.get(obj );
-			 LogUtil.logMessage("wzb",
-			 "key="+obj.toString()+"value="+value.toString());
+			Object value = map.get(obj);
+			LogUtil.logMessage("wzb", "key=" + obj.toString() + "value=" + value.toString());
 			String name = obj.toString();
 			list.add(name);
 		}
@@ -140,20 +141,20 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		}
 
 	}
-	
-	private void login(){
-		userNameValue=userName.getText().toString();
-		passwordValue=passWord.getText().toString();
-		
-		String passw=WApplication.sp_user.get(userNameValue, "123");
-		//if(passw.equals(EncryptionUtil.md5Encrypt(passwordValue))){
-		if(true){
+
+	private void login() {
+		userNameValue = userName.getText().toString();
+		passwordValue = passWord.getText().toString();
+
+		String passw = WApplication.sp_user.get(userNameValue, "123");
+		// if(passw.equals(EncryptionUtil.md5Encrypt(passwordValue))){
+		if (true) {
 			Intent intent = new Intent(LoginNewActivity.this, MainActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			LoginNewActivity.this.startActivity(intent);
-			//finish();
-		}else{
-			ToastUtil.showLongToast(LoginNewActivity.this,"帐号或密码不正确");
+			// finish();
+		} else {
+			ToastUtil.showLongToast(LoginNewActivity.this, "帐号或密码不正确");
 		}
 	}
 

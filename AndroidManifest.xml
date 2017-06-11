@@ -59,6 +59,16 @@
         
         <activity
             android:name="com.wzb.spp.test.SimpleActivity"/>
+        
+        <receiver 
+            android:name="com.wzb.hhu.btcore.BtManager"
+             android:enabled="true">
+            <intent-filter>
+              <action android:name="com.wzb.hhu.ACTION_CONNETION_ADDRESS"/>
+              <action android:name="com.wzb.hhu.ACTION_OPEN_BT"/>
+              
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

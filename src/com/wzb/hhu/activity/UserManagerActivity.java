@@ -30,63 +30,63 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class UserManagerActivity extends BaseActivity implements OnScrollListener, OnClickListener{
-	
+public class UserManagerActivity extends BaseActivity implements OnScrollListener, OnClickListener {
+
 	private ImageView backView;
 	private TextView titleView;
-	
-	private Button btnAdd,btnEdit,btnDelete,btnBack;
-	
+
+	private Button btnAdd, btnEdit, btnDelete, btnBack;
+
 	private UserAdapter userAdapter;
 
 	private ListView userListView = null;
 	private int curPosition = -1;
 	private int titlePosition = 0;
 	private Context mContext;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_usermanager);
-		mContext=UserManagerActivity.this;
+		mContext = UserManagerActivity.this;
 		initTitleView();
 		initView();
 	}
-	
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
+
 		updateAllUsers();
-		
+
 	}
-	
-	private void updateAllUsers(){
+
+	private void updateAllUsers() {
 		List<UserBean> users = new ArrayList<UserBean>();
 		String x[] = ResTools.getResStringArray(UserManagerActivity.this, R.array.user_title);
-		UserBean userTitle=new UserBean();
+		UserBean userTitle = new UserBean();
 		userTitle.setAccount(x[0]);
 		userTitle.setName(x[1]);
 		userTitle.setLevel(x[2]);
 		users.add(userTitle);
-		
-		ArrayList<UserBean> allUser=new ArrayList<UserBean>();
-		allUser=DbUtil.getAllUser();
-		for(int i=0;i<allUser.size();i++){
+
+		ArrayList<UserBean> allUser = new ArrayList<UserBean>();
+		allUser = DbUtil.getAllUser();
+		for (int i = 0; i < allUser.size(); i++) {
 			users.add(allUser.get(i));
 		}
 		userAdapter.clearAlldata();
 		userAdapter.updateList(users);
 		userAdapter.notifyDataSetChanged();
 	}
-	
-	private void initView(){
+
+	private void initView() {
 		userListView = (ListView) findViewById(R.id.lv_user);
 		initAdapter();
-		
+
 		userListView.setAdapter(userAdapter);
 		userListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		userListView.setOnScrollListener(this);
@@ -95,46 +95,46 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				curPosition=arg2;
-				LogUtil.logMessage("wzb", "curpos="+curPosition);
+				curPosition = arg2;
+				LogUtil.logMessage("wzb", "curpos=" + curPosition);
 				userAdapter.notifyDataSetChanged();
 			}
-			
+
 		});
-		
-		btnAdd=(Button)findViewById(R.id.user_add_btn);
+
+		btnAdd = (Button) findViewById(R.id.user_add_btn);
 		btnAdd.setOnClickListener(this);
-		btnEdit=(Button)findViewById(R.id.user_edit_btn);
+		btnEdit = (Button) findViewById(R.id.user_edit_btn);
 		btnEdit.setOnClickListener(this);
-		btnDelete=(Button)findViewById(R.id.user_del_btn);
+		btnDelete = (Button) findViewById(R.id.user_del_btn);
 		btnDelete.setOnClickListener(this);
-		btnBack=(Button)findViewById(R.id.user_back_btn);
+		btnBack = (Button) findViewById(R.id.user_back_btn);
 		btnBack.setOnClickListener(this);
 	}
-	
-	private void initAdapter(){
+
+	private void initAdapter() {
 		List<UserBean> users = new ArrayList<UserBean>();
 		String x[] = ResTools.getResStringArray(UserManagerActivity.this, R.array.user_title);
-		UserBean userTitle=new UserBean();
+		UserBean userTitle = new UserBean();
 		userTitle.setAccount(x[0]);
 		userTitle.setName(x[1]);
 		userTitle.setLevel(x[2]);
 		users.add(userTitle);
-		
-		ArrayList<UserBean> allUser=new ArrayList<UserBean>();
-		allUser=DbUtil.getAllUser();
-		for(int i=0;i<allUser.size();i++){
+
+		ArrayList<UserBean> allUser = new ArrayList<UserBean>();
+		allUser = DbUtil.getAllUser();
+		for (int i = 0; i < allUser.size(); i++) {
 			users.add(allUser.get(i));
 		}
-		//UserBean admin=new UserBean();
-		//admin.setAccount("admin");
-		//admin.setName("system");
-		//admin.setLevel("AdminUser");
-		//users.add(admin);
+		// UserBean admin=new UserBean();
+		// admin.setAccount("admin");
+		// admin.setName("system");
+		// admin.setLevel("AdminUser");
+		// users.add(admin);
 
-		userAdapter=new UserAdapter(users);
+		userAdapter = new UserAdapter(users);
 	}
-	
+
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
@@ -148,11 +148,11 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 			}
 		});
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		switch(v.getId()){
+		switch (v.getId()) {
 		case R.id.user_back_btn:
 			finish();
 			break;
@@ -165,16 +165,16 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 		case R.id.user_edit_btn:
 			editUser();
 			break;
-			default:
-				break;
+		default:
+			break;
 		}
 	}
-	
-	private void editUser(){
-		if(curPosition<1){
+
+	private void editUser() {
+		if (curPosition < 1) {
 			ToastUtil.showLongToast(mContext, "你还没有选中内容");
-		}else{
-			String account=userAdapter.getUser(curPosition).getAccount();
+		} else {
+			String account = userAdapter.getUser(curPosition).getAccount();
 			Intent intent = new Intent();
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			intent.setClass(UserManagerActivity.this, UserEditActivity.class);
@@ -182,56 +182,55 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 			startActivity(intent);
 		}
 	}
-	
-	private void delUser(){
-		if(curPosition<1){
+
+	private void delUser() {
+		if (curPosition < 1) {
 			ToastUtil.showLongToast(mContext, "你还没有选中内容");
-		}else{
+		} else {
 			CustomDialog.showOkAndCalcelDialog(mContext, "删除用户", "你确定要删除这个用户吗?", okListener, cancleListener);
 		}
-		
+
 	}
-	
-	private void addUser(){
+
+	private void addUser() {
 		Intent intent = new Intent();
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.setClass(UserManagerActivity.this, UserAddActivity.class);
 		startActivity(intent);
 	}
-	
-	OnClickListener okListener=new OnClickListener() {
-		
+
+	OnClickListener okListener = new OnClickListener() {
+
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			CustomDialog.dismissDialog();
 			CustomDialog.showWaitDialog(mContext, "删除中");
-			new Handler().postDelayed(new  Runnable() {
+			new Handler().postDelayed(new Runnable() {
 				public void run() {
-					curPosition=-1;
+					curPosition = -1;
 					updateAllUsers();
 					CustomDialog.dismissDialog();
 				}
 			}, 3000);
-			String account=userAdapter.getUser(curPosition).getAccount();
+			String account = userAdapter.getUser(curPosition).getAccount();
 			DbUtil.deleteUser(account);
 		}
 	};
-	
-OnClickListener cancleListener=new OnClickListener() {
-		
+
+	OnClickListener cancleListener = new OnClickListener() {
+
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			CustomDialog.dismissDialog();
 		}
 	};
-	
-	
-	
-	class UserAdapter extends BaseAdapter{
-		
+
+	class UserAdapter extends BaseAdapter {
+
 		List<UserBean> users;
+
 		public UserAdapter(List<UserBean> users) {
 			// TODO Auto-generated constructor stub
 			this.users = users;
@@ -272,16 +271,16 @@ OnClickListener cancleListener=new OnClickListener() {
 			int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };// RGB颜色
 
 			convertView.setBackgroundColor(colors[position % 2]);// 每隔item之间颜色不同
-			
-			if(curPosition==position){
+
+			if (curPosition == position) {
 				convertView.setBackgroundColor(Color.YELLOW);
 			}
-			
-			if(titlePosition==position){
+
+			if (titlePosition == position) {
 				account.setTextSize(18);
 				name.setTextSize(18);
 				level.setTextSize(18);
-			}else{
+			} else {
 				account.setTextSize(15);
 				name.setTextSize(15);
 				level.setTextSize(15);
@@ -294,13 +293,13 @@ OnClickListener cancleListener=new OnClickListener() {
 
 			return users.get(id);
 		}
-		
-		public void clearAlldata(){
+
+		public void clearAlldata() {
 			users.clear();
 		}
-		
-		public void updateList(List<UserBean> list){
-			this.users=list;
+
+		public void updateList(List<UserBean> list) {
+			this.users = list;
 		}
 
 	}
@@ -308,15 +307,13 @@ OnClickListener cancleListener=new OnClickListener() {
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	
+	}
 
 }

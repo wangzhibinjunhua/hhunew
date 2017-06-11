@@ -39,7 +39,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 
 	private ImageView backView;
 	private TextView titleView;
-	private Button readBtn, stopBtn,exportBtn,returnBtn;
+	private Button readBtn, stopBtn, exportBtn, returnBtn;
 
 	String name[] = { "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10", "G11", "G12", "G13", "G14" };
 
@@ -62,11 +62,11 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	private void initView() {
 		readBtn = (Button) findViewById(R.id.data_read_btn);
 		readBtn.setOnClickListener(this);
-		stopBtn=(Button)findViewById(R.id.data_stop_btn);
+		stopBtn = (Button) findViewById(R.id.data_stop_btn);
 		stopBtn.setOnClickListener(this);
-		exportBtn=(Button)findViewById(R.id.data_export_btn);
+		exportBtn = (Button) findViewById(R.id.data_export_btn);
 		exportBtn.setOnClickListener(this);
-		returnBtn=(Button)findViewById(R.id.data_back_btn);
+		returnBtn = (Button) findViewById(R.id.data_back_btn);
 		returnBtn.setOnClickListener(this);
 
 		ElecListStr = new ArrayList<String>();
@@ -101,12 +101,12 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		for (int i = 0; i < x.length; i++) {
 			DataItemBean item = new DataItemBean();
 			LogUtil.logMessage("wzb", "x=" + x[i]);
-			if(i==0){
+			if (i == 0) {
 				item.setItemName(x[i]);
 				item.setItemValue("Value");
 				item.setItemState("State");
 				item.setItemSelect(false);
-			}else{
+			} else {
 				item.setItemName(x[i]);
 				item.setItemValue("");
 				item.setItemState("");
@@ -131,7 +131,6 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				finish();
 			}
 		});
-
 
 	}
 

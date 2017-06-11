@@ -16,7 +16,7 @@ import com.wzb.hhu.interf.WApplication;
 
 /**
  * @author wzb<wangzhibin_x@qq.com>
- * @date May 8, 2017 2:47:08 PM	
+ * @date May 8, 2017 2:47:08 PM
  */
 public class SharedPreferencesUtil {
 

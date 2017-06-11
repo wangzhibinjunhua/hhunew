@@ -72,11 +72,11 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				if (arg2 == 0) {
-						if(eventAdapter.getDataItem(arg2).getItemSelect()){
-							eventAdapter.unSelectAll();
-						}else{
-							eventAdapter.selectAll();
-						}
+					if (eventAdapter.getDataItem(arg2).getItemSelect()) {
+						eventAdapter.unSelectAll();
+					} else {
+						eventAdapter.selectAll();
+					}
 				} else {
 					eventAdapter.getDataItem(arg2).cbToggle();
 					if (eventAdapter.getDataItem(arg2).getItemSelect()) {
@@ -204,15 +204,15 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 
 			return dataItems.get(id);
 		}
-		
-		public void selectAll(){
-			for(int i=0;i<dataItems.size();i++){
+
+		public void selectAll() {
+			for (int i = 0; i < dataItems.size(); i++) {
 				dataItems.get(i).setItemSelect(true);
 			}
 		}
-		
-		public void unSelectAll(){
-			for(int i=0;i<dataItems.size();i++){
+
+		public void unSelectAll() {
+			for (int i = 0; i < dataItems.size(); i++) {
 				dataItems.get(i).setItemSelect(false);
 			}
 		}

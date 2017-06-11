@@ -25,17 +25,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class SettingActivity extends BaseActivity implements OnScrollListener{
-	
+public class SettingActivity extends BaseActivity implements OnScrollListener {
+
 	private ImageView backView;
 	private TextView titleView;
-	
+
 	ArrayList<String> settingListStr = null;
 	private List<HashMap<String, Object>> settingList = null;
 	private SettingAdapter settingAdapter;
 
 	private ListView settingListView = null;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -45,8 +45,8 @@ public class SettingActivity extends BaseActivity implements OnScrollListener{
 		initTitleView();
 		initView();
 	}
-	
-	private void initView(){
+
+	private void initView() {
 		settingListStr = new ArrayList<String>();
 
 		settingListView = (ListView) findViewById(R.id.lv_setting);
@@ -71,9 +71,9 @@ public class SettingActivity extends BaseActivity implements OnScrollListener{
 			}
 
 		});
-		
+
 	}
-	
+
 	private void initAdapter() {
 		List<DataItemBean> dataItems = new ArrayList<DataItemBean>();
 
@@ -97,7 +97,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener{
 
 		settingAdapter = new SettingAdapter(dataItems);
 	}
-	
+
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
@@ -111,7 +111,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener{
 			}
 		});
 	}
-	
+
 	class SettingAdapter extends BaseAdapter {
 
 		List<DataItemBean> dataItems;
@@ -172,13 +172,13 @@ public class SettingActivity extends BaseActivity implements OnScrollListener{
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

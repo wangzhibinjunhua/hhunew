@@ -14,6 +14,17 @@
         android:src="@drawable/back_icon" 
         android:padding="5.0dip"
         />
+     <ImageView
+        android:id="@+id/title_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/connected" 
+        android:padding="5.0dip"
+        />
 
     <TextView
         android:id="@+id/title_text"

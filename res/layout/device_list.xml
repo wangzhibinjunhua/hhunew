@@ -17,7 +17,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFFFFF" >
+    android:background="#87CEFA" >
+         <include
+        android:id="@+id/tape_title"
+        layout="@layout/title_layout" />
 
 	<ListView
 	    android:id="@+id/list_devices"
@@ -27,7 +30,7 @@
 	    android:layout_above="@+id/button_scan"
 	    android:layout_marginLeft="20dp"
 	    android:layout_marginRight="20dp"
-	    android:layout_marginTop="20dp"
+	    android:layout_marginTop="60dp"
 	    android:smoothScrollbar="true" />
 		
 	<Button

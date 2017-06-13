@@ -30,6 +30,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private MyGridView mGridView;
 
 	private ImageView backView;
+	private ImageView btView;
 	private TextView titleView;
 
 	private String[] img_text;
@@ -58,6 +59,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		backView = (ImageView) findViewById(R.id.title_back);
 		backView.setOnClickListener(this);
 		backView.setVisibility(View.GONE);
+		btView=(ImageView)findViewById(R.id.title_bt);
+		btView.setVisibility(View.GONE);
 		titleView = (TextView) findViewById(R.id.title_text);
 		titleView.setText(getString(R.string.home_page));
 	}

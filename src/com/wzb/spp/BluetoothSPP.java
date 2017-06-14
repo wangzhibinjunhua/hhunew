@@ -101,8 +101,8 @@ public class BluetoothSPP {
 		}
 		return true;
 	}
-	
-	public boolean isConnected(){
+
+	public boolean isConnected() {
 		return isConnected;
 	}
 
@@ -238,7 +238,7 @@ public class BluetoothSPP {
 	}
 
 	public void connect(Intent data) {
-		LogUtil.logMessage("wzb", "isserviceok"+isServiceAvailable());
+		LogUtil.logMessage("wzb", "isserviceok" + isServiceAvailable());
 		String address = data.getExtras().getString(BluetoothState.EXTRA_DEVICE_ADDRESS);
 		BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
 		mChatService.connect(device);

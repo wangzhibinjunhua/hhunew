@@ -47,7 +47,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
  * @date May 4, 2017 2:46:37 PM
  */
 
-public class AmmeterListActivity extends BaseActivity implements OnScrollListener {
+public class AmmeterListActivity2 extends BaseActivity implements OnScrollListener {
 
 	private ImageView backView;
 	private ImageView btView;
@@ -63,8 +63,6 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 	private Button loadMoreBtn;
 	private Handler mHandler = new Handler();
 	private Context mContext;
-	
-	private ImageView searchBtn,addBtn,delBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,21 +70,8 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_ammeterlist);
-		mContext = AmmeterListActivity.this;
+		mContext = AmmeterListActivity2.this;
 		initTitleView();
-		
-		addBtn=(ImageView)findViewById(R.id.add_btn);
-		addBtn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				intent.setClass(AmmeterListActivity.this, MeterAddActivity.class);
-				startActivity(intent);
-			}
-		});
 
 		loadMoreView = getLayoutInflater().inflate(R.layout.loadmore, null);
 		loadMoreBtn = (Button) loadMoreView.findViewById(R.id.load_more_btn);
@@ -176,7 +161,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
 		btView = (ImageView) findViewById(R.id.title_bt);
-		titleView.setText(ResTools.getResString(AmmeterListActivity.this, R.string.ammeter_list));
+		titleView.setText(ResTools.getResString(AmmeterListActivity2.this, R.string.ammeter_list));
 		backView.setOnClickListener(new OnClickListener() {
 
 			@Override

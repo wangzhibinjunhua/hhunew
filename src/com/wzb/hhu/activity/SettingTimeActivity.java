@@ -33,9 +33,9 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 	private ImageView backView;
 	private TextView titleView;
 	private ImageView btView;
-	
+
 	private Context mContext;
-	
+
 	private Button readBtn, writeBtn, returnBtn;
 	private CheckBox sysClockCb;
 	private EditText sysDate, sysTime;
@@ -48,7 +48,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_settingtime);
-		mContext=SettingTimeActivity.this;
+		mContext = SettingTimeActivity.this;
 		initTitleView();
 		setBtListener();
 		initView();
@@ -107,7 +107,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -115,6 +115,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		setBtListener();
 		updateBtState();
 	}
+
 	private void updateBtState() {
 		Drawable drawableDisconnect = mContext.getResources().getDrawable(R.drawable.disconnect);
 		Drawable drawableconnect = mContext.getResources().getDrawable(R.drawable.connected);

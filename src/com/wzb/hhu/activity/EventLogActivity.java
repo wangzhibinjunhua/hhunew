@@ -155,7 +155,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -163,7 +163,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 		setBtListener();
 		updateBtState();
 	}
-	
+
 	private void updateBtState() {
 		Drawable drawableDisconnect = mContext.getResources().getDrawable(R.drawable.disconnect);
 		Drawable drawableconnect = mContext.getResources().getDrawable(R.drawable.connected);

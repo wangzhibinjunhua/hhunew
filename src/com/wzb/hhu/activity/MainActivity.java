@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		backView = (ImageView) findViewById(R.id.title_back);
 		backView.setOnClickListener(this);
 		backView.setVisibility(View.GONE);
-		btView=(ImageView)findViewById(R.id.title_bt);
+		btView = (ImageView) findViewById(R.id.title_bt);
 		btView.setVisibility(View.GONE);
 		titleView = (TextView) findViewById(R.id.title_text);
 		titleView.setText(getString(R.string.home_page));
@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				startActivity(intent);
 				break;
 			case 1:
-				//intent.setClass(MainActivity.this, SimpleActivity.class);
+				// intent.setClass(MainActivity.this, SimpleActivity.class);
 				intent.setClass(MainActivity.this, SettingActivity.class);
 				startActivity(intent);
 				break;

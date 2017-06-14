@@ -117,7 +117,7 @@ public class DeviceList2 extends BaseActivity {
 			mPairedDevicesArrayAdapter.add(noDevices);
 		}
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub

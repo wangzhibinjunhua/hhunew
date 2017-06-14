@@ -38,7 +38,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 	private ImageView backView;
 	private TextView titleView;
 	private ImageView btView;
-	
+
 	private Context mContext;
 
 	ArrayList<String> settingListStr = null;
@@ -53,7 +53,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_setting);
-		mContext=SettingActivity.this;
+		mContext = SettingActivity.this;
 		initTitleView();
 		initView();
 	}
@@ -124,7 +124,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 		});
 		btView = (ImageView) findViewById(R.id.title_bt);
 		btView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -135,7 +135,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -143,7 +143,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 		setBtListener();
 		updateBtState();
 	}
-	
+
 	private void updateBtState() {
 		Drawable drawableDisconnect = mContext.getResources().getDrawable(R.drawable.disconnect);
 		Drawable drawableconnect = mContext.getResources().getDrawable(R.drawable.connected);
@@ -154,7 +154,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 			btView.setBackground(drawableDisconnect);
 		}
 	}
-	
+
 	String password = "";
 
 	private void setBtListener() {

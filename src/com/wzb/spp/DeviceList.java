@@ -67,10 +67,11 @@ public class DeviceList extends BaseActivity {
 	private ArrayAdapter<String> mPairedDevicesArrayAdapter;
 	private Set<BluetoothDevice> pairedDevices;
 	private Button scanButton;
-	public static final int DEVICE_CONNECTION_FAILED=0xff01;
-	public static final int DEVICE_CONNECTED=0xff02;
-	public static final int DEVICE_DISCONNECTED=0xff03;
-	private String connectAddress="";
+	public static final int DEVICE_CONNECTION_FAILED = 0xff01;
+	public static final int DEVICE_CONNECTED = 0xff02;
+	public static final int DEVICE_DISCONNECTED = 0xff03;
+	private String connectAddress = "";
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -163,7 +164,7 @@ public class DeviceList extends BaseActivity {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case DEVICE_CONNECTED:
-				ToastUtil.showShortToast(DeviceList.this, "connected to"+connectAddress);
+				ToastUtil.showShortToast(DeviceList.this, "connected to" + connectAddress);
 				CustomDialog.dismissDialog();
 				finish();
 				break;
@@ -272,7 +273,7 @@ public class DeviceList extends BaseActivity {
 				// View
 				String info = ((TextView) v).getText().toString();
 				String address = info.substring(info.length() - 17);
-				connectAddress=address;
+				connectAddress = address;
 				// Create the result Intent and include the MAC address
 				Intent intent = new Intent();
 				intent.putExtra(BluetoothState.EXTRA_DEVICE_ADDRESS, address);

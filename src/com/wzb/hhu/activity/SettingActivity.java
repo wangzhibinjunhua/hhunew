@@ -6,10 +6,18 @@ import java.util.List;
 
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.DataItemBean;
+import com.wzb.hhu.interf.WApplication;
+import com.wzb.hhu.util.Common;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
+import com.wzb.spp.BluetoothSPP.BluetoothConnectionListener;
+import com.wzb.spp.BluetoothSPP.OnDataReceivedListener;
+import com.wzb.spp.DeviceList;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -29,6 +37,9 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 
 	private ImageView backView;
 	private TextView titleView;
+	private ImageView btView;
+	
+	private Context mContext;
 
 	ArrayList<String> settingListStr = null;
 	private List<HashMap<String, Object>> settingList = null;
@@ -42,6 +53,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_setting);
+		mContext=SettingActivity.this;
 		initTitleView();
 		initView();
 	}
@@ -110,6 +122,74 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 				finish();
 			}
 		});
+		btView = (ImageView) findViewById(R.id.title_bt);
+		btView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				Intent intent = new Intent(mContext, DeviceList.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		});
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		setBtListener();
+		updateBtState();
+	}
+	
+	private void updateBtState() {
+		Drawable drawableDisconnect = mContext.getResources().getDrawable(R.drawable.disconnect);
+		Drawable drawableconnect = mContext.getResources().getDrawable(R.drawable.connected);
+		if (WApplication.bt.isConnected()) {
+
+			btView.setBackground(drawableconnect);
+		} else {
+			btView.setBackground(drawableDisconnect);
+		}
+	}
+	
+	String password = "";
+
+	private void setBtListener() {
+		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
+			public void onDataReceived(byte[] data, String message) {
+				String dataString = Common.bytesToHexString(data);
+				LogUtil.logMessage("wzb", "SettingActivity datarec:" + dataString + " msg:" + message);
+				if (dataString.startsWith("0150300228")) {
+					password = dataString.substring(dataString.indexOf("28") + 2, dataString.indexOf("29"));
+					LogUtil.logMessage("wzb", "password=" + password);
+					password = Common.asciiToString(password);
+					LogUtil.logMessage("wzb", "ascii password=" + password);
+				}
+				// Toast.makeText(SimpleActivity.this, message,
+				// Toast.LENGTH_SHORT).show();
+			}
+		});
+
+		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
+			public void onDeviceConnected(String name, String address) {
+				LogUtil.logMessage("wzb", "SettingActivity onDeviceConnected");
+				updateBtState();
+			}
+
+			public void onDeviceDisconnected() {
+				LogUtil.logMessage("wzb", "SettingActivity onDeviceDisconnected");
+				updateBtState();
+			}
+
+			public void onDeviceConnectionFailed() {
+				LogUtil.logMessage("wzb", "SettingActivity onDeviceConnectionFailed");
+				updateBtState();
+			}
+		});
+
 	}
 
 	class SettingAdapter extends BaseAdapter {

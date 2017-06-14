@@ -9,7 +9,11 @@ import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
 import com.wzb.spp.BluetoothSPP.BluetoothConnectionListener;
 import com.wzb.spp.BluetoothSPP.OnDataReceivedListener;
+import com.wzb.spp.DeviceList;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
@@ -28,7 +32,10 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 
 	private ImageView backView;
 	private TextView titleView;
-
+	private ImageView btView;
+	
+	private Context mContext;
+	
 	private Button readBtn, writeBtn, returnBtn;
 	private CheckBox sysClockCb;
 	private EditText sysDate, sysTime;
@@ -41,6 +48,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_settingtime);
+		mContext=SettingTimeActivity.this;
 		initTitleView();
 		setBtListener();
 		initView();
@@ -86,14 +94,45 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 				finish();
 			}
 		});
+		btView = (ImageView) findViewById(R.id.title_bt);
+		btView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				Intent intent = new Intent(getApplicationContext(), DeviceList.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		});
 	}
 	
-	String password="";
-	private void setBtListener(){
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		setBtListener();
+		updateBtState();
+	}
+	private void updateBtState() {
+		Drawable drawableDisconnect = mContext.getResources().getDrawable(R.drawable.disconnect);
+		Drawable drawableconnect = mContext.getResources().getDrawable(R.drawable.connected);
+		if (WApplication.bt.isConnected()) {
+
+			btView.setBackground(drawableconnect);
+		} else {
+			btView.setBackground(drawableDisconnect);
+		}
+	}
+
+	String password = "";
+
+	private void setBtListener() {
 		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
 			public void onDataReceived(byte[] data, String message) {
 				String dataString = Common.bytesToHexString(data);
-				LogUtil.logMessage("wzb", "22 datarec:" + dataString + " msg:" + message);
+				LogUtil.logMessage("wzb", "SettingTimeActivity datarec:" + dataString + " msg:" + message);
 				if (dataString.startsWith("0150300228")) {
 					password = dataString.substring(dataString.indexOf("28") + 2, dataString.indexOf("29"));
 					LogUtil.logMessage("wzb", "password=" + password);
@@ -107,19 +146,19 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 
 		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
 			public void onDeviceConnected(String name, String address) {
-				LogUtil.logMessage("wzb", "22 onDeviceConnected");
+				LogUtil.logMessage("wzb", "SettingTimeActivity onDeviceConnected");
 
 			}
 
 			public void onDeviceDisconnected() {
-				LogUtil.logMessage("wzb", "22 onDeviceDisconnected");
+				LogUtil.logMessage("wzb", "SettingTimeActivity onDeviceDisconnected");
 			}
 
 			public void onDeviceConnectionFailed() {
-				LogUtil.logMessage("wzb", "22 onDeviceConnectionFailed");
+				LogUtil.logMessage("wzb", "SettingTimeActivity onDeviceConnectionFailed");
 			}
 		});
-		
+
 	}
 
 	@Override
@@ -127,10 +166,10 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.time_back_btn:
-			//test
+			// test
 			String s = "0x2f3f303030303031323334353638210d0a";
 			WApplication.bt.send(Common.parseHexStringToBytes(s), false);
-			//finish();
+			// finish();
 			break;
 		case R.id.sys_clock_date_value_set:
 			onYearMonthDayPicker();

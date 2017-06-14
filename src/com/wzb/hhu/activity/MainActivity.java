@@ -84,7 +84,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				startActivity(intent);
 				break;
 			case 5:
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.setClass(MainActivity.this, LoginNewActivity.class);
 				startActivity(intent);
 				break;
@@ -98,7 +97,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				startActivity(intent);
 				break;
 			case 1:
-				intent.setClass(MainActivity.this, SimpleActivity.class);
+				//intent.setClass(MainActivity.this, SimpleActivity.class);
+				intent.setClass(MainActivity.this, SettingActivity.class);
 				startActivity(intent);
 				break;
 			default:

@@ -21,6 +21,14 @@ import java.util.Set;
 import com.wzb.hhu.R;
 import com.wzb.hhu.activity.BaseActivity;
 import com.wzb.hhu.btcore.BroadcastAction;
+import com.wzb.hhu.interf.WApplication;
+import com.wzb.hhu.util.Common;
+import com.wzb.hhu.util.CustomDialog;
+import com.wzb.hhu.util.LogUtil;
+import com.wzb.hhu.util.ResTools;
+import com.wzb.hhu.util.ToastUtil;
+import com.wzb.spp.BluetoothSPP.BluetoothConnectionListener;
+import com.wzb.spp.BluetoothSPP.OnDataReceivedListener;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -31,6 +39,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -38,12 +47,17 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 @SuppressLint("NewApi")
 public class DeviceList extends BaseActivity {
+
+	private ImageView backView;
+	private ImageView btView;
+	private TextView titleView;
 	// Debugging
 	private static final String TAG = "BluetoothSPP";
 	private static final boolean D = true;
@@ -53,7 +67,10 @@ public class DeviceList extends BaseActivity {
 	private ArrayAdapter<String> mPairedDevicesArrayAdapter;
 	private Set<BluetoothDevice> pairedDevices;
 	private Button scanButton;
-
+	public static final int DEVICE_CONNECTION_FAILED=0xff01;
+	public static final int DEVICE_CONNECTED=0xff02;
+	public static final int DEVICE_DISCONNECTED=0xff03;
+	private String connectAddress="";
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -61,7 +78,7 @@ public class DeviceList extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		int listId = getIntent().getIntExtra("layout_list", R.layout.device_list);
 		setContentView(listId);
-
+		initTitleView();
 		String strBluetoothDevices = getIntent().getStringExtra("bluetooth_devices");
 		if (strBluetoothDevices == null)
 			strBluetoothDevices = "Bluetooth Devices";
@@ -117,12 +134,77 @@ public class DeviceList extends BaseActivity {
 			mPairedDevicesArrayAdapter.add(noDevices);
 		}
 	}
-	
+
+	private void initTitleView() {
+		backView = (ImageView) findViewById(R.id.title_back);
+		btView = (ImageView) findViewById(R.id.title_bt);
+		btView.setVisibility(View.GONE);
+		titleView = (TextView) findViewById(R.id.title_text);
+		titleView.setText(ResTools.getResString(DeviceList.this, R.string.bt_device));
+		backView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+	}
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		setBtListener();
 		sendBroadcast(new Intent(BroadcastAction.ACTION_OPEN_BT));
+	}
+
+	private Handler mHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case DEVICE_CONNECTED:
+				ToastUtil.showShortToast(DeviceList.this, "connected to"+connectAddress);
+				CustomDialog.dismissDialog();
+				finish();
+				break;
+			case DEVICE_CONNECTION_FAILED:
+				ToastUtil.showShortToast(DeviceList.this, "connection failed");
+				CustomDialog.dismissDialog();
+				break;
+			case DEVICE_DISCONNECTED:
+				ToastUtil.showShortToast(DeviceList.this, "disconnected");
+				CustomDialog.dismissDialog();
+			default:
+				break;
+			}
+		};
+	};
+
+	private void setBtListener() {
+		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
+			public void onDataReceived(byte[] data, String message) {
+				String dataString = Common.bytesToHexString(data);
+				LogUtil.logMessage("wzb", " DeviceList datarec:" + dataString + " msg:" + message);
+			}
+		});
+
+		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
+			public void onDeviceConnected(String name, String address) {
+				LogUtil.logMessage("wzb", " DeviceList onDeviceConnected");
+				mHandler.sendEmptyMessage(DEVICE_CONNECTED);
+			}
+
+			public void onDeviceDisconnected() {
+				LogUtil.logMessage("wzb", "DeviceList onDeviceDisconnected");
+				mHandler.sendEmptyMessage(DEVICE_DISCONNECTED);
+			}
+
+			public void onDeviceConnectionFailed() {
+				LogUtil.logMessage("wzb", "DeviceList onDeviceConnectionFailed");
+				mHandler.sendEmptyMessage(DEVICE_CONNECTION_FAILED);
+			}
+		});
+
 	}
 
 	protected void onDestroy() {
@@ -190,16 +272,17 @@ public class DeviceList extends BaseActivity {
 				// View
 				String info = ((TextView) v).getText().toString();
 				String address = info.substring(info.length() - 17);
-
+				connectAddress=address;
 				// Create the result Intent and include the MAC address
 				Intent intent = new Intent();
 				intent.putExtra(BluetoothState.EXTRA_DEVICE_ADDRESS, address);
 
 				intent.setAction(BroadcastAction.ACTION_CONNETION_ADDRESS);
 				sendBroadcast(intent);
+				CustomDialog.showWaitDialog(DeviceList.this, "connecting...");
 				// Set result and finish this Activity
-				setResult(Activity.RESULT_OK, intent);
-				finish();
+				// setResult(Activity.RESULT_OK, intent);
+				// finish();
 			}
 		}
 	};

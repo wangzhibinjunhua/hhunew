@@ -37,20 +37,12 @@ public class BtManager extends BroadcastReceiver {
 		}
 	}
 	
-	String password="";
+	
 	private void setBtListener(){
 		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
 			public void onDataReceived(byte[] data, String message) {
 				String dataString = Common.bytesToHexString(data);
 				LogUtil.logMessage("wzb", "datarec:" + dataString + " msg:" + message);
-				if (dataString.startsWith("0150300228")) {
-					password = dataString.substring(dataString.indexOf("28") + 2, dataString.indexOf("29"));
-					LogUtil.logMessage("wzb", "password=" + password);
-					password = Common.asciiToString(password);
-					LogUtil.logMessage("wzb", "ascii password=" + password);
-				}
-				// Toast.makeText(SimpleActivity.this, message,
-				// Toast.LENGTH_SHORT).show();
 			}
 		});
 

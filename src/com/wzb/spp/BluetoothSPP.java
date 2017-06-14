@@ -101,6 +101,10 @@ public class BluetoothSPP {
 		}
 		return true;
 	}
+	
+	public boolean isConnected(){
+		return isConnected;
+	}
 
 	public boolean isBluetoothEnabled() {
 		return mBluetoothAdapter.isEnabled();

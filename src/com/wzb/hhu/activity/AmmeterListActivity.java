@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -49,6 +50,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 public class AmmeterListActivity extends BaseActivity implements OnScrollListener {
 
 	private ImageView backView;
+	private ImageView btView;
 	private TextView titleView;
 	private ListView listView;
 	private int visibleLastIndex = 0;// 最后的可视项索引
@@ -70,7 +72,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		setContentView(R.layout.activity_ammeterlist);
 		mContext = AmmeterListActivity.this;
 		initTitleView();
-		setBtListener();
+
 		loadMoreView = getLayoutInflater().inflate(R.layout.loadmore, null);
 		loadMoreBtn = (Button) loadMoreView.findViewById(R.id.load_more_btn);
 
@@ -128,10 +130,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				return true;
 			}
 		});
-		
-		//test
-		Intent intent = new Intent(getApplicationContext(), DeviceList.class);
-		startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+
 	}
 
 	private void startReadData(String sn) {
@@ -161,6 +160,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
+		btView = (ImageView) findViewById(R.id.title_bt);
 		titleView.setText(ResTools.getResString(AmmeterListActivity.this, R.string.ammeter_list));
 		backView.setOnClickListener(new OnClickListener() {
 
@@ -168,6 +168,18 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				finish();
+			}
+		});
+		
+		btView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				Intent intent = new Intent(getApplicationContext(), DeviceList.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
 			}
 		});
 	}
@@ -186,9 +198,29 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 
 		adapter = new AmmeterAdapter(ammeters);
 	}
-	
-	String password="";
-	private void setBtListener(){
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		setBtListener();
+		updateBtState();
+	}
+
+	private void updateBtState() {
+		Drawable drawableDisconnect = mContext.getResources().getDrawable(R.drawable.disconnect);
+		Drawable drawableconnect = mContext.getResources().getDrawable(R.drawable.connected);
+		if (WApplication.bt.isConnected()) {
+
+			btView.setBackground(drawableconnect);
+		} else {
+			btView.setBackground(drawableDisconnect);
+		}
+	}
+
+	String password = "";
+
+	private void setBtListener() {
 		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
 			public void onDataReceived(byte[] data, String message) {
 				String dataString = Common.bytesToHexString(data);
@@ -207,25 +239,27 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
 			public void onDeviceConnected(String name, String address) {
 				LogUtil.logMessage("wzb", "11 onDeviceConnected");
-
+				updateBtState();
 			}
 
 			public void onDeviceDisconnected() {
 				LogUtil.logMessage("wzb", "11 onDeviceDisconnected");
+				updateBtState();
 			}
 
 			public void onDeviceConnectionFailed() {
 				LogUtil.logMessage("wzb", "11 onDeviceConnectionFailed");
+				updateBtState();
 			}
 		});
-		
+
 	}
 
 	private void loadMoreData() {
-		//test
+		// test
 		String s = "0x2f3f303030303031323334353638210d0a";
 		WApplication.bt.send(Common.parseHexStringToBytes(s), false);
-		
+
 		int count = adapter.getCount();
 
 		if (count + 10 <= datasize) {

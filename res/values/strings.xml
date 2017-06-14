@@ -25,5 +25,6 @@
     <string name="meter_setting">Meter Setting</string>
     <string name="new_user" string="">New User</string>
     <string name="edit_user" string="">Edit User</string>
+    <string name="bt_device" string="">Bluetooth Device</string>
 
 </resources>

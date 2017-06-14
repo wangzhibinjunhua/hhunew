@@ -21,6 +21,7 @@
          <include
         android:id="@+id/tape_title"
         layout="@layout/title_layout" />
+         
 
 	<ListView
 	    android:id="@+id/list_devices"

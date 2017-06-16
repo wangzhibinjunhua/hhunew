@@ -123,6 +123,7 @@
   
     </string-array>
     
+   
      <string-array name="event" translatable="false">
         <item>Item Name</item> <!-- 0 -->
         <item>开端盖事件发生次数</item><!-- 1开端盖事件发生次数 -->

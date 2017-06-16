@@ -7,12 +7,19 @@ import java.util.List;
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.AmmeterBean;
 import com.wzb.hhu.bean.DataItemBean;
+import com.wzb.hhu.interf.WApplication;
+import com.wzb.hhu.util.Common;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
 import com.wzb.hhu.view.DataViewHolder;
+import com.wzb.spp.BluetoothSPP.BluetoothConnectionListener;
+import com.wzb.spp.BluetoothSPP.OnDataReceivedListener;
+import com.wzb.spp.DeviceList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,12 +46,12 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 
 	private ImageView backView;
 	private TextView titleView;
+	private ImageView btView;
+	private Context mContext;
 	private Button readBtn, stopBtn, exportBtn, returnBtn;
 
-	String name[] = { "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10", "G11", "G12", "G13", "G14" };
 
-	ArrayList<String> ElecListStr = null;
-	private List<HashMap<String, Object>> ElecList = null;
+	ArrayList<Integer> selectedItem = null;
 	private DataAdapter ElecAdapter;
 
 	private ListView ElecListView = null;
@@ -55,6 +62,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_readdata);
+		mContext=ReadDataActivity.this;
 		initTitleView();
 		initView();
 	}
@@ -69,7 +77,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		returnBtn = (Button) findViewById(R.id.data_back_btn);
 		returnBtn.setOnClickListener(this);
 
-		ElecListStr = new ArrayList<String>();
+		selectedItem = new ArrayList<Integer>();
 
 		ElecListView = (ListView) findViewById(R.id.lv_data);
 
@@ -84,9 +92,9 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				// TODO Auto-generated method stub
 				ElecAdapter.getDataItem(arg2).cbToggle();
 				if (ElecAdapter.getDataItem(arg2).getItemSelect()) {
-					ElecListStr.add("" + arg2);
+					selectedItem.add(arg2);
 				} else {
-					ElecListStr.remove("" + arg2);
+					selectedItem.remove(arg2);
 				}
 				LogUtil.logMessage("wzb", "cb:" + arg2 + " " + ElecAdapter.getDataItem(arg2).getItemSelect());
 				ElecAdapter.notifyDataSetChanged();
@@ -131,6 +139,74 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				finish();
 			}
 		});
+		btView = (ImageView) findViewById(R.id.title_bt);
+		btView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				Intent intent = new Intent(getApplicationContext(), DeviceList.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		});
+
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		setBtListener();
+		updateBtState();
+	}
+	
+	private void updateBtState() {
+		Drawable drawableDisconnect = mContext.getResources().getDrawable(R.drawable.disconnect);
+		Drawable drawableconnect = mContext.getResources().getDrawable(R.drawable.connected);
+		if (WApplication.bt.isConnected()) {
+
+			btView.setBackground(drawableconnect);
+		} else {
+			btView.setBackground(drawableDisconnect);
+		}
+	}
+
+	String password = "";
+
+	private void setBtListener() {
+		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
+			public void onDataReceived(byte[] data, String message) {
+				String dataString = Common.bytesToHexString(data);
+				LogUtil.logMessage("wzb", "11 datarec:" + dataString + " msg:" + message);
+				if (dataString.startsWith("0150300228")) {
+					password = dataString.substring(dataString.indexOf("28") + 2, dataString.indexOf("29"));
+					LogUtil.logMessage("wzb", "password=" + password);
+					password = Common.asciiToString(password);
+					LogUtil.logMessage("wzb", "ascii password=" + password);
+				}
+				// Toast.makeText(SimpleActivity.this, message,
+				// Toast.LENGTH_SHORT).show();
+			}
+		});
+
+		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
+			public void onDeviceConnected(String name, String address) {
+				LogUtil.logMessage("wzb", "11 onDeviceConnected");
+				updateBtState();
+			}
+
+			public void onDeviceDisconnected() {
+				LogUtil.logMessage("wzb", "11 onDeviceDisconnected");
+				updateBtState();
+			}
+
+			public void onDeviceConnectionFailed() {
+				LogUtil.logMessage("wzb", "11 onDeviceConnectionFailed");
+				updateBtState();
+			}
+		});
 
 	}
 
@@ -139,7 +215,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.data_read_btn:
-			LogUtil.logMessage("wzb", "" + ElecListStr);
+			LogUtil.logMessage("wzb", "" + selectedItem);
 			break;
 		case R.id.data_back_btn:
 			finish();

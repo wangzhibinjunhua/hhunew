@@ -52,6 +52,8 @@ import android.widget.AdapterView.OnItemLongClickListener;
 
 public class AmmeterListActivity extends BaseActivity implements OnScrollListener {
 
+	public static final int UPDATE_BT_STATE=0xff0001;
+	
 	private ImageView backView;
 	private ImageView btView;
 	private TextView titleView;
@@ -64,7 +66,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 	private AmmeterAdapter adapter;
 	private View loadMoreView;
 	private Button loadMoreBtn;
-	private Handler mHandler = new Handler();
+	
 	private Context mContext;
 
 	private ImageView searchBtn, addBtn, delBtn;
@@ -125,7 +127,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				// TODO Auto-generated method stub
 				loadMoreBtn.setText("正在加载..");
 				loadMoreBtn.setClickable(false);
-				mHandler.postDelayed(new Runnable() {
+				new Handler().postDelayed(new Runnable() {
 
 					@Override
 					public void run() {
@@ -279,6 +281,18 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			btView.setBackground(drawableDisconnect);
 		}
 	}
+	
+	Handler mHandler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch(msg.what){
+			case UPDATE_BT_STATE:
+				updateBtState();
+				break;
+			default:
+				break;
+			}
+		};
+	};
 
 	String password = "";
 
@@ -300,18 +314,18 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 
 		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
 			public void onDeviceConnected(String name, String address) {
-				LogUtil.logMessage("wzb", "11 onDeviceConnected");
-				updateBtState();
+				LogUtil.logMessage("wzb", "AmmeterListActivity onDeviceConnected");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 
 			public void onDeviceDisconnected() {
-				LogUtil.logMessage("wzb", "11 onDeviceDisconnected");
-				updateBtState();
+				LogUtil.logMessage("wzb", "AmmeterListActivity onDeviceDisconnected");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 
 			public void onDeviceConnectionFailed() {
-				LogUtil.logMessage("wzb", "11 onDeviceConnectionFailed");
-				updateBtState();
+				LogUtil.logMessage("wzb", "AmmeterListActivity onDeviceConnectionFailed");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 		});
 

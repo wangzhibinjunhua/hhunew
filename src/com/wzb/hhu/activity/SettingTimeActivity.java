@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.format.Time;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,7 +30,7 @@ import cn.qqtheme.framework.picker.TimePicker;
 import cn.qqtheme.framework.util.ConvertUtils;
 
 public class SettingTimeActivity extends BaseActivity implements OnClickListener {
-
+	public static final int UPDATE_BT_STATE=0xff0001;
 	private ImageView backView;
 	private TextView titleView;
 	private ImageView btView;
@@ -126,6 +127,18 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 			btView.setBackground(drawableDisconnect);
 		}
 	}
+	
+	Handler mHandler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch(msg.what){
+			case UPDATE_BT_STATE:
+				updateBtState();
+				break;
+			default:
+				break;
+			}
+		};
+	};
 
 	String password = "";
 
@@ -148,15 +161,18 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
 			public void onDeviceConnected(String name, String address) {
 				LogUtil.logMessage("wzb", "SettingTimeActivity onDeviceConnected");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 
 			}
 
 			public void onDeviceDisconnected() {
 				LogUtil.logMessage("wzb", "SettingTimeActivity onDeviceDisconnected");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 
 			public void onDeviceConnectionFailed() {
 				LogUtil.logMessage("wzb", "SettingTimeActivity onDeviceConnectionFailed");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 		});
 

@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -34,7 +35,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class SettingActivity extends BaseActivity implements OnScrollListener {
-
+	public static final int UPDATE_BT_STATE=0xff0001;
 	private ImageView backView;
 	private TextView titleView;
 	private ImageView btView;
@@ -154,6 +155,18 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 			btView.setBackground(drawableDisconnect);
 		}
 	}
+	
+	Handler mHandler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch(msg.what){
+			case UPDATE_BT_STATE:
+				updateBtState();
+				break;
+			default:
+				break;
+			}
+		};
+	};
 
 	String password = "";
 
@@ -176,17 +189,17 @@ public class SettingActivity extends BaseActivity implements OnScrollListener {
 		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
 			public void onDeviceConnected(String name, String address) {
 				LogUtil.logMessage("wzb", "SettingActivity onDeviceConnected");
-				updateBtState();
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 
 			public void onDeviceDisconnected() {
 				LogUtil.logMessage("wzb", "SettingActivity onDeviceDisconnected");
-				updateBtState();
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 
 			public void onDeviceConnectionFailed() {
 				LogUtil.logMessage("wzb", "SettingActivity onDeviceConnectionFailed");
-				updateBtState();
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 		});
 

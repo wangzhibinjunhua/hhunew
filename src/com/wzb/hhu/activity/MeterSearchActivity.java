@@ -44,6 +44,7 @@ import android.widget.TextView;
  */
 
 public class MeterSearchActivity extends BaseActivity implements OnScrollListener{
+	public static final int UPDATE_BT_STATE=0xff0001;
 	private ImageView backView;
 	private ImageView btView;
 	private TextView titleView;
@@ -145,6 +146,9 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 			case UPDATE_SEARCH_RESULT:
 
 				break;
+			case UPDATE_BT_STATE:
+				updateBtState();
+				break;
 			default:
 				break;
 			}
@@ -204,18 +208,18 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 
 		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
 			public void onDeviceConnected(String name, String address) {
-				LogUtil.logMessage("wzb", "11 onDeviceConnected");
-				updateBtState();
+				LogUtil.logMessage("wzb", "MeterSearchActivity onDeviceConnected");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 
 			public void onDeviceDisconnected() {
-				LogUtil.logMessage("wzb", "11 onDeviceDisconnected");
-				updateBtState();
+				LogUtil.logMessage("wzb", "MeterSearchActivity onDeviceDisconnected");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 
 			public void onDeviceConnectionFailed() {
-				LogUtil.logMessage("wzb", "11 onDeviceConnectionFailed");
-				updateBtState();
+				LogUtil.logMessage("wzb", "MeterSearchActivity onDeviceConnectionFailed");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 		});
 

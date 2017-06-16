@@ -3,6 +3,7 @@ package com.wzb.hhu.activity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.LogManager;
 
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.AmmeterBean;
@@ -21,6 +22,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +46,8 @@ import android.widget.TextView;
  */
 public class ReadDataActivity extends BaseActivity implements OnScrollListener, OnClickListener {
 
+	public static final int UPDATE_BT_STATE=0xff0001;
+	
 	private ImageView backView;
 	private TextView titleView;
 	private ImageView btView;
@@ -56,6 +60,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 
 	private ListView ElecListView = null;
 
+	private String meterSn,meterPw;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -63,6 +68,8 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_readdata);
 		mContext=ReadDataActivity.this;
+		meterSn=getIntent().getStringExtra("meter_sn");
+		meterPw=getIntent().getStringExtra("meter_pw");
 		initTitleView();
 		initView();
 	}
@@ -172,6 +179,18 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			btView.setBackground(drawableDisconnect);
 		}
 	}
+	
+	Handler mHandler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch(msg.what){
+			case UPDATE_BT_STATE:
+				updateBtState();
+				break;
+			default:
+				break;
+			}
+		};
+	};
 
 	String password = "";
 
@@ -179,7 +198,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
 			public void onDataReceived(byte[] data, String message) {
 				String dataString = Common.bytesToHexString(data);
-				LogUtil.logMessage("wzb", "11 datarec:" + dataString + " msg:" + message);
+				LogUtil.logMessage("wzb", "ReadDataActivity datarec:" + dataString + " msg:" + message);
 				if (dataString.startsWith("0150300228")) {
 					password = dataString.substring(dataString.indexOf("28") + 2, dataString.indexOf("29"));
 					LogUtil.logMessage("wzb", "password=" + password);
@@ -193,18 +212,18 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 
 		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
 			public void onDeviceConnected(String name, String address) {
-				LogUtil.logMessage("wzb", "11 onDeviceConnected");
-				updateBtState();
+				LogUtil.logMessage("wzb", "ReadDataActivity onDeviceConnected");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 
 			public void onDeviceDisconnected() {
-				LogUtil.logMessage("wzb", "11 onDeviceDisconnected");
-				updateBtState();
+				LogUtil.logMessage("wzb", "ReadDataActivity onDeviceDisconnected");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 
 			public void onDeviceConnectionFailed() {
-				LogUtil.logMessage("wzb", "11 onDeviceConnectionFailed");
-				updateBtState();
+				LogUtil.logMessage("wzb", "ReadDataActivity onDeviceConnectionFailed");
+				mHandler.sendEmptyMessage(UPDATE_BT_STATE);
 			}
 		});
 
@@ -216,6 +235,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		switch (v.getId()) {
 		case R.id.data_read_btn:
 			LogUtil.logMessage("wzb", "" + selectedItem);
+			LogUtil.logMessage("wzb", "sn:"+meterSn+" pw:"+meterPw);
 			break;
 		case R.id.data_back_btn:
 			finish();

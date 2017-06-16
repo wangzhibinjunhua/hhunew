@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.wzb.hhu.R;
+import com.wzb.hhu.interf.WApplication;
 import com.wzb.hhu.util.Common;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.spp.BluetoothSPP;
@@ -51,10 +52,31 @@ public class SimpleActivity extends Activity {
 			finish();
 		}
 
-		bt.setOnDataReceivedListener(new OnDataReceivedListener() {
+		
+
+		Button btnConnect = (Button) findViewById(R.id.btnConnect);
+		btnConnect.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				if (bt.getServiceState() == BluetoothState.STATE_CONNECTED) {
+					bt.disconnect();
+				} else {
+					Intent intent = new Intent(getApplicationContext(), DeviceList.class);
+					startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+				}
+			}
+		});
+
+		initView();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
 			public void onDataReceived(byte[] data, String message) {
 				String dataString = Common.bytesToHexString(data);
-				LogUtil.logMessage("wzb", "datarec:" + dataString + " msg:" + message);
+				LogUtil.logMessage("wzb", "simple datarec:" + dataString + " msg:" + message);
 				if (dataString.startsWith("0150300228")) {
 					password = dataString.substring(dataString.indexOf("28") + 2, dataString.indexOf("29"));
 					LogUtil.logMessage("wzb", "password=" + password);
@@ -66,7 +88,7 @@ public class SimpleActivity extends Activity {
 			}
 		});
 
-		bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
+		WApplication.bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
 			public void onDeviceConnected(String name, String address) {
 				LogUtil.logMessage("wzb", "onDeviceConnected");
 				Toast.makeText(getApplicationContext(), "Connected to " + name + "\n" + address, Toast.LENGTH_SHORT)
@@ -83,24 +105,10 @@ public class SimpleActivity extends Activity {
 				Toast.makeText(getApplicationContext(), "Unable to connect", Toast.LENGTH_SHORT).show();
 			}
 		});
-
-		Button btnConnect = (Button) findViewById(R.id.btnConnect);
-		btnConnect.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				if (bt.getServiceState() == BluetoothState.STATE_CONNECTED) {
-					bt.disconnect();
-				} else {
-					Intent intent = new Intent(getApplicationContext(), DeviceList.class);
-					startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
-				}
-			}
-		});
-
-		initView();
 	}
 
 	private void sppSend(String s) {
-		bt.send(Common.parseHexStringToBytes(s), false);
+		WApplication.bt.send(Common.parseHexStringToBytes(s), false);
 	}
 
 	private void initView() {
@@ -166,18 +174,18 @@ public class SimpleActivity extends Activity {
 
 	public void onDestroy() {
 		super.onDestroy();
-		bt.stopService();
+		WApplication.bt.stopService();
 	}
 
 	public void onStart() {
 		super.onStart();
-		if (!bt.isBluetoothEnabled()) {
+		if (!WApplication.bt.isBluetoothEnabled()) {
 			Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 			startActivityForResult(intent, BluetoothState.REQUEST_ENABLE_BT);
 		} else {
-			if (!bt.isServiceAvailable()) {
-				bt.setupService();
-				bt.startService(BluetoothState.DEVICE_OTHER);
+			if (!WApplication.bt.isServiceAvailable()) {
+				WApplication.bt.setupService();
+				WApplication.bt.startService(BluetoothState.DEVICE_OTHER);
 				setup();
 			}
 		}
@@ -189,12 +197,13 @@ public class SimpleActivity extends Activity {
 			public void onClick(View v) {
 				// bt.send("Text", true);
 				LogUtil.logMessage("wzb", "send");
-				String s = "0x2f3f303030303031323334353638210d0a";
-				bt.send(Common.parseHexStringToBytes(s), false);
+				String s = "0x2f3f31323334353638210d0a";
+				WApplication.bt.send(Common.parseHexStringToBytes(s), false);
 			}
 		});
 	}
 
+	/*
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == BluetoothState.REQUEST_CONNECT_DEVICE) {
 			if (resultCode == Activity.RESULT_OK)
@@ -209,5 +218,5 @@ public class SimpleActivity extends Activity {
 				finish();
 			}
 		}
-	}
+	}*/
 }

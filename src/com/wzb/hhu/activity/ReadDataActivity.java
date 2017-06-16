@@ -33,6 +33,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import junit.framework.Test;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -236,6 +237,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		case R.id.data_read_btn:
 			LogUtil.logMessage("wzb", "" + selectedItem);
 			LogUtil.logMessage("wzb", "sn:"+meterSn+" pw:"+meterPw);
+			test_read();
 			break;
 		case R.id.data_back_btn:
 			finish();
@@ -247,6 +249,10 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		default:
 			break;
 		}
+	}
+	
+	void test_read(){
+		
 	}
 
 	class DataAdapter extends BaseAdapter {

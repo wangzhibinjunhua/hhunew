@@ -69,6 +69,8 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 
 	private ImageView searchBtn, addBtn, delBtn;
 	private EditText searchEt;
+	
+	private String selectedSn,selectedPw;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +153,8 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				Log.d("wzb", "arg2=" + arg2 + " " + adapter.getAmmeterBean(arg2).getSn());
 				curPosition = arg2;
 				adapter.notifyDataSetChanged();
+				selectedSn=adapter.getAmmeterBean(arg2).getSn();
+				selectedPw=adapter.getAmmeterBean(arg2).getPassword();
 				startReadData(adapter.getAmmeterBean(arg2).getSn());
 				// Intent intent = new Intent(AmmeterListActivity.this,
 				// ReadDataActivity.class);
@@ -172,6 +176,15 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		});
 
 	}
+	
+	private void gotoReadData(String sn,String pw){
+		Intent intent = new Intent();
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.setClass(mContext, ReadDataActivity.class);
+		intent.putExtra("meter_sn", sn);
+		intent.putExtra("meter_pw", pw);
+		startActivity(intent);
+	}
 
 	private void startReadData(String sn) {
 		CustomDialog.showOkAndCalcelDialog(mContext, "读取数据", "你确定要操作这个电表吗?" + "\n SN:" + sn, okListener,
@@ -184,7 +197,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			CustomDialog.dismissDialog();
-
+			gotoReadData(selectedSn, selectedPw);
 		}
 	};
 

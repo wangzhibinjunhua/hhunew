@@ -52,6 +52,7 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 	private int curPosition = -1;
 	private AmmeterAdapter adapter;
 	private String searchSn="";
+	private String selectedSn,selectedPw;
 	private static final int UPDATE_SEARCH_RESULT=0xffff00;
 	List<AmmeterBean> ammeters = new ArrayList<AmmeterBean>();
 	@Override
@@ -82,6 +83,8 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 				Log.d("wzb", "arg2=" + arg2 + " " + adapter.getAmmeterBean(arg2).getSn());
 				curPosition = arg2;
 				adapter.notifyDataSetChanged();
+				selectedSn=adapter.getAmmeterBean(arg2).getSn();
+				selectedPw=adapter.getAmmeterBean(arg2).getPassword();
 				startReadData(adapter.getAmmeterBean(arg2).getSn());
 				// Intent intent = new Intent(AmmeterListActivity.this,
 				// ReadDataActivity.class);
@@ -103,6 +106,15 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 		});
 	}
 	
+	private void gotoReadData(String sn,String pw){
+		Intent intent = new Intent();
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.setClass(mContext, ReadDataActivity.class);
+		intent.putExtra("meter_sn", sn);
+		intent.putExtra("meter_pw", pw);
+		startActivity(intent);
+	}
+	
 	private void startReadData(String sn) {
 		CustomDialog.showOkAndCalcelDialog(mContext, "读取数据", "你确定要操作这个电表吗?" + "\n SN:" + sn, okListener,
 				cancleListener);
@@ -114,7 +126,7 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			CustomDialog.dismissDialog();
-
+			gotoReadData(selectedSn,selectedPw);
 		}
 	};
 

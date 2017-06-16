@@ -52,6 +52,9 @@
            <activity
               android:name=".activity.MeterAddActivity"/>
            
+             <activity
+              android:name=".activity.MeterSearchActivity"/>
+           
         <activity
             android:name=".activity.AmmeterListActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"

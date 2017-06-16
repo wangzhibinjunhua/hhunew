@@ -3,8 +3,6 @@ package com.wzb.hhu.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.client.RedirectException;
-
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.AmmeterBean;
 import com.wzb.hhu.interf.WApplication;
@@ -14,12 +12,10 @@ import com.wzb.hhu.util.DbUtil;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
 import com.wzb.hhu.util.ToastUtil;
-import com.wzb.spp.BluetoothState;
-import com.wzb.spp.DeviceList;
 import com.wzb.spp.BluetoothSPP.BluetoothConnectionListener;
 import com.wzb.spp.BluetoothSPP.OnDataReceivedListener;
+import com.wzb.spp.DeviceList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -33,113 +29,48 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AbsListView;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  * @author wzb<wangzhibin_x@qq.com>
- * @date May 4, 2017 2:46:37 PM
+ * @date Jun 16, 2017 3:29:27 PM	
  */
 
-public class AmmeterListActivity extends BaseActivity implements OnScrollListener {
-
+public class MeterSearchActivity extends BaseActivity implements OnScrollListener{
 	private ImageView backView;
 	private ImageView btView;
 	private TextView titleView;
 	private ListView listView;
-	private int visibleLastIndex = 0;// 最后的可视项索引
-	private int visibleItemCount;// 当前窗口可见项总数
-	private int datasize = 38;// 模拟数据
-
+	private Context mContext;
 	private int curPosition = -1;
 	private AmmeterAdapter adapter;
-	private View loadMoreView;
-	private Button loadMoreBtn;
-	private Handler mHandler = new Handler();
-	private Context mContext;
-
-	private ImageView searchBtn, addBtn, delBtn;
-	private EditText searchEt;
-
+	private String searchSn="";
+	private static final int UPDATE_SEARCH_RESULT=0xffff00;
+	List<AmmeterBean> ammeters = new ArrayList<AmmeterBean>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_ammeterlist);
-		mContext = AmmeterListActivity.this;
+		setContentView(R.layout.activity_ammetersearchlist);
+		mContext = MeterSearchActivity.this;
+		searchSn = getIntent().getStringExtra("search_sn");
+		if(TextUtils.isEmpty(searchSn)){
+			finish();
+		}
 		initTitleView();
-
-		searchEt = (EditText) findViewById(R.id.ammeter_et);
-		addBtn = (ImageView) findViewById(R.id.add_btn);
-		addBtn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				intent.setClass(AmmeterListActivity.this, MeterAddActivity.class);
-				startActivity(intent);
-			}
-		});
-
-		searchBtn = (ImageView) findViewById(R.id.search_btn);
-		searchBtn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
-				String searchSn = searchEt.getText().toString();
-				if (TextUtils.isEmpty(searchSn)) {
-						ToastUtil.showShortToast(mContext, "搜索内容不能为空!");
-				} else {
-					Intent intent = new Intent();
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					intent.setClass(AmmeterListActivity.this, MeterSearchActivity.class);
-					intent.putExtra("search_sn", searchSn);
-					startActivity(intent);
-				}
-			}
-		});
-
-		loadMoreView = getLayoutInflater().inflate(R.layout.loadmore, null);
-		loadMoreBtn = (Button) loadMoreView.findViewById(R.id.load_more_btn);
-
-		loadMoreBtn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				loadMoreBtn.setText("正在加载..");
-				loadMoreBtn.setClickable(false);
-				mHandler.postDelayed(new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						loadMoreData();
-						adapter.notifyDataSetChanged();
-						loadMoreBtn.setText("load more ...");
-						loadMoreBtn.setClickable(true);
-						// listView.setSelection(0);
-					}
-				}, 2000);
-			}
-		});
-
+		initView();
+	}
+	
+	private void initView(){
 		listView = (ListView) findViewById(R.id.ammeter_lv);
-		listView.addFooterView(loadMoreView);
 		initAdapter();
 		listView.setAdapter(adapter);
 		listView.setOnScrollListener(this);
@@ -170,9 +101,8 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				return true;
 			}
 		});
-
 	}
-
+	
 	private void startReadData(String sn) {
 		CustomDialog.showOkAndCalcelDialog(mContext, "读取数据", "你确定要操作这个电表吗?" + "\n SN:" + sn, okListener,
 				cancleListener);
@@ -196,66 +126,41 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			CustomDialog.dismissDialog();
 		}
 	};
+	
+	Handler mHandler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch(msg.what){
+			case UPDATE_SEARCH_RESULT:
 
-	private void initTitleView() {
-		backView = (ImageView) findViewById(R.id.title_back);
-		titleView = (TextView) findViewById(R.id.title_text);
-		btView = (ImageView) findViewById(R.id.title_bt);
-		titleView.setText(ResTools.getResString(AmmeterListActivity.this, R.string.ammeter_list));
-		backView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
+				break;
+			default:
+				break;
 			}
-		});
-
-		btView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
-				Intent intent = new Intent(getApplicationContext(), DeviceList.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(intent);
-			}
-		});
-	}
-
+		};
+	};
+	
 	private void initAdapter() {
-		List<AmmeterBean> ammeters = new ArrayList<AmmeterBean>();
+		
+		CustomDialog.showWaitDialog(mContext, "搜索中...");
+		ammeters=DbUtil.searchSomeMeter(searchSn);
+		if(ammeters.size()==0){
+			ToastUtil.showShortToast(mContext, "无查询结果");
+		}
 
-		ammeters = DbUtil.getSomeMeter(10);
+		CustomDialog.dismissDialog();
 		adapter = new AmmeterAdapter(ammeters);
-	}
 
+	}
+	
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		updateShowMeters();
 		setBtListener();
 		updateBtState();
-		long meterCount = DbUtil.getAllMeterCount();
-		LogUtil.logMessage("wzb", "meterCount=" + meterCount);
-		if (meterCount <= 10) {
-			loadMoreBtn.setVisibility(View.GONE);
-		} else {
-			loadMoreBtn.setVisibility(View.VISIBLE);
-		}
 	}
-
-	private void updateShowMeters() {
-		List<AmmeterBean> meters = new ArrayList<AmmeterBean>();
-		meters = DbUtil.getSomeMeter(10);
-		adapter.clearAlldata();
-		adapter.updateList(meters);
-		adapter.notifyDataSetChanged();
-
-	}
-
+	
 	private void updateBtState() {
 		Drawable drawableDisconnect = mContext.getResources().getDrawable(R.drawable.disconnect);
 		Drawable drawableconnect = mContext.getResources().getDrawable(R.drawable.connected);
@@ -303,25 +208,38 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		});
 
 	}
+	
+	private void initTitleView() {
+		backView = (ImageView) findViewById(R.id.title_back);
+		titleView = (TextView) findViewById(R.id.title_text);
+		btView = (ImageView) findViewById(R.id.title_bt);
+		titleView.setText(ResTools.getResString(mContext, R.string.ammeter_list));
+		backView.setOnClickListener(new OnClickListener() {
 
-	private void loadMoreData() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
 
-		int count = adapter.getCount();
-		long meterCount = DbUtil.getAllMeterCount();
-		LogUtil.logMessage("wzb", "all meterCount=" + meterCount);
+		btView.setOnClickListener(new OnClickListener() {
 
-		if (count < meterCount) {
-			List<AmmeterBean> meters = new ArrayList<AmmeterBean>();
-			meters = DbUtil.getSomeMeter(count + 10);
-			adapter.clearAlldata();
-			adapter.updateList(meters);
-			adapter.notifyDataSetChanged();
-		} else {
-			ToastUtil.showLongToast(mContext, "没有更多数据了");
-		}
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
 
+				Intent intent = new Intent(getApplicationContext(), DeviceList.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		});
 	}
-
+	
+	
+	
+	
+	
 	class AmmeterAdapter extends BaseAdapter {
 
 		List<AmmeterBean> ammeterItems;
@@ -385,13 +303,13 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 
 			return ammeterItems.get(id);
 		}
-
-		public void clearAlldata() {
+		
+		public void clearAlldata(){
 			ammeterItems.clear();
 		}
-
-		public void updateList(List<AmmeterBean> list) {
-			this.ammeterItems = list;
+		
+		public void updateList(List<AmmeterBean> list){
+			this.ammeterItems=list;
 		}
 
 	}
@@ -407,5 +325,4 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		// TODO Auto-generated method stub
 
 	}
-
 }

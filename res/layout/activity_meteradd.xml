@@ -74,16 +74,41 @@
         android:layout_marginLeft="10dp"
         android:text="Model:"
         android:textSize="20sp" />
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/phrases_1"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:id="@+id/admin_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="1 Phrases"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/phrases_3"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+             />
+
+        <TextView
+            android:id="@+id/rw_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="3 Phrases"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
     
-     <EditText
-        android:id="@+id/model_et"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="10dp"
-        android:maxLines="1"
-        android:maxLength="40"
-        android:singleLine="true"
-        android:textSize="20sp" />
+
 
     <View
         android:layout_width="fill_parent"

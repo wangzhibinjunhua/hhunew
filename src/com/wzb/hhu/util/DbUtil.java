@@ -2,6 +2,7 @@ package com.wzb.hhu.util;
 
 import java.util.ArrayList;
 
+import com.wzb.hhu.bean.AmmeterBean;
 import com.wzb.hhu.bean.UserBean;
 import com.wzb.hhu.interf.WApplication;
 
@@ -73,5 +74,111 @@ public class DbUtil {
 		cursor.close();
 		return null;
 	}
+	
+	//meter
+	public static AmmeterBean getMeter(String sn){
+		Cursor cursor = WApplication.db.rawQuery("select * from meter where sn=?", new String[] { sn });
+		if (cursor.moveToNext()) {
+			AmmeterBean meter = new AmmeterBean();
+			meter.setSn(cursor.getString(1));
+			meter.setPassword(cursor.getString(2));
+			meter.setLocation(cursor.getString(3));
+			meter.setModel(cursor.getString(4));
+			return meter;
+		}
+		cursor.close();
+		
+		return null;
+	}
+	
+	
+	public static ArrayList<AmmeterBean> getAllMeter(){
+		ArrayList<AmmeterBean> list = new ArrayList<AmmeterBean>();
+		Cursor cursor = WApplication.db.rawQuery("select * from meter order by id desc", null);
+		for (int i = 0; i < cursor.getCount(); i++) {
+			cursor.moveToNext();
+			AmmeterBean info = new AmmeterBean();
+			info.setSn(cursor.getString(1));
+			info.setPassword(cursor.getString(2));
+			info.setLocation(cursor.getString(3));
+			info.setModel(cursor.getString(4));
+
+			list.add(info);
+		}
+		cursor.close();
+		return list;
+		
+	}
+	
+	public static ArrayList<AmmeterBean> getSomeMeter(int num){
+		if(num<1) num=10;
+		ArrayList<AmmeterBean> list = new ArrayList<AmmeterBean>();
+		Cursor cursor = WApplication.db.rawQuery("select * from meter order by id desc limit ?", new String[]{""+num});
+		for (int i = 0; i < cursor.getCount(); i++) {
+			cursor.moveToNext();
+			AmmeterBean info = new AmmeterBean();
+			info.setSn(cursor.getString(1));
+			info.setPassword(cursor.getString(2));
+			info.setLocation(cursor.getString(3));
+			info.setModel(cursor.getString(4));
+			list.add(info);
+		}
+		cursor.close();
+		return list;
+		
+	}
+	
+	
+	public static void deleteMeter(String sn){
+		WApplication.db.delete("meter", "sn=?", new String[] { sn });
+		
+	}
+	
+	public static void updateMeter(String sn,String password,String location,String model){
+		ContentValues values = new ContentValues();
+		values.put("sn", sn);
+		values.put("password", password);
+		values.put("location", location);
+		values.put("model", model);
+		WApplication.db.update("meter", values, "sn=?", new String[] { sn });
+	}
+	
+	public static void addMeter(String sn,String password,String location,String model){
+		LogUtil.logMessage("wzb", "add meter: sn="+sn+"pw="+password+"location="+location+"model="+model);;
+		ContentValues values = new ContentValues();
+		values.put("sn", sn);
+		values.put("password", password);
+		values.put("location", location);
+		values.put("model", model);
+		WApplication.db.insert("meter", null, values);
+	}
+	
+	public static long getAllMeterCount() {
+		String sql = "select count(*) from meter";
+		Cursor cursor = WApplication.db.rawQuery(sql, null);
+		cursor.moveToFirst();
+		long count = cursor.getLong(0);
+		cursor.close();
+		return count;
+	}
+	
+	public static ArrayList<AmmeterBean> searchSomeMeter(String sn){
+		ArrayList<AmmeterBean> list = new ArrayList<AmmeterBean>();
+		Cursor cursor = WApplication.db.rawQuery("select * from meter where sn like ? order by id desc", new String[]{"%"+sn+"%"});
+		for (int i = 0; i < cursor.getCount(); i++) {
+			cursor.moveToNext();
+			AmmeterBean info = new AmmeterBean();
+			info.setSn(cursor.getString(1));
+			info.setPassword(cursor.getString(2));
+			info.setLocation(cursor.getString(3));
+			info.setModel(cursor.getString(4));
+			list.add(info);
+		}
+		cursor.close();
+		return list;
+		
+	}
+	
+
 
 }

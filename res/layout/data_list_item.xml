@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/data_item_value"
-        android:layout_width="120dp"
+        android:layout_width="140dp"
         android:layout_height="60dp"
         android:layout_marginLeft="5dp"
         android:textSize="15sp" />
@@ -53,14 +53,9 @@
 
     <TextView
         android:id="@+id/data_item_state"
-        android:layout_width="40dp"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:textSize="15sp" />
 
-    <View
-        android:layout_width="1px"
-        android:layout_height="fill_parent"
-        android:background="#000000"
-        android:visibility="visible" />
 
 </LinearLayout>

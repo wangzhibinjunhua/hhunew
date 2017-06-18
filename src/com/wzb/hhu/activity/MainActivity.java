@@ -76,7 +76,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			switch (arg2) {
 			case 3:
-				intent.setClass(MainActivity.this, EventLogActivity.class);
+				//intent.setClass(MainActivity.this, EventLogActivity.class);
+				intent.setClass(MainActivity.this, AmmeterListActivity.class);
+				intent.putExtra("curActivity", "3");
 				startActivity(intent);
 				break;
 			case 4:
@@ -88,17 +90,22 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				startActivity(intent);
 				break;
 			case 2:
-				intent.setClass(MainActivity.this, SettingTimeActivity.class);
+				//intent.setClass(MainActivity.this, SettingTimeActivity.class);
+				intent.setClass(MainActivity.this, AmmeterListActivity.class);
+				intent.putExtra("curActivity", "2");
 				startActivity(intent);
 				break;
 			case 0:// read data
 
 				intent.setClass(MainActivity.this, AmmeterListActivity.class);
+				intent.putExtra("curActivity", "0");
 				startActivity(intent);
 				break;
 			case 1:
-				 intent.setClass(MainActivity.this, SimpleActivity.class);
+				 //intent.setClass(MainActivity.this, SimpleActivity.class);
 				//intent.setClass(MainActivity.this, SettingActivity.class);
+				intent.setClass(MainActivity.this, AmmeterListActivity.class);
+				intent.putExtra("curActivity", "1");
 				startActivity(intent);
 				break;
 			default:

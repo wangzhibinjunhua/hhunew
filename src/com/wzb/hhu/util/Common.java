@@ -32,9 +32,10 @@ public class Common {
 		char[] chars = value.toCharArray();
 		for (int i = 0; i < chars.length; i++) {
 			if (i != chars.length - 1) {
-				sbu.append((int) chars[i]).append(",");
+				//sbu.append((int) chars[i]).append(",");
+				sbu.append(Integer.toHexString(chars[i]));
 			} else {
-				sbu.append((int) chars[i]);
+				sbu.append(Integer.toHexString(chars[i]));
 			}
 		}
 		return sbu.toString();

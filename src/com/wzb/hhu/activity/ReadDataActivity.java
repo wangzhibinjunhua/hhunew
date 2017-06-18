@@ -8,10 +8,13 @@ import java.util.logging.LogManager;
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.AmmeterBean;
 import com.wzb.hhu.bean.DataItemBean;
+import com.wzb.hhu.btcore.IECCommand;
 import com.wzb.hhu.interf.WApplication;
 import com.wzb.hhu.util.Common;
+import com.wzb.hhu.util.CustomDialog;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
+import com.wzb.hhu.util.ToastUtil;
 import com.wzb.hhu.view.DataViewHolder;
 import com.wzb.spp.BluetoothSPP.BluetoothConnectionListener;
 import com.wzb.spp.BluetoothSPP.OnDataReceivedListener;
@@ -23,6 +26,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,30 +51,33 @@ import android.widget.TextView;
  */
 public class ReadDataActivity extends BaseActivity implements OnScrollListener, OnClickListener {
 
-	public static final int UPDATE_BT_STATE=0xff0001;
-	
+	public static final int UPDATE_BT_STATE = 0xff0001;
+
 	private ImageView backView;
 	private TextView titleView;
 	private ImageView btView;
 	private Context mContext;
 	private Button readBtn, stopBtn, exportBtn, returnBtn;
 
-
 	ArrayList<Integer> selectedItem = null;
 	private DataAdapter ElecAdapter;
 
 	private ListView ElecListView = null;
 
-	private String meterSn,meterPw;
+	private String meterSn, meterPw;
+
+	private static int curComCmd = 0xff;
+	private static int curItemId = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_readdata);
-		mContext=ReadDataActivity.this;
-		meterSn=getIntent().getStringExtra("meter_sn");
-		meterPw=getIntent().getStringExtra("meter_pw");
+		mContext = ReadDataActivity.this;
+		meterSn = getIntent().getStringExtra("meter_sn");
+		meterPw = getIntent().getStringExtra("meter_pw");
 		initTitleView();
 		initView();
 	}
@@ -99,11 +106,11 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				ElecAdapter.getDataItem(arg2).cbToggle();
-				if (ElecAdapter.getDataItem(arg2).getItemSelect()) {
-					selectedItem.add(arg2);
-				} else {
-					selectedItem.remove(arg2);
-				}
+//				if (ElecAdapter.getDataItem(arg2).getItemSelect()) {
+//					selectedItem.add(arg2);
+//				} else {
+//					selectedItem.remove(arg2);
+//				}
 				LogUtil.logMessage("wzb", "cb:" + arg2 + " " + ElecAdapter.getDataItem(arg2).getItemSelect());
 				ElecAdapter.notifyDataSetChanged();
 			}
@@ -161,7 +168,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		});
 
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -169,7 +176,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		setBtListener();
 		updateBtState();
 	}
-	
+
 	private void updateBtState() {
 		Drawable drawableDisconnect = mContext.getResources().getDrawable(R.drawable.disconnect);
 		Drawable drawableconnect = mContext.getResources().getDrawable(R.drawable.connected);
@@ -180,34 +187,105 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			btView.setBackground(drawableDisconnect);
 		}
 	}
-	
-	Handler mHandler=new Handler(){
+
+	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			switch(msg.what){
+
+			String rString = (String) msg.obj;
+			switch (msg.what) {
 			case UPDATE_BT_STATE:
 				updateBtState();
+				break;
+			case 0xfe:
+				//if (rString.startsWith("2f")) {
+					curComCmd = 0xfd;
+					String s = "063033310d0a";
+					IECCommand.sppSend(s);
+				//}
+				break;
+			case 0xfd:
+				if (rString.startsWith("0150300228")) {
+					curComCmd = 0xfc;
+					String password = rString.substring(rString.indexOf("28") + 2, rString.indexOf("29"));
+					LogUtil.logMessage("wzb", "password=" + password);
+					password = Common.asciiToString(password);
+					LogUtil.logMessage("wzb", "ascii password=" + password);
+					sendPassword(password);
+				}
+				break;
+			case 0xfc:
+				if (rString.equals("06") || rString.equals("6")) {
+					// start read
+					curComCmd = 0xff0002;
+					curItemId = 0;
+					sendDataItemCmd();
+
+				}
+				break;
+			case 0xff0002:
+				updateUI(rString, selectedItem.get(curItemId));
+				curItemId++;
+				if (curItemId > selectedItem.size()-1) {
+					LogUtil.logMessage("wzb", "read completed");
+					CustomDialog.dismissDialog();
+					closeCon();
+				} else {
+					sendDataItemCmd();
+				}
+				break;
+			case 0xffff:
+				CustomDialog.dismissDialog();
 				break;
 			default:
 				break;
 			}
 		};
 	};
+	
+	private void closeCon(){
+		String string="01423003";
+		String xor = Common.xorHex(string.substring(2));
+		IECCommand.sppSend(string+xor);
+	}
 
-	String password = "";
+	private void updateUI(String s, int id) {
+		String info = s.substring(s.indexOf("28") + 2, s.indexOf("29"));
+		LogUtil.logMessage("wzb", "####: info:"+info);
+		String ainfo=Common.asciiToString(info);
+		LogUtil.logMessage("wzb", "***: ainfo:"+ainfo);
+		ElecAdapter.updateDataItem(id,ainfo , "Y");
+		ElecAdapter.notifyDataSetChanged();
+	}
+
+	private void sendDataItemCmd() {
+		int curComItem = selectedItem.get(curItemId);
+		String cmd = ResTools.getResStringArray(mContext, R.array.elec_cmd)[curComItem];
+		String sendData = "01523102" + Common.stringToAscii(cmd) + "282903";
+		String sendDataXor = Common.xorHex(sendData.substring(2));
+		IECCommand.sppSend(sendData + sendDataXor);
+	}
+
+	private void sendPassword(String pw) {
+		String crcPw = Common.getMeterPw(pw, meterPw);
+		LogUtil.logMessage("wzb", "crcpw=" + crcPw);
+		String pwHeadHex = "0150320228";
+		String pwEndHex = "2903";
+		String pwV = pwHeadHex + Common.str2HexStr(crcPw) + pwEndHex;
+		String pwVxor = Common.xorHex(pwV.substring(2));
+		IECCommand.sppSend(pwV + pwVxor);
+	}
 
 	private void setBtListener() {
 		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
 			public void onDataReceived(byte[] data, String message) {
 				String dataString = Common.bytesToHexString(data);
 				LogUtil.logMessage("wzb", "ReadDataActivity datarec:" + dataString + " msg:" + message);
-				if (dataString.startsWith("0150300228")) {
-					password = dataString.substring(dataString.indexOf("28") + 2, dataString.indexOf("29"));
-					LogUtil.logMessage("wzb", "password=" + password);
-					password = Common.asciiToString(password);
-					LogUtil.logMessage("wzb", "ascii password=" + password);
-				}
-				// Toast.makeText(SimpleActivity.this, message,
-				// Toast.LENGTH_SHORT).show();
+
+				Message msg = mHandler.obtainMessage();
+				msg.what = curComCmd;
+				msg.obj = dataString;
+				mHandler.sendMessage(msg);
+
 			}
 		});
 
@@ -236,7 +314,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		switch (v.getId()) {
 		case R.id.data_read_btn:
 			LogUtil.logMessage("wzb", "" + selectedItem);
-			LogUtil.logMessage("wzb", "sn:"+meterSn+" pw:"+meterPw);
+			LogUtil.logMessage("wzb", "sn:" + meterSn + " pw:" + meterPw);
 			test_read();
 			break;
 		case R.id.data_back_btn:
@@ -245,14 +323,47 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		case R.id.data_export_btn:
 			break;
 		case R.id.data_stop_btn:
+			CustomDialog.dismissDialog();
 			break;
 		default:
 			break;
 		}
 	}
+
+	private void initCom() {
+		curComCmd = 0xfe;
+		String sendData = "2f3f" + Common.stringToAscii(meterSn) + "210d0a";
+		LogUtil.logMessage("wzb", "senddata=" + sendData);
+		IECCommand.sppSend(sendData);
+	}
 	
-	void test_read(){
-		
+	private void calSelectedItem(){
+		selectedItem.clear();
+		for(int i=0;i<ElecAdapter.getCount();i++){
+			if(ElecAdapter.getDataItem(i).getItemSelect()){
+				if(i!=0 || i!=1 || i!=23 || i!=27 || i!=31 || i!=36){
+					selectedItem.add(i);
+				}
+			}
+		}
+	}
+
+	private void test_read() {
+		//get selectedItem
+		calSelectedItem();
+		LogUtil.logMessage("wzb", "selecteditem:"+selectedItem);
+		if (!WApplication.bt.isConnected()) {
+			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
+		} else {
+
+			if (selectedItem == null || selectedItem.size() == 0) {
+				ToastUtil.showShortToast(mContext, "请选择需要读取的数据项");
+			} else {
+				CustomDialog.showWaitDialog(mContext, "读取中...");
+				initCom();
+				mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+			}
+		}
 	}
 
 	class DataAdapter extends BaseAdapter {
@@ -308,6 +419,11 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		public DataItemBean getDataItem(int id) {
 
 			return dataItems.get(id);
+		}
+
+		public void updateDataItem(int id, String value, String state) {
+			dataItems.get(id).setItemValue(value);
+			dataItems.get(id).setItemState(state);
 		}
 
 	}

@@ -23,7 +23,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/event_read_btn"
+            android:id="@+id/set_read_btn"
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_marginLeft="50dp"
@@ -31,7 +31,7 @@
             android:text="Read" />
 
         <Button
-            android:id="@+id/event_stop_btn"
+            android:id="@+id/set_write_btn"
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
@@ -49,7 +49,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/event_export_btn"
+            android:id="@+id/set_export_btn"
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_marginLeft="50dp"
@@ -57,7 +57,7 @@
             android:text="Export" />
 
         <Button
-            android:id="@+id/event_back_btn"
+            android:id="@+id/set_back_btn"
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"

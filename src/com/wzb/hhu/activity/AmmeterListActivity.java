@@ -74,6 +74,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 	
 	private String selectedSn,selectedPw;
 
+	private static String curActivity="";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -81,6 +82,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_ammeterlist);
 		mContext = AmmeterListActivity.this;
+		curActivity=getIntent().getStringExtra("curActivity");
 		initTitleView();
 
 		searchEt = (EditText) findViewById(R.id.ammeter_et);
@@ -182,7 +184,17 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 	private void gotoReadData(String sn,String pw){
 		Intent intent = new Intent();
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.setClass(mContext, ReadDataActivity.class);
+		if(curActivity.equals("0")){
+			intent.setClass(mContext, ReadDataActivity.class);
+		}else if(curActivity.equals("1")){
+			intent.setClass(mContext, SettingActivity.class);
+		}else if(curActivity.equals("2")){
+			intent.setClass(mContext, SettingTimeActivity.class);
+		}else if(curActivity.equals("3")){
+			intent.setClass(mContext, EventLogActivity.class);
+		}else{
+			intent.setClass(mContext, ReadDataActivity.class);
+		}
 		intent.putExtra("meter_sn", sn);
 		intent.putExtra("meter_pw", pw);
 		startActivity(intent);

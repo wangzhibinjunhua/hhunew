@@ -383,11 +383,31 @@ public class BluetoothService {
 			while (true) {
 				try {
 					int data = mmInStream.read();
-					// LogUtil.logMessage("wzb", "listen
-					// data="+Integer.toHexString(data));
+					// LogUtil.logMessage("wzb", "listen data="+Integer.toHexString(data));
 					if (data == 0x0A) {
 						// LogUtil.logMessage("wzb", "listen 111");
+						if ((arr_byte.size() >= 3) && (arr_byte.get(arr_byte.size() - 1) == 0x03)) {
+							// int xor=arr_byte.get(1);
+							// for(int i=2;i<arr_byte.size()-1;i++){
+							// xor=xor^arr_byte.get(i);
+							// }
+							// LogUtil.logMessage("wzb", "listen
+							// data="+Integer.toHexString(data)
+							// +"xor="+Integer.toHexString(xor));
+							// if(data+1 == xor){
+							if (true) {
+								buffer = new byte[arr_byte.size()];
+								for (int i = 0; i < arr_byte.size(); i++) {
+									buffer[i] = arr_byte.get(i).byteValue();
+								}
+								// Send the obtained bytes to the UI Activity
+								mHandler.obtainMessage(BluetoothState.MESSAGE_READ, buffer.length, -1, buffer)
+										.sendToTarget();
+								arr_byte = new ArrayList<Integer>();
+							}
+						}
 					} else if (data == 0x0D) {
+					
 						// LogUtil.logMessage("wzb", "listen 222");
 						buffer = new byte[arr_byte.size()];
 						for (int i = 0; i < arr_byte.size(); i++) {

@@ -183,10 +183,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.time_back_btn:
-			// test
-			String s = "0x2f3f303030303031323334353638210d0a";
-			WApplication.bt.send(Common.parseHexStringToBytes(s), false);
-			// finish();
+			finish();
 			break;
 		case R.id.sys_clock_date_value_set:
 			onYearMonthDayPicker();

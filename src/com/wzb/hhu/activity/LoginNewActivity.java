@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.wzb.hhu.R;
 import com.wzb.hhu.interf.WApplication;
+import com.wzb.hhu.util.DbUtil;
 import com.wzb.hhu.util.EncryptionUtil;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ToastUtil;
@@ -55,7 +56,7 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login_new);
-		testdata();
+		//testdata();
 		init();
 	}
 
@@ -141,17 +142,22 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		}
 
 	}
+	private void saveAccount(String account){
+		WApplication.sp_user.set(account, "1");
+	}
 
 	private void login() {
 		userNameValue = userName.getText().toString();
 		passwordValue = passWord.getText().toString();
 
-		String passw = WApplication.sp_user.get(userNameValue, "123");
-		// if(passw.equals(EncryptionUtil.md5Encrypt(passwordValue))){
-		if (true) {
+		String passw = DbUtil.getUserPw(userNameValue);
+		 if(passw!=null && passw.equals(EncryptionUtil.md5Encrypt(passwordValue))){
+		//if (true) {
+			saveAccount(userNameValue); 
 			Intent intent = new Intent(LoginNewActivity.this, MainActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			LoginNewActivity.this.startActivity(intent);
+			
 			// finish();
 		} else {
 			ToastUtil.showLongToast(LoginNewActivity.this, "帐号或密码不正确");

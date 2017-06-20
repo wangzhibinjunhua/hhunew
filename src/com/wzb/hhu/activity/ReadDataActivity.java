@@ -242,6 +242,8 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		};
 	};
 	
+	
+	
 	private void closeCon(){
 		String string="01423003";
 		String xor = Common.xorHex(string.substring(2));

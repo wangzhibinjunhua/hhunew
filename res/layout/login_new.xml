@@ -87,7 +87,7 @@
                 android:id="@+id/et_ps"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                
+                android:password="true"
                 android:maxLines="1"
         		android:singleLine="true"
                 android:layout_weight="4" />

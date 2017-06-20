@@ -75,6 +75,15 @@ public class DbUtil {
 		return null;
 	}
 	
+	public static String getUserPw(String account){
+		Cursor cursor = WApplication.db.rawQuery("select * from user where account=?", new String[] { account });
+		if (cursor.moveToNext()) {
+			return cursor.getString(2);
+		}
+		cursor.close();
+		return null;
+	}
+	
 	//meter
 	public static AmmeterBean getMeter(String sn){
 		Cursor cursor = WApplication.db.rawQuery("select * from meter where sn=?", new String[] { sn });

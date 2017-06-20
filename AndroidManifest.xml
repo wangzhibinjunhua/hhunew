@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme" >
         
         <activity 
-            android:name=".activity.LoginNewActivity">
+            android:name=".activity.LoginNewActivity"
+            android:screenOrientation="portrait">"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -27,41 +28,53 @@
         
         <activity
             android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"
             />
           <activity
             android:name=".activity.ReadDataActivity"
+            android:screenOrientation="portrait"
             />
           
           <activity
-              android:name=".activity.EventLogActivity"/>
+              android:name=".activity.EventLogActivity"
+              android:screenOrientation="portrait"/>
           
           <activity
-              android:name=".activity.SettingTimeActivity"/>
+              android:name=".activity.SettingTimeActivity"
+              android:screenOrientation="portrait"/>
           
            <activity
-              android:name=".activity.UserManagerActivity"/>
+              android:name=".activity.UserManagerActivity"
+              android:screenOrientation="portrait"/>
            
            <activity
-              android:name=".activity.SettingActivity"/>
+              android:name=".activity.SettingActivity"
+              android:screenOrientation="portrait"/>
            
            <activity
-              android:name=".activity.UserAddActivity"/>
+              android:name=".activity.UserAddActivity"
+              android:screenOrientation="portrait"/>
            <activity
-              android:name=".activity.UserEditActivity"/>
+              android:name=".activity.UserEditActivity"
+              android:screenOrientation="portrait"/>
            
            <activity
-              android:name=".activity.MeterAddActivity"/>
+              android:name=".activity.MeterAddActivity"
+              android:screenOrientation="portrait"/>
            
              <activity
-              android:name=".activity.MeterSearchActivity"/>
+              android:name=".activity.MeterSearchActivity"
+              android:screenOrientation="portrait"/>
            
         <activity
             android:name=".activity.AmmeterListActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
             />
         
         <activity
-            android:name="com.wzb.spp.DeviceList"/>
+            android:name="com.wzb.spp.DeviceList"
+            android:screenOrientation="portrait"/>
         
         <activity
             android:name="com.wzb.spp.test.SimpleActivity"/>

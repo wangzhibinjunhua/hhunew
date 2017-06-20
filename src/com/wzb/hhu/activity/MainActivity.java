@@ -86,8 +86,14 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				startActivity(intent);
 				break;
 			case 5:
-				intent.setClass(MainActivity.this, LoginNewActivity.class);
-				startActivity(intent);
+				//intent.setClass(MainActivity.this, LoginNewActivity.class);
+				//startActivity(intent);
+				for (Activity activity : WApplication.activityList) {
+					activity.finish();
+				}
+				finish();
+				System.exit(0);
+				System.gc();
 				break;
 			case 2:
 				//intent.setClass(MainActivity.this, SettingTimeActivity.class);

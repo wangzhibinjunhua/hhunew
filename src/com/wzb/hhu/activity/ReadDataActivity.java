@@ -145,7 +145,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
-		titleView.setText(ResTools.getResString(ReadDataActivity.this, R.string.read_data));
+		titleView.setText(ResTools.getResString(ReadDataActivity.this, R.string.read_data)+":"+meterSn);
 		backView.setOnClickListener(new OnClickListener() {
 
 			@Override

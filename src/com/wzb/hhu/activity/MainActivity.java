@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private ImageView backView;
 	private ImageView btView;
 	private TextView titleView;
+	private ImageView titleMeterList;
 
 	private String[] img_text;
 	private int[] img_icon = { R.drawable.form, R.drawable.set, R.drawable.clock, R.drawable.warning,
@@ -63,6 +64,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		btView.setVisibility(View.GONE);
 		titleView = (TextView) findViewById(R.id.title_text);
 		titleView.setText(getString(R.string.home_page));
+		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterList.setVisibility(View.GONE);
 	}
 
 	private class MyItemClickListener implements OnItemClickListener {

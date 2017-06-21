@@ -197,6 +197,8 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		}
 		intent.putExtra("meter_sn", sn);
 		intent.putExtra("meter_pw", pw);
+		WApplication.sp.set("current_sn",sn);
+		WApplication.sp.set("current_pw",pw);
 		startActivity(intent);
 	}
 

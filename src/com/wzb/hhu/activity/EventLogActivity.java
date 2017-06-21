@@ -98,6 +98,13 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 				// TODO Auto-generated method stub
 
 				eventAdapter.getDataItem(arg2).cbToggle();
+				if(arg2==0){
+					if(eventAdapter.getDataItem(arg2).getItemSelect()){
+						eventAdapter.selectAll();
+					}else{
+						eventAdapter.unSelectAll();
+					}
+				}
 
 				LogUtil.logMessage("wzb", "cb:" + arg2 + " " + eventAdapter.getDataItem(arg2).getItemSelect());
 				eventAdapter.notifyDataSetChanged();
@@ -386,7 +393,8 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(R.layout.data_list_item, null);
 			}
-
+			ImageView itemList=(ImageView)convertView.findViewById(R.id.item_list);
+			itemList.setVisibility(View.GONE);
 			TextView tvName = (TextView) convertView.findViewById(R.id.data_item_name);
 			TextView tvValue = (TextView) convertView.findViewById(R.id.data_item_value);
 			TextView tvState = (TextView) convertView.findViewById(R.id.data_item_state);

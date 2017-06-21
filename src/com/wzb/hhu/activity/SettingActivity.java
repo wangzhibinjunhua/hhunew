@@ -95,7 +95,13 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				settingAdapter.getDataItem(arg2).cbToggle();
-
+				if(arg2==0){
+					if(settingAdapter.getDataItem(arg2).getItemSelect()){
+						settingAdapter.selectAll();
+					}else{
+						settingAdapter.unSelectAll();
+					}
+				}
 				LogUtil.logMessage("wzb", "cb:" + arg2 + " " + settingAdapter.getDataItem(arg2).getItemSelect());
 				settingAdapter.notifyDataSetChanged();
 			}
@@ -381,7 +387,8 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(R.layout.data_list_item, null);
 			}
-
+			ImageView itemList=(ImageView)convertView.findViewById(R.id.item_list);
+			itemList.setVisibility(View.GONE);
 			TextView tvName = (TextView) convertView.findViewById(R.id.data_item_name);
 			TextView tvValue = (TextView) convertView.findViewById(R.id.data_item_value);
 			TextView tvState = (TextView) convertView.findViewById(R.id.data_item_state);
@@ -406,6 +413,17 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 		public void updateDataItem(int id, String value, String state) {
 			dataItems.get(id).setItemValue(value);
 			dataItems.get(id).setItemState(state);
+		}
+		public void selectAll() {
+			for (int i = 0; i < dataItems.size(); i++) {
+				dataItems.get(i).setItemSelect(true);
+			}
+		}
+
+		public void unSelectAll() {
+			for (int i = 0; i < dataItems.size(); i++) {
+				dataItems.get(i).setItemSelect(false);
+			}
 		}
 
 	}

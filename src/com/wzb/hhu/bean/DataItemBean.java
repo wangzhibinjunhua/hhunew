@@ -10,6 +10,9 @@ public class DataItemBean {
 	private String itemValue;
 	private String itemState;
 	private Boolean itemSelect;
+	
+	private Boolean isUp;
+	private Boolean isHide;
 
 	public DataItemBean() {
 
@@ -52,6 +55,24 @@ public class DataItemBean {
 
 	public void setItemSelect(Boolean select) {
 		this.itemSelect = select;
+	}
+	
+	public void setisUp(Boolean b){
+		this.isUp=b;
+	}
+	public Boolean getisUp(){
+		return this.isUp;
+	}
+	
+	public void setisHide(Boolean b){
+		this.isHide=b;
+	}
+	public Boolean getisHide(){
+		return this.isHide;
+	}
+	
+	public void isUpToggle(){
+		setisUp(!this.isUp);
 	}
 
 	public void cbToggle() {

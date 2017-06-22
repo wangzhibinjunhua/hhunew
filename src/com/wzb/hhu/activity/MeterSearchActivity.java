@@ -24,8 +24,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AbsListView;
@@ -95,18 +99,97 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 				// finish();
 			}
 		});
-		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				// TODO Auto-generated method stub
-				Log.d("wzb", "long click arg2=" + arg2 + " " + adapter.getAmmeterBean(arg2).getSn());
-				curPosition = arg2;
-				adapter.notifyDataSetChanged();
-				return true;
-			}
-		});
+//		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+//
+//			@Override
+//			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+//				// TODO Auto-generated method stub
+//				Log.d("wzb", "long click arg2=" + arg2 + " " + adapter.getAmmeterBean(arg2).getSn());
+//				curPosition = arg2;
+//				adapter.notifyDataSetChanged();
+//				return true;
+//			}
+//		});
+		MyItemOnLongClick();
 	}
+	
+	// long click for delete or edit
+			private void MyItemOnLongClick() {
+
+				listView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
+					@Override
+					public void onCreateContextMenu(ContextMenu menu, View v,
+							ContextMenuInfo menuInfo) {
+						menu.add(0, 0, 0, getResources().getString(R.string.edit));
+						menu.add(0, 1, 0, getResources().getString(R.string.delete));
+						
+					}
+				});
+			}
+			
+			public boolean onContextItemSelected(MenuItem item) {
+
+				AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+						.getMenuInfo();
+				final int MID = (int) info.id;// 这里的info.id对应的就是数据库中_id的值
+				curPosition = MID;
+				
+				switch (item.getItemId()) {
+				case 0:// edit
+					String snString=adapter.getAmmeterBean(MID).getSn();
+					Intent intent = new Intent();
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.setClass(mContext, MeterEditActivity.class);
+					intent.putExtra("sn", snString);
+					startActivity(intent);
+					finish();
+					break;
+
+				case 1:// delete
+					CustomDialog.showOkAndCalcelDialog(mContext, "Delete Meter", "确定要删除吗？\n"+"sn:"+adapter.getAmmeterBean(MID).getSn(), new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							CustomDialog.dismissDialog();
+							CustomDialog.showWaitDialog(mContext, "删除中...");
+							new Handler().postDelayed(new Runnable() {
+								public void run() {
+									curPosition = -1;
+									CustomDialog.dismissDialog();
+									gotoMeterListActivity();
+								}
+							}, 3000);
+							DbUtil.deleteMeter(adapter.getAmmeterBean(curPosition).getSn());
+							
+						}
+					}, new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							CustomDialog.dismissDialog();
+						}
+					});
+					//adapter.deleteMeter(MID);
+					break;
+
+				default:
+					break;
+				}
+				adapter.notifyDataSetChanged();
+
+				return super.onContextItemSelected(item);
+
+			}
+			
+			private void gotoMeterListActivity(){
+				Intent intent = new Intent();
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.setClass(mContext, AmmeterListActivity.class);
+				startActivity(intent);
+				finish();
+			}
 	
 
 	private void gotoReadData(String sn,String pw){

@@ -217,6 +217,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				intent.setClass(mContext, MeterEditActivity.class);
 				intent.putExtra("sn", snString);
 				startActivity(intent);
+				finish();
 				break;
 
 			case 1:// delete

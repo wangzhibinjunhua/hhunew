@@ -147,6 +147,7 @@ public class MeterEditActivity extends BaseActivity implements OnClickListener{
 					public void run() {
 						// TODO Auto-generated method stub
 						CustomDialog.dismissDialog();
+						gotoMeterListActivity();
 						finish();
 					}
 				}, 2000);
@@ -157,6 +158,13 @@ public class MeterEditActivity extends BaseActivity implements OnClickListener{
 			ToastUtil.showShortToast(mContext, "资料填写不完整");
 		}
 		
+	}
+	private void gotoMeterListActivity(){
+		Intent intent = new Intent();
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.setClass(mContext, AmmeterListActivity.class);
+		startActivity(intent);
+		finish();
 	}
 
 	@Override

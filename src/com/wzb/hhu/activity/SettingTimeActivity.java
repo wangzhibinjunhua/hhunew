@@ -1,12 +1,16 @@
 package com.wzb.hhu.activity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.wzb.hhu.R;
+import com.wzb.hhu.btcore.IECCommand;
 import com.wzb.hhu.interf.WApplication;
 import com.wzb.hhu.util.Common;
+import com.wzb.hhu.util.CustomDialog;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
+import com.wzb.hhu.util.ToastUtil;
 import com.wzb.spp.BluetoothSPP.BluetoothConnectionListener;
 import com.wzb.spp.BluetoothSPP.OnDataReceivedListener;
 import com.wzb.spp.DeviceList;
@@ -16,6 +20,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.format.Time;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,6 +50,12 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 	private TextView meterDate, meterTime;
 	
 	private String meterSn, meterPw;
+	
+	private static int curComCmd = 0xff;
+	private static int curItemId = 0;
+	private static Boolean isRead=true;
+	
+	ArrayList<Integer> selectedItem = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +64,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_settingtime);
 		mContext = SettingTimeActivity.this;
+		selectedItem = new ArrayList<Integer>();
 		initTitleView();
 		setBtListener();
 		initView();
@@ -133,7 +145,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		updateBtState();
 		meterSn=WApplication.sp.get("current_sn", "");
 		meterPw=WApplication.sp.get("current_pw", "");
-		titleView.setText(ResTools.getResString(SettingTimeActivity.this, R.string.setting_time)+":"+meterSn);
+		titleView.setText(ResTools.getResString(SettingTimeActivity.this, R.string.setting_time)+":\n"+meterSn);
 		
 	}
 
@@ -148,33 +160,227 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		}
 	}
 	
-	Handler mHandler=new Handler(){
+	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			switch(msg.what){
+
+			String rString = (String) msg.obj;
+			switch (msg.what) {
 			case UPDATE_BT_STATE:
 				updateBtState();
+				break;
+			case 0xfe:
+				//if (rString.startsWith("2f")) {
+					curComCmd = 0xfd;
+					String s = "063033310d0a";
+					IECCommand.sppSend(s);
+				//}
+				break;
+			case 0xfd:
+				if (rString.startsWith("0150300228")) {
+					curComCmd = 0xfc;
+					String password = rString.substring(rString.indexOf("28") + 2, rString.indexOf("29"));
+					LogUtil.logMessage("wzb", "password=" + password);
+					password = Common.asciiToString(password);
+					LogUtil.logMessage("wzb", "ascii password=" + password);
+					sendPassword(password);
+				}
+				break;
+			case 0xfc:
+				if (rString.equals("06") || rString.equals("6")) {
+					// start read
+					if(isRead){
+						curComCmd = 0xff0002;
+						curItemId = 0;
+						sendDataItemCmd();
+					}else{
+						curComCmd = 0xff0003;
+						curItemId = 0;
+						sendWriteDataItemCmd();
+					}
+
+				}
+				break;
+			case 0xff0002:
+				updateUI(rString, selectedItem.get(curItemId));
+				curItemId++;
+				if (curItemId > selectedItem.size()-1) {
+					LogUtil.logMessage("wzb", "read completed");
+					CustomDialog.dismissDialog();
+					closeCon();
+				} else {
+					sendDataItemCmd();
+				}
+				break;
+				
+			case 0xff0003:
+				updateWriteUI(rString, selectedItem.get(curItemId));
+				curItemId++;
+				if (curItemId > selectedItem.size()-1) {
+					LogUtil.logMessage("wzb", "read completed");
+					CustomDialog.dismissDialog();
+					closeCon();
+				} else {
+					sendWriteDataItemCmd();
+				}
+				break;
+
+			case 0xffff:
+				CustomDialog.dismissDialog();
 				break;
 			default:
 				break;
 			}
 		};
 	};
+	
+	private void sendPassword(String pw) {
+		String crcPw = Common.getMeterPw(pw, meterPw);
+		LogUtil.logMessage("wzb", "crcpw=" + crcPw);
+		String pwHeadHex = "0150320228";
+		String pwEndHex = "2903";
+		String pwV = pwHeadHex + Common.str2HexStr(crcPw) + pwEndHex;
+		String pwVxor = Common.xorHex(pwV.substring(2));
+		IECCommand.sppSend(pwV + pwVxor);
+	}
+	
+	private void closeCon(){
+		String string="01423003";
+		String xor = Common.xorHex(string.substring(2));
+		IECCommand.sppSend(string+xor);
+	}
+	
+	private void updateUI(String s, int id) {
+		String info = s.substring(s.indexOf("28") + 2, s.indexOf("29"));
+		LogUtil.logMessage("wzb", "####: info:"+info);
+		String ainfo=Common.asciiToString(info);
+		LogUtil.logMessage("wzb", "***: ainfo:"+ainfo);
+		if(id==0)meterTime.setText(ainfo);
+		if(id==1)meterDate.setText(ainfo);
+	}
+	
+	private void updateWriteUI(String s, int id) {
+		LogUtil.logMessage("wzb", "####: info:"+s);
+		String ainfo=Common.asciiToString(s);
+		LogUtil.logMessage("wzb", "***: ainfo:"+ainfo);
+		if(id==0){
+			if(s.equals("06")){
+				ToastUtil.showShortToast(mContext, "time:write ok");
+			}else if(s.equals("15")){
+				ToastUtil.showShortToast(mContext, "time:write failed");
+			}
+		}else if(id==1){
+			if(s.equals("06")){
+				ToastUtil.showShortToast(mContext, "date:write ok");
+			}else if(s.equals("15")){
+				ToastUtil.showShortToast(mContext, "date:write failed");
+			}
+		}
+		
+	}
 
-	String password = "";
+	private void sendDataItemCmd() {
+		int curComItem = selectedItem.get(curItemId);
+		String cmd = ResTools.getResStringArray(mContext, R.array.time_cmd)[curComItem];
+		String sendData = "01523102" + Common.stringToAscii(cmd) + "282903";
+		String sendDataXor = Common.xorHex(sendData.substring(2));
+		IECCommand.sppSend(sendData + sendDataXor);
+	}
+	
+	private void sendWriteDataItemCmd(){
+		int curComItem = selectedItem.get(curItemId);
+		String cmd = ResTools.getResStringArray(mContext, R.array.time_cmd)[curComItem];
+		String writeValue="";
+		if(curComItem==0){
+			writeValue=sysTime.getText().toString();
+		}else if(curComItem==1){
+			writeValue=sysDate.getText().toString();
+		}
+		String sendData = "01573102" + Common.stringToAscii(cmd) + "28"+Common.stringToAscii(writeValue)+"2903";
+		String sendDataXor = Common.xorHex(sendData.substring(2));
+		IECCommand.sppSend(sendData + sendDataXor);
+	}
+
+	private void initCom() {
+		curComCmd = 0xfe;
+		String sendData = "2f3f" + Common.stringToAscii(meterSn) + "210d0a";
+		LogUtil.logMessage("wzb", "senddata=" + sendData);
+		IECCommand.sppSend(sendData);
+	}
+	
+
+	
+	private void calSelectedItem(){
+		selectedItem.clear();
+		selectedItem.add(0);
+		selectedItem.add(1);
+	}
+	
+	OnClickListener waitcancleListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			closeCon();
+			CustomDialog.dismissDialog();
+		}
+	};
+
+
+	private void test_read() {
+		isRead=true;
+		//get selectedItem
+		calSelectedItem();
+		LogUtil.logMessage("wzb", "selecteditem:"+selectedItem);
+		if (!WApplication.bt.isConnected()) {
+			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
+		} else {
+
+			if (selectedItem == null || selectedItem.size() == 0) {
+				ToastUtil.showShortToast(mContext, "请选择需要读取的数据项");
+			} else {
+				//CustomDialog.showWaitDialog(mContext, "读取中...");
+				CustomDialog.showWaitAndCancelDialog(mContext, "读取中...", waitcancleListener);
+				initCom();
+				//mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+			}
+		}
+	}
+	
+	private void test_write() {
+		isRead=false;
+		//get selectedItem
+		calSelectedItem();
+		LogUtil.logMessage("wzb", "selecteditem:"+selectedItem);
+		if(!sysClockCb.isChecked()){
+			ToastUtil.showShortToast(mContext, "请选择要写入的数据项");
+			return;
+		}
+		if (!WApplication.bt.isConnected()) {
+			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
+		} else {
+
+			if (selectedItem == null || selectedItem.size() == 0) {
+				ToastUtil.showShortToast(mContext, "请选择需要写入的数据项");
+			} else {
+				//CustomDialog.showWaitDialog(mContext, "读取中...");
+				CustomDialog.showWaitAndCancelDialog(mContext, "写入中...", waitcancleListener);
+				initCom();
+				//mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+			}
+		}
+	}
+
 
 	private void setBtListener() {
 		WApplication.bt.setOnDataReceivedListener(new OnDataReceivedListener() {
 			public void onDataReceived(byte[] data, String message) {
 				String dataString = Common.bytesToHexString(data);
 				LogUtil.logMessage("wzb", "SettingTimeActivity datarec:" + dataString + " msg:" + message);
-				if (dataString.startsWith("0150300228")) {
-					password = dataString.substring(dataString.indexOf("28") + 2, dataString.indexOf("29"));
-					LogUtil.logMessage("wzb", "password=" + password);
-					password = Common.asciiToString(password);
-					LogUtil.logMessage("wzb", "ascii password=" + password);
-				}
-				// Toast.makeText(SimpleActivity.this, message,
-				// Toast.LENGTH_SHORT).show();
+
+				Message msg = mHandler.obtainMessage();
+				msg.what = curComCmd;
+				msg.obj = dataString;
+				mHandler.sendMessage(msg);
 			}
 		});
 
@@ -210,6 +416,12 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 			break;
 		case R.id.sys_clock_time_value_set:
 			onTimePicker();
+			break;
+		case R.id.time_read_btn:
+			test_read();
+			break;
+		case R.id.time_write_btn:
+			test_write();
 			break;
 		default:
 			break;

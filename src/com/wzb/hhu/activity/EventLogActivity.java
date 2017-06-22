@@ -186,7 +186,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 		updateBtState();
 		meterSn = WApplication.sp.get("current_sn", "");
 		meterPw = WApplication.sp.get("current_pw", "");
-		titleView.setText(ResTools.getResString(EventLogActivity.this, R.string.event_log) + ":" + meterSn);
+		titleView.setText(ResTools.getResString(EventLogActivity.this, R.string.event_log) + ":\n" + meterSn);
 
 	}
 

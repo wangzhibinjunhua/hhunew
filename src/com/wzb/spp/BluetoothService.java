@@ -440,7 +440,7 @@ public class BluetoothService {
 										.sendToTarget();
 								arr_byte = new ArrayList<Integer>();
 							}
-						} else if (data == 0x06 && arr_byte.size() == 1) { // 06
+						} else if ((data == 0x06 || data==0x15)&& arr_byte.size() == 1) { // 06
 																			// is
 																			// ACK
 							buffer = new byte[arr_byte.size()];

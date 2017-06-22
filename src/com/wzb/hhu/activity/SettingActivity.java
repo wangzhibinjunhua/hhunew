@@ -182,7 +182,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 		updateBtState();
 		meterSn=WApplication.sp.get("current_sn", "");
 		meterPw=WApplication.sp.get("current_pw", "");
-		titleView.setText(ResTools.getResString(SettingActivity.this, R.string.meter_setting)+":"+meterSn);
+		titleView.setText(ResTools.getResString(SettingActivity.this, R.string.meter_setting)+":\n"+meterSn);
 	}
 
 	private void updateBtState() {

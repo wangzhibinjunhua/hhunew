@@ -225,7 +225,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		updateBtState();
 		meterSn=WApplication.sp.get("current_sn", "");
 		meterPw=WApplication.sp.get("current_pw", "");
-		titleView.setText(ResTools.getResString(mContext, R.string.read_data)+":"+meterSn);
+		titleView.setText(ResTools.getResString(mContext, R.string.read_data)+":\n"+meterSn);
 	}
 
 	private void updateBtState() {

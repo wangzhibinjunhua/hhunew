@@ -35,5 +35,6 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     
+    <string name="bt_not_enabled">Bluetooth was not enabled</string>
 
 </resources>

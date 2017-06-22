@@ -84,6 +84,7 @@ public class BtManager extends BroadcastReceiver {
 			connect(intent);
 		} else if (action.equals(BroadcastAction.ACTION_OPEN_BT)) {
 			openBt();
+			initSPPService();
 		}
 	}
 

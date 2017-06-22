@@ -38,8 +38,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
+import android.text.style.UpdateAppearance;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -71,7 +74,10 @@ public class DeviceList extends BaseActivity {
 	public static final int DEVICE_CONNECTION_FAILED = 0xff01;
 	public static final int DEVICE_CONNECTED = 0xff02;
 	public static final int DEVICE_DISCONNECTED = 0xff03;
+	public static final int START_DISCOVER_BT=0xff04;
 	private String connectAddress = "";
+	
+	private TextView btState;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,6 +94,8 @@ public class DeviceList extends BaseActivity {
 
 		// Set result CANCELED in case the user backs out
 		setResult(Activity.RESULT_CANCELED);
+		
+		btState=(TextView)findViewById(R.id.tv);
 
 		// Initialize the button to perform device discovery
 		scanButton = (Button) findViewById(R.id.button_scan);
@@ -161,6 +169,22 @@ public class DeviceList extends BaseActivity {
 		super.onResume();
 		setBtListener();
 		sendBroadcast(new Intent(BroadcastAction.ACTION_OPEN_BT));
+		mHandler.sendEmptyMessageDelayed(START_DISCOVER_BT, 500);
+		
+		updateBtDevice();
+	}
+	
+	private void updateBtDevice(){
+		String connectedDeviceName=WApplication.bt.getConnectedDeviceName();
+		String connectedDeviceAddr=WApplication.bt.getConnectedDeviceAddress();
+		
+		if(connectedDeviceAddr!= null && !TextUtils.isEmpty(connectedDeviceAddr)){
+			btState.setText("connected"+"\n"+connectedDeviceName+"\n"+connectedDeviceAddr);
+			btState.setBackgroundColor(Color.GREEN);
+		}else{
+			btState.setText("No device connected");
+			btState.setBackgroundColor(Color.RED);
+		}
 	}
 
 	private Handler mHandler = new Handler() {
@@ -178,6 +202,9 @@ public class DeviceList extends BaseActivity {
 			case DEVICE_DISCONNECTED:
 				ToastUtil.showShortToast(DeviceList.this, "disconnected");
 				CustomDialog.dismissDialog();
+			case START_DISCOVER_BT:
+				doDiscovery();
+				break;
 			default:
 				break;
 			}

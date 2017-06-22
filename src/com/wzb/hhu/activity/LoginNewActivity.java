@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.wzb.hhu.R;
 import com.wzb.hhu.interf.WApplication;
+import com.wzb.hhu.util.CustomDialog;
 import com.wzb.hhu.util.DbUtil;
 import com.wzb.hhu.util.EncryptionUtil;
 import com.wzb.hhu.util.LogUtil;
@@ -17,6 +18,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.KeyEvent;
@@ -182,8 +184,11 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 			return super.onKeyDown(keyCode, event);
 		}
 	}
+	
 
 	private void exit() {
+
+		
 		for (Activity activity : WApplication.activityList) {
 			activity.finish();
 		}

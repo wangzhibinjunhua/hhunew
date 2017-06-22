@@ -53,7 +53,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 public class AmmeterListActivity extends BaseActivity implements OnScrollListener {
 
 	public static final int UPDATE_BT_STATE=0xff0001;
-	
+
 	private ImageView backView;
 	private ImageView btView;
 	private ImageView titleMeterView;
@@ -67,12 +67,12 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 	private AmmeterAdapter adapter;
 	private View loadMoreView;
 	private Button loadMoreBtn;
-	
+
 	private Context mContext;
 
 	private ImageView searchBtn, addBtn, delBtn;
 	private EditText searchEt;
-	
+
 	private String selectedSn,selectedPw;
 
 	private static String curActivity="";
@@ -182,7 +182,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		});
 
 	}
-	
+
 	private void gotoReadData(String sn,String pw){
 		Intent intent = new Intent();
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -301,7 +301,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			btView.setBackground(drawableDisconnect);
 		}
 	}
-	
+
 	Handler mHandler=new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			switch(msg.what){

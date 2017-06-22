@@ -86,6 +86,23 @@ public class CustomDialog {
 		view = LayoutInflater.from(context).inflate(R.layout.dialog_wait, null);
 		showNoSizeDefaultDialog(context, view, true);
 	}
+	
+	//add by wzb
+	private static TextView waitAndCancelTxt=null;
+	public static void showWaitAndCancelDialog(Context context, String msg,View.OnClickListener cancleListener){
+		view = LayoutInflater.from(context).inflate(R.layout.dialog_wait2, null);
+		waitAndCancelTxt = (TextView) view.findViewById(R.id.txt_dialog_msg);
+		waitAndCancelTxt.setText(msg);
+		Button bt_cancel = (Button) view.findViewById(R.id.txt_dialog_btn_cancle);
+		bt_cancel.setOnClickListener(cancleListener);
+		showNoSizeDefaultDialog(context, view, true);
+	}
+	
+	public static void setWaitAndCancelTxt(String txt){
+		if(waitAndCancelTxt!=null){
+			waitAndCancelTxt.setText(txt);
+		}
+	}
 
 	/**
 	 * 显示等待对话框.

@@ -18,3 +18,28 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+#####################################
+######### 主程序不能混淆的代码 #########
+#####################################
+######-dontwarn xxx.model.**
+######-keep class xxx.model.** { *; }
+
+#####################################
+########### 不优化泛型和反射 ##########
+#####################################
+#-keepattributes Signature
+#-keep class * extends java.lang.annotation.Annotation { *; }
+
+#####################################
+######### 不混淆第三方库或者jar包 #######
+#####################################
+-dontwarn cn.qqtheme.framework.**
+-keep class cn.qqtheme.framework.** { *; }
+
+#-dontwarn com.iflytek.speech.**
+#-keep class com.iflytek.speech.** { *; }
+
+#-dontwarn com.lidroid.xutils.**
+#-keep class com.lidroid.xutils.** { *; }
+#####################################

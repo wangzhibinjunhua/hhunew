@@ -399,6 +399,17 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			}
 		}
 	}
+	
+	OnClickListener waitcancleListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			closeCon();
+			CustomDialog.dismissDialog();
+		}
+	};
+
 
 	private void test_read() {
 		//get selectedItem
@@ -411,9 +422,10 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			if (selectedItem == null || selectedItem.size() == 0) {
 				ToastUtil.showShortToast(mContext, "请选择需要读取的数据项");
 			} else {
-				CustomDialog.showWaitDialog(mContext, "读取中...");
+				//CustomDialog.showWaitDialog(mContext, "读取中...");
+				CustomDialog.showWaitAndCancelDialog(mContext, "读取中...", waitcancleListener);
 				initCom();
-				mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+				//mHandler.sendEmptyMessageDelayed(0xffff, 5000);
 			}
 		}
 	}

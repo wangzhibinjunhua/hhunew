@@ -179,7 +179,7 @@ public class BluetoothSPP {
 	@SuppressLint("HandlerLeak")
 	private final Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
-			LogUtil.logMessage("wzb", "bt state:" + msg.what + " value" + Common.bytesToHexString((byte[]) msg.obj));
+			LogUtil.logMessage("wzb", "bt state:" + msg.what + " value:" + Common.bytesToHexString((byte[]) msg.obj));
 			switch (msg.what) {
 			case BluetoothState.MESSAGE_WRITE:
 				break;

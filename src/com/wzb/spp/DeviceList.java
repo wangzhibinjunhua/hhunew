@@ -75,6 +75,7 @@ public class DeviceList extends BaseActivity {
 	public static final int DEVICE_CONNECTED = 0xff02;
 	public static final int DEVICE_DISCONNECTED = 0xff03;
 	public static final int START_DISCOVER_BT=0xff04;
+	public static final int UPDATE_CONNECTED_BT_STATE=0xff05;
 	private String connectAddress = "";
 	
 	private TextView btState;
@@ -86,6 +87,8 @@ public class DeviceList extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		int listId = getIntent().getIntExtra("layout_list", R.layout.device_list);
 		setContentView(listId);
+		
+		
 		initTitleView();
 		String strBluetoothDevices = getIntent().getStringExtra("bluetooth_devices");
 		if (strBluetoothDevices == null)
@@ -129,7 +132,6 @@ public class DeviceList extends BaseActivity {
 
 		// Get the local Bluetooth adapter
 		mBtAdapter = BluetoothAdapter.getDefaultAdapter();
-
 		// Get a set of currently paired devices
 		pairedDevices = mBtAdapter.getBondedDevices();
 
@@ -167,8 +169,17 @@ public class DeviceList extends BaseActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		if (!WApplication.bt.isBluetoothEnabled()) {
+			Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			startActivityForResult(intent, BluetoothState.REQUEST_ENABLE_BT);
+		} else {
+			if (!WApplication.bt.isServiceAvailable()) {
+				WApplication.bt.setupService();
+				WApplication.bt.startService(BluetoothState.DEVICE_OTHER);
+			}
+		}
 		setBtListener();
-		sendBroadcast(new Intent(BroadcastAction.ACTION_OPEN_BT));
+		//sendBroadcast(new Intent(BroadcastAction.ACTION_OPEN_BT));
 		mHandler.sendEmptyMessageDelayed(START_DISCOVER_BT, 500);
 		
 		updateBtDevice();
@@ -204,6 +215,9 @@ public class DeviceList extends BaseActivity {
 				CustomDialog.dismissDialog();
 			case START_DISCOVER_BT:
 				doDiscovery();
+				break;
+			case UPDATE_CONNECTED_BT_STATE:
+				updateBtDevice();
 				break;
 			default:
 				break;
@@ -249,9 +263,21 @@ public class DeviceList extends BaseActivity {
 		this.unregisterReceiver(mReceiver);
 		this.finish();
 	}
+	
 
 	// Start device discover with the BluetoothAdapter
 	private void doDiscovery() {
+		CustomDialog.showWaitAndCancelDialog(DeviceList.this, "discovery...", new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CustomDialog.dismissDialog();
+				if (mBtAdapter != null) {
+					mBtAdapter.cancelDiscovery();
+				}
+			}
+		});
 		if (D)
 			Log.d(TAG, "doDiscovery()");
 
@@ -259,7 +285,8 @@ public class DeviceList extends BaseActivity {
 		mPairedDevicesArrayAdapter.clear();
 
 		// If there are paired devices, add each one to the ArrayAdapter
-		if (pairedDevices.size() > 0) {
+		//if (pairedDevices.size() > 0) {
+		if(false){
 			for (BluetoothDevice device : pairedDevices) {
 				mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
 			}
@@ -311,6 +338,8 @@ public class DeviceList extends BaseActivity {
 				intent.setAction(BroadcastAction.ACTION_CONNETION_ADDRESS);
 				sendBroadcast(intent);
 				CustomDialog.showWaitDialog(DeviceList.this, "connecting...");
+				btState.setText("No device connected");
+				btState.setBackgroundColor(Color.RED);
 				// Set result and finish this Activity
 				// setResult(Activity.RESULT_OK, intent);
 				// finish();
@@ -323,7 +352,7 @@ public class DeviceList extends BaseActivity {
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-
+			LogUtil.logMessage("wzb", "onReceive action:"+action);
 			// When discovery finds a device
 			if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 				// Get the BluetoothDevice object from the Intent
@@ -331,7 +360,7 @@ public class DeviceList extends BaseActivity {
 
 				// If it's already paired, skip it, because it's been listed
 				// already
-				if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
+				//if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
 					String strNoFound = getIntent().getStringExtra("no_devices_found");
 					if (strNoFound == null)
 						strNoFound = "No devices found";
@@ -340,12 +369,13 @@ public class DeviceList extends BaseActivity {
 						mPairedDevicesArrayAdapter.remove(strNoFound);
 					}
 					mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-				}
+				//}
 
 				mPairedDevicesArrayAdapter.notifyDataSetChanged();
 
 				// When discovery is finished, change the Activity title
 			} else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+				CustomDialog.dismissDialog();
 				setProgressBarIndeterminateVisibility(false);
 				String strSelectDevice = getIntent().getStringExtra("select_device");
 				if (strSelectDevice == null)

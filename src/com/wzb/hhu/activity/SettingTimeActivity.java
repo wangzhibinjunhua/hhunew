@@ -120,6 +120,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 				Intent intent = new Intent(getApplicationContext(), AmmeterListActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				finish();
 			}
 		});
 	}

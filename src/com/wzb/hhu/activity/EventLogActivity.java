@@ -173,6 +173,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 				Intent intent = new Intent(getApplicationContext(), AmmeterListActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				finish();
 			}
 		});
 	}

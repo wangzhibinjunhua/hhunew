@@ -32,6 +32,8 @@
     <string name="write">Write</string>
        
     <string name="stop">Stop</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
     
 
 </resources>

@@ -28,8 +28,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AbsListView;
@@ -85,7 +89,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		mContext = AmmeterListActivity.this;
 		curActivity=getIntent().getStringExtra("curActivity");
 		initTitleView();
-
+		
 		searchEt = (EditText) findViewById(R.id.ammeter_et);
 		addBtn = (ImageView) findViewById(R.id.add_btn);
 		addBtn.setOnClickListener(new OnClickListener() {
@@ -169,7 +173,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				// finish();
 			}
 		});
-		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+		/*listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
@@ -179,9 +183,79 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				adapter.notifyDataSetChanged();
 				return true;
 			}
-		});
+		});*/
+		MyItemOnLongClick();
 
 	}
+	
+	// long click for delete or edit
+		private void MyItemOnLongClick() {
+
+			listView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
+				@Override
+				public void onCreateContextMenu(ContextMenu menu, View v,
+						ContextMenuInfo menuInfo) {
+					menu.add(0, 0, 0, getResources().getString(R.string.edit));
+					menu.add(0, 1, 0, getResources().getString(R.string.delete));
+					
+				}
+			});
+		}
+		
+		public boolean onContextItemSelected(MenuItem item) {
+
+			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+					.getMenuInfo();
+			final int MID = (int) info.id;// 这里的info.id对应的就是数据库中_id的值
+			curPosition = MID;
+			
+			switch (item.getItemId()) {
+			case 0:// edit
+				String snString=adapter.getAmmeterBean(MID).getSn();
+				Intent intent = new Intent();
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.setClass(mContext, MeterEditActivity.class);
+				intent.putExtra("sn", snString);
+				startActivity(intent);
+				break;
+
+			case 1:// delete
+				CustomDialog.showOkAndCalcelDialog(mContext, "Delete Meter", "确定要删除吗？\n"+"sn:"+adapter.getAmmeterBean(MID).getSn(), new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						CustomDialog.dismissDialog();
+						CustomDialog.showWaitDialog(mContext, "删除中...");
+						new Handler().postDelayed(new Runnable() {
+							public void run() {
+								curPosition = -1;
+								updateShowMeters();
+								CustomDialog.dismissDialog();
+							}
+						}, 3000);
+						DbUtil.deleteMeter(adapter.getAmmeterBean(curPosition).getSn());
+						
+					}
+				}, new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						CustomDialog.dismissDialog();
+					}
+				});
+				//adapter.deleteMeter(MID);
+				break;
+
+			default:
+				break;
+			}
+			adapter.notifyDataSetChanged();
+
+			return super.onContextItemSelected(item);
+
+		}
 
 	private void gotoReadData(String sn,String pw){
 		Intent intent = new Intent();
@@ -273,13 +347,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		updateShowMeters();
 		setBtListener();
 		updateBtState();
-		long meterCount = DbUtil.getAllMeterCount();
-		LogUtil.logMessage("wzb", "meterCount=" + meterCount);
-		if (meterCount <= 10) {
-			loadMoreBtn.setVisibility(View.GONE);
-		} else {
-			loadMoreBtn.setVisibility(View.VISIBLE);
-		}
+		
 	}
 
 	private void updateShowMeters() {
@@ -288,6 +356,13 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		adapter.clearAlldata();
 		adapter.updateList(meters);
 		adapter.notifyDataSetChanged();
+		long meterCount = DbUtil.getAllMeterCount();
+		LogUtil.logMessage("wzb", "meterCount=" + meterCount);
+		if (meterCount <= 10) {
+			loadMoreBtn.setVisibility(View.GONE);
+		} else {
+			loadMoreBtn.setVisibility(View.VISIBLE);
+		}
 
 	}
 
@@ -426,6 +501,10 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 
 		public void addAmmeterItem(AmmeterBean items) {
 			ammeterItems.add(items);
+		}
+		
+		public void deleteMeter(int id){
+			ammeterItems.remove(id);
 		}
 
 		public AmmeterBean getAmmeterBean(int id) {

@@ -169,6 +169,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 				Intent intent = new Intent(getApplicationContext(), AmmeterListActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				finish();
 			}
 		});
 	}

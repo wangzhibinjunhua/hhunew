@@ -36,7 +36,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:background="@color/btn_default"
-            android:text="Stop" />
+            android:text="Write" />
     </LinearLayout>
 
     <View

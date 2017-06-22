@@ -99,10 +99,10 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 				// TODO Auto-generated method stub
 
 				eventAdapter.getDataItem(arg2).cbToggle();
-				if(arg2==0){
-					if(eventAdapter.getDataItem(arg2).getItemSelect()){
+				if (arg2 == 0) {
+					if (eventAdapter.getDataItem(arg2).getItemSelect()) {
 						eventAdapter.selectAll();
-					}else{
+					} else {
 						eventAdapter.unSelectAll();
 					}
 				}
@@ -142,7 +142,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
-		
+
 		backView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -163,9 +163,9 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 				startActivity(intent);
 			}
 		});
-		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterList = (ImageView) findViewById(R.id.title_meterlist);
 		titleMeterList.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -184,10 +184,10 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 		super.onResume();
 		setBtListener();
 		updateBtState();
-		meterSn=WApplication.sp.get("current_sn", "");
-		meterPw=WApplication.sp.get("current_pw", "");
-		titleView.setText(ResTools.getResString(EventLogActivity.this, R.string.event_log)+":"+meterSn);
-		
+		meterSn = WApplication.sp.get("current_sn", "");
+		meterPw = WApplication.sp.get("current_pw", "");
+		titleView.setText(ResTools.getResString(EventLogActivity.this, R.string.event_log) + ":" + meterSn);
+
 	}
 
 	private void updateBtState() {
@@ -371,9 +371,18 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 			if (selectedItem == null || selectedItem.size() == 0) {
 				ToastUtil.showShortToast(mContext, "请选择需要读取的数据项");
 			} else {
-				CustomDialog.showWaitDialog(mContext, "读取中...");
+				// CustomDialog.showWaitDialog(mContext, "读取中...");
+				CustomDialog.showWaitAndCancelDialog(mContext, "读取中...", new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						closeCon();
+						CustomDialog.dismissDialog();
+					}
+				});
 				initCom();
-				mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+				// mHandler.sendEmptyMessageDelayed(0xffff, 5000);
 			}
 		}
 	}
@@ -411,7 +420,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(R.layout.data_list_item, null);
 			}
-			ImageView itemList=(ImageView)convertView.findViewById(R.id.item_list);
+			ImageView itemList = (ImageView) convertView.findViewById(R.id.item_list);
 			itemList.setVisibility(View.GONE);
 			TextView tvName = (TextView) convertView.findViewById(R.id.data_item_name);
 			TextView tvValue = (TextView) convertView.findViewById(R.id.data_item_value);

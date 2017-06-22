@@ -47,6 +47,7 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 	public static final int UPDATE_BT_STATE=0xff0001;
 	private ImageView backView;
 	private ImageView btView;
+	private ImageView titleMeterView;
 	private TextView titleView;
 	private ListView listView;
 	private Context mContext;
@@ -107,13 +108,28 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 		});
 	}
 	
+
 	private void gotoReadData(String sn,String pw){
 		Intent intent = new Intent();
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.setClass(mContext, ReadDataActivity.class);
+		String currentActivity=WApplication.sp.get("current_activity", "0");
+		if(currentActivity.equals("0")){
+			intent.setClass(mContext, ReadDataActivity.class);
+		}else if(currentActivity.equals("1")){
+			intent.setClass(mContext, SettingActivity.class);
+		}else if(currentActivity.equals("2")){
+			intent.setClass(mContext, SettingTimeActivity.class);
+		}else if(currentActivity.equals("3")){
+			intent.setClass(mContext, EventLogActivity.class);
+		}else{
+			intent.setClass(mContext, ReadDataActivity.class);
+		}
 		intent.putExtra("meter_sn", sn);
 		intent.putExtra("meter_pw", pw);
+		WApplication.sp.set("current_sn",sn);
+		WApplication.sp.set("current_pw",pw);
 		startActivity(intent);
+		finish();
 	}
 	
 	private void startReadData(String sn) {
@@ -250,6 +266,8 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 				startActivity(intent);
 			}
 		});
+		titleMeterView=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterView.setVisibility(View.GONE);
 	}
 	
 	

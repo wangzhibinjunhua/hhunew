@@ -44,6 +44,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 	private ImageView backView;
 	private TextView titleView;
 	private ImageView btView;
+	private ImageView titleMeterList;
 
 	private Context mContext;
 
@@ -141,7 +142,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
-		titleView.setText(ResTools.getResString(EventLogActivity.this, R.string.event_log));
+		
 		backView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -162,6 +163,18 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 				startActivity(intent);
 			}
 		});
+		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterList.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				WApplication.sp.set("current_activity", "3");
+				Intent intent = new Intent(getApplicationContext(), AmmeterListActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override
@@ -170,6 +183,10 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 		super.onResume();
 		setBtListener();
 		updateBtState();
+		meterSn=WApplication.sp.get("current_sn", "");
+		meterPw=WApplication.sp.get("current_pw", "");
+		titleView.setText(ResTools.getResString(EventLogActivity.this, R.string.event_log)+":"+meterSn);
+		
 	}
 
 	private void updateBtState() {

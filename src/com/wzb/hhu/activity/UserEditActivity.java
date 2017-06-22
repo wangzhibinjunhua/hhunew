@@ -31,6 +31,9 @@ public class UserEditActivity extends BaseActivity implements OnClickListener {
 
 	private ImageView backView;
 	private TextView titleView;
+	
+	private ImageView btView;
+	private ImageView titleMeterList;
 
 	private EditText accountEt, passwordEt, nameEt;
 	private CheckBox adminCb, rwCb, roCb;
@@ -158,6 +161,10 @@ public class UserEditActivity extends BaseActivity implements OnClickListener {
 				finish();
 			}
 		});
+		btView = (ImageView) findViewById(R.id.title_bt);
+		btView.setVisibility(View.GONE);
+		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterList.setVisibility(View.GONE);
 	}
 
 	private void updateUser() {

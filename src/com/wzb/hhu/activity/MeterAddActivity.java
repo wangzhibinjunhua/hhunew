@@ -25,6 +25,8 @@ public class MeterAddActivity extends BaseActivity implements OnClickListener{
 	
 	private ImageView backView;
 	private TextView titleView;
+	private ImageView btView;
+	private ImageView titleMeterList;
 	private Context mContext;
 	
 	private EditText snEt, passwordEt, locationEt;
@@ -92,6 +94,10 @@ public class MeterAddActivity extends BaseActivity implements OnClickListener{
 				finish();
 			}
 		});
+		btView = (ImageView) findViewById(R.id.title_bt);
+		btView.setVisibility(View.GONE);
+		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterList.setVisibility(View.GONE);
 	}
 	
 	

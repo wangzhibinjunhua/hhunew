@@ -55,6 +55,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 
 	private ImageView backView;
 	private TextView titleView;
+	private ImageView titleMeterList;
 	private ImageView btView;
 	private Context mContext;
 	private Button readBtn, stopBtn, exportBtn, returnBtn;
@@ -77,8 +78,8 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_readdata);
 		mContext = ReadDataActivity.this;
-		meterSn = getIntent().getStringExtra("meter_sn");
-		meterPw = getIntent().getStringExtra("meter_pw");
+		//meterSn = getIntent().getStringExtra("meter_sn");
+		//meterPw = getIntent().getStringExtra("meter_pw");
 		drawableUp = mContext.getResources().getDrawable(R.drawable.up_icon);
 		drawableDown = mContext.getResources().getDrawable(R.drawable.down_icon);
 		initTitleView();
@@ -179,7 +180,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
-		titleView.setText(ResTools.getResString(ReadDataActivity.this, R.string.read_data)+":"+meterSn);
+		//titleView.setText(ResTools.getResString(ReadDataActivity.this, R.string.read_data)+":"+meterSn);
 		backView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -200,7 +201,19 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				startActivity(intent);
 			}
 		});
-
+		
+		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterList.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				WApplication.sp.set("current_activity", "0");
+				Intent intent = new Intent(getApplicationContext(), AmmeterListActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override
@@ -209,6 +222,9 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		super.onResume();
 		setBtListener();
 		updateBtState();
+		meterSn=WApplication.sp.get("current_sn", "");
+		meterPw=WApplication.sp.get("current_pw", "");
+		titleView.setText(ResTools.getResString(mContext, R.string.read_data)+":"+meterSn);
 	}
 
 	private void updateBtState() {

@@ -1,5 +1,7 @@
 package com.wzb.hhu.activity;
 
+import org.apache.http.impl.conn.tsccm.WaitingThread;
+
 import com.wzb.hhu.R;
 import com.wzb.hhu.interf.WApplication;
 import com.wzb.hhu.view.MyGridAdapter;
@@ -73,15 +75,18 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 			// TODO Auto-generated method stub
-			// Toast.makeText(HomeActivity.this, "" + arg2, Toast.LENGTH_SHORT)
-			// .show();
 			Intent intent = new Intent();
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			Boolean isFirstUseMeter=WApplication.sp.get("current_sn", "__000___").equals("__000___");
 			switch (arg2) {
 			case 3:
-				//intent.setClass(MainActivity.this, EventLogActivity.class);
-				intent.setClass(MainActivity.this, AmmeterListActivity.class);
-				intent.putExtra("curActivity", "3");
+				
+				if(isFirstUseMeter){
+					intent.setClass(MainActivity.this, AmmeterListActivity.class);
+				}else{
+					intent.setClass(MainActivity.this, EventLogActivity.class);
+				}
+				WApplication.sp.set("current_activity", "3");
 				startActivity(intent);
 				break;
 			case 4:
@@ -99,22 +104,34 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				System.gc();
 				break;
 			case 2:
-				//intent.setClass(MainActivity.this, SettingTimeActivity.class);
-				intent.setClass(MainActivity.this, AmmeterListActivity.class);
-				intent.putExtra("curActivity", "2");
+				
+				if(isFirstUseMeter){
+					intent.setClass(MainActivity.this, AmmeterListActivity.class);
+				}else{
+					intent.setClass(MainActivity.this, SettingTimeActivity.class);
+				}
+				WApplication.sp.set("current_activity", "2");
 				startActivity(intent);
 				break;
 			case 0:// read data
-
-				intent.setClass(MainActivity.this, AmmeterListActivity.class);
-				intent.putExtra("curActivity", "0");
+				
+				if(isFirstUseMeter){
+					intent.setClass(MainActivity.this, AmmeterListActivity.class);
+				}else{
+					intent.setClass(MainActivity.this, ReadDataActivity.class);
+				}
+				WApplication.sp.set("current_activity", "0");
 				startActivity(intent);
 				break;
 			case 1:
 				 //intent.setClass(MainActivity.this, SimpleActivity.class);
-				//intent.setClass(MainActivity.this, SettingActivity.class);
-				intent.setClass(MainActivity.this, AmmeterListActivity.class);
-				intent.putExtra("curActivity", "1");
+				
+				if(isFirstUseMeter){
+					intent.setClass(MainActivity.this, AmmeterListActivity.class);
+				}else{
+					intent.setClass(MainActivity.this, SettingActivity.class);
+				}
+				WApplication.sp.set("current_activity", "1");
 				startActivity(intent);
 				break;
 			default:

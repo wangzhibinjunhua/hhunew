@@ -57,6 +57,7 @@ public class DeviceList extends BaseActivity {
 
 	private ImageView backView;
 	private ImageView btView;
+	private ImageView titleMeterList;
 	private TextView titleView;
 	// Debugging
 	private static final String TAG = "BluetoothSPP";
@@ -150,6 +151,8 @@ public class DeviceList extends BaseActivity {
 				finish();
 			}
 		});
+		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterList.setVisibility(View.GONE);
 	}
 
 	@Override

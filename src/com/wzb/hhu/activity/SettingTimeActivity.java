@@ -34,6 +34,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 	private ImageView backView;
 	private TextView titleView;
 	private ImageView btView;
+	private ImageView titleMeterList;
 
 	private Context mContext;
 
@@ -42,6 +43,8 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 	private EditText sysDate, sysTime;
 	private ImageView dateSet, timeSet;
 	private TextView meterDate, meterTime;
+	
+	private String meterSn, meterPw;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
-		titleView.setText(ResTools.getResString(SettingTimeActivity.this, R.string.setting_time));
+		
 		backView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -107,6 +110,18 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 				startActivity(intent);
 			}
 		});
+		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterList.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				WApplication.sp.set("current_activity", "2");
+				Intent intent = new Intent(getApplicationContext(), AmmeterListActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override
@@ -115,6 +130,10 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		super.onResume();
 		setBtListener();
 		updateBtState();
+		meterSn=WApplication.sp.get("current_sn", "");
+		meterPw=WApplication.sp.get("current_pw", "");
+		titleView.setText(ResTools.getResString(SettingTimeActivity.this, R.string.setting_time)+":"+meterSn);
+		
 	}
 
 	private void updateBtState() {

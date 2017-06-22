@@ -56,6 +56,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 	
 	private ImageView backView;
 	private ImageView btView;
+	private ImageView titleMeterView;
 	private TextView titleView;
 	private ListView listView;
 	private int visibleLastIndex = 0;// 最后的可视项索引
@@ -115,6 +116,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 					intent.setClass(AmmeterListActivity.this, MeterSearchActivity.class);
 					intent.putExtra("search_sn", searchSn);
 					startActivity(intent);
+					finish();
 				}
 			}
 		});
@@ -184,13 +186,14 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 	private void gotoReadData(String sn,String pw){
 		Intent intent = new Intent();
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		if(curActivity.equals("0")){
+		String currentActivity=WApplication.sp.get("current_activity", "0");
+		if(currentActivity.equals("0")){
 			intent.setClass(mContext, ReadDataActivity.class);
-		}else if(curActivity.equals("1")){
+		}else if(currentActivity.equals("1")){
 			intent.setClass(mContext, SettingActivity.class);
-		}else if(curActivity.equals("2")){
+		}else if(currentActivity.equals("2")){
 			intent.setClass(mContext, SettingTimeActivity.class);
-		}else if(curActivity.equals("3")){
+		}else if(currentActivity.equals("3")){
 			intent.setClass(mContext, EventLogActivity.class);
 		}else{
 			intent.setClass(mContext, ReadDataActivity.class);
@@ -200,6 +203,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 		WApplication.sp.set("current_sn",sn);
 		WApplication.sp.set("current_pw",pw);
 		startActivity(intent);
+		finish();
 	}
 
 	private void startReadData(String sn) {
@@ -251,6 +255,8 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				startActivity(intent);
 			}
 		});
+		titleMeterView=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterView.setVisibility(View.GONE);
 	}
 
 	private void initAdapter() {

@@ -44,6 +44,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 	private ImageView backView;
 	private TextView titleView;
 	private ImageView btView;
+	private ImageView titleMeterList;
 
 	private Context mContext;
 	private Button readBtn, stopBtn, exportBtn, returnBtn;
@@ -65,8 +66,8 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_setting);
 		mContext = SettingActivity.this;
-		meterSn = getIntent().getStringExtra("meter_sn");
-		meterPw = getIntent().getStringExtra("meter_pw");
+		//meterSn = getIntent().getStringExtra("meter_sn");
+		//meterPw = getIntent().getStringExtra("meter_pw");
 		initTitleView();
 		initView();
 	}
@@ -137,7 +138,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
-		titleView.setText(ResTools.getResString(SettingActivity.this, R.string.meter_setting));
+		
 		backView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -158,6 +159,18 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 				startActivity(intent);
 			}
 		});
+		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterList.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				WApplication.sp.set("current_activity", "1");
+				Intent intent = new Intent(getApplicationContext(), AmmeterListActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override
@@ -166,6 +179,9 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 		super.onResume();
 		setBtListener();
 		updateBtState();
+		meterSn=WApplication.sp.get("current_sn", "");
+		meterPw=WApplication.sp.get("current_pw", "");
+		titleView.setText(ResTools.getResString(SettingActivity.this, R.string.meter_setting)+":"+meterSn);
 	}
 
 	private void updateBtState() {

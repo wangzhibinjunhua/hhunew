@@ -9,6 +9,9 @@ import com.wzb.hhu.util.Common;
  */
 public class IECCommand {
 	
+	public static final String MONTH_DEFAULT_NUM="12";
+	public static final String RATE_DEFAULT_NUM="4";
+	
 	private static final String READ_CMD_HEAD="01523102";
 	private static final String READ_CMD_END="282903";
 	

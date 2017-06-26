@@ -313,6 +313,17 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	private void sendDataItemCmd() {
 		int curComItem = selectedItem.get(curItemId);
 		String cmd = ResTools.getResStringArray(mContext, R.array.elec_cmd)[curComItem];
+		if(curComItem==3 || curComItem==5 ||curComItem==7 ||curComItem==9||curComItem==11||curComItem==13){
+			cmd=cmd+IECCommand.MONTH_DEFAULT_NUM;
+		}
+		
+		if(curComItem==15 ||curComItem==17 ||curComItem==19 ||curComItem==21){
+			cmd=cmd+IECCommand.RATE_DEFAULT_NUM;
+		}
+		
+		if(curComItem==16 ||curComItem==18 ||curComItem==20 ||curComItem==22){
+			cmd=cmd+IECCommand.RATE_DEFAULT_NUM+"*"+IECCommand.MONTH_DEFAULT_NUM;
+		}
 		String sendData = "01523102" + Common.stringToAscii(cmd) + "282903";
 		String sendDataXor = Common.xorHex(sendData.substring(2));
 		IECCommand.sppSend(sendData + sendDataXor);

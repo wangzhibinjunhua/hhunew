@@ -1,8 +1,13 @@
+android.support.v4.app.BackStackState
 android.support.v4.app.BackStackState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.Fragment$SavedState
 android.support.v4.app.Fragment$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentManagerState
 android.support.v4.app.FragmentManagerState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentState
 android.support.v4.app.FragmentState: android.os.Parcelable$Creator CREATOR
 android.support.v4.app.FragmentTabHost: void setOnTabChangedListener(android.widget.TabHost$OnTabChangeListener)
+android.support.v4.app.FragmentTabHost$SavedState
 android.support.v4.app.FragmentTabHost$SavedState: android.os.Parcelable$Creator CREATOR
 android.support.v4.content.ModernAsyncTask$Status: android.support.v4.content.ModernAsyncTask$Status[] values()
 android.support.v4.content.ModernAsyncTask$Status: android.support.v4.content.ModernAsyncTask$Status valueOf(java.lang.String)
@@ -39,10 +44,12 @@ android.support.v4.view.ViewPager: int getPageMargin()
 android.support.v4.view.ViewPager: void setPageMarginDrawable(android.graphics.drawable.Drawable)
 android.support.v4.view.ViewPager: void setPageMarginDrawable(int)
 android.support.v4.view.ViewPager: void setScrollingCacheEnabled(boolean)
+android.support.v4.view.ViewPager$SavedState
 android.support.v4.view.ViewPager$SavedState: android.os.Parcelable$Creator CREATOR
 android.support.v4.widget.DrawerLayout: void setScrimColor(int)
 android.support.v4.widget.DrawerLayout: void setDrawerListener(android.support.v4.widget.DrawerLayout$DrawerListener)
 android.support.v4.widget.DrawerLayout: void setDrawerLockMode(int)
+android.support.v4.widget.DrawerLayout$SavedState
 android.support.v4.widget.DrawerLayout$SavedState: android.os.Parcelable$Creator CREATOR
 android.support.v4.widget.SlidingPaneLayout: void setParallaxDistance(int)
 android.support.v4.widget.SlidingPaneLayout: int getParallaxDistance()
@@ -53,6 +60,7 @@ android.support.v4.widget.SlidingPaneLayout: int getCoveredFadeColor()
 android.support.v4.widget.SlidingPaneLayout: void setPanelSlideListener(android.support.v4.widget.SlidingPaneLayout$PanelSlideListener)
 android.support.v4.widget.SlidingPaneLayout: void setShadowDrawable(android.graphics.drawable.Drawable)
 android.support.v4.widget.SlidingPaneLayout: void setShadowResource(int)
+android.support.v4.widget.SlidingPaneLayout$SavedState
 android.support.v4.widget.SlidingPaneLayout$SavedState: android.os.Parcelable$Creator CREATOR
 cn.qqtheme.framework.AppConfig
 cn.qqtheme.framework.AppConfig: java.lang.String DEBUG_TAG
@@ -1560,6 +1568,7 @@ com.wzb.hhu.R$array: int event_cmd
 com.wzb.hhu.R$array: int img_text
 com.wzb.hhu.R$array: int setting
 com.wzb.hhu.R$array: int setting_cmd
+com.wzb.hhu.R$array: int time_cmd
 com.wzb.hhu.R$array: int user_title
 com.wzb.hhu.R$color: int background_gray
 com.wzb.hhu.R$color: int black
@@ -1803,6 +1812,7 @@ com.wzb.hhu.R$id: int tv_acc
 com.wzb.hhu.R$id: int tv_dialog_msg
 com.wzb.hhu.R$id: int tv_item
 com.wzb.hhu.R$id: int tv_ps
+com.wzb.hhu.R$id: int txt_dialog_btn_cancle
 com.wzb.hhu.R$id: int txt_dialog_msg
 com.wzb.hhu.R$id: int txt_dialog_title
 com.wzb.hhu.R$id: int txt_line
@@ -1821,6 +1831,7 @@ com.wzb.hhu.R$layout: int activity_ammetersearchlist
 com.wzb.hhu.R$layout: int activity_eventlog
 com.wzb.hhu.R$layout: int activity_main
 com.wzb.hhu.R$layout: int activity_meteradd
+com.wzb.hhu.R$layout: int activity_meteredit
 com.wzb.hhu.R$layout: int activity_readdata
 com.wzb.hhu.R$layout: int activity_setting
 com.wzb.hhu.R$layout: int activity_settingtime
@@ -1835,6 +1846,7 @@ com.wzb.hhu.R$layout: int device_list
 com.wzb.hhu.R$layout: int device_name
 com.wzb.hhu.R$layout: int dialog_defalut
 com.wzb.hhu.R$layout: int dialog_wait
+com.wzb.hhu.R$layout: int dialog_wait2
 com.wzb.hhu.R$layout: int home_grid_item
 com.wzb.hhu.R$layout: int loadmore
 com.wzb.hhu.R$layout: int login
@@ -1935,9 +1947,12 @@ com.wzb.hhu.R$string: int add
 com.wzb.hhu.R$string: int ammeter_list
 com.wzb.hhu.R$string: int app_name
 com.wzb.hhu.R$string: int bt_device
+com.wzb.hhu.R$string: int bt_not_enabled
 com.wzb.hhu.R$string: int cancel
+com.wzb.hhu.R$string: int delete
 com.wzb.hhu.R$string: int dialog_image_camear
 com.wzb.hhu.R$string: int dialog_image_picture
+com.wzb.hhu.R$string: int edit
 com.wzb.hhu.R$string: int edit_meter
 com.wzb.hhu.R$string: int edit_user
 com.wzb.hhu.R$string: int event_log
@@ -1951,14 +1966,17 @@ com.wzb.hhu.R$string: int new_meter
 com.wzb.hhu.R$string: int new_user
 com.wzb.hhu.R$string: int ok
 com.wzb.hhu.R$string: int password
+com.wzb.hhu.R$string: int read
 com.wzb.hhu.R$string: int read_data
 com.wzb.hhu.R$string: int setting_time
+com.wzb.hhu.R$string: int stop
 com.wzb.hhu.R$string: int sw_info
 com.wzb.hhu.R$string: int sw_info1
 com.wzb.hhu.R$string: int user_manager
 com.wzb.hhu.R$string: int user_name
 com.wzb.hhu.R$string: int wait
 com.wzb.hhu.R$string: int wating
+com.wzb.hhu.R$string: int write
 com.wzb.hhu.R$style: int AppBaseTheme
 com.wzb.hhu.R$style: int AppTheme
 com.wzb.hhu.R$style: int AppThemeFull
@@ -1994,6 +2012,9 @@ com.wzb.hhu.activity.MainActivity: void onClick(android.view.View)
 com.wzb.hhu.activity.MeterAddActivity
 com.wzb.hhu.activity.MeterAddActivity: MeterAddActivity()
 com.wzb.hhu.activity.MeterAddActivity: void onClick(android.view.View)
+com.wzb.hhu.activity.MeterEditActivity
+com.wzb.hhu.activity.MeterEditActivity: MeterEditActivity()
+com.wzb.hhu.activity.MeterEditActivity: void onClick(android.view.View)
 com.wzb.hhu.activity.MeterSearchActivity
 com.wzb.hhu.activity.MeterSearchActivity: MeterSearchActivity()
 com.wzb.hhu.activity.ReadDataActivity

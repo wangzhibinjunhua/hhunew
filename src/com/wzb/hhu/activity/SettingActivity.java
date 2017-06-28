@@ -22,7 +22,9 @@ import com.wzb.spp.BluetoothSPP.BluetoothConnectionListener;
 import com.wzb.spp.BluetoothSPP.OnDataReceivedListener;
 import com.wzb.spp.DeviceList;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -39,15 +41,17 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class SettingActivity extends BaseActivity implements OnScrollListener , OnClickListener{
-	public static final int UPDATE_BT_STATE=0xff0001;
+public class SettingActivity extends BaseActivity implements OnScrollListener, OnClickListener {
+	public static final int UPDATE_BT_STATE = 0xff0001;
 	private ImageView backView;
 	private TextView titleView;
 	private ImageView btView;
@@ -73,8 +77,8 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_setting);
 		mContext = SettingActivity.this;
-		//meterSn = getIntent().getStringExtra("meter_sn");
-		//meterPw = getIntent().getStringExtra("meter_pw");
+		// meterSn = getIntent().getStringExtra("meter_sn");
+		// meterPw = getIntent().getStringExtra("meter_pw");
 		initTitleView();
 		initView();
 	}
@@ -103,10 +107,10 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				settingAdapter.getDataItem(arg2).cbToggle();
-				if(arg2==0){
-					if(settingAdapter.getDataItem(arg2).getItemSelect()){
+				if (arg2 == 0) {
+					if (settingAdapter.getDataItem(arg2).getItemSelect()) {
 						settingAdapter.selectAll();
-					}else{
+					} else {
 						settingAdapter.unSelectAll();
 					}
 				}
@@ -115,7 +119,41 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			}
 
 		});
+		settingListView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				LogUtil.logMessage("wzb", "setting long click arg2:" + arg2);
+				editSettingValue(arg2);
+				return true;
+			}
+		});
+
+	}
+
+	private void editSettingValue(final int id) {
+
+		final EditText et = new EditText(this);
+		et.setMaxLines(1);
+		et.setSingleLine(true);
+		new AlertDialog.Builder(this).setTitle(settingAdapter.getDataItem(id).getItemName())
+				.setIcon(android.R.drawable.ic_dialog_info).setView(et)
+				.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						String input = et.getText().toString();
+						if (!TextUtils.isEmpty(input)) {
+							settingAdapter.getDataItem(id).setItemValue(input);
+							settingAdapter.notifyDataSetChanged();
+						} else {
+							ToastUtil.showShortToast(mContext, "输入数据不能为空");
+						}
+					}
+				}
+
+				)
+				.setCancelable(false)
+				.setNegativeButton("cancle", null).show();
 	}
 
 	private void initAdapter() {
@@ -145,7 +183,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
-		
+
 		backView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -166,9 +204,9 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 				startActivity(intent);
 			}
 		});
-		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+		titleMeterList = (ImageView) findViewById(R.id.title_meterlist);
 		titleMeterList.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -187,9 +225,9 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 		super.onResume();
 		setBtListener();
 		updateBtState();
-		meterSn=WApplication.sp.get("current_sn", "");
-		meterPw=WApplication.sp.get("current_pw", "");
-		titleView.setText(ResTools.getResString(SettingActivity.this, R.string.meter_setting)+":\n"+meterSn);
+		meterSn = WApplication.sp.get("current_sn", "");
+		meterPw = WApplication.sp.get("current_pw", "");
+		titleView.setText(ResTools.getResString(SettingActivity.this, R.string.meter_setting) + ":\n" + meterSn);
 	}
 
 	private void updateBtState() {
@@ -202,8 +240,8 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			btView.setBackground(drawableDisconnect);
 		}
 	}
-	
-	Handler mHandler=new Handler(){
+
+	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 
 			String rString = (String) msg.obj;
@@ -212,11 +250,11 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 				updateBtState();
 				break;
 			case 0xfe:
-				//if (rString.startsWith("2f")) {
-					curComCmd = 0xfd;
-					String s = "063033310d0a";
-					IECCommand.sppSend(s);
-				//}
+				// if (rString.startsWith("2f")) {
+				curComCmd = 0xfd;
+				String s = "063033310d0a";
+				IECCommand.sppSend(s);
+				// }
 				break;
 			case 0xfd:
 				if (rString.startsWith("0150300228")) {
@@ -240,7 +278,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			case 0xff0002:
 				updateUI(rString, selectedItem.get(curItemId));
 				curItemId++;
-				if (curItemId > selectedItem.size()-1) {
+				if (curItemId > selectedItem.size() - 1) {
 					LogUtil.logMessage("wzb", "read completed");
 					CustomDialog.dismissDialog();
 					closeCon();
@@ -256,19 +294,19 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			}
 		};
 	};
-	
-	private void closeCon(){
-		String string="01423003";
+
+	private void closeCon() {
+		String string = "01423003";
 		String xor = Common.xorHex(string.substring(2));
-		IECCommand.sppSend(string+xor);
+		IECCommand.sppSend(string + xor);
 	}
 
 	private void updateUI(String s, int id) {
 		String info = s.substring(s.indexOf("28") + 2, s.indexOf("29"));
-		LogUtil.logMessage("wzb", "####: info:"+info);
-		String ainfo=Common.asciiToString(info);
-		LogUtil.logMessage("wzb", "***: ainfo:"+ainfo);
-		settingAdapter.updateDataItem(id,ainfo , "Y");
+		LogUtil.logMessage("wzb", "####: info:" + info);
+		String ainfo = Common.asciiToString(info);
+		LogUtil.logMessage("wzb", "***: ainfo:" + ainfo);
+		settingAdapter.updateDataItem(id, ainfo, "Y");
 		settingAdapter.notifyDataSetChanged();
 	}
 
@@ -322,7 +360,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 		});
 
 	}
-	
+
 	private void exportData() {
 		CustomDialog.showWaitDialog(mContext);
 		String path = "";
@@ -358,7 +396,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			}
 			outputStream.close();
 			CustomDialog.dismissDialog();
-			ToastUtil.showLongToast(mContext, "file saved in "+savePath);
+			ToastUtil.showLongToast(mContext, "file saved in " + savePath);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -390,18 +428,19 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			break;
 		}
 	}
+
 	private void initCom() {
 		curComCmd = 0xfe;
 		String sendData = "2f3f" + Common.stringToAscii(meterSn) + "210d0a";
 		LogUtil.logMessage("wzb", "senddata=" + sendData);
 		IECCommand.sppSend(sendData);
 	}
-	
-	private void calSelectedItem(){
+
+	private void calSelectedItem() {
 		selectedItem.clear();
-		for(int i=0;i<settingAdapter.getCount();i++){
-			if(settingAdapter.getDataItem(i).getItemSelect()){
-				if(i!=0){
+		for (int i = 0; i < settingAdapter.getCount(); i++) {
+			if (settingAdapter.getDataItem(i).getItemSelect()) {
+				if (i != 0) {
 					selectedItem.add(i);
 				}
 			}
@@ -409,9 +448,9 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 	}
 
 	private void test_read() {
-		//get selectedItem
+		// get selectedItem
 		calSelectedItem();
-		LogUtil.logMessage("wzb", "selecteditem:"+selectedItem);
+		LogUtil.logMessage("wzb", "selecteditem:" + selectedItem);
 		if (!WApplication.bt.isConnected()) {
 			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
 		} else {
@@ -419,9 +458,9 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			if (selectedItem == null || selectedItem.size() == 0) {
 				ToastUtil.showShortToast(mContext, "请选择需要读取的数据项");
 			} else {
-				//CustomDialog.showWaitDialog(mContext, "读取中...");
+				// CustomDialog.showWaitDialog(mContext, "读取中...");
 				CustomDialog.showWaitAndCancelDialog(mContext, "读取中...", new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
@@ -430,10 +469,11 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 					}
 				});
 				initCom();
-				//mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+				// mHandler.sendEmptyMessageDelayed(0xffff, 5000);
 			}
 		}
 	}
+
 	class SettingAdapter extends BaseAdapter {
 
 		List<DataItemBean> dataItems;
@@ -467,7 +507,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(R.layout.data_list_item, null);
 			}
-			ImageView itemList=(ImageView)convertView.findViewById(R.id.item_list);
+			ImageView itemList = (ImageView) convertView.findViewById(R.id.item_list);
 			itemList.setVisibility(View.GONE);
 			TextView tvName = (TextView) convertView.findViewById(R.id.data_item_name);
 			TextView tvValue = (TextView) convertView.findViewById(R.id.data_item_value);
@@ -494,6 +534,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			dataItems.get(id).setItemValue(value);
 			dataItems.get(id).setItemState(state);
 		}
+
 		public void selectAll() {
 			for (int i = 0; i < dataItems.size(); i++) {
 				dataItems.get(i).setItemSelect(true);

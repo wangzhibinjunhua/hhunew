@@ -14,7 +14,9 @@ import com.wzb.hhu.util.ToastUtil;
 import com.wzb.spp.BluetoothState;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -130,6 +132,7 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_exit:
+			//test();
 			exit();
 			break;
 		case R.id.btn_login:
@@ -183,6 +186,29 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		} else {
 			return super.onKeyDown(keyCode, event);
 		}
+	}
+	
+	void test(){
+		final EditText et = new EditText(this);  
+        
+		new AlertDialog.Builder(this).setTitle("搜索")  
+		.setIcon(android.R.drawable.ic_dialog_info)  
+		.setView(et)  
+		.setPositiveButton("确定", new DialogInterface.OnClickListener() {  
+		    public void onClick(DialogInterface dialog, int which) {  
+		    String input = et.getText().toString();  
+		    if (input.equals("")) {  
+		        Toast.makeText(getApplicationContext(), "搜索内容不能为空！" + input, Toast.LENGTH_LONG).show();  
+		    }  
+		    else {  
+
+		    }  
+		    }
+		}
+		    
+		)
+		.setNegativeButton("取消", null)  
+		.show();  
 	}
 	
 

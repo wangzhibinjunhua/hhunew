@@ -474,6 +474,15 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 			}
 		}
 	}
+	
+	private void test_write(){
+		if(!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")
+				|| !WApplication.sp.get("current_level", "ReadUser").equals("ProgramUser")){
+			ToastUtil.showShortToast(mContext, "没有权限");
+			return;
+		}
+		
+	}
 
 	class SettingAdapter extends BaseAdapter {
 

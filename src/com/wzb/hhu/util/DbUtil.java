@@ -11,6 +11,15 @@ import android.database.Cursor;
 
 public class DbUtil {
 
+	public static String getUserLevel(String account){
+		Cursor cursor = WApplication.db.rawQuery("select * from user where account=?", new String[] { account });
+		if (cursor.moveToNext()) {
+			return cursor.getString(4);
+		}
+		cursor.close();
+		return null;
+	}
+
 	public static void addUser(String account, String password, String name, String permission) {
 		ContentValues values = new ContentValues();
 		values.put("account", account);

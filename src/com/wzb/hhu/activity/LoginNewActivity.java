@@ -149,6 +149,12 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 	}
 	private void saveAccount(String account){
 		WApplication.sp_user.set(account, "1");
+		String level=DbUtil.getUserLevel(account);
+		if(level==null){
+			WApplication.sp.set("current_level", "ReadUser");
+		}else{
+			WApplication.sp.set("current_level", level);
+		}
 	}
 
 	private void login() {

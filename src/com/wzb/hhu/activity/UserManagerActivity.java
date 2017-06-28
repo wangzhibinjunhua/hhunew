@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.wzb.hhu.R;
 import com.wzb.hhu.bean.UserBean;
+import com.wzb.hhu.interf.WApplication;
 import com.wzb.hhu.util.CustomDialog;
 import com.wzb.hhu.util.DbUtil;
 import com.wzb.hhu.util.LogUtil;
@@ -177,6 +178,10 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 	}
 
 	private void editUser() {
+		if(!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")){
+			ToastUtil.showShortToast(mContext, "没有权限");
+			return;
+		}
 		if (curPosition < 1) {
 			ToastUtil.showLongToast(mContext, "你还没有选中内容");
 		} else {
@@ -190,6 +195,10 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 	}
 
 	private void delUser() {
+		if(!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")){
+			ToastUtil.showShortToast(mContext, "没有权限");
+			return;
+		}
 		if (curPosition < 1) {
 			ToastUtil.showLongToast(mContext, "你还没有选中内容");
 		} else {
@@ -199,6 +208,10 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 	}
 
 	private void addUser() {
+		if(!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")){
+			ToastUtil.showShortToast(mContext, "没有权限");
+			return;
+		}
 		Intent intent = new Intent();
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.setClass(UserManagerActivity.this, UserAddActivity.class);

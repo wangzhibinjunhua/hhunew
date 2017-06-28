@@ -1,5 +1,10 @@
 package com.wzb.hhu.activity;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +30,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +77,8 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	private static int curComCmd = 0xff;
 	private static int curItemId = 0;
 	List<DataItemBean> mdataItems;
-	Drawable drawableUp,drawableDown;
+	Drawable drawableUp, drawableDown;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -78,8 +86,8 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_readdata);
 		mContext = ReadDataActivity.this;
-		//meterSn = getIntent().getStringExtra("meter_sn");
-		//meterPw = getIntent().getStringExtra("meter_pw");
+		// meterSn = getIntent().getStringExtra("meter_sn");
+		// meterPw = getIntent().getStringExtra("meter_pw");
 		drawableUp = mContext.getResources().getDrawable(R.drawable.up_icon);
 		drawableDown = mContext.getResources().getDrawable(R.drawable.down_icon);
 		initTitleView();
@@ -110,38 +118,38 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				ElecAdapter.getDataItem(arg2).cbToggle();
-//				if (ElecAdapter.getDataItem(arg2).getItemSelect()) {
-//					selectedItem.add(arg2);
-//				} else {
-//					selectedItem.remove(arg2);
-//				}
-				if(arg2==0){
+				// if (ElecAdapter.getDataItem(arg2).getItemSelect()) {
+				// selectedItem.add(arg2);
+				// } else {
+				// selectedItem.remove(arg2);
+				// }
+				if (arg2 == 0) {
 					ElecAdapter.setAllItemsSelect(ElecAdapter.getDataItem(arg2).getItemSelect());
 				}
-				if(arg2==1){
+				if (arg2 == 1) {
 					ElecAdapter.setEnergyItemsSelect(ElecAdapter.getDataItem(arg2).getItemSelect());
 				}
-				
-				if(arg2==14){
+
+				if (arg2 == 14) {
 					ElecAdapter.setRateItemsSelect(ElecAdapter.getDataItem(arg2).getItemSelect());
 				}
-				
-				if(arg2==23){
+
+				if (arg2 == 23) {
 					ElecAdapter.setDemandItemsSelect(ElecAdapter.getDataItem(arg2).getItemSelect());
 				}
-				
-				if(arg2==27){
+
+				if (arg2 == 27) {
 					ElecAdapter.setVoltageItemsSelect(ElecAdapter.getDataItem(arg2).getItemSelect());
 				}
-				
-				if(arg2==31){
+
+				if (arg2 == 31) {
 					ElecAdapter.setCurrentItemsSelect(ElecAdapter.getDataItem(arg2).getItemSelect());
 				}
-				
-				if(arg2==36){
+
+				if (arg2 == 36) {
 					ElecAdapter.setPowerItemsSelect(ElecAdapter.getDataItem(arg2).getItemSelect());
 				}
-				
+
 				LogUtil.logMessage("wzb", "cb:" + arg2 + " " + ElecAdapter.getDataItem(arg2).getItemSelect());
 				ElecAdapter.notifyDataSetChanged();
 			}
@@ -174,13 +182,12 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		ElecAdapter = new DataAdapter(mdataItems);
 
 	}
-	
-
 
 	private void initTitleView() {
 		backView = (ImageView) findViewById(R.id.title_back);
 		titleView = (TextView) findViewById(R.id.title_text);
-		//titleView.setText(ResTools.getResString(ReadDataActivity.this, R.string.read_data)+":"+meterSn);
+		// titleView.setText(ResTools.getResString(ReadDataActivity.this,
+		// R.string.read_data)+":"+meterSn);
 		backView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -201,10 +208,10 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				startActivity(intent);
 			}
 		});
-		
-		titleMeterList=(ImageView)findViewById(R.id.title_meterlist);
+
+		titleMeterList = (ImageView) findViewById(R.id.title_meterlist);
 		titleMeterList.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -223,9 +230,9 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		super.onResume();
 		setBtListener();
 		updateBtState();
-		meterSn=WApplication.sp.get("current_sn", "");
-		meterPw=WApplication.sp.get("current_pw", "");
-		titleView.setText(ResTools.getResString(mContext, R.string.read_data)+":\n"+meterSn);
+		meterSn = WApplication.sp.get("current_sn", "");
+		meterPw = WApplication.sp.get("current_pw", "");
+		titleView.setText(ResTools.getResString(mContext, R.string.read_data) + ":\n" + meterSn);
 	}
 
 	private void updateBtState() {
@@ -248,11 +255,11 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				updateBtState();
 				break;
 			case 0xfe:
-				//if (rString.startsWith("2f")) {
-					curComCmd = 0xfd;
-					String s = "063033310d0a";
-					IECCommand.sppSend(s);
-				//}
+				// if (rString.startsWith("2f")) {
+				curComCmd = 0xfd;
+				String s = "063033310d0a";
+				IECCommand.sppSend(s);
+				// }
 				break;
 			case 0xfd:
 				if (rString.startsWith("0150300228")) {
@@ -276,7 +283,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			case 0xff0002:
 				updateUI(rString, selectedItem.get(curItemId));
 				curItemId++;
-				if (curItemId > selectedItem.size()-1) {
+				if (curItemId > selectedItem.size() - 1) {
 					LogUtil.logMessage("wzb", "read completed");
 					CustomDialog.dismissDialog();
 					closeCon();
@@ -292,37 +299,36 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			}
 		};
 	};
-	
-	
-	
-	private void closeCon(){
-		String string="01423003";
+
+	private void closeCon() {
+		String string = "01423003";
 		String xor = Common.xorHex(string.substring(2));
-		IECCommand.sppSend(string+xor);
+		IECCommand.sppSend(string + xor);
 	}
 
 	private void updateUI(String s, int id) {
 		String info = s.substring(s.indexOf("28") + 2, s.indexOf("29"));
-		LogUtil.logMessage("wzb", "####: info:"+info);
-		String ainfo=Common.asciiToString(info);
-		LogUtil.logMessage("wzb", "***: ainfo:"+ainfo);
-		ElecAdapter.updateDataItem(id,ainfo , "Y");
+		LogUtil.logMessage("wzb", "####: info:" + info);
+		String ainfo = Common.asciiToString(info);
+		LogUtil.logMessage("wzb", "***: ainfo:" + ainfo);
+		ElecAdapter.updateDataItem(id, ainfo, "Y");
 		ElecAdapter.notifyDataSetChanged();
 	}
 
 	private void sendDataItemCmd() {
 		int curComItem = selectedItem.get(curItemId);
 		String cmd = ResTools.getResStringArray(mContext, R.array.elec_cmd)[curComItem];
-		if(curComItem==3 || curComItem==5 ||curComItem==7 ||curComItem==9||curComItem==11||curComItem==13){
-			cmd=cmd+IECCommand.MONTH_DEFAULT_NUM;
+		if (curComItem == 3 || curComItem == 5 || curComItem == 7 || curComItem == 9 || curComItem == 11
+				|| curComItem == 13) {
+			cmd = cmd + IECCommand.MONTH_DEFAULT_NUM;
 		}
-		
-		if(curComItem==15 ||curComItem==17 ||curComItem==19 ||curComItem==21){
-			cmd=cmd+IECCommand.RATE_DEFAULT_NUM;
+
+		if (curComItem == 15 || curComItem == 17 || curComItem == 19 || curComItem == 21) {
+			cmd = cmd + IECCommand.RATE_DEFAULT_NUM;
 		}
-		
-		if(curComItem==16 ||curComItem==18 ||curComItem==20 ||curComItem==22){
-			cmd=cmd+IECCommand.RATE_DEFAULT_NUM+"*"+IECCommand.MONTH_DEFAULT_NUM;
+
+		if (curComItem == 16 || curComItem == 18 || curComItem == 20 || curComItem == 22) {
+			cmd = cmd + IECCommand.RATE_DEFAULT_NUM + "*" + IECCommand.MONTH_DEFAULT_NUM;
 		}
 		String sendData = "01523102" + Common.stringToAscii(cmd) + "282903";
 		String sendDataXor = Common.xorHex(sendData.substring(2));
@@ -372,6 +378,52 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 
 	}
 
+	private void exportData() {
+		CustomDialog.showWaitDialog(mContext);
+		String path = "";
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			try {
+				path = Environment.getExternalStorageDirectory().getCanonicalPath().toString() + "/HHU";
+				File files = new File(path);
+				if (!files.exists()) {
+					files.mkdir();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			ToastUtil.showShortToast(mContext, "设备存储不可用");
+			return;
+		}
+		String tempDate = new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis());
+		String savePath = path + "/" + tempDate + ".txt";
+		FileOutputStream outputStream = null;
+		try {
+			outputStream = new FileOutputStream(savePath, true);
+			for (int i = 0; i < ElecAdapter.getCount(); i++) {
+				DataItemBean item = ElecAdapter.getDataItem(i);
+				if (!TextUtils.isEmpty(item.getItemValue())) {
+
+					outputStream.write(item.getItemName().getBytes());
+					outputStream.write(" ".getBytes());
+					outputStream.write(item.getItemValue().getBytes());
+					outputStream.write("\r\n".getBytes());
+
+				}
+			}
+			outputStream.close();
+			CustomDialog.dismissDialog();
+			ToastUtil.showLongToast(mContext, "file saved in "+savePath);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -385,6 +437,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			finish();
 			break;
 		case R.id.data_export_btn:
+			exportData();
 			break;
 		case R.id.data_stop_btn:
 			CustomDialog.dismissDialog();
@@ -400,18 +453,18 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		LogUtil.logMessage("wzb", "senddata=" + sendData);
 		IECCommand.sppSend(sendData);
 	}
-	
-	private void calSelectedItem(){
+
+	private void calSelectedItem() {
 		selectedItem.clear();
-		for(int i=0;i<ElecAdapter.getCount();i++){
-			if(ElecAdapter.getDataItem(i).getItemSelect()){
-				if(i!=0 || i!=1 || i!=23 || i!=27 || i!=31 || i!=36){
+		for (int i = 0; i < ElecAdapter.getCount(); i++) {
+			if (ElecAdapter.getDataItem(i).getItemSelect()) {
+				if (i != 0 || i != 1 || i != 23 || i != 27 || i != 31 || i != 36) {
 					selectedItem.add(i);
 				}
 			}
 		}
 	}
-	
+
 	OnClickListener waitcancleListener = new OnClickListener() {
 
 		@Override
@@ -422,11 +475,10 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		}
 	};
 
-
 	private void test_read() {
-		//get selectedItem
+		// get selectedItem
 		calSelectedItem();
-		LogUtil.logMessage("wzb", "selecteditem:"+selectedItem);
+		LogUtil.logMessage("wzb", "selecteditem:" + selectedItem);
 		if (!WApplication.bt.isConnected()) {
 			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
 		} else {
@@ -434,10 +486,10 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			if (selectedItem == null || selectedItem.size() == 0) {
 				ToastUtil.showShortToast(mContext, "请选择需要读取的数据项");
 			} else {
-				//CustomDialog.showWaitDialog(mContext, "读取中...");
+				// CustomDialog.showWaitDialog(mContext, "读取中...");
 				CustomDialog.showWaitAndCancelDialog(mContext, "读取中...", waitcancleListener);
 				initCom();
-				//mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+				// mHandler.sendEmptyMessageDelayed(0xffff, 5000);
 			}
 		}
 	}
@@ -475,10 +527,9 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(R.layout.data_list_item, null);
 			}
-			ImageView itemList=(ImageView)convertView.findViewById(R.id.item_list);
+			ImageView itemList = (ImageView) convertView.findViewById(R.id.item_list);
 			itemList.setClickable(true);
-			
-			
+
 			TextView tvName = (TextView) convertView.findViewById(R.id.data_item_name);
 			TextView tvValue = (TextView) convertView.findViewById(R.id.data_item_value);
 			TextView tvState = (TextView) convertView.findViewById(R.id.data_item_state);
@@ -491,16 +542,13 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };// RGB颜色
 
 			convertView.setBackgroundColor(colors[position % 2]);// 每隔item之间颜色不同
-			
-			
-			
-			
-			//test
-			//if(tvName.getText().equals("Item Name")){
-			if(position==0){
+
+			// test
+			// if(tvName.getText().equals("Item Name")){
+			if (position == 0) {
 				itemList.setVisibility(View.VISIBLE);
 				itemList.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
@@ -517,12 +565,12 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 					}
 				});
 			}
-			
-			//if(tvName.getText().equals("Energy")){
-			if(position==1){
+
+			// if(tvName.getText().equals("Energy")){
+			if (position == 1) {
 				itemList.setVisibility(View.VISIBLE);
 				itemList.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
@@ -533,10 +581,10 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 					}
 				});
 			}
-			
-			if(position==14){
+
+			if (position == 14) {
 				itemList.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
@@ -547,10 +595,10 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 					}
 				});
 			}
-			
-			if(position==23){
+
+			if (position == 23) {
 				itemList.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
@@ -561,10 +609,10 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 					}
 				});
 			}
-			
-			if(position==27){
+
+			if (position == 27) {
 				itemList.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
@@ -575,10 +623,10 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 					}
 				});
 			}
-			
-			if(position==31){
+
+			if (position == 31) {
 				itemList.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
@@ -589,10 +637,10 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 					}
 				});
 			}
-			
-			if(position==36){
+
+			if (position == 36) {
 				itemList.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
@@ -603,35 +651,30 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 					}
 				});
 			}
-			
-			if(dataItems.get(position).getisUp()){
+
+			if (dataItems.get(position).getisUp()) {
 				itemList.setBackground(drawableDown);
-			}else{
+			} else {
 				itemList.setBackground(drawableUp);
 			}
-			
-			if(dataItems.get(position).getisHide()){
+
+			if (dataItems.get(position).getisHide()) {
 				tvName.setVisibility(View.GONE);
 				tvValue.setVisibility(View.GONE);
 				tvState.setVisibility(View.GONE);
 				cb.setVisibility(View.GONE);
 				itemList.setVisibility(View.GONE);
-			}else{
+			} else {
 				tvName.setVisibility(View.VISIBLE);
 				tvValue.setVisibility(View.VISIBLE);
 				tvState.setVisibility(View.VISIBLE);
 				cb.setVisibility(View.VISIBLE);
 				itemList.setVisibility(View.INVISIBLE);
-				if(position == 0 || position == 1 || position ==14
-						|| position == 23 || position==27 || position==31
-						|| position == 36){
+				if (position == 0 || position == 1 || position == 14 || position == 23 || position == 27
+						|| position == 31 || position == 36) {
 					itemList.setVisibility(View.VISIBLE);
 				}
 			}
-
-
-
-
 
 			return convertView;
 		}
@@ -645,87 +688,87 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			dataItems.get(id).setItemValue(value);
 			dataItems.get(id).setItemState(state);
 		}
-		
-		public void setAllItemsSelect(Boolean select){
-			for(int i=0;i<dataItems.size();i++){
+
+		public void setAllItemsSelect(Boolean select) {
+			for (int i = 0; i < dataItems.size(); i++) {
 				dataItems.get(i).setItemSelect(select);
 			}
 		}
-		
-		public void setEnergyItemsSelect(Boolean select){
-			for(int i=1;i<14;i++){
+
+		public void setEnergyItemsSelect(Boolean select) {
+			for (int i = 1; i < 14; i++) {
 				dataItems.get(i).setItemSelect(select);
 			}
 		}
-		
-		public void setRateItemsSelect(Boolean select){
-			for(int i=14;i<23;i++){
+
+		public void setRateItemsSelect(Boolean select) {
+			for (int i = 14; i < 23; i++) {
 				dataItems.get(i).setItemSelect(select);
 			}
 		}
-		
-		public void setDemandItemsSelect(Boolean select){
-			for(int i=23;i<27;i++){
+
+		public void setDemandItemsSelect(Boolean select) {
+			for (int i = 23; i < 27; i++) {
 				dataItems.get(i).setItemSelect(select);
 			}
 		}
-		
-		public void setVoltageItemsSelect(Boolean select){
-			for(int i=27;i<31;i++){
+
+		public void setVoltageItemsSelect(Boolean select) {
+			for (int i = 27; i < 31; i++) {
 				dataItems.get(i).setItemSelect(select);
 			}
 		}
-		
-		public void setCurrentItemsSelect(Boolean select){
-			for(int i=31;i<36;i++){
+
+		public void setCurrentItemsSelect(Boolean select) {
+			for (int i = 31; i < 36; i++) {
 				dataItems.get(i).setItemSelect(select);
 			}
 		}
-		
-		public void setPowerItemsSelect(Boolean select){
-			for(int i=36;i<53;i++){
+
+		public void setPowerItemsSelect(Boolean select) {
+			for (int i = 36; i < 53; i++) {
 				dataItems.get(i).setItemSelect(select);
 			}
 		}
-		
-		public void setAllItemsHide(Boolean select){
-			for(int i=1;i<dataItems.size();i++){
+
+		public void setAllItemsHide(Boolean select) {
+			for (int i = 1; i < dataItems.size(); i++) {
 				dataItems.get(i).setisHide(select);
 			}
 		}
-		
-		public void setEnergyItemsHide(Boolean select){
-			for(int i=2;i<14;i++){
+
+		public void setEnergyItemsHide(Boolean select) {
+			for (int i = 2; i < 14; i++) {
 				dataItems.get(i).setisHide(select);
 			}
 		}
-		
-		public void setRateItemsHide(Boolean select){
-			for(int i=15;i<23;i++){
+
+		public void setRateItemsHide(Boolean select) {
+			for (int i = 15; i < 23; i++) {
 				dataItems.get(i).setisHide(select);
 			}
 		}
-		
-		public void setDemandItemsHide(Boolean select){
-			for(int i=24;i<27;i++){
+
+		public void setDemandItemsHide(Boolean select) {
+			for (int i = 24; i < 27; i++) {
 				dataItems.get(i).setisHide(select);
 			}
 		}
-		
-		public void setVoltageItemsHide(Boolean select){
-			for(int i=28;i<31;i++){
+
+		public void setVoltageItemsHide(Boolean select) {
+			for (int i = 28; i < 31; i++) {
 				dataItems.get(i).setisHide(select);
 			}
 		}
-		
-		public void setCurrentItemsHide(Boolean select){
-			for(int i=32;i<36;i++){
+
+		public void setCurrentItemsHide(Boolean select) {
+			for (int i = 32; i < 36; i++) {
 				dataItems.get(i).setisHide(select);
 			}
 		}
-		
-		public void setPowerItemsHide(Boolean select){
-			for(int i=37;i<53;i++){
+
+		public void setPowerItemsHide(Boolean select) {
+			for (int i = 37; i < 53; i++) {
 				dataItems.get(i).setisHide(select);
 			}
 		}

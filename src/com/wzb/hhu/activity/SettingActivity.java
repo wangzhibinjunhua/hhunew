@@ -1,5 +1,10 @@
 package com.wzb.hhu.activity;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,8 +27,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -315,6 +322,52 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 		});
 
 	}
+	
+	private void exportData() {
+		CustomDialog.showWaitDialog(mContext);
+		String path = "";
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			try {
+				path = Environment.getExternalStorageDirectory().getCanonicalPath().toString() + "/HHU";
+				File files = new File(path);
+				if (!files.exists()) {
+					files.mkdir();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			ToastUtil.showShortToast(mContext, "设备存储不可用");
+			return;
+		}
+		String tempDate = new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis());
+		String savePath = path + "/" + tempDate + ".txt";
+		FileOutputStream outputStream = null;
+		try {
+			outputStream = new FileOutputStream(savePath, true);
+			for (int i = 0; i < settingAdapter.getCount(); i++) {
+				DataItemBean item = settingAdapter.getDataItem(i);
+				if (!TextUtils.isEmpty(item.getItemValue())) {
+
+					outputStream.write(item.getItemName().getBytes());
+					outputStream.write(" ".getBytes());
+					outputStream.write(item.getItemValue().getBytes());
+					outputStream.write("\r\n".getBytes());
+
+				}
+			}
+			outputStream.close();
+			CustomDialog.dismissDialog();
+			ToastUtil.showLongToast(mContext, "file saved in "+savePath);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -329,6 +382,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener , 
 			finish();
 			break;
 		case R.id.set_export_btn:
+			exportData();
 			break;
 		case R.id.set_write_btn:
 			break;

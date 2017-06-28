@@ -137,6 +137,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 		final EditText et = new EditText(this);
 		et.setMaxLines(1);
 		et.setSingleLine(true);
+		et.setText(settingAdapter.getDataItem(id).getItemValue());
 		new AlertDialog.Builder(this).setTitle(settingAdapter.getDataItem(id).getItemName())
 				.setIcon(android.R.drawable.ic_dialog_info).setView(et)
 				.setPositiveButton("ok", new DialogInterface.OnClickListener() {

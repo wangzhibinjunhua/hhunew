@@ -146,13 +146,13 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 					break;
 
 				case 1:// delete
-					CustomDialog.showOkAndCalcelDialog(mContext, "Delete Meter", "确定要删除吗？\n"+"sn:"+adapter.getAmmeterBean(MID).getSn(), new OnClickListener() {
+					CustomDialog.showOkAndCalcelDialog(mContext, mContext.getResources().getString(R.string.delete), mContext.getResources().getString(R.string.sure_delete)+"\n"+"sn:"+adapter.getAmmeterBean(MID).getSn(), new OnClickListener() {
 						
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
 							CustomDialog.dismissDialog();
-							CustomDialog.showWaitDialog(mContext, "删除中...");
+							CustomDialog.showWaitDialog(mContext);
 							new Handler().postDelayed(new Runnable() {
 								public void run() {
 									curPosition = -1;
@@ -216,7 +216,7 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 	}
 	
 	private void startReadData(String sn) {
-		CustomDialog.showOkAndCalcelDialog(mContext, "读取数据", "你确定要操作这个电表吗?" + "\n SN:" + sn, okListener,
+		CustomDialog.showOkAndCalcelDialog(mContext, mContext.getResources().getString(R.string.read_data), mContext.getResources().getString(R.string.sure_select_meter) + "\n SN:" + sn, okListener,
 				cancleListener);
 	}
 
@@ -256,7 +256,7 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 	
 	private void initAdapter() {
 		
-		CustomDialog.showWaitDialog(mContext, "搜索中...");
+		CustomDialog.showWaitDialog(mContext, mContext.getResources().getString(R.string.search));
 		ammeters=DbUtil.searchSomeMeter(searchSn);
 		if(ammeters.size()==0){
 			ToastUtil.showShortToast(mContext, "无查询结果");

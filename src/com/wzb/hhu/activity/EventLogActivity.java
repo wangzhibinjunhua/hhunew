@@ -342,7 +342,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 				e.printStackTrace();
 			}
 		} else {
-			ToastUtil.showShortToast(mContext, "设备存储不可用");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.storage_unavailable));
 			return;
 		}
 		String tempDate = new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis());
@@ -363,7 +363,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 			}
 			outputStream.close();
 			CustomDialog.dismissDialog();
-			ToastUtil.showLongToast(mContext, "file saved in "+savePath);
+			ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.file_saved_in)+savePath);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -419,14 +419,14 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 		calSelectedItem();
 		LogUtil.logMessage("wzb", "selecteditem:" + selectedItem);
 		if (!WApplication.bt.isConnected()) {
-			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.bt_disconnect_show));
 		} else {
 
 			if (selectedItem == null || selectedItem.size() == 0) {
-				ToastUtil.showShortToast(mContext, "请选择需要读取的数据项");
+				ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.select_item));
 			} else {
 				// CustomDialog.showWaitDialog(mContext, "读取中...");
-				CustomDialog.showWaitAndCancelDialog(mContext, "读取中...", new OnClickListener() {
+				CustomDialog.showWaitAndCancelDialog(mContext, mContext.getResources().getString(R.string.reading), new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {

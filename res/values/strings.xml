@@ -2,6 +2,14 @@
 
     <string name="app_name">Meter management software</string>
     <string name="load_more">load more ...</string>
+       <string name="info_not_completed">Information are not completed</string>
+     <string name="file_saved_in">File saved in</string>
+       <string name="meter_sn_exists">Meter SN already exists</string>
+     <string name="reading">Readout...</string>
+     <string name="select_item">Please select item</string>
+     <string name="bt_disconnect_show">Bluetooth is disconnect,please connect</string>
+    <string name="storage_unavailable">Storage may be unavailable</string>
+    <string name="no_more_data">No more data</string>
     <string name="wating">Please wating</string>
     <string name="add">Add:</string>
     <string name="exit_dialog">Press again to exit</string>
@@ -142,5 +150,5 @@
     <string name="search_value_can_not_be_empty">Search value can not be empty!</string>
 <string name="search">Search...</string>
 <string name="sure_delete">Are you sure delete?</string>
-<string name="delete">Delete...</string>
+<string name="sure_select_meter">Are you sure select this meter?</string>
 </resources>

@@ -140,7 +140,7 @@ public class MeterEditActivity extends BaseActivity implements OnClickListener{
 		if(!TextUtils.isEmpty(password) && !TextUtils.isEmpty(model)){
 			
 			
-				CustomDialog.showWaitDialog(mContext, "更新中");
+				CustomDialog.showWaitDialog(mContext);
 				new Handler().postDelayed(new Runnable() {
 
 					@Override
@@ -155,7 +155,7 @@ public class MeterEditActivity extends BaseActivity implements OnClickListener{
 			
 		}else{
 			
-			ToastUtil.showShortToast(mContext, "资料填写不完整");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.info_not_completed));
 		}
 		
 	}

@@ -282,7 +282,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 	}
 
 	private void startReadData(String sn) {
-		CustomDialog.showOkAndCalcelDialog(mContext, "读取数据", "你确定要操作这个电表吗?" + "\n SN:" + sn, okListener,
+		CustomDialog.showOkAndCalcelDialog(mContext, mContext.getResources().getString(R.string.read_data), mContext.getResources().getString(R.string.sure_select_meter) + "\n SN:" + sn, okListener,
 				cancleListener);
 	}
 
@@ -440,7 +440,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			adapter.updateList(meters);
 			adapter.notifyDataSetChanged();
 		} else {
-			ToastUtil.showLongToast(mContext, "没有更多数据了");
+			ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.no_more_data));
 		}
 
 	}

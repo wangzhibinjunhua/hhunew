@@ -114,9 +114,9 @@ public class MeterAddActivity extends BaseActivity implements OnClickListener{
 		
 		if(!TextUtils.isEmpty(sn) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(model)){
 			if(DbUtil.getMeter(sn) !=null){
-				ToastUtil.showShortToast(mContext, "此表号已存在");
+				ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.meter_sn_exists));
 			}else{
-				CustomDialog.showWaitDialog(mContext, "创建中");
+				CustomDialog.showWaitDialog(mContext);
 				new Handler().postDelayed(new Runnable() {
 
 					@Override
@@ -130,7 +130,7 @@ public class MeterAddActivity extends BaseActivity implements OnClickListener{
 			}
 		}else{
 			
-			ToastUtil.showShortToast(mContext, "资料填写不完整");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.info_not_completed));
 		}
 		
 	}

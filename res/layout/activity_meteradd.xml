@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="Serial Number:"
+        android:text="@string/sn"
         android:textSize="20sp" />
 
     <EditText
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="Password:"
+        android:text="@string/password"
         android:textSize="20sp" />
 
     <EditText

@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	private String[] img_text;
 	private int[] img_icon = { R.drawable.form, R.drawable.set, R.drawable.clock, R.drawable.warning,
-			R.drawable.account, R.drawable.logout, R.drawable.set_con };
+			R.drawable.account, R.drawable.logout, R.drawable.sys_setting };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -8,7 +8,7 @@
         <item>@string/event_log</item>
         <item>@string/user_manager</item>
         <item>@string/exit</item>
-        <item>Comm Setting</item>
+        <item>@string/application_setting</item>
     </string-array>
     <string-array name="elec" translatable="false">
         <item>@string/item_name</item>

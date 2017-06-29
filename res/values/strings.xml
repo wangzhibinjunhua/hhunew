@@ -35,6 +35,7 @@
     <string name="event_log">Event Log</string>
     <string name="setting_time">Setting Date\u0026Time</string>
     <string name="user_manager">User management</string>
+    <string name="application_setting">Application Setting</string>
     <string name="user_name">User Name:</string>
     <string name="password">Password:</string>
     <string name="login">Login</string>

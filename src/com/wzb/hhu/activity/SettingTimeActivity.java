@@ -332,14 +332,14 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		calSelectedItem();
 		LogUtil.logMessage("wzb", "selecteditem:"+selectedItem);
 		if (!WApplication.bt.isConnected()) {
-			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.bt_disconnect_show));
 		} else {
 
 			if (selectedItem == null || selectedItem.size() == 0) {
-				ToastUtil.showShortToast(mContext, "请选择需要读取的数据项");
+				ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.select_item));
 			} else {
 				//CustomDialog.showWaitDialog(mContext, "读取中...");
-				CustomDialog.showWaitAndCancelDialog(mContext, "读取中...", waitcancleListener);
+				CustomDialog.showWaitAndCancelDialog(mContext, mContext.getResources().getString(R.string.reading), waitcancleListener);
 				initCom();
 				//mHandler.sendEmptyMessageDelayed(0xffff, 5000);
 			}
@@ -348,8 +348,8 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 	
 	private void test_write() {
 		if(!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")
-				|| !WApplication.sp.get("current_level", "ReadUser").equals("ProgramUser")){
-			ToastUtil.showShortToast(mContext, "没有权限");
+				&& !WApplication.sp.get("current_level", "ReadUser").equals("ProgramUser")){
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.no_permission));
 			return;
 		}
 		isRead=false;
@@ -357,18 +357,18 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		calSelectedItem();
 		LogUtil.logMessage("wzb", "selecteditem:"+selectedItem);
 		if(!sysClockCb.isChecked()){
-			ToastUtil.showShortToast(mContext, "请选择要写入的数据项");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.select_item));
 			return;
 		}
 		if (!WApplication.bt.isConnected()) {
-			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.bt_disconnect_show));
 		} else {
 
 			if (selectedItem == null || selectedItem.size() == 0) {
-				ToastUtil.showShortToast(mContext, "请选择需要写入的数据项");
+				ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.select_item));
 			} else {
 				//CustomDialog.showWaitDialog(mContext, "读取中...");
-				CustomDialog.showWaitAndCancelDialog(mContext, "写入中...", waitcancleListener);
+				CustomDialog.showWaitAndCancelDialog(mContext, mContext.getResources().getString(R.string.writing), waitcancleListener);
 				initCom();
 				//mHandler.sendEmptyMessageDelayed(0xffff, 5000);
 			}

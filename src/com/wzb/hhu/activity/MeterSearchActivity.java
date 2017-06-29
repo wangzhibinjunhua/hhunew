@@ -259,7 +259,7 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 		CustomDialog.showWaitDialog(mContext, mContext.getResources().getString(R.string.search));
 		ammeters=DbUtil.searchSomeMeter(searchSn);
 		if(ammeters.size()==0){
-			ToastUtil.showShortToast(mContext, "无查询结果");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.no_search_result));
 		}
 
 		CustomDialog.dismissDialog();

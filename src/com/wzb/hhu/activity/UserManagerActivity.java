@@ -179,11 +179,11 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 
 	private void editUser() {
 		if(!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")){
-			ToastUtil.showShortToast(mContext, "没有权限");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.no_permission));
 			return;
 		}
 		if (curPosition < 1) {
-			ToastUtil.showLongToast(mContext, "你还没有选中内容");
+			ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.select_item));
 		} else {
 			String account = userAdapter.getUser(curPosition).getAccount();
 			Intent intent = new Intent();
@@ -196,20 +196,20 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 
 	private void delUser() {
 		if(!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")){
-			ToastUtil.showShortToast(mContext, "没有权限");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.no_permission));
 			return;
 		}
 		if (curPosition < 1) {
-			ToastUtil.showLongToast(mContext, "你还没有选中内容");
+			ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.select_item));
 		} else {
-			CustomDialog.showOkAndCalcelDialog(mContext, "删除用户", "你确定要删除这个用户吗?", okListener, cancleListener);
+			CustomDialog.showOkAndCalcelDialog(mContext, mContext.getResources().getString(R.string.delete), mContext.getResources().getString(R.string.sure_delete), okListener, cancleListener);
 		}
 
 	}
 
 	private void addUser() {
 		if(!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")){
-			ToastUtil.showShortToast(mContext, "没有权限");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.no_permission));
 			return;
 		}
 		Intent intent = new Intent();
@@ -224,7 +224,7 @@ public class UserManagerActivity extends BaseActivity implements OnScrollListene
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			CustomDialog.dismissDialog();
-			CustomDialog.showWaitDialog(mContext, "删除中");
+			CustomDialog.showWaitDialog(mContext, mContext.getResources().getString(R.string.delete));
 			new Handler().postDelayed(new Runnable() {
 				public void run() {
 					curPosition = -1;

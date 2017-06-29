@@ -138,9 +138,9 @@ public class UserAddActivity extends BaseActivity implements OnClickListener {
 				&& !TextUtils.isEmpty(permission)) {
 
 			if (DbUtil.getUser(account) != null) {
-				ToastUtil.showShortToast(mContext, "帐号重复");
+				ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.account_exists));
 			} else {
-				CustomDialog.showWaitDialog(mContext, "创建中");
+				CustomDialog.showWaitDialog(mContext, mContext.getResources().getString(R.string.creating));
 				new Handler().postDelayed(new Runnable() {
 
 					@Override
@@ -154,7 +154,7 @@ public class UserAddActivity extends BaseActivity implements OnClickListener {
 			}
 
 		} else {
-			ToastUtil.showShortToast(mContext, "资料填写不完整");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.info_not_completed));
 		}
 
 	}

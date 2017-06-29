@@ -183,7 +183,7 @@ public class UserEditActivity extends BaseActivity implements OnClickListener {
 
 		if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(name)
 				&& !TextUtils.isEmpty(permission)) {
-			CustomDialog.showWaitDialog(mContext, "更新中");
+			CustomDialog.showWaitDialog(mContext, mContext.getResources().getString(R.string.updating));
 			new Handler().postDelayed(new Runnable() {
 
 				@Override
@@ -196,7 +196,7 @@ public class UserEditActivity extends BaseActivity implements OnClickListener {
 			DbUtil.updateUser(account, password, name, permission);
 
 		} else {
-			ToastUtil.showShortToast(mContext, "资料填写不完整");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.info_not_completed));
 		}
 
 	}

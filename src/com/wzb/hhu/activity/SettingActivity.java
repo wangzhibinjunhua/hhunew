@@ -149,7 +149,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 							settingAdapter.getDataItem(id).setItemValue(input);
 							settingAdapter.notifyDataSetChanged();
 						} else {
-							ToastUtil.showShortToast(mContext, "输入数据不能为空");
+							ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.input_can_not_empty));
 						}
 					}
 				}
@@ -393,7 +393,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 				e.printStackTrace();
 			}
 		} else {
-			ToastUtil.showShortToast(mContext, "设备存储不可用");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.storage_unavailable));
 			return;
 		}
 		String tempDate = new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis());
@@ -414,7 +414,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 			}
 			outputStream.close();
 			CustomDialog.dismissDialog();
-			ToastUtil.showLongToast(mContext, "file saved in " + savePath);
+			ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.file_saved_in) + savePath);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -441,6 +441,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 			exportData();
 			break;
 		case R.id.set_write_btn:
+			test_write();
 			break;
 		default:
 			break;
@@ -493,14 +494,14 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 		calSelectedItem();
 		LogUtil.logMessage("wzb", "selecteditem:" + selectedItem);
 		if (!WApplication.bt.isConnected()) {
-			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.bt_disconnect_show));
 		} else {
 
 			if (selectedItem == null || selectedItem.size() == 0) {
-				ToastUtil.showShortToast(mContext, "请选择需要读取的数据项");
+				ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.select_item));
 			} else {
 				// CustomDialog.showWaitDialog(mContext, "读取中...");
-				CustomDialog.showWaitAndCancelDialog(mContext, "读取中...", new OnClickListener() {
+				CustomDialog.showWaitAndCancelDialog(mContext, mContext.getResources().getString(R.string.reading), new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
@@ -518,21 +519,21 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 	private void test_write() {
 
 		if (!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")
-				|| !WApplication.sp.get("current_level", "ReadUser").equals("ProgramUser")) {
-			ToastUtil.showShortToast(mContext, "没有权限");
+				&& !WApplication.sp.get("current_level", "ReadUser").equals("ProgramUser")) {
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.no_permission));
 			return;
 		}
 		isRead = false;
 		calWriteSelectedItem();
 		if (!WApplication.bt.isConnected()) {
-			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.bt_disconnect_show));
 		} else {
 
 			if (selectedItem == null || selectedItem.size() == 0) {
-				ToastUtil.showShortToast(mContext, "请选择需要写入的数据项");
+				ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.select_item));
 			} else {
 				// CustomDialog.showWaitDialog(mContext, "读取中...");
-				CustomDialog.showWaitAndCancelDialog(mContext, "写入中...", waitcancleListener);
+				CustomDialog.showWaitAndCancelDialog(mContext, mContext.getResources().getString(R.string.writing), waitcancleListener);
 				initCom();
 				// mHandler.sendEmptyMessageDelayed(0xffff, 5000);
 			}

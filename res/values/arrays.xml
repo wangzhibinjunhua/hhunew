@@ -2,341 +2,452 @@
 <resources>
 
     <string-array name="img_text" translatable="false">
-        <item>Readout</item>
-        <item>Settings</item>
-        <item>Setting Date\u0026Time </item>
-        <item>Event Log</item>
-        <item>User management</item>
-        <item>Exit</item>
+        <item>@string/read_data</item>
+        <item>@string/settings</item>
+        <item>@string/setting_time</item>
+        <item>@string/event_log</item>
+        <item>@string/user_manager</item>
+        <item>@string/exit</item>
         <item>Comm Setting</item>
     </string-array>
     <string-array name="elec" translatable="false">
-        <item>Item Name</item>
- <!-- 0 -->
+        <item>@string/item_name</item>
+        <!-- 0 -->
 
-        <item>Energy</item>
- <!-- 1 电量 -->
-        <item>Total Active Energy</item>
- <!-- 2 合相总有功电量 -->
-        <item>合相总有功历史电量</item>
- <!-- 3 合相总有功历史电量 -->
-        <item>合相正向有功电量</item>
- <!-- 4 合相正向有功电量 -->
-        <item>合相正向有功历史电量</item>
- <!-- 5 合相正向有功历史电量 -->
-        <item>合相反向有功电量</item>
- <!-- 6 合相反向有功电量 -->
-        <item>合相反向有功历史电量</item>
- <!-- 7 合相反向有功历史电量 -->
-        <item>合相总无功电量</item>
- <!-- 8 合相总无功电量 -->
-        <item>合相总无功历史电量</item>
- <!-- 9 合相总无功历史电量 -->
-        <item>合相总感性无功电量</item>
- <!-- 10 合相总感性无功电量 -->
-        <item>合相总感性无功历史电量</item>
- <!-- 11 合相总感性无功历史电量 -->
-        <item>合相感性无功电量</item>
- <!-- 12 合相感性无功电量 -->
-        <item>合相感性无功历史电量</item>
- <!-- 13 合相感性无功历史电量 -->
+        <item>@string/energy</item>
+        <!-- 1 电量 -->
+        <item>@string/total_active_energy</item>
+        <!-- 2 合相总有功电量 -->
+        <item>@string/total_active_energy_history</item>
+        <!-- 3 合相总有功历史电量 -->
+        <item>@string/positive_active_energy</item>
+        <!-- 4 合相正向有功电量 -->
+        <item>@string/positive_active_energy_history</item>
+        <!-- 5 合相正向有功历史电量 -->
+        <item>@string/reverse_active_energy</item>
+        <!-- 6 合相反向有功电量 -->
+        <item>@string/reverse_active_energy_history</item>
+        <!-- 7 合相反向有功历史电量 -->
+        <item>@string/total_reactive_energy</item>
+        <!-- 8 合相总无功电量 -->
+        <item>@string/total_reactive_energy_history</item>
+        <!-- 9 合相总无功历史电量 -->
+        <item>@string/total_inductive_reactive_power</item>
+        <!-- 10 合相总感性无功电量 -->
+        <item>@string/total_inductive_reactive_power_history</item>
+        <!-- 11 合相总感性无功历史电量 -->
+        <item>@string/inductive_reactive_power</item>
+        <!-- 12 合相感性无功电量 -->
+        <item>@string/inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
 
-        <item>分费率</item>
- <!-- 14 分费率 -->
-        <item>合相总有功电量分费率</item>
- <!-- 15 合相总有功电量分费率 -->
-        <item>合相总有功历史电量分费率</item>
- <!-- 16 合相总有功历史电量分费率 -->
-        <item>合相正向有功电量分费率</item>
- <!-- 17 合相正向有功电量分费率 -->
-        <item>合相正向有功历史电量分费率</item>
- <!-- 18 合相正向有功历史电量分费率 -->
-        <item>合相反向有功电量分费率</item>
- <!-- 19 合相反向有功电量分费率 -->
-        <item>合相反向有功历史电量分费率</item>
- <!-- 20 合相反向有功历史电量分费率 -->
-        <item>合相总无功电量分费率</item>
- <!-- 21 合相总无功电量分费率 -->
-        <item>合相总无功历史电量分费率</item>
- <!-- 22 合相总无功历史电量分费率 -->
+        <item>@string/tariff_rate</item>
+        <!-- 14 分费率 -->
+        <item>@string/total_active_energy_tr</item>
+        <!-- 15 合相总有功电量分费率 -->
+        <item>@string/total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+        <item>@string/positive_active_energy_tr</item>
+        <!-- 17 合相正向有功电量分费率 -->
+        <item>@string/positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+        <item>@string/reverse_active_energy_tr</item>
+        <!-- 19 合相反向有功电量分费率 -->
+        <item>@string/reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+        <item>@string/total_reactive_energy_tr</item>
+        <!-- 21 合相总无功电量分费率 -->
+        <item>@string/total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
 
-        <item>需量</item>
- <!-- 23 需量 -->
-        <item>总有功最大需量</item>
- <!-- 24 总有功最大需量 -->
-        <item>总有功历史最大需量</item>
- <!-- 25 总有功历史最大需量 -->
-        <item>总无功最大需量</item>
- <!-- 26 总无功最大需量 -->
+        <item>@string/demand</item>
+        <!-- 23 需量 -->
+        <item>@string/total_active_max_demand</item>
+        <!-- 24 总有功最大需量 -->
+        <item>@string/total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+        <item>@string/total_reactive_max_demand</item>
+        <!-- 26 总无功最大需量 -->
 
-        <item>Voltage</item>
- <!-- 27 电压 -->
-        <item>Phase A Voltage</item>
- <!-- 28 A相电压 -->
-        <item>Phase B Voltage</item>
- <!-- 29 B相电压 -->
-        <item>Phase C Voltage</item>
- <!-- 30 C相电压 -->
+        <item>@string/voltage</item>
+        <!-- 27 电压 -->
+        <item>@string/phase_a_voltage</item>
+        <!-- 28 A相电压 -->
+        <item>@string/phase_b_voltage</item>
+        <!-- 29 B相电压 -->
+        <item>@string/phase_c_voltage</item>
+        <!-- 30 C相电压 -->
 
-        <item>Current</item>
- <!-- 31  电流 -->
-        <item>Phase A Current</item>
- <!-- 32 A相电流 -->
-        <item>Phase B Current</item>
- <!-- 33 B相电流 -->
-        <item>Phase C Current</item>
- <!-- 34 C相电流 -->
-        <item>Neutral Line Current</item>
- <!-- 35 零线电流 -->
+        <item>@string/current</item>
+        <!-- 31  电流 -->
+        <item>@string/phase_a_current</item>
+        <!-- 32 A相电流 -->
+        <item>@string/phase_b_current</item>
+        <!-- 33 B相电流 -->
+        <item>@string/phase_c_current</item>
+        <!-- 34 C相电流 -->
+        <item>@string/neutral_line_current</item>
+        <!-- 35 零线电流 -->
 
-        <item>Power</item>
- <!-- 36 功率 -->
-        <item>总有功功率</item>
- <!-- 37 总有功功率 -->
-        <item>A相有功功率</item>
- <!-- 38 A相有功功率 -->
-        <item>B相有功功率</item>
- <!-- 39 B相有功功率 -->
-        <item>C相有功功率</item>
- <!-- 40 C相有功功率 -->
-        <item>总无功功率</item> <!-- 41 总无功功率 -->
-        <item>A相无功功率</item><!-- 42 A相无功功率 -->
-        <item>B相无功功率</item><!-- 43 B相无功功率 -->
-        <item>C相无功功率</item><!-- 44 C相无功功率 -->
-        <item>总视在功率</item> <!-- 45 总视在功率 -->
-        <item>A相视在功率</item><!-- 46 A相视在功率 -->
-        <item>B相视在功率</item><!-- 47 B相视在功率 -->
-        <item>C相视在功率</item><!-- 48 C相视在功率 -->
-         <item>总功率因数</item><!-- 49 总功率因数 -->
-        <item>A相功率因数</item> <!-- 50 A相功率因数 -->
-        <item>B相功率因数</item> <!-- 51 B相功率因数 -->
-        <item>C相功率因数</item> <!-- 52 C相功率因数 -->
-        
-        <item>电表当前频率</item> <!-- 53 电表当前频率 -->
-        
-        <item>电表表号</item> <!-- 54 电表表号 -->
-         <item>软件版本号</item> <!-- 55 软件版本号 -->
-        <item>额定电压</item><!-- 56 额定电压 -->
-        <item>额定电流</item><!-- 57 额定电流 -->
-        <item>额定频率</item> <!-- 58 额定频率 -->
-         <item>最大电流</item> <!--59 最大电流 -->
-  
+        <item>@string/power</item>
+        <!-- 36 功率 -->
+        <item>@string/total_active_power</item>
+        <!-- 37 总有功功率 -->
+        <item>@string/phase_a_active_power</item>
+        <!-- 38 A相有功功率 -->
+        <item>@string/phase_b_active_power</item>
+        <!-- 39 B相有功功率 -->
+        <item>@string/phase_c_active_power</item>
+        <!-- 40 C相有功功率 -->
+        <item>@string/total_reactive_power</item>
+        <!-- 41 总无功功率 -->
+        <item>@string/phase_a_reactive_power</item>
+        <!-- 42 A相无功功率 -->
+        <item>@string/phase_b_reactive_power</item>
+        <!-- 43 B相无功功率 -->
+        <item>@string/phase_c_reactive_power</item>
+        <!-- 44 C相无功功率 -->
+        <item>@string/total_apparent_power</item>
+        <!-- 45 总视在功率 -->
+        <item>@string/phase_a_apparent_power</item>
+        <!-- 46 A相视在功率 -->
+        <item>@string/phase_b_apparent_power</item>
+        <!-- 47 B相视在功率 -->
+        <item>@string/phase_c_apparent_power</item>
+        <!-- 48 C相视在功率 -->
+        <item>@string/total_factor_power</item>
+        <!-- 49 总功率因数 -->
+        <item>@string/phase_a_factor_power</item>
+        <!-- 50 A相功率因数 -->
+        <item>@string/phase_b_factor_power</item>
+        <!-- 51 B相功率因数 -->
+        <item>@string/phase_c_factor_power</item>
+        <!-- 52 C相功率因数 -->
+
+        <item>@string/current_frequency</item>
+        <!-- 53 电表当前频率 -->
+
+        <item>@string/meter_sn</item>
+        <!-- 54 电表表号 -->
+        <item>@string/software_version</item>
+        <!-- 55 软件版本号 -->
+        <item>@string/nominal_voltage</item>
+        <!-- 56 额定电压 -->
+        <item>@string/nominal_current</item>
+        <!-- 57 额定电流 -->
+        <item>@string/nominal_frequency</item>
+        <!-- 58 额定频率 -->
+        <item>@string/max_current</item>
+        <!-- 59 最大电流 -->
+
     </string-array>
-    
-       <string-array name="elec_cmd" translatable="false">
+    <string-array name="elec_cmd" translatable="false">
         <item></item>
- <!-- 0 -->
+        <!-- 0 -->
 
         <item></item>
- <!-- 1 电量 -->
+        <!-- 1 电量 -->
         <item>15.8.0</item>
- <!-- 2 合相总有功电量 -->
+        <!-- 2 合相总有功电量 -->
         <item>15.8.0*</item>
- <!-- 3 合相总有功历史电量 -->
+        <!-- 3 合相总有功历史电量 -->
         <item>1.8.0</item>
- <!-- 4 合相正向有功电量 -->
+        <!-- 4 合相正向有功电量 -->
         <item>1.8.0*</item>
- <!-- 5 合相正向有功历史电量 -->
+        <!-- 5 合相正向有功历史电量 -->
         <item>2.8.0</item>
- <!-- 6 合相反向有功电量 -->
+        <!-- 6 合相反向有功电量 -->
         <item>2.8.0*</item>
- <!-- 7 合相反向有功历史电量 -->
+        <!-- 7 合相反向有功历史电量 -->
         <item>96.81.0</item>
- <!-- 8 合相总无功电量 -->
+        <!-- 8 合相总无功电量 -->
         <item>96.81.0*</item>
- <!-- 9 合相总无功历史电量 -->
+        <!-- 9 合相总无功历史电量 -->
         <item>3.8.0</item>
- <!-- 10 合相总感性无功电量 -->
+        <!-- 10 合相总感性无功电量 -->
         <item>3.8.0*</item>
- <!-- 11 合相总感性无功历史电量 -->
+        <!-- 11 合相总感性无功历史电量 -->
         <item>4.8.0</item>
- <!-- 12 合相感性无功电量 -->
+        <!-- 12 合相感性无功电量 -->
         <item>4.8.0*</item>
- <!-- 13 合相感性无功历史电量 -->
+        <!-- 13 合相感性无功历史电量 -->
 
         <item></item>
- <!-- 14 分费率 -->
+        <!-- 14 分费率 -->
         <item>15.8.</item>
- <!-- 15 合相总有功电量分费率 -->
+        <!-- 15 合相总有功电量分费率 -->
         <item>15.8.</item>
- <!-- 16 合相总有功历史电量分费率 -->
+        <!-- 16 合相总有功历史电量分费率 -->
         <item>1.8.</item>
- <!-- 17 合相正向有功电量分费率 -->
+        <!-- 17 合相正向有功电量分费率 -->
         <item>1.8.</item>
- <!-- 18 合相正向有功历史电量分费率 -->
+        <!-- 18 合相正向有功历史电量分费率 -->
         <item>2.8.</item>
- <!-- 19 合相反向有功电量分费率 -->
+        <!-- 19 合相反向有功电量分费率 -->
         <item>2.8.</item>
- <!-- 20 合相反向有功历史电量分费率 -->
+        <!-- 20 合相反向有功历史电量分费率 -->
         <item>96.81.</item>
- <!-- 21 合相总无功电量分费率 -->
+        <!-- 21 合相总无功电量分费率 -->
         <item>96.81.</item>
- <!-- 22 合相总无功历史电量分费率 -->
+        <!-- 22 合相总无功历史电量分费率 -->
 
         <item></item>
- <!-- 23 需量 -->
+        <!-- 23 需量 -->
         <item>1.6.0</item>
- <!-- 24 总有功最大需量 -->
+        <!-- 24 总有功最大需量 -->
         <item>1.6.0*</item>
- <!-- 25 总有功历史最大需量 -->
+        <!-- 25 总有功历史最大需量 -->
         <item>96.61.0</item>
- <!-- 26 总无功最大需量 -->
+        <!-- 26 总无功最大需量 -->
 
         <item></item>
- <!-- 27 电压 -->
+        <!-- 27 电压 -->
         <item>32.7.0</item>
- <!-- 28 A相电压 -->
+        <!-- 28 A相电压 -->
         <item>52.7.0</item>
- <!-- 29 B相电压 -->
+        <!-- 29 B相电压 -->
         <item>72.7.0</item>
- <!-- 30 C相电压 -->
+        <!-- 30 C相电压 -->
 
         <item>Current</item>
- <!-- 31  电流 -->
+        <!-- 31  电流 -->
         <item>31.7.0</item>
- <!-- 32 A相电流 -->
+        <!-- 32 A相电流 -->
         <item>51.7.0</item>
- <!-- 33 B相电流 -->
+        <!-- 33 B相电流 -->
         <item>71.7.0</item>
- <!-- 34 C相电流 -->
+        <!-- 34 C相电流 -->
         <item>91.7.0</item>
- <!-- 35 零线电流 -->
+        <!-- 35 零线电流 -->
 
         <item>Power</item>
- <!-- 36 功率 -->
+        <!-- 36 功率 -->
         <item>1.7.0</item>
- <!-- 37 总有功功率 -->
+        <!-- 37 总有功功率 -->
         <item>21.7.0</item>
- <!-- 38 A相有功功率 -->
+        <!-- 38 A相有功功率 -->
         <item>41.7.0</item>
- <!-- 39 B相有功功率 -->
+        <!-- 39 B相有功功率 -->
         <item>61.7.0</item>
- <!-- 40 C相有功功率 -->
-        <item>3.7.0</item> <!-- 41 总无功功率 -->
-        <item>23.7.0</item><!-- 42 A相无功功率 -->
-        <item>43.7.0</item><!-- 43 B相无功功率 -->
-        <item>63.7.0</item><!-- 44 C相无功功率 -->
-        <item>9.7.0</item> <!-- 45 总视在功率 -->
-        <item>29.7.0</item><!-- 46 A相视在功率 -->
-        <item>49.7.0</item><!-- 47 B相视在功率 -->
-        <item>69.7.0</item><!-- 48 C相视在功率 -->
-         <item>13.7.0</item><!-- 49 总功率因数 -->
-        <item>33.7.0</item> <!-- 50 A相功率因数 -->
-        <item>53.7.0</item> <!-- 51 B相功率因数 -->
-        <item>73.7.0</item> <!-- 52 C相功率因数 -->
-        
-        <item>14.7.0</item> <!-- 53 电表当前频率 -->
-        
-        <item>96.1.0</item> <!-- 54 电表表号 -->
-         <item>0.2.0</item> <!-- 55 软件版本号 -->
-        <item>0.6.0</item><!-- 56 额定电压 -->
-        <item>0.6.1</item><!-- 57 额定电流 -->
-        <item>0.6.2</item> <!-- 58 额定频率 -->
-         <item>0.6.3</item> <!--59 最大电流 -->
-  
+        <!-- 40 C相有功功率 -->
+        <item>3.7.0</item>
+        <!-- 41 总无功功率 -->
+        <item>23.7.0</item>
+        <!-- 42 A相无功功率 -->
+        <item>43.7.0</item>
+        <!-- 43 B相无功功率 -->
+        <item>63.7.0</item>
+        <!-- 44 C相无功功率 -->
+        <item>9.7.0</item>
+        <!-- 45 总视在功率 -->
+        <item>29.7.0</item>
+        <!-- 46 A相视在功率 -->
+        <item>49.7.0</item>
+        <!-- 47 B相视在功率 -->
+        <item>69.7.0</item>
+        <!-- 48 C相视在功率 -->
+        <item>13.7.0</item>
+        <!-- 49 总功率因数 -->
+        <item>33.7.0</item>
+        <!-- 50 A相功率因数 -->
+        <item>53.7.0</item>
+        <!-- 51 B相功率因数 -->
+        <item>73.7.0</item>
+        <!-- 52 C相功率因数 -->
+
+        <item>14.7.0</item>
+        <!-- 53 电表当前频率 -->
+
+        <item>96.1.0</item>
+        <!-- 54 电表表号 -->
+        <item>0.2.0</item>
+        <!-- 55 软件版本号 -->
+        <item>0.6.0</item>
+        <!-- 56 额定电压 -->
+        <item>0.6.1</item>
+        <!-- 57 额定电流 -->
+        <item>0.6.2</item>
+        <!-- 58 额定频率 -->
+        <item>0.6.3</item>
+        <!-- 59 最大电流 -->
+
     </string-array>
-    
-   
-     <string-array name="event" translatable="false">
-        <item>Item Name</item> <!-- 0 -->
-        <item>开端盖事件发生次数</item><!-- 1开端盖事件发生次数 -->
-        <item>开端盖事件记录</item><!-- 2 开端盖事件记录 -->
-        <item>开面盖事件发生次数</item><!-- 3 开面盖事件发生次数 -->
-        <item>开面盖事件记录</item><!-- 4 开面盖事件记录 -->
-        <item>反向事件发生次数</item><!-- 5 反向事件发生次数 -->
-        <item>反向事件记录</item><!-- 6 反向事件记录 -->
-        <item>磁场事件发生次数</item><!-- 7 磁场事件发生次数 -->
-        <item>磁场事件记录</item><!-- 8 磁场事件记录 -->
-        <item>需量复位事件发生次数</item><!-- 9 需量复位事件发生次数 -->
-        <item>需量复位事件记录</item><!-- 10 需量复位事件记录 -->
+    <string-array name="event" translatable="false">
+        <item>@string/item_name</item>
+        <!-- 0 -->
+        <item>@string/open_closure_times</item>
+        <!-- 1开端盖事件发生次数 -->
+        <item>@string/open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>@string/open_cover_times</item>
+        <!-- 3 开面盖事件发生次数 -->
+        <item>@string/open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+        <item>@string/reverse_event_times</item>
+        <!-- 5 反向事件发生次数 -->
+        <item>@string/reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
+        <item>@string/magnetic_event_times</item>
+        <!-- 7 磁场事件发生次数 -->
+        <item>@string/magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
+        <item>@string/deman_reset_event_times</item>
+        <!-- 9 需量复位事件发生次数 -->
+        <item>@string/deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
     </string-array>
-    
-      <string-array name="event_cmd" translatable="false">
-        <item>Item Name</item> <!-- 0 -->
-        <item>99.98.7*0</item><!-- 1开端盖事件发生次数 -->
-        <item>99.98.7*</item><!-- 2 开端盖事件记录 -->
-        <item>99.98.8*0</item><!-- 3 开面盖事件发生次数 -->
-        <item>99.98.8*</item><!-- 4 开面盖事件记录 -->
-        <item>99.98.35*0</item><!-- 5 反向事件发生次数 -->
-        <item>99.98.35*</item><!-- 6 反向事件记录 -->
-        <item>99.98.58*0</item><!-- 7 磁场事件发生次数 -->
-        <item>99.98.58*</item><!-- 8 磁场事件记录 -->
-        <item>99.98.5*0</item><!-- 9 需量复位事件发生次数 -->
-        <item>99.98.5*</item><!-- 10 需量复位事件记录 -->
+    <string-array name="event_cmd" translatable="false">
+        <item>Item Name</item>
+        <!-- 0 -->
+        <item>99.98.7*0</item>
+        <!-- 1开端盖事件发生次数 -->
+        <item>99.98.7*</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>99.98.8*0</item>
+        <!-- 3 开面盖事件发生次数 -->
+        <item>99.98.8*</item>
+        <!-- 4 开面盖事件记录 -->
+        <item>99.98.35*0</item>
+        <!-- 5 反向事件发生次数 -->
+        <item>99.98.35*</item>
+        <!-- 6 反向事件记录 -->
+        <item>99.98.58*0</item>
+        <!-- 7 磁场事件发生次数 -->
+        <item>99.98.58*</item>
+        <!-- 8 磁场事件记录 -->
+        <item>99.98.5*0</item>
+        <!-- 9 需量复位事件发生次数 -->
+        <item>99.98.5*</item>
+        <!-- 10 需量复位事件记录 -->
     </string-array>
-    
-     <string-array name="setting" translatable="false">
-        <item>Item Name</item> <!-- 0 -->
-        <item>电表当前星期</item><!-- 1电表当前星期-->
-        <item>电表轮显间隔</item><!-- 2 电表轮显间隔-->
-        <item>显示前导零开关</item><!-- 3 显示前导零开关 -->
-        <item>计量单元个数</item><!-- 4 计量单元个数 -->
-        <item>总有功电量计算表达式</item><!-- 5 总有功电量计算表达式 -->
-        <item>正向有功电量计算表达式</item><!-- 6 正向有功电量计算表达式-->
-        <item>反向有功电量计算表达式</item><!-- 7 反向有功电量计算表达式 -->
-        <item>总无功电量计算表达式</item><!-- 8 总无功电量计算表达式 -->
-        <item>总感性无功电量计算表达式</item><!-- 9 总感性无功电量计算表达式 -->
-        <item>感性无功电量计算表达式</item><!-- 10 感性无功电量计算表达式 -->
-        <item>清除报警符号</item><!-- 11清除报警符号 -->
-        <item>需量清零</item><!-- 12 需量清零 -->
-        <item>电量清零</item> <!-- 13 电量清零 -->
-        <item>清除需量清零事件</item> <!--  14 清除需量清零事件 -->
-        <item>需量周期</item> <!-- 15 需量周期 -->
-        <item>电量整数位数</item> <!-- 16 电量整数位数 -->
-        <item>电量小数位数</item> <!-- 17 电量小数位数 -->
-        <item>功率整数位数</item> <!-- 18 功率整数位数 -->
-        <item>功率小数位数</item> <!-- 19 功率小数位数 -->
-        <item>电流整数位数</item> <!-- 20 电流整数位数 -->
-        <item>电流小数位数</item> <!-- 21 电流小数位数 -->
-        <item>电压整数位数</item> <!-- 22 电压整数位数 -->
-        <item>电压小数位数</item> <!-- 23 电压小数位数 -->
-        <item>功率因素整数位数</item> <!-- 24 功率因素整数位数 -->
-        <item>功率因数小数位数</item> <!-- 25 功率因数小数位数 -->
-        <item>频率整数位数</item> <!-- 26 频率整数位数 -->
-        <item>频率小数位数</item> <!-- 27 频率小数位数 -->
-        <item>日费率时段表</item> <!-- 28 日费率时段表 -->
+    <string-array name="setting" translatable="false">
+        <item>@string/item_name</item>
+        <!-- 0 -->
+        <item>@string/current_week</item>
+        <!-- 1电表当前星期 -->
+        <item>@string/display_intervals</item>
+        <!-- 2 电表轮显间隔 -->
+        <item>@string/display_zero_switch</item>
+        <!-- 3 显示前导零开关 -->
+        <item>@string/measuring_unit_number</item>
+        <!-- 4 计量单元个数 -->
+        <item>@string/total_active_energy_formula</item>
+        <!-- 5 总有功电量计算表达式 -->
+        <item>@string/import_active_energy_formula</item>
+        <!-- 6 正向有功电量计算表达式 -->
+        <item>@string/export_active_energy_formula</item>
+        <!-- 7 反向有功电量计算表达式 -->
+        <item>@string/total_reactive_energy_formula</item>
+        <!-- 8 总无功电量计算表达式 -->
+        <item>@string/total_inductive_reactive_energy_formula</item>
+        <!-- 9 总感性无功电量计算表达式 -->
+        <item>@string/positive_inductive_reactive_energy_formula</item>
+        <!-- 10 感性无功电量计算表达式 -->
+        <item>@string/clear_warning_symbol</item>
+        <!-- 11清除报警符号 -->
+        <item>@string/demand_clear</item>
+        <!-- 12 需量清零 -->
+        <item>@string/Energy_register_reset</item>
+        <!-- 13 电量清零 -->
+        <item>@string/clear_demand_cleared_event</item>
+        <!-- 14 清除需量清零事件 -->
+        <item>@string/demand_subinterval</item>
+        <!-- 15 需量周期 -->
+        <item>@string/engery_integer_digits</item>
+        <!-- 16 电量整数位数 -->
+        <item>@string/engery_decimal_digits</item>
+        <!-- 17 电量小数位数 -->
+        <item>@string/power_integer_digits</item>
+        <!-- 18 功率整数位数 -->
+        <item>@string/power_decimal_digits</item>
+        <!-- 19 功率小数位数 -->
+        <item>@string/current_integer_digits</item>
+        <!-- 20 电流整数位数 -->
+        <item>@string/current_decimal_digits</item>
+        <!-- 21 电流小数位数 -->
+        <item>@string/voltage_integer_digits</item>
+        <!-- 22 电压整数位数 -->
+        <item>@string/voltage_decimal_digits</item>
+        <!-- 23 电压小数位数 -->
+        <item>@string/power_factor_integer_digits</item>
+        <!-- 24 功率因素整数位数 -->
+        <item>@string/power_factor_decimal_digits</item>
+        <!-- 25 功率因数小数位数 -->
+        <item>@string/frequency_factor_integer_digits</item>
+        <!-- 26 频率整数位数 -->
+        <item>@string/frequency_factor_decimal_digits</item>
+        <!-- 27 频率小数位数 -->
+        <item>@string/day_tariff_table</item>
+        <!-- 28 日费率时段表 -->
     </string-array>
-    
-     <string-array name="setting_cmd" translatable="false">
-        <item>Item Name</item> <!-- 0 -->
-        <item>0.9.5</item><!-- 1电表当前星期-->
-        <item>96.52.11</item><!-- 2 电表轮显间隔-->
-        <item>96.52.81</item><!-- 3 显示前导零开关 -->
-        <item>96.50.19</item><!-- 4 计量单元个数 -->
-        <item>96.52.21</item><!-- 5 总有功电量计算表达式 -->
-        <item>96.52.22</item><!-- 6 正向有功电量计算表达式-->
-        <item>96.52.23</item><!-- 7 反向有功电量计算表达式 -->
-        <item>96.52.24</item><!-- 8 总无功电量计算表达式 -->
-        <item>96.52.25</item><!-- 9 总感性无功电量计算表达式 -->
-        <item>96.52.26</item><!-- 10 感性无功电量计算表达式 -->
-        <item>C.C.7</item><!-- 11清除报警符号 -->
-        <item>C.C.6</item><!-- 12 需量清零 -->
-        <item>C.C.2</item> <!-- 13 电量清零 -->
-        <item>C.C.5</item> <!--  14 清除需量清零事件 -->
-        <item>96.52.39</item> <!-- 15 需量周期 -->
-        <item>96.52.82</item> <!-- 16 电量整数位数 -->
-        <item>96.52.15</item> <!-- 17 电量小数位数 -->
-        <item>96.52.82.01</item> <!-- 18 功率整数位数 -->
-        <item>96.52.16</item> <!-- 19 功率小数位数 -->
-        <item>96.52.82.02</item> <!-- 20 电流整数位数 -->
-        <item>96.52.17</item> <!-- 21 电流小数位数 -->
-        <item>96.52.82.03</item> <!-- 22 电压整数位数 -->
-        <item>96.52.18</item> <!-- 23 电压小数位数 -->
-        <item>96.52.82.04</item> <!-- 24 功率因素整数位数 -->
-        <item>96.52.19</item> <!-- 25 功率因数小数位数 -->
-        <item>96.52.82.05</item> <!-- 26 频率整数位数 -->
-        <item>96.52.20</item> <!-- 27 频率小数位数 -->
-        <item>96.64.254</item> <!-- 28 日费率时段表 -->
+    <string-array name="setting_cmd" translatable="false">
+        <item>Item Name</item>
+        <!-- 0 -->
+        <item>0.9.5</item>
+        <!-- 1电表当前星期 -->
+        <item>96.52.11</item>
+        <!-- 2 电表轮显间隔 -->
+        <item>96.52.81</item>
+        <!-- 3 显示前导零开关 -->
+        <item>96.50.19</item>
+        <!-- 4 计量单元个数 -->
+        <item>96.52.21</item>
+        <!-- 5 总有功电量计算表达式 -->
+        <item>96.52.22</item>
+        <!-- 6 正向有功电量计算表达式 -->
+        <item>96.52.23</item>
+        <!-- 7 反向有功电量计算表达式 -->
+        <item>96.52.24</item>
+        <!-- 8 总无功电量计算表达式 -->
+        <item>96.52.25</item>
+        <!-- 9 总感性无功电量计算表达式 -->
+        <item>96.52.26</item>
+        <!-- 10 感性无功电量计算表达式 -->
+        <item>C.C.7</item>
+        <!-- 11清除报警符号 -->
+        <item>C.C.6</item>
+        <!-- 12 需量清零 -->
+        <item>C.C.2</item>
+        <!-- 13 电量清零 -->
+        <item>C.C.5</item>
+        <!-- 14 清除需量清零事件 -->
+        <item>96.52.39</item>
+        <!-- 15 需量周期 -->
+        <item>96.52.82</item>
+        <!-- 16 电量整数位数 -->
+        <item>96.52.15</item>
+        <!-- 17 电量小数位数 -->
+        <item>96.52.82.01</item>
+        <!-- 18 功率整数位数 -->
+        <item>96.52.16</item>
+        <!-- 19 功率小数位数 -->
+        <item>96.52.82.02</item>
+        <!-- 20 电流整数位数 -->
+        <item>96.52.17</item>
+        <!-- 21 电流小数位数 -->
+        <item>96.52.82.03</item>
+        <!-- 22 电压整数位数 -->
+        <item>96.52.18</item>
+        <!-- 23 电压小数位数 -->
+        <item>96.52.82.04</item>
+        <!-- 24 功率因素整数位数 -->
+        <item>96.52.19</item>
+        <!-- 25 功率因数小数位数 -->
+        <item>96.52.82.05</item>
+        <!-- 26 频率整数位数 -->
+        <item>96.52.20</item>
+        <!-- 27 频率小数位数 -->
+        <item>96.64.254</item>
+        <!-- 28 日费率时段表 -->
     </string-array>
-    
-     <string-array name="user_title" translatable="false">
-          <item>Account</item>
-           <item>Name</item>
-            <item>Access level</item>
- </string-array>
- 
-      <string-array name="time_cmd" translatable="false">
-          <item>0.9.1</item>
-           <item>0.9.2</item>
- </string-array>
+    <string-array name="user_title" translatable="false">
+        <item>@string/user_account</item>
+        <item>@string/name</item>
+        <item>@string/user_level</item>
+    </string-array>
+    <string-array name="time_cmd" translatable="false">
+        <item>0.9.1</item>
+        <item>0.9.2</item>
+    </string-array>
+
 </resources>

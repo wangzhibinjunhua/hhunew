@@ -55,7 +55,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 
 	private Context mContext;
 
-	private Button readBtn, stopBtn, exportBtn, returnBtn;
+	private Button readBtn, exportBtn, returnBtn;
 
 	ArrayList<Integer> selectedItem = null;
 
@@ -84,8 +84,6 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 	private void initView() {
 		readBtn = (Button) findViewById(R.id.event_read_btn);
 		readBtn.setOnClickListener(this);
-		stopBtn = (Button) findViewById(R.id.event_stop_btn);
-		stopBtn.setOnClickListener(this);
 		exportBtn = (Button) findViewById(R.id.event_export_btn);
 		exportBtn.setOnClickListener(this);
 		returnBtn = (Button) findViewById(R.id.event_back_btn);
@@ -388,8 +386,6 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 			break;
 		case R.id.event_export_btn:
 			exportData();
-			break;
-		case R.id.event_stop_btn:
 			break;
 		default:
 			break;

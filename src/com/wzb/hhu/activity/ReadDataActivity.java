@@ -65,7 +65,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	private ImageView titleMeterList;
 	private ImageView btView;
 	private Context mContext;
-	private Button readBtn, stopBtn, exportBtn, returnBtn;
+	private Button readBtn, exportBtn, returnBtn;
 
 	ArrayList<Integer> selectedItem = null;
 	private DataAdapter ElecAdapter;
@@ -97,8 +97,6 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	private void initView() {
 		readBtn = (Button) findViewById(R.id.data_read_btn);
 		readBtn.setOnClickListener(this);
-		stopBtn = (Button) findViewById(R.id.data_stop_btn);
-		stopBtn.setOnClickListener(this);
 		exportBtn = (Button) findViewById(R.id.data_export_btn);
 		exportBtn.setOnClickListener(this);
 		returnBtn = (Button) findViewById(R.id.data_back_btn);
@@ -439,9 +437,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		case R.id.data_export_btn:
 			exportData();
 			break;
-		case R.id.data_stop_btn:
-			CustomDialog.dismissDialog();
-			break;
+
 		default:
 			break;
 		}

@@ -18,29 +18,7 @@
 <View android:layout_width="fill_parent"
         android:layout_height="40dp"/>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
 
-        <!-- android:layout_marginLeft="50dp" -->
-        <Button
-            android:id="@+id/data_read_btn"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="120dp"
-            android:background="@color/btn_default"
-            android:text="Read" />
-
-        <Button
-            android:id="@+id/data_stop_btn"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/btn_default"
-            android:visibility="gone"
-            android:text="Stop" />
-    </LinearLayout>
     
     <View android:layout_width="fill_parent"
         android:layout_height="10dp"/>
@@ -49,18 +27,25 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
+         <Button
+            android:id="@+id/data_read_btn"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:background="@color/btn_default"
+            android:text="Read" />
 
         <Button
             android:id="@+id/data_export_btn"
-            android:layout_width="120dp"
+            android:layout_width="90dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="20dp"
             android:background="@color/btn_default"
             android:text="Export" />
 
         <Button
             android:id="@+id/data_back_btn"
-            android:layout_width="120dp"
+            android:layout_width="90dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:background="@color/btn_default"

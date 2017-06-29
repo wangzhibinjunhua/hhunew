@@ -171,7 +171,7 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 			
 			// finish();
 		} else {
-			ToastUtil.showLongToast(LoginNewActivity.this, "帐号或密码不正确");
+			ToastUtil.showLongToast(LoginNewActivity.this, LoginNewActivity.this.getResources().getString(R.string.err_pw_or_acc));
 		}
 	}
 

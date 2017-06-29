@@ -1,6 +1,5 @@
 package com.wzb.hhu.activity;
 
-import org.apache.http.impl.conn.tsccm.WaitingThread;
 
 import com.wzb.hhu.R;
 import com.wzb.hhu.interf.WApplication;

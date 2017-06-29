@@ -24,11 +24,11 @@
     <string name="login">Login</string>
     <string name="exit">Exit</string>
     <string name="meter_setting">Meter Setting</string>
-    <string name="new_user" string="">New User</string>
-    <string name="new_meter" string="">New Meter</string>
-    <string name="edit_user" string="">Edit User</string>
-    <string name="edit_meter" string="">Edit Meter</string>
-    <string name="bt_device" string="">Bluetooth Device</string>
+    <string name="new_user">New User</string>
+    <string name="new_meter">New Meter</string>
+    <string name="edit_user">Edit User</string>
+    <string name="edit_meter">Edit Meter</string>
+    <string name="bt_device">Bluetooth Device</string>
     <string name="read">Read</string>
     <string name="write">Write</string>
     <string name="stop">Stop</string>
@@ -137,4 +137,10 @@
     <string name="name">Name</string>
     <string name="user_level">Access level</string>
 
+
+    <string name="err_pw_or_acc">Invalid user name or password!</string>
+    <string name="search_value_can_not_be_empty">Search value can not be empty!</string>
+<string name="search">Search...</string>
+<string name="sure_delete">Are you sure delete?</string>
+<string name="delete">Delete...</string>
 </resources>

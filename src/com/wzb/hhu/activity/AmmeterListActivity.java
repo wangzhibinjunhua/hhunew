@@ -113,7 +113,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 
 				String searchSn = searchEt.getText().toString();
 				if (TextUtils.isEmpty(searchSn)) {
-						ToastUtil.showShortToast(mContext, "搜索内容不能为空!");
+						ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.search_value_can_not_be_empty));
 				} else {
 					Intent intent = new Intent();
 					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -133,7 +133,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				loadMoreBtn.setText("正在加载..");
+				loadMoreBtn.setText(mContext.getResources().getString(R.string.search));
 				loadMoreBtn.setClickable(false);
 				new Handler().postDelayed(new Runnable() {
 
@@ -142,7 +142,7 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 						// TODO Auto-generated method stub
 						loadMoreData();
 						adapter.notifyDataSetChanged();
-						loadMoreBtn.setText("load more ...");
+						loadMoreBtn.setText(mContext.getResources().getString(R.string.load_more));
 						loadMoreBtn.setClickable(true);
 						// listView.setSelection(0);
 					}
@@ -221,13 +221,13 @@ public class AmmeterListActivity extends BaseActivity implements OnScrollListene
 				break;
 
 			case 1:// delete
-				CustomDialog.showOkAndCalcelDialog(mContext, "Delete Meter", "确定要删除吗？\n"+"sn:"+adapter.getAmmeterBean(MID).getSn(), new OnClickListener() {
+				CustomDialog.showOkAndCalcelDialog(mContext, "Delete Meter", mContext.getResources().getString(R.string.sure_delete)+"\n"+"sn:"+adapter.getAmmeterBean(MID).getSn(), new OnClickListener() {
 					
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						CustomDialog.dismissDialog();
-						CustomDialog.showWaitDialog(mContext, "删除中...");
+						CustomDialog.showWaitDialog(mContext, mContext.getResources().getString(R.string.delete));
 						new Handler().postDelayed(new Runnable() {
 							public void run() {
 								curPosition = -1;

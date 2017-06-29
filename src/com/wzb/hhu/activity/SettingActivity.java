@@ -70,6 +70,8 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 	private static int curComCmd = 0xff;
 	private static int curItemId = 0;
 
+	private static Boolean isRead = true;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -152,9 +154,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 					}
 				}
 
-				)
-				.setCancelable(false)
-				.setNegativeButton("cancle", null).show();
+				).setCancelable(false).setNegativeButton("cancle", null).show();
 	}
 
 	private void initAdapter() {
@@ -270,9 +270,15 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 			case 0xfc:
 				if (rString.equals("06") || rString.equals("6")) {
 					// start read
-					curComCmd = 0xff0002;
-					curItemId = 0;
-					sendDataItemCmd();
+					if (isRead) {
+						curComCmd = 0xff0002;
+						curItemId = 0;
+						sendDataItemCmd();
+					} else {
+						curComCmd = 0xff0003;
+						curItemId = 0;
+						sendWriteDataItemCmd();
+					}
 
 				}
 				break;
@@ -285,6 +291,17 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 					closeCon();
 				} else {
 					sendDataItemCmd();
+				}
+				break;
+			case 0xff0003:
+				// updateWriteUI(rString, selectedItem.get(curItemId));
+				curItemId++;
+				if (curItemId > selectedItem.size() - 1) {
+					LogUtil.logMessage("wzb", "write completed");
+					CustomDialog.dismissDialog();
+					closeCon();
+				} else {
+					sendWriteDataItemCmd();
 				}
 				break;
 			case 0xffff:
@@ -430,6 +447,16 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 		}
 	}
 
+	private void sendWriteDataItemCmd() {
+		int curComItem = selectedItem.get(curItemId);
+		String cmd = ResTools.getResStringArray(mContext, R.array.setting)[curComItem];
+		String writeValue = "";
+		writeValue = settingAdapter.getDataItem(curComItem).getItemValue();
+		String sendData = "01573102" + Common.stringToAscii(cmd) + "28" + Common.stringToAscii(writeValue) + "2903";
+		String sendDataXor = Common.xorHex(sendData.substring(2));
+		IECCommand.sppSend(sendData + sendDataXor);
+	}
+
 	private void initCom() {
 		curComCmd = 0xfe;
 		String sendData = "2f3f" + Common.stringToAscii(meterSn) + "210d0a";
@@ -448,7 +475,20 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 		}
 	}
 
+	private void calWriteSelectedItem() {
+		selectedItem.clear();
+		for (int i = 0; i < settingAdapter.getCount(); i++) {
+			if (settingAdapter.getDataItem(i).getItemSelect()
+					&& !TextUtils.isEmpty(settingAdapter.getDataItem(i).getItemValue())) {
+				if (i != 0) {
+					selectedItem.add(i);
+				}
+			}
+		}
+	}
+
 	private void test_read() {
+		isRead = true;
 		// get selectedItem
 		calSelectedItem();
 		LogUtil.logMessage("wzb", "selecteditem:" + selectedItem);
@@ -474,15 +514,41 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 			}
 		}
 	}
-	
-	private void test_write(){
-		if(!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")
-				|| !WApplication.sp.get("current_level", "ReadUser").equals("ProgramUser")){
+
+	private void test_write() {
+
+		if (!WApplication.sp.get("current_level", "ReadUser").equals("AdminUser")
+				|| !WApplication.sp.get("current_level", "ReadUser").equals("ProgramUser")) {
 			ToastUtil.showShortToast(mContext, "没有权限");
 			return;
 		}
-		
+		isRead = false;
+		calWriteSelectedItem();
+		if (!WApplication.bt.isConnected()) {
+			ToastUtil.showShortToast(mContext, "蓝牙处于断开状态，请连接");
+		} else {
+
+			if (selectedItem == null || selectedItem.size() == 0) {
+				ToastUtil.showShortToast(mContext, "请选择需要写入的数据项");
+			} else {
+				// CustomDialog.showWaitDialog(mContext, "读取中...");
+				CustomDialog.showWaitAndCancelDialog(mContext, "写入中...", waitcancleListener);
+				initCom();
+				// mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+			}
+		}
+
 	}
+
+	OnClickListener waitcancleListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			closeCon();
+			CustomDialog.dismissDialog();
+		}
+	};
 
 	class SettingAdapter extends BaseAdapter {
 

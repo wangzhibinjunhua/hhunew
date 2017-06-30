@@ -1,6 +1,7 @@
 <resources>
 
     <string name="app_name">Meter management software</string>
+    <string name="language">Language</string>
     <string name="load_more">load more ...</string>
     <string name="sn">Serial Number:</string>
     <string name="no_permission">Permission denied</string>
@@ -24,7 +25,7 @@
     <string name="exit_dialog">Press again to exit</string>
     <string name="home_page">HomePage</string>
     <string name="sw_info">HHU Software</string>
-    <string name="sw_info1">Ver:2.2.0.10 built on 2017-06-23</string>
+    <string name="sw_info1">Ver:2.3.0.10 built on 2017-06-30</string>
     <string name="ammeter_list">Meter List</string>
     <string name="dialog_image_camear">Photograph</string>
     <string name="dialog_image_picture">Choose from Gallery</string>

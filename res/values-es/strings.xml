@@ -1,5 +1,6 @@
 <resources>
 <string name="app_name">Software de administrador del medidor</string>
+<string name="language">Lenguaje</string>
     <string name="load_more"> cargar más ... </string>
     <string name="no_permission"> Permiso denegado </string>
     <string name="input_can_not_empty"> La entrada no puede estar vacía </string>
@@ -22,7 +23,7 @@
     <string name="exit_dialog"> Pulse de nuevo para salir </string>
     <string name="home_page"> Página de inicio </string>
     <string name="sw_info"> Software HHU </string>
-    <string name="sw_info1"> Ver: 2.2.0.10 construido el 2017-06-23 </string>
+    <string name="sw_info1"> Ver: 2.3.0.10 construido el 2017-06-30 </string>
     <string name="ammeter_list"> Lista de medidores </string>
     <string name="dialog_image_camear"> Fotografía </string>
     <string name="dialog_image_picture"> Elija de Galería </string>

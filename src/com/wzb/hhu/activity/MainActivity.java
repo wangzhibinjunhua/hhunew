@@ -133,6 +133,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				WApplication.sp.set("current_activity", "1");
 				startActivity(intent);
 				break;
+			case 6:
+				intent.setClass(MainActivity.this, ApplicationSetting.class);
+				startActivity(intent);
+				break;
 			default:
 				break;
 			}

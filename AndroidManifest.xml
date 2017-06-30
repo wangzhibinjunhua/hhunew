@@ -90,6 +90,9 @@
              <activity
               android:name=".activity.MeterSearchActivity"
               android:screenOrientation="portrait"/>
+              <activity
+              android:name=".activity.ApplicationSetting"
+              android:screenOrientation="portrait"/>
            
         <activity
             android:name=".activity.AmmeterListActivity"

@@ -283,6 +283,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 				}
 				break;
 			case 0xff0002:
+				mHandler.removeCallbacks(timeout);
 				updateUI(rString, selectedItem.get(curItemId));
 				curItemId++;
 				if (curItemId > selectedItem.size() - 1) {
@@ -295,6 +296,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 				break;
 			case 0xff0003:
 				// updateWriteUI(rString, selectedItem.get(curItemId));
+				mHandler.removeCallbacks(timeout);
 				curItemId++;
 				if (curItemId > selectedItem.size() - 1) {
 					LogUtil.logMessage("wzb", "write completed");
@@ -512,6 +514,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 				});
 				initCom();
 				// mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+				mHandler.postDelayed(timeout, 5000);
 			}
 		}
 	}
@@ -536,6 +539,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 				CustomDialog.showWaitAndCancelDialog(mContext, mContext.getResources().getString(R.string.writing), waitcancleListener);
 				initCom();
 				// mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+				mHandler.postDelayed(timeout, 5000);
 			}
 		}
 
@@ -550,6 +554,16 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 			CustomDialog.dismissDialog();
 		}
 	};
+	
+	Runnable timeout = new Runnable() {
+        @Override
+        public void run() {
+        	if(curComCmd!=0xff0002 && curComCmd!=0xff0003){
+				CustomDialog.dismissDialog();
+				ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.read_fail));
+			}
+        }
+    };
 
 	class SettingAdapter extends BaseAdapter {
 

@@ -279,6 +279,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				}
 				break;
 			case 0xff0002:
+				mHandler.removeCallbacks(timeout);
 				updateUI(rString, selectedItem.get(curItemId));
 				curItemId++;
 				if (curItemId > selectedItem.size() - 1) {
@@ -290,7 +291,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				}
 				break;
 			case 0xffff:
-				CustomDialog.dismissDialog();
+				
 				break;
 			default:
 				break;
@@ -485,10 +486,20 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				// CustomDialog.showWaitDialog(mContext, "读取中...");
 				CustomDialog.showWaitAndCancelDialog(mContext, mContext.getResources().getString(R.string.reading), waitcancleListener);
 				initCom();
-				// mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+				mHandler.postDelayed(timeout, 5000);
 			}
 		}
 	}
+	
+	Runnable timeout = new Runnable() {
+        @Override
+        public void run() {
+        	if(curComCmd!=0xff0002){
+				CustomDialog.dismissDialog();
+				ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.read_fail));
+			}
+        }
+    };
 
 	class DataAdapter extends BaseAdapter {
 

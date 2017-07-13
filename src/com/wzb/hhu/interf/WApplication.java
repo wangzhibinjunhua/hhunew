@@ -81,7 +81,9 @@ public class WApplication extends Application {
 	}
 	
 	private void addTestMeter(){
-		DbUtil.addMeter("1234568", "87153668", "shenzhen", "1 Phrases");
+		if(DbUtil.getAllMeterCount()==0){
+			DbUtil.addMeter("1234568", "87153668", "shenzhen", "1 Phrases");
+		}
 	}
 
 	private void initBt() {

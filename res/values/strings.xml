@@ -2,6 +2,7 @@
 
     <string name="app_name">Meter management software</string>
     <string name="language">Language</string>
+    <string name="read_fail">No response from meter!</string>
     <string name="load_more">load more ...</string>
     <string name="sn">Serial Number:</string>
     <string name="no_permission">Permission denied</string>

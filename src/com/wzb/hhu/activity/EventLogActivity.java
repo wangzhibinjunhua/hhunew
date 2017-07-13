@@ -241,6 +241,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 				}
 				break;
 			case 0xff0002:
+				mHandler.removeCallbacks(timeout);
 				updateUI(rString, selectedItem.get(curItemId));
 				curItemId++;
 				if (curItemId > selectedItem.size() - 1) {
@@ -433,9 +434,20 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 				});
 				initCom();
 				// mHandler.sendEmptyMessageDelayed(0xffff, 5000);
+				mHandler.postDelayed(timeout, 5000);
 			}
 		}
 	}
+	
+	Runnable timeout = new Runnable() {
+        @Override
+        public void run() {
+        	if(curComCmd!=0xff0002){
+				CustomDialog.dismissDialog();
+				ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.read_fail));
+			}
+        }
+    };
 
 	class EventAdapter extends BaseAdapter {
 

@@ -1,7 +1,7 @@
 <resources>
 <string name="app_name">Software de administrador del medidor</string>
-<string name="language">Lenguaje</string>
     <string name="load_more"> cargar más ... </string>
+    <string name="read_fail">Sin respuesta desde medidor!</string>
     <string name="no_permission"> Permiso denegado </string>
     <string name="input_can_not_empty"> La entrada no puede estar vacía </string>
     <string name="no_search_result"> Sin resultado de búsqueda </string>
@@ -23,7 +23,7 @@
     <string name="exit_dialog"> Pulse de nuevo para salir </string>
     <string name="home_page"> Página de inicio </string>
     <string name="sw_info"> Software HHU </string>
-    <string name="sw_info1"> Ver: 2.3.0.10 construido el 2017-06-30 </string>
+    <string name="sw_info1"> Ver: 2.2.0.10 construido el 2017-06-23 </string>
     <string name="ammeter_list"> Lista de medidores </string>
     <string name="dialog_image_camear"> Fotografía </string>
     <string name="dialog_image_picture"> Elija de Galería </string>
@@ -75,10 +75,10 @@
     <string name="reverse_active_energy_history_tr"> Historial de Energía Activa Inversa </string>
     <string name="total_reactive_energy_tr"> Tarifa de Tarifa de Energía Reactiva Total </string>
     <string name="total_reactive_energy_history_tr"> Índice de Tarifa Histórica de la Energía Reactiva Total </string>
-    <string name="demand"> Demand </string>
-    <string name="total_active_max_demand"> Demanda máxima de potencia activa total </string>
-    <string name="total_active_max_demand_history"> Historial de demanda máxima de energía activa total </string>
-    <string name="total_reactive_max_demand"> Demanda máxima de potencia reactiva total </string>
+    <string name="demand"> Demanta </string>
+    <string name="total_active_max_demand"> Demanta máxima de potencia activa total </string>
+    <string name="total_active_max_demand_history"> Historial de Demanta máxima de energía activa total </string>
+    <string name="total_reactive_max_demand"> Demanta máxima de potencia reactiva total </string>
     <string name="voltage"> Tensión </string>
     <string name="phase_a_voltage"> Tensión de fase A </string>
     <string name="phase_b_voltage"> Tensión de fase B </string>

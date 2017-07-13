@@ -996,7 +996,9 @@ com.wzb.hhu.activity.LoginActivity$2
 com.wzb.hhu.activity.LoginActivity$3
 com.wzb.hhu.activity.LoginNewActivity:
     private int i
-    66:67:void testdata()
+    68:69:void testdata()
+    198:218:void test()
+com.wzb.hhu.activity.LoginNewActivity$2
 com.wzb.hhu.activity.MeterSearchActivity:
     public static final int UPDATE_BT_STATE
     private static final int UPDATE_SEARCH_RESULT
@@ -1033,22 +1035,23 @@ com.wzb.hhu.btcore.BtManager:
 com.wzb.hhu.btcore.BtManager$1
 com.wzb.hhu.btcore.BtManager$2
 com.wzb.hhu.btcore.IECCommand:
+    public static final java.lang.String MONTH_DEFAULT_NUM
+    public static final java.lang.String RATE_DEFAULT_NUM
     private static final java.lang.String READ_CMD_HEAD
     private static final java.lang.String READ_CMD_END
     10:10:public IECCommand()
-    21:21:public static void cmd2()
+    24:24:public static void cmd2()
 com.wzb.hhu.util.Common:
     12:12:public Common()
 com.wzb.hhu.util.CustomDialog:
     19:19:public CustomDialog()
-    86:88:public static void showWaitDialog(android.content.Context)
     102:105:public static void setWaitAndCancelTxt(java.lang.String)
     127:131:public static void showWaitDialog(android.content.Context,int)
 com.wzb.hhu.util.DatabaseHelper:
     private static final int VERSION
 com.wzb.hhu.util.DbUtil:
     12:12:public DbUtil()
-    105:118:public static java.util.ArrayList getAllMeter()
+    114:127:public static java.util.ArrayList getAllMeter()
 com.wzb.hhu.util.EncryptionUtil:
     12:12:public EncryptionUtil()
 com.wzb.hhu.util.LogUtil:

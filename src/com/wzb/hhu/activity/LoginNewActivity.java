@@ -36,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -53,6 +54,9 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 	private LinearLayout parent, option;
 	private Map<String, String> map;
 	private int width, i;
+	
+	private TextView languageValue;
+	private ImageView languageBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +129,16 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 			}
 
 		});
+		
+		languageValue=(TextView)findViewById(R.id.language_value);
+		String appLanguage=WApplication.sp.get("app_language", "en");
+		if(appLanguage.equals("es")){
+			languageValue.setText("Español");
+		}else{
+			languageValue.setText("English");
+		}
+		languageBtn=(ImageView)findViewById(R.id.language_btn);
+		languageBtn.setOnClickListener(this);
 	}
 
 	@Override
@@ -141,7 +155,9 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		case R.id.acc_select:
 			pw.showAsDropDown(parent, 15, -4);
 			break;
-
+		case R.id.language_btn:
+			showSelectLanguage();
+			break;
 		default:
 			break;
 		}
@@ -194,27 +210,52 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 	
+	private void showSelectLanguage(){
+		final String[] items = { "English","Español"};
+	    AlertDialog.Builder listDialog = 
+	        new AlertDialog.Builder(LoginNewActivity.this);
+	   // listDialog.setTitle("我是一个列表Dialog");
+	    listDialog.setItems(items, new DialogInterface.OnClickListener() {
+	        @Override
+	        public void onClick(DialogInterface dialog, int which) {
+	            if(which==0){
+	            	languageValue.setText("English");
+	    			WApplication.sp.set("app_language", "en");
+	            }else if(which==1){
+	            	languageValue.setText("Español");
+	    			WApplication.sp.set("app_language", "es");
+	            }
+	            reStartApp();
+	        }
+	    });
+	    listDialog.show();
+	}
+	
+	private void reStartApp(){
+		Intent intent = new Intent(LoginNewActivity.this, LoginNewActivity.class);
+		 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		startActivity(intent);
+		 // 杀掉进程
+		 android.os.Process.killProcess(android.os.Process.myPid());
+		 System.exit(0);
+	}
+	
 	void test(){
-		final EditText et = new EditText(this);  
-        
-		new AlertDialog.Builder(this).setTitle("搜索")  
-		.setIcon(android.R.drawable.ic_dialog_info)  
-		.setView(et)  
-		.setPositiveButton("确定", new DialogInterface.OnClickListener() {  
-		    public void onClick(DialogInterface dialog, int which) {  
-		    String input = et.getText().toString();  
-		    if (input.equals("")) {  
-		        Toast.makeText(getApplicationContext(), "搜索内容不能为空！" + input, Toast.LENGTH_LONG).show();  
-		    }  
-		    else {  
-
-		    }  
-		    }
-		}
-		    
-		)
-		.setNegativeButton("取消", null)  
-		.show();  
+		 final String[] items = { "我是1","我是2","我是3","我是4" };
+		    AlertDialog.Builder listDialog = 
+		        new AlertDialog.Builder(LoginNewActivity.this);
+		   // listDialog.setTitle("我是一个列表Dialog");
+		    listDialog.setItems(items, new DialogInterface.OnClickListener() {
+		        @Override
+		        public void onClick(DialogInterface dialog, int which) {
+		            // which 下标从0开始
+		            // ...To-do
+		            Toast.makeText(LoginNewActivity.this, 
+		                "你点击了" + items[which], 
+		                Toast.LENGTH_SHORT).show();
+		        }
+		    });
+		    listDialog.show();
 	}
 	
 

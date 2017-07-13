@@ -2709,7 +2709,25 @@ com.wzb.hhu.activity.AmmeterListActivity$AmmeterAdapter -> com.wzb.hhu.activity.
     com.wzb.hhu.bean.AmmeterBean getAmmeterBean(int) -> a
     void clearAlldata() -> a
     void updateList(java.util.List) -> a
-com.wzb.hhu.activity.BaseActivity -> com.wzb.hhu.activity.r:
+com.wzb.hhu.activity.ApplicationSetting -> com.wzb.hhu.activity.ApplicationSetting:
+    android.widget.ImageView backView -> a
+    android.widget.TextView titleView -> b
+    android.widget.ImageView btView -> c
+    android.widget.ImageView titleMeterList -> d
+    android.content.Context mContext -> f
+    android.widget.TextView languageTv -> g
+    void onCreate(android.os.Bundle) -> onCreate
+    void initTitleView() -> a
+    void initView() -> b
+    boolean onContextItemSelected(android.view.MenuItem) -> onContextItemSelected
+    void reStartApp() -> c
+com.wzb.hhu.activity.ApplicationSetting$1 -> com.wzb.hhu.activity.r:
+    com.wzb.hhu.activity.ApplicationSetting this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.wzb.hhu.activity.ApplicationSetting$2 -> com.wzb.hhu.activity.s:
+    com.wzb.hhu.activity.ApplicationSetting this$0 -> a
+    void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
+com.wzb.hhu.activity.BaseActivity -> com.wzb.hhu.activity.t:
     com.wzb.hhu.activity.BaseActivity instance -> e
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
@@ -2717,6 +2735,7 @@ com.wzb.hhu.activity.BaseActivity -> com.wzb.hhu.activity.r:
     void onPause() -> onPause
     void onStop() -> onStop
     void onDestroy() -> onDestroy
+    void updateAppLanguage() -> a
 com.wzb.hhu.activity.EventLogActivity -> com.wzb.hhu.activity.EventLogActivity:
     android.widget.ImageView backView -> c
     android.widget.TextView titleView -> d
@@ -2724,16 +2743,15 @@ com.wzb.hhu.activity.EventLogActivity -> com.wzb.hhu.activity.EventLogActivity:
     android.widget.ImageView titleMeterList -> g
     android.content.Context mContext -> h
     android.widget.Button readBtn -> i
-    android.widget.Button stopBtn -> j
-    android.widget.Button exportBtn -> k
-    android.widget.Button returnBtn -> l
+    android.widget.Button exportBtn -> j
+    android.widget.Button returnBtn -> k
     java.util.ArrayList selectedItem -> a
-    com.wzb.hhu.activity.EventLogActivity$EventAdapter eventAdapter -> m
-    android.widget.ListView eventListView -> n
-    java.lang.String meterSn -> o
-    java.lang.String meterPw -> p
-    int curComCmd -> q
-    int curItemId -> r
+    com.wzb.hhu.activity.EventLogActivity$EventAdapter eventAdapter -> l
+    android.widget.ListView eventListView -> m
+    java.lang.String meterSn -> n
+    java.lang.String meterPw -> o
+    int curComCmd -> p
+    int curItemId -> q
     android.os.Handler mHandler -> b
     void onCreate(android.os.Bundle) -> onCreate
     void initView() -> c
@@ -2746,10 +2764,11 @@ com.wzb.hhu.activity.EventLogActivity -> com.wzb.hhu.activity.EventLogActivity:
     void sendDataItemCmd() -> h
     void sendPassword(java.lang.String) -> a
     void setBtListener() -> i
+    void exportData() -> j
     void onClick(android.view.View) -> onClick
-    void initCom() -> j
-    void calSelectedItem() -> k
-    void test_read() -> l
+    void initCom() -> k
+    void calSelectedItem() -> l
+    void test_read() -> m
     void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
     void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
     void access$0(com.wzb.hhu.activity.EventLogActivity) -> a
@@ -2762,33 +2781,33 @@ com.wzb.hhu.activity.EventLogActivity -> com.wzb.hhu.activity.EventLogActivity:
     void access$7(com.wzb.hhu.activity.EventLogActivity) -> c
     com.wzb.hhu.activity.EventLogActivity$EventAdapter access$8(com.wzb.hhu.activity.EventLogActivity) -> d
     int access$9() -> b
-com.wzb.hhu.activity.EventLogActivity$1 -> com.wzb.hhu.activity.s:
+com.wzb.hhu.activity.EventLogActivity$1 -> com.wzb.hhu.activity.u:
     com.wzb.hhu.activity.EventLogActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wzb.hhu.activity.EventLogActivity$2 -> com.wzb.hhu.activity.t:
+com.wzb.hhu.activity.EventLogActivity$2 -> com.wzb.hhu.activity.v:
     com.wzb.hhu.activity.EventLogActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.wzb.hhu.activity.EventLogActivity$3 -> com.wzb.hhu.activity.u:
+com.wzb.hhu.activity.EventLogActivity$3 -> com.wzb.hhu.activity.w:
     com.wzb.hhu.activity.EventLogActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.EventLogActivity$4 -> com.wzb.hhu.activity.v:
+com.wzb.hhu.activity.EventLogActivity$4 -> com.wzb.hhu.activity.x:
     com.wzb.hhu.activity.EventLogActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.EventLogActivity$5 -> com.wzb.hhu.activity.w:
+com.wzb.hhu.activity.EventLogActivity$5 -> com.wzb.hhu.activity.y:
     com.wzb.hhu.activity.EventLogActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.EventLogActivity$6 -> com.wzb.hhu.activity.x:
+com.wzb.hhu.activity.EventLogActivity$6 -> com.wzb.hhu.activity.z:
     com.wzb.hhu.activity.EventLogActivity this$0 -> a
     void onDataReceived(byte[],java.lang.String) -> a
-com.wzb.hhu.activity.EventLogActivity$7 -> com.wzb.hhu.activity.y:
+com.wzb.hhu.activity.EventLogActivity$7 -> com.wzb.hhu.activity.aa:
     com.wzb.hhu.activity.EventLogActivity this$0 -> a
     void onDeviceConnected(java.lang.String,java.lang.String) -> a
     void onDeviceDisconnected() -> a
     void onDeviceConnectionFailed() -> b
-com.wzb.hhu.activity.EventLogActivity$8 -> com.wzb.hhu.activity.z:
+com.wzb.hhu.activity.EventLogActivity$8 -> com.wzb.hhu.activity.ab:
     com.wzb.hhu.activity.EventLogActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.EventLogActivity$EventAdapter -> com.wzb.hhu.activity.aa:
+com.wzb.hhu.activity.EventLogActivity$EventAdapter -> com.wzb.hhu.activity.ac:
     java.util.List dataItems -> a
     com.wzb.hhu.activity.EventLogActivity this$0 -> b
     int getCount() -> getCount
@@ -2823,7 +2842,7 @@ com.wzb.hhu.activity.LoginNewActivity -> com.wzb.hhu.activity.LoginNewActivity:
     void exit() -> c
     android.widget.EditText access$0(com.wzb.hhu.activity.LoginNewActivity) -> a
     android.widget.PopupWindow access$1(com.wzb.hhu.activity.LoginNewActivity) -> b
-com.wzb.hhu.activity.LoginNewActivity$1 -> com.wzb.hhu.activity.ab:
+com.wzb.hhu.activity.LoginNewActivity$1 -> com.wzb.hhu.activity.ad:
     com.wzb.hhu.activity.LoginNewActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 com.wzb.hhu.activity.MainActivity -> com.wzb.hhu.activity.MainActivity:
@@ -2840,7 +2859,7 @@ com.wzb.hhu.activity.MainActivity -> com.wzb.hhu.activity.MainActivity:
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void onClick(android.view.View) -> onClick
     void exit() -> b
-com.wzb.hhu.activity.MainActivity$MyItemClickListener -> com.wzb.hhu.activity.ac:
+com.wzb.hhu.activity.MainActivity$MyItemClickListener -> com.wzb.hhu.activity.ae:
     com.wzb.hhu.activity.MainActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 com.wzb.hhu.activity.MeterAddActivity -> com.wzb.hhu.activity.MeterAddActivity:
@@ -2863,16 +2882,16 @@ com.wzb.hhu.activity.MeterAddActivity -> com.wzb.hhu.activity.MeterAddActivity:
     void onClick(android.view.View) -> onClick
     android.widget.CheckBox access$0(com.wzb.hhu.activity.MeterAddActivity) -> a
     android.widget.CheckBox access$1(com.wzb.hhu.activity.MeterAddActivity) -> b
-com.wzb.hhu.activity.MeterAddActivity$1 -> com.wzb.hhu.activity.ad:
+com.wzb.hhu.activity.MeterAddActivity$1 -> com.wzb.hhu.activity.af:
     com.wzb.hhu.activity.MeterAddActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.wzb.hhu.activity.MeterAddActivity$2 -> com.wzb.hhu.activity.ae:
+com.wzb.hhu.activity.MeterAddActivity$2 -> com.wzb.hhu.activity.ag:
     com.wzb.hhu.activity.MeterAddActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.wzb.hhu.activity.MeterAddActivity$3 -> com.wzb.hhu.activity.af:
+com.wzb.hhu.activity.MeterAddActivity$3 -> com.wzb.hhu.activity.ah:
     com.wzb.hhu.activity.MeterAddActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.MeterAddActivity$4 -> com.wzb.hhu.activity.ag:
+com.wzb.hhu.activity.MeterAddActivity$4 -> com.wzb.hhu.activity.ai:
     com.wzb.hhu.activity.MeterAddActivity this$0 -> a
     void run() -> run
 com.wzb.hhu.activity.MeterEditActivity -> com.wzb.hhu.activity.MeterEditActivity:
@@ -2898,16 +2917,16 @@ com.wzb.hhu.activity.MeterEditActivity -> com.wzb.hhu.activity.MeterEditActivity
     android.widget.CheckBox access$0(com.wzb.hhu.activity.MeterEditActivity) -> a
     android.widget.CheckBox access$1(com.wzb.hhu.activity.MeterEditActivity) -> b
     void access$2(com.wzb.hhu.activity.MeterEditActivity) -> c
-com.wzb.hhu.activity.MeterEditActivity$1 -> com.wzb.hhu.activity.ah:
+com.wzb.hhu.activity.MeterEditActivity$1 -> com.wzb.hhu.activity.aj:
     com.wzb.hhu.activity.MeterEditActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.wzb.hhu.activity.MeterEditActivity$2 -> com.wzb.hhu.activity.ai:
+com.wzb.hhu.activity.MeterEditActivity$2 -> com.wzb.hhu.activity.ak:
     com.wzb.hhu.activity.MeterEditActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.wzb.hhu.activity.MeterEditActivity$3 -> com.wzb.hhu.activity.aj:
+com.wzb.hhu.activity.MeterEditActivity$3 -> com.wzb.hhu.activity.al:
     com.wzb.hhu.activity.MeterEditActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.MeterEditActivity$4 -> com.wzb.hhu.activity.ak:
+com.wzb.hhu.activity.MeterEditActivity$4 -> com.wzb.hhu.activity.am:
     com.wzb.hhu.activity.MeterEditActivity this$0 -> a
     void run() -> run
 com.wzb.hhu.activity.MeterSearchActivity -> com.wzb.hhu.activity.MeterSearchActivity:
@@ -2953,46 +2972,46 @@ com.wzb.hhu.activity.MeterSearchActivity -> com.wzb.hhu.activity.MeterSearchActi
     void access$9(com.wzb.hhu.activity.MeterSearchActivity,java.lang.String) -> c
     android.content.Context access$10(com.wzb.hhu.activity.MeterSearchActivity) -> f
     void access$11(com.wzb.hhu.activity.MeterSearchActivity) -> g
-com.wzb.hhu.activity.MeterSearchActivity$1 -> com.wzb.hhu.activity.al:
+com.wzb.hhu.activity.MeterSearchActivity$1 -> com.wzb.hhu.activity.an:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.MeterSearchActivity$10 -> com.wzb.hhu.activity.am:
+com.wzb.hhu.activity.MeterSearchActivity$10 -> com.wzb.hhu.activity.ao:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.MeterSearchActivity$11 -> com.wzb.hhu.activity.an:
+com.wzb.hhu.activity.MeterSearchActivity$11 -> com.wzb.hhu.activity.ap:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.MeterSearchActivity$2 -> com.wzb.hhu.activity.ao:
+com.wzb.hhu.activity.MeterSearchActivity$2 -> com.wzb.hhu.activity.aq:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.MeterSearchActivity$3 -> com.wzb.hhu.activity.ap:
+com.wzb.hhu.activity.MeterSearchActivity$3 -> com.wzb.hhu.activity.ar:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wzb.hhu.activity.MeterSearchActivity$4 -> com.wzb.hhu.activity.aq:
+com.wzb.hhu.activity.MeterSearchActivity$4 -> com.wzb.hhu.activity.as:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.wzb.hhu.activity.MeterSearchActivity$5 -> com.wzb.hhu.activity.ar:
+com.wzb.hhu.activity.MeterSearchActivity$5 -> com.wzb.hhu.activity.at:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
-com.wzb.hhu.activity.MeterSearchActivity$6 -> com.wzb.hhu.activity.as:
+com.wzb.hhu.activity.MeterSearchActivity$6 -> com.wzb.hhu.activity.au:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
     com.wzb.hhu.activity.MeterSearchActivity access$0(com.wzb.hhu.activity.MeterSearchActivity$6) -> a
-com.wzb.hhu.activity.MeterSearchActivity$6$1 -> com.wzb.hhu.activity.at:
+com.wzb.hhu.activity.MeterSearchActivity$6$1 -> com.wzb.hhu.activity.av:
     com.wzb.hhu.activity.MeterSearchActivity$6 this$1 -> a
     void run() -> run
-com.wzb.hhu.activity.MeterSearchActivity$7 -> com.wzb.hhu.activity.au:
+com.wzb.hhu.activity.MeterSearchActivity$7 -> com.wzb.hhu.activity.aw:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.MeterSearchActivity$8 -> com.wzb.hhu.activity.av:
+com.wzb.hhu.activity.MeterSearchActivity$8 -> com.wzb.hhu.activity.ax:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void onDataReceived(byte[],java.lang.String) -> a
-com.wzb.hhu.activity.MeterSearchActivity$9 -> com.wzb.hhu.activity.aw:
+com.wzb.hhu.activity.MeterSearchActivity$9 -> com.wzb.hhu.activity.ay:
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> a
     void onDeviceConnected(java.lang.String,java.lang.String) -> a
     void onDeviceDisconnected() -> a
     void onDeviceConnectionFailed() -> b
-com.wzb.hhu.activity.MeterSearchActivity$AmmeterAdapter -> com.wzb.hhu.activity.ax:
+com.wzb.hhu.activity.MeterSearchActivity$AmmeterAdapter -> com.wzb.hhu.activity.az:
     java.util.List ammeterItems -> a
     com.wzb.hhu.activity.MeterSearchActivity this$0 -> b
     int getCount() -> getCount
@@ -3007,16 +3026,15 @@ com.wzb.hhu.activity.ReadDataActivity -> com.wzb.hhu.activity.ReadDataActivity:
     android.widget.ImageView btView -> k
     android.content.Context mContext -> l
     android.widget.Button readBtn -> m
-    android.widget.Button stopBtn -> n
-    android.widget.Button exportBtn -> o
-    android.widget.Button returnBtn -> p
+    android.widget.Button exportBtn -> n
+    android.widget.Button returnBtn -> o
     java.util.ArrayList selectedItem -> a
-    com.wzb.hhu.activity.ReadDataActivity$DataAdapter ElecAdapter -> q
-    android.widget.ListView ElecListView -> r
-    java.lang.String meterSn -> s
-    java.lang.String meterPw -> t
-    int curComCmd -> u
-    int curItemId -> v
+    com.wzb.hhu.activity.ReadDataActivity$DataAdapter ElecAdapter -> p
+    android.widget.ListView ElecListView -> q
+    java.lang.String meterSn -> r
+    java.lang.String meterPw -> s
+    int curComCmd -> t
+    int curItemId -> u
     java.util.List mdataItems -> b
     android.graphics.drawable.Drawable drawableUp -> c
     android.graphics.drawable.Drawable drawableDown -> d
@@ -3033,10 +3051,11 @@ com.wzb.hhu.activity.ReadDataActivity -> com.wzb.hhu.activity.ReadDataActivity:
     void sendDataItemCmd() -> h
     void sendPassword(java.lang.String) -> a
     void setBtListener() -> i
+    void exportData() -> j
     void onClick(android.view.View) -> onClick
-    void initCom() -> j
-    void calSelectedItem() -> k
-    void test_read() -> l
+    void initCom() -> k
+    void calSelectedItem() -> l
+    void test_read() -> m
     void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
     void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
     void access$0(com.wzb.hhu.activity.ReadDataActivity) -> a
@@ -3049,33 +3068,33 @@ com.wzb.hhu.activity.ReadDataActivity -> com.wzb.hhu.activity.ReadDataActivity:
     void access$7(com.wzb.hhu.activity.ReadDataActivity) -> c
     com.wzb.hhu.activity.ReadDataActivity$DataAdapter access$8(com.wzb.hhu.activity.ReadDataActivity) -> d
     int access$9() -> b
-com.wzb.hhu.activity.ReadDataActivity$1 -> com.wzb.hhu.activity.ay:
+com.wzb.hhu.activity.ReadDataActivity$1 -> com.wzb.hhu.activity.ba:
     com.wzb.hhu.activity.ReadDataActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wzb.hhu.activity.ReadDataActivity$2 -> com.wzb.hhu.activity.az:
+com.wzb.hhu.activity.ReadDataActivity$2 -> com.wzb.hhu.activity.bb:
     com.wzb.hhu.activity.ReadDataActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.ReadDataActivity$3 -> com.wzb.hhu.activity.ba:
+com.wzb.hhu.activity.ReadDataActivity$3 -> com.wzb.hhu.activity.bc:
     com.wzb.hhu.activity.ReadDataActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.wzb.hhu.activity.ReadDataActivity$4 -> com.wzb.hhu.activity.bb:
+com.wzb.hhu.activity.ReadDataActivity$4 -> com.wzb.hhu.activity.bd:
     com.wzb.hhu.activity.ReadDataActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.ReadDataActivity$5 -> com.wzb.hhu.activity.bc:
+com.wzb.hhu.activity.ReadDataActivity$5 -> com.wzb.hhu.activity.be:
     com.wzb.hhu.activity.ReadDataActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.ReadDataActivity$6 -> com.wzb.hhu.activity.bd:
+com.wzb.hhu.activity.ReadDataActivity$6 -> com.wzb.hhu.activity.bf:
     com.wzb.hhu.activity.ReadDataActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.ReadDataActivity$7 -> com.wzb.hhu.activity.be:
+com.wzb.hhu.activity.ReadDataActivity$7 -> com.wzb.hhu.activity.bg:
     com.wzb.hhu.activity.ReadDataActivity this$0 -> a
     void onDataReceived(byte[],java.lang.String) -> a
-com.wzb.hhu.activity.ReadDataActivity$8 -> com.wzb.hhu.activity.bf:
+com.wzb.hhu.activity.ReadDataActivity$8 -> com.wzb.hhu.activity.bh:
     com.wzb.hhu.activity.ReadDataActivity this$0 -> a
     void onDeviceConnected(java.lang.String,java.lang.String) -> a
     void onDeviceDisconnected() -> a
     void onDeviceConnectionFailed() -> b
-com.wzb.hhu.activity.ReadDataActivity$DataAdapter -> com.wzb.hhu.activity.bg:
+com.wzb.hhu.activity.ReadDataActivity$DataAdapter -> com.wzb.hhu.activity.bi:
     java.util.List dataItems -> a
     com.wzb.hhu.activity.ReadDataActivity this$0 -> b
     int getCount() -> getCount
@@ -3099,100 +3118,121 @@ com.wzb.hhu.activity.ReadDataActivity$DataAdapter -> com.wzb.hhu.activity.bg:
     void setCurrentItemsHide(java.lang.Boolean) -> m
     void setPowerItemsHide(java.lang.Boolean) -> n
     com.wzb.hhu.activity.ReadDataActivity access$0(com.wzb.hhu.activity.ReadDataActivity$DataAdapter) -> a
-com.wzb.hhu.activity.ReadDataActivity$DataAdapter$1 -> com.wzb.hhu.activity.bh:
+com.wzb.hhu.activity.ReadDataActivity$DataAdapter$1 -> com.wzb.hhu.activity.bj:
     com.wzb.hhu.activity.ReadDataActivity$DataAdapter this$1 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.ReadDataActivity$DataAdapter$2 -> com.wzb.hhu.activity.bi:
+com.wzb.hhu.activity.ReadDataActivity$DataAdapter$2 -> com.wzb.hhu.activity.bk:
     com.wzb.hhu.activity.ReadDataActivity$DataAdapter this$1 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.ReadDataActivity$DataAdapter$3 -> com.wzb.hhu.activity.bj:
+com.wzb.hhu.activity.ReadDataActivity$DataAdapter$3 -> com.wzb.hhu.activity.bl:
     com.wzb.hhu.activity.ReadDataActivity$DataAdapter this$1 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.ReadDataActivity$DataAdapter$4 -> com.wzb.hhu.activity.bk:
+com.wzb.hhu.activity.ReadDataActivity$DataAdapter$4 -> com.wzb.hhu.activity.bm:
     com.wzb.hhu.activity.ReadDataActivity$DataAdapter this$1 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.ReadDataActivity$DataAdapter$5 -> com.wzb.hhu.activity.bl:
+com.wzb.hhu.activity.ReadDataActivity$DataAdapter$5 -> com.wzb.hhu.activity.bn:
     com.wzb.hhu.activity.ReadDataActivity$DataAdapter this$1 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.ReadDataActivity$DataAdapter$6 -> com.wzb.hhu.activity.bm:
+com.wzb.hhu.activity.ReadDataActivity$DataAdapter$6 -> com.wzb.hhu.activity.bo:
     com.wzb.hhu.activity.ReadDataActivity$DataAdapter this$1 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.ReadDataActivity$DataAdapter$7 -> com.wzb.hhu.activity.bn:
+com.wzb.hhu.activity.ReadDataActivity$DataAdapter$7 -> com.wzb.hhu.activity.bp:
     com.wzb.hhu.activity.ReadDataActivity$DataAdapter this$1 -> a
     void onClick(android.view.View) -> onClick
 com.wzb.hhu.activity.SettingActivity -> com.wzb.hhu.activity.SettingActivity:
-    android.widget.ImageView backView -> c
-    android.widget.TextView titleView -> d
-    android.widget.ImageView btView -> f
-    android.widget.ImageView titleMeterList -> g
-    android.content.Context mContext -> h
-    android.widget.Button readBtn -> i
-    android.widget.Button stopBtn -> j
-    android.widget.Button exportBtn -> k
-    android.widget.Button returnBtn -> l
+    android.widget.ImageView backView -> d
+    android.widget.TextView titleView -> f
+    android.widget.ImageView btView -> g
+    android.widget.ImageView titleMeterList -> h
+    android.content.Context mContext -> i
+    android.widget.Button readBtn -> j
+    android.widget.Button stopBtn -> k
+    android.widget.Button exportBtn -> l
+    android.widget.Button returnBtn -> m
     java.util.ArrayList selectedItem -> a
-    com.wzb.hhu.activity.SettingActivity$SettingAdapter settingAdapter -> m
-    android.widget.ListView settingListView -> n
-    java.lang.String meterSn -> o
-    java.lang.String meterPw -> p
-    int curComCmd -> q
-    int curItemId -> r
+    com.wzb.hhu.activity.SettingActivity$SettingAdapter settingAdapter -> n
+    android.widget.ListView settingListView -> o
+    java.lang.String meterSn -> p
+    java.lang.String meterPw -> q
+    int curComCmd -> r
+    int curItemId -> s
+    java.lang.Boolean isRead -> t
     android.os.Handler mHandler -> b
+    android.view.View$OnClickListener waitcancleListener -> c
     void onCreate(android.os.Bundle) -> onCreate
-    void initView() -> c
-    void initAdapter() -> d
-    void initTitleView() -> e
+    void initView() -> d
+    void editSettingValue(int) -> c
+    void initAdapter() -> e
+    void initTitleView() -> f
     void onResume() -> onResume
-    void updateBtState() -> f
-    void closeCon() -> g
+    void updateBtState() -> g
+    void closeCon() -> h
     void updateUI(java.lang.String,int) -> a
-    void sendDataItemCmd() -> h
+    void sendDataItemCmd() -> i
     void sendPassword(java.lang.String) -> a
-    void setBtListener() -> i
+    void setBtListener() -> j
+    void exportData() -> k
     void onClick(android.view.View) -> onClick
-    void initCom() -> j
-    void calSelectedItem() -> k
-    void test_read() -> l
+    void sendWriteDataItemCmd() -> l
+    void initCom() -> m
+    void calSelectedItem() -> n
+    void calWriteSelectedItem() -> o
+    void test_read() -> p
+    void test_write() -> q
     void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
     void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
     void access$0(com.wzb.hhu.activity.SettingActivity) -> a
     void access$1(int) -> a
     void access$2(com.wzb.hhu.activity.SettingActivity,java.lang.String) -> a
-    void access$3(int) -> b
-    void access$4(com.wzb.hhu.activity.SettingActivity) -> b
-    int access$5() -> a
-    void access$6(com.wzb.hhu.activity.SettingActivity,java.lang.String,int) -> a
-    void access$7(com.wzb.hhu.activity.SettingActivity) -> c
-    com.wzb.hhu.activity.SettingActivity$SettingAdapter access$8(com.wzb.hhu.activity.SettingActivity) -> d
-    android.content.Context access$9(com.wzb.hhu.activity.SettingActivity) -> e
-    int access$10() -> b
-com.wzb.hhu.activity.SettingActivity$1 -> com.wzb.hhu.activity.bo:
+    java.lang.Boolean access$3() -> a
+    void access$4(int) -> b
+    void access$5(com.wzb.hhu.activity.SettingActivity) -> b
+    void access$6(com.wzb.hhu.activity.SettingActivity) -> c
+    int access$7() -> b
+    void access$8(com.wzb.hhu.activity.SettingActivity,java.lang.String,int) -> a
+    void access$9(com.wzb.hhu.activity.SettingActivity) -> d
+    com.wzb.hhu.activity.SettingActivity$SettingAdapter access$10(com.wzb.hhu.activity.SettingActivity) -> e
+    void access$11(com.wzb.hhu.activity.SettingActivity,int) -> a
+    android.content.Context access$12(com.wzb.hhu.activity.SettingActivity) -> f
+    int access$13() -> c
+com.wzb.hhu.activity.SettingActivity$1 -> com.wzb.hhu.activity.bq:
     com.wzb.hhu.activity.SettingActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wzb.hhu.activity.SettingActivity$2 -> com.wzb.hhu.activity.bp:
-    com.wzb.hhu.activity.SettingActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.wzb.hhu.activity.SettingActivity$3 -> com.wzb.hhu.activity.bq:
-    com.wzb.hhu.activity.SettingActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.SettingActivity$4 -> com.wzb.hhu.activity.br:
-    com.wzb.hhu.activity.SettingActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.SettingActivity$5 -> com.wzb.hhu.activity.bs:
-    com.wzb.hhu.activity.SettingActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.SettingActivity$6 -> com.wzb.hhu.activity.bt:
-    com.wzb.hhu.activity.SettingActivity this$0 -> a
-    void onDataReceived(byte[],java.lang.String) -> a
-com.wzb.hhu.activity.SettingActivity$7 -> com.wzb.hhu.activity.bu:
+com.wzb.hhu.activity.SettingActivity$10 -> com.wzb.hhu.activity.br:
     com.wzb.hhu.activity.SettingActivity this$0 -> a
     void onDeviceConnected(java.lang.String,java.lang.String) -> a
     void onDeviceDisconnected() -> a
     void onDeviceConnectionFailed() -> b
-com.wzb.hhu.activity.SettingActivity$8 -> com.wzb.hhu.activity.bv:
+com.wzb.hhu.activity.SettingActivity$11 -> com.wzb.hhu.activity.bs:
     com.wzb.hhu.activity.SettingActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.SettingActivity$SettingAdapter -> com.wzb.hhu.activity.bw:
+com.wzb.hhu.activity.SettingActivity$2 -> com.wzb.hhu.activity.bt:
+    com.wzb.hhu.activity.SettingActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.wzb.hhu.activity.SettingActivity$3 -> com.wzb.hhu.activity.bu:
+    com.wzb.hhu.activity.SettingActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+com.wzb.hhu.activity.SettingActivity$4 -> com.wzb.hhu.activity.bv:
+    com.wzb.hhu.activity.SettingActivity this$0 -> a
+    boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
+com.wzb.hhu.activity.SettingActivity$5 -> com.wzb.hhu.activity.bw:
+    com.wzb.hhu.activity.SettingActivity this$0 -> a
+    android.widget.EditText val$et -> b
+    int val$id -> c
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.wzb.hhu.activity.SettingActivity$6 -> com.wzb.hhu.activity.bx:
+    com.wzb.hhu.activity.SettingActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.wzb.hhu.activity.SettingActivity$7 -> com.wzb.hhu.activity.by:
+    com.wzb.hhu.activity.SettingActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.wzb.hhu.activity.SettingActivity$8 -> com.wzb.hhu.activity.bz:
+    com.wzb.hhu.activity.SettingActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.wzb.hhu.activity.SettingActivity$9 -> com.wzb.hhu.activity.ca:
+    com.wzb.hhu.activity.SettingActivity this$0 -> a
+    void onDataReceived(byte[],java.lang.String) -> a
+com.wzb.hhu.activity.SettingActivity$SettingAdapter -> com.wzb.hhu.activity.cb:
     java.util.List dataItems -> a
     com.wzb.hhu.activity.SettingActivity this$0 -> b
     int getCount() -> getCount
@@ -3263,36 +3303,36 @@ com.wzb.hhu.activity.SettingTimeActivity -> com.wzb.hhu.activity.SettingTimeActi
     int access$11() -> e
     void access$12(com.wzb.hhu.activity.SettingTimeActivity,java.lang.String,java.lang.String,java.lang.String) -> a
     void access$13(com.wzb.hhu.activity.SettingTimeActivity,java.lang.String,java.lang.String) -> a
-com.wzb.hhu.activity.SettingTimeActivity$1 -> com.wzb.hhu.activity.bx:
+com.wzb.hhu.activity.SettingTimeActivity$1 -> com.wzb.hhu.activity.cc:
     com.wzb.hhu.activity.SettingTimeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wzb.hhu.activity.SettingTimeActivity$10 -> com.wzb.hhu.activity.by:
+com.wzb.hhu.activity.SettingTimeActivity$10 -> com.wzb.hhu.activity.cd:
     com.wzb.hhu.activity.SettingTimeActivity this$0 -> a
     void onTimePicked(java.lang.String,java.lang.String) -> onTimePicked
-com.wzb.hhu.activity.SettingTimeActivity$2 -> com.wzb.hhu.activity.bz:
+com.wzb.hhu.activity.SettingTimeActivity$2 -> com.wzb.hhu.activity.ce:
     com.wzb.hhu.activity.SettingTimeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.SettingTimeActivity$3 -> com.wzb.hhu.activity.ca:
+com.wzb.hhu.activity.SettingTimeActivity$3 -> com.wzb.hhu.activity.cf:
     com.wzb.hhu.activity.SettingTimeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.SettingTimeActivity$4 -> com.wzb.hhu.activity.cb:
+com.wzb.hhu.activity.SettingTimeActivity$4 -> com.wzb.hhu.activity.cg:
     com.wzb.hhu.activity.SettingTimeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.SettingTimeActivity$5 -> com.wzb.hhu.activity.cc:
+com.wzb.hhu.activity.SettingTimeActivity$5 -> com.wzb.hhu.activity.ch:
     com.wzb.hhu.activity.SettingTimeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.SettingTimeActivity$6 -> com.wzb.hhu.activity.cd:
+com.wzb.hhu.activity.SettingTimeActivity$6 -> com.wzb.hhu.activity.ci:
     com.wzb.hhu.activity.SettingTimeActivity this$0 -> a
     void onDataReceived(byte[],java.lang.String) -> a
-com.wzb.hhu.activity.SettingTimeActivity$7 -> com.wzb.hhu.activity.ce:
+com.wzb.hhu.activity.SettingTimeActivity$7 -> com.wzb.hhu.activity.cj:
     com.wzb.hhu.activity.SettingTimeActivity this$0 -> a
     void onDeviceConnected(java.lang.String,java.lang.String) -> a
     void onDeviceDisconnected() -> a
     void onDeviceConnectionFailed() -> b
-com.wzb.hhu.activity.SettingTimeActivity$8 -> com.wzb.hhu.activity.cf:
+com.wzb.hhu.activity.SettingTimeActivity$8 -> com.wzb.hhu.activity.ck:
     com.wzb.hhu.activity.SettingTimeActivity this$0 -> a
     void onDatePicked(java.lang.String,java.lang.String,java.lang.String) -> onDatePicked
-com.wzb.hhu.activity.SettingTimeActivity$9 -> com.wzb.hhu.activity.cg:
+com.wzb.hhu.activity.SettingTimeActivity$9 -> com.wzb.hhu.activity.cl:
     com.wzb.hhu.activity.SettingTimeActivity this$0 -> a
     cn.qqtheme.framework.picker.DatePicker val$picker -> b
     void onYearWheeled(int,java.lang.String) -> onYearWheeled
@@ -3320,19 +3360,19 @@ com.wzb.hhu.activity.UserAddActivity -> com.wzb.hhu.activity.UserAddActivity:
     android.widget.CheckBox access$0(com.wzb.hhu.activity.UserAddActivity) -> a
     android.widget.CheckBox access$1(com.wzb.hhu.activity.UserAddActivity) -> b
     android.widget.CheckBox access$2(com.wzb.hhu.activity.UserAddActivity) -> c
-com.wzb.hhu.activity.UserAddActivity$1 -> com.wzb.hhu.activity.ch:
+com.wzb.hhu.activity.UserAddActivity$1 -> com.wzb.hhu.activity.cm:
     com.wzb.hhu.activity.UserAddActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.wzb.hhu.activity.UserAddActivity$2 -> com.wzb.hhu.activity.ci:
+com.wzb.hhu.activity.UserAddActivity$2 -> com.wzb.hhu.activity.cn:
     com.wzb.hhu.activity.UserAddActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.wzb.hhu.activity.UserAddActivity$3 -> com.wzb.hhu.activity.cj:
+com.wzb.hhu.activity.UserAddActivity$3 -> com.wzb.hhu.activity.co:
     com.wzb.hhu.activity.UserAddActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.wzb.hhu.activity.UserAddActivity$4 -> com.wzb.hhu.activity.ck:
+com.wzb.hhu.activity.UserAddActivity$4 -> com.wzb.hhu.activity.cp:
     com.wzb.hhu.activity.UserAddActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.UserAddActivity$5 -> com.wzb.hhu.activity.cl:
+com.wzb.hhu.activity.UserAddActivity$5 -> com.wzb.hhu.activity.cq:
     com.wzb.hhu.activity.UserAddActivity this$0 -> a
     void run() -> run
 com.wzb.hhu.activity.UserEditActivity -> com.wzb.hhu.activity.UserEditActivity:
@@ -3361,19 +3401,19 @@ com.wzb.hhu.activity.UserEditActivity -> com.wzb.hhu.activity.UserEditActivity:
     android.widget.CheckBox access$0(com.wzb.hhu.activity.UserEditActivity) -> a
     android.widget.CheckBox access$1(com.wzb.hhu.activity.UserEditActivity) -> b
     android.widget.CheckBox access$2(com.wzb.hhu.activity.UserEditActivity) -> c
-com.wzb.hhu.activity.UserEditActivity$1 -> com.wzb.hhu.activity.cm:
+com.wzb.hhu.activity.UserEditActivity$1 -> com.wzb.hhu.activity.cr:
     com.wzb.hhu.activity.UserEditActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.wzb.hhu.activity.UserEditActivity$2 -> com.wzb.hhu.activity.cn:
+com.wzb.hhu.activity.UserEditActivity$2 -> com.wzb.hhu.activity.cs:
     com.wzb.hhu.activity.UserEditActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.wzb.hhu.activity.UserEditActivity$3 -> com.wzb.hhu.activity.co:
+com.wzb.hhu.activity.UserEditActivity$3 -> com.wzb.hhu.activity.ct:
     com.wzb.hhu.activity.UserEditActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.wzb.hhu.activity.UserEditActivity$4 -> com.wzb.hhu.activity.cp:
+com.wzb.hhu.activity.UserEditActivity$4 -> com.wzb.hhu.activity.cu:
     com.wzb.hhu.activity.UserEditActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.UserEditActivity$5 -> com.wzb.hhu.activity.cq:
+com.wzb.hhu.activity.UserEditActivity$5 -> com.wzb.hhu.activity.cv:
     com.wzb.hhu.activity.UserEditActivity this$0 -> a
     void run() -> run
 com.wzb.hhu.activity.UserManagerActivity -> com.wzb.hhu.activity.UserManagerActivity:
@@ -3410,23 +3450,23 @@ com.wzb.hhu.activity.UserManagerActivity -> com.wzb.hhu.activity.UserManagerActi
     com.wzb.hhu.activity.UserManagerActivity$UserAdapter access$3(com.wzb.hhu.activity.UserManagerActivity) -> c
     int access$4(com.wzb.hhu.activity.UserManagerActivity) -> d
     int access$5(com.wzb.hhu.activity.UserManagerActivity) -> e
-com.wzb.hhu.activity.UserManagerActivity$1 -> com.wzb.hhu.activity.cr:
+com.wzb.hhu.activity.UserManagerActivity$1 -> com.wzb.hhu.activity.cw:
     com.wzb.hhu.activity.UserManagerActivity this$0 -> a
     void onClick(android.view.View) -> onClick
     com.wzb.hhu.activity.UserManagerActivity access$0(com.wzb.hhu.activity.UserManagerActivity$1) -> a
-com.wzb.hhu.activity.UserManagerActivity$1$1 -> com.wzb.hhu.activity.cs:
+com.wzb.hhu.activity.UserManagerActivity$1$1 -> com.wzb.hhu.activity.cx:
     com.wzb.hhu.activity.UserManagerActivity$1 this$1 -> a
     void run() -> run
-com.wzb.hhu.activity.UserManagerActivity$2 -> com.wzb.hhu.activity.ct:
+com.wzb.hhu.activity.UserManagerActivity$2 -> com.wzb.hhu.activity.cy:
     com.wzb.hhu.activity.UserManagerActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.UserManagerActivity$3 -> com.wzb.hhu.activity.cu:
+com.wzb.hhu.activity.UserManagerActivity$3 -> com.wzb.hhu.activity.cz:
     com.wzb.hhu.activity.UserManagerActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.wzb.hhu.activity.UserManagerActivity$4 -> com.wzb.hhu.activity.cv:
+com.wzb.hhu.activity.UserManagerActivity$4 -> com.wzb.hhu.activity.da:
     com.wzb.hhu.activity.UserManagerActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wzb.hhu.activity.UserManagerActivity$UserAdapter -> com.wzb.hhu.activity.cw:
+com.wzb.hhu.activity.UserManagerActivity$UserAdapter -> com.wzb.hhu.activity.db:
     java.util.List users -> a
     com.wzb.hhu.activity.UserManagerActivity this$0 -> b
     int getCount() -> getCount
@@ -3522,6 +3562,7 @@ com.wzb.hhu.util.CustomDialog -> com.wzb.hhu.b.b:
     android.widget.TextView waitAndCancelTxt -> c
     void showDefaultDialog(android.content.Context,android.view.View,boolean) -> a
     void showNoSizeDefaultDialog(android.content.Context,android.view.View,boolean) -> b
+    void showWaitDialog(android.content.Context) -> a
     void showWaitAndCancelDialog(android.content.Context,java.lang.String,android.view.View$OnClickListener) -> a
     void showWaitDialog(android.content.Context,java.lang.String) -> a
     void showOkAndCalcelDialog(android.content.Context,java.lang.String,java.lang.String,boolean,android.view.View$OnClickListener,android.view.View$OnClickListener) -> a
@@ -3531,20 +3572,21 @@ com.wzb.hhu.util.DatabaseHelper -> com.wzb.hhu.b.c:
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
 com.wzb.hhu.util.DbUtil -> com.wzb.hhu.b.d:
+    java.lang.String getUserLevel(java.lang.String) -> a
     void addUser(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     void updateUser(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> b
-    void deleteUser(java.lang.String) -> a
+    void deleteUser(java.lang.String) -> b
     long getAllUserCount() -> a
     java.util.ArrayList getAllUser() -> b
-    com.wzb.hhu.bean.UserBean getUser(java.lang.String) -> b
-    java.lang.String getUserPw(java.lang.String) -> c
-    com.wzb.hhu.bean.AmmeterBean getMeter(java.lang.String) -> d
+    com.wzb.hhu.bean.UserBean getUser(java.lang.String) -> c
+    java.lang.String getUserPw(java.lang.String) -> d
+    com.wzb.hhu.bean.AmmeterBean getMeter(java.lang.String) -> e
     java.util.ArrayList getSomeMeter(int) -> a
-    void deleteMeter(java.lang.String) -> e
+    void deleteMeter(java.lang.String) -> f
     void updateMeter(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> c
     void addMeter(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> d
     long getAllMeterCount() -> c
-    java.util.ArrayList searchSomeMeter(java.lang.String) -> f
+    java.util.ArrayList searchSomeMeter(java.lang.String) -> g
 com.wzb.hhu.util.EncryptionUtil -> com.wzb.hhu.b.e:
     java.lang.String md5Encrypt(java.lang.String) -> a
 com.wzb.hhu.util.LogUtil -> com.wzb.hhu.b.f:

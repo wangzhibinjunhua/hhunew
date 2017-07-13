@@ -76,7 +76,12 @@ public class WApplication extends Application {
 		LogUtil.openLog(); // 正式发布请注释次程序语句.
 		initAdminUser();
 		initBt();
+		addTestMeter();
 
+	}
+	
+	private void addTestMeter(){
+		DbUtil.addMeter("1234568", "87153668", "shenzhen", "1 Phrases");
 	}
 
 	private void initBt() {

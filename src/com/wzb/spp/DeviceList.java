@@ -261,6 +261,15 @@ public class DeviceList extends BaseActivity {
 		this.unregisterReceiver(mReceiver);
 		this.finish();
 	}
+	
+	Runnable timeout = new Runnable() {
+        @Override
+        public void run() {
+        	if (mBtAdapter.isDiscovering()) {
+				mBtAdapter.cancelDiscovery();
+			}
+        }
+    };
 
 	// Start device discover with the BluetoothAdapter
 	private void doDiscovery() {
@@ -270,6 +279,7 @@ public class DeviceList extends BaseActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//CustomDialog.dismissDialog();
+				mHandler.removeCallbacks(timeout);
 				if (mBtAdapter != null) {
 					mBtAdapter.cancelDiscovery();
 				}
@@ -310,6 +320,11 @@ public class DeviceList extends BaseActivity {
 
 		// Request discover from BluetoothAdapter
 		mBtAdapter.startDiscovery();
+		
+		
+		mHandler.removeCallbacks(timeout);
+		mHandler.postDelayed(timeout, 7*1000);
+		
 	}
 
 	// The on-click listener for all devices in the ListViews

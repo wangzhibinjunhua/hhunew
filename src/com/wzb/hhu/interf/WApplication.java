@@ -73,7 +73,7 @@ public class WApplication extends Application {
 		sp = new SharedPreferencesUtil(SP_NAME, SharedPreferencesUtil.PRIVATE, CONTEXT);
 		sp_user = new SharedPreferencesUtil("hhu_user", SharedPreferencesUtil.PRIVATE, CONTEXT);
 		db = new DatabaseHelper(CONTEXT, "hhu").getWritableDatabase();
-		LogUtil.openLog(); // 正式发布请注释次程序语句.
+		LogUtil.openLog(); // 正式发布请注释此程序语句.
 		initAdminUser();
 		initBt();
 		addTestMeter();
@@ -81,8 +81,11 @@ public class WApplication extends Application {
 	}
 	
 	private void addTestMeter(){
-		if(DbUtil.getAllMeterCount()==0){
+		if(DbUtil.getMeter("1234568")==null){
 			DbUtil.addMeter("1234568", "87153668", "shenzhen", "1 Phrases");
+		}
+		if(DbUtil.getMeter("123456789012")==null){
+			DbUtil.addMeter("123456789012", "38553283", "shenzhen", "3 Phrases");
 		}
 	}
 

@@ -280,6 +280,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				break;
 			case 0xff0002:
 				mHandler.removeCallbacks(timeout);
+				mHandler.removeCallbacks(sendtimeout);
 				updateUI(rString, selectedItem.get(curItemId));
 				curItemId++;
 				if (curItemId > selectedItem.size() - 1) {
@@ -288,6 +289,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 					closeCon();
 				} else {
 					sendDataItemCmd();
+					
 				}
 				break;
 			case 0xffff:
@@ -298,6 +300,14 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			}
 		};
 	};
+	
+	Runnable sendtimeout = new Runnable() {
+        @Override
+        public void run() {
+				CustomDialog.dismissDialog();
+				ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.read_fail));
+        }
+    };
 
 	private void closeCon() {
 		String string = "01423003";
@@ -310,7 +320,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		LogUtil.logMessage("wzb", "####: info:" + info);
 		String ainfo = Common.asciiToString(info);
 		LogUtil.logMessage("wzb", "***: ainfo:" + ainfo);
-		ElecAdapter.updateDataItem(id, ainfo, "Y");
+		if (id != 0 || id != 1 || id != 23 || id != 27 || id != 31 || id != 36)ElecAdapter.updateDataItem(id, ainfo, "Y");
 		ElecAdapter.notifyDataSetChanged();
 	}
 
@@ -332,6 +342,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		String sendData = "01523102" + Common.stringToAscii(cmd) + "282903";
 		String sendDataXor = Common.xorHex(sendData.substring(2));
 		IECCommand.sppSend(sendData + sendDataXor);
+		mHandler.postDelayed(sendtimeout, 2000);
 	}
 
 	private void sendPassword(String pw) {
@@ -455,7 +466,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		selectedItem.clear();
 		for (int i = 0; i < ElecAdapter.getCount(); i++) {
 			if (ElecAdapter.getDataItem(i).getItemSelect()) {
-				if (i != 0 || i != 1 || i != 23 || i != 27 || i != 31 || i != 36) {
+				if (i != 0 && i != 1 && i != 23 && i != 27 && i != 31 && i != 36) {
 					selectedItem.add(i);
 				}
 			}

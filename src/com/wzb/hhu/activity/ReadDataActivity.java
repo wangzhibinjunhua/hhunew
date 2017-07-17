@@ -388,7 +388,14 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 
 	}
 
+	String savePath="";
 	private void exportData() {
+		
+		calSelectedItem();
+		if(selectedItem ==null || selectedItem.size()==0){
+			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.select_item));
+			return;
+		}
 		CustomDialog.showWaitDialog(mContext,mContext.getResources().getString(R.string.save_to_excel));
 		String path = "";
 		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -406,7 +413,8 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			return;
 		}
 		String tempDate = new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis());
-		String savePath = path + "/" + tempDate + ".txt";
+		String currentSn=WApplication.sp.get("current_sn", "null");
+		savePath = path + "/" +currentSn +"_"+tempDate + ".txt";
 		FileOutputStream outputStream = null;
 		try {
 			outputStream = new FileOutputStream(savePath, true);
@@ -422,8 +430,13 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				}
 			}
 			outputStream.close();
-			CustomDialog.dismissDialog();
-			ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.file_saved_in)+savePath);
+			new Handler().postDelayed(new Runnable() {
+				public void run() {
+					CustomDialog.dismissDialog();
+					ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.file_saved_in)+savePath);
+				}
+			}, 2000);
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

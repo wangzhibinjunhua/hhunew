@@ -44,7 +44,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 	private Context mContext;
 
 	private Button readBtn, writeBtn, returnBtn;
-	private CheckBox sysClockCb;
+	private CheckBox dateCb,timeCb;
 	private EditText sysDate, sysTime;
 	private ImageView dateSet, timeSet;
 	private TextView meterDate, meterTime;
@@ -71,8 +71,11 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 	}
 
 	private void initView() {
-		sysClockCb = (CheckBox) findViewById(R.id.sys_clock_cb);
-		sysClockCb.setChecked(false);
+		dateCb = (CheckBox) findViewById(R.id.date_cb);
+		dateCb.setChecked(false);
+		
+		timeCb = (CheckBox) findViewById(R.id.time_cb);
+		timeCb.setChecked(false);
 
 		sysDate = (EditText) findViewById(R.id.sys_clock_date_value);
 		sysTime = (EditText) findViewById(R.id.sys_clock_time_value);
@@ -311,10 +314,15 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 	
 
 	
-	private void calSelectedItem(){
+	private void calSelectedItem(boolean read){
 		selectedItem.clear();
-		selectedItem.add(0);
-		selectedItem.add(1);
+		if(read){
+			selectedItem.add(0);
+			selectedItem.add(1);
+		}else{
+			if(dateCb.isChecked())selectedItem.add(0);
+			if(timeCb.isChecked())selectedItem.add(1);
+		}
 	}
 	
 	OnClickListener waitcancleListener = new OnClickListener() {
@@ -331,7 +339,7 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 	private void test_read() {
 		isRead=true;
 		//get selectedItem
-		calSelectedItem();
+		calSelectedItem(true);
 		LogUtil.logMessage("wzb", "selecteditem:"+selectedItem);
 		if (!WApplication.bt.isConnected()) {
 			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.bt_disconnect_show));
@@ -357,9 +365,9 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		}
 		isRead=false;
 		//get selectedItem
-		calSelectedItem();
+		calSelectedItem(false);
 		LogUtil.logMessage("wzb", "selecteditem:"+selectedItem);
-		if(!sysClockCb.isChecked()){
+		if (selectedItem == null || selectedItem.size() == 0) {
 			ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.select_item));
 			return;
 		}

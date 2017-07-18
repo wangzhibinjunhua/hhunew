@@ -18,16 +18,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <CheckBox
-            android:id="@+id/sys_clock_cb"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp" />
-
         <TextView
             android:id="@+id/sys_clock_title"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
             android:text="System Clock"
             android:textSize="28sp" />
     </LinearLayout>
@@ -36,6 +31,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
+          <CheckBox
+            android:id="@+id/date_cb"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp" />
 
         <TextView
             android:id="@+id/sys_clock_date"
@@ -70,6 +70,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
+        
+           <CheckBox
+            android:id="@+id/time_cb"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp" />
 
         <TextView
             android:id="@+id/sys_clock_time"

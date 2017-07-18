@@ -290,6 +290,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 					LogUtil.logMessage("wzb", "read completed");
 					CustomDialog.dismissDialog();
 					closeCon();
+					ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.read_ok));
 				} else {
 					sendDataItemCmd();
 				}
@@ -302,6 +303,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 					LogUtil.logMessage("wzb", "write completed");
 					CustomDialog.dismissDialog();
 					closeCon();
+					ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.write_ok));
 				} else {
 					sendWriteDataItemCmd();
 				}

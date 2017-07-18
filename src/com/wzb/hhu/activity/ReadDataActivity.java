@@ -287,6 +287,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 					LogUtil.logMessage("wzb", "read completed");
 					CustomDialog.dismissDialog();
 					closeCon();
+					ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.read_ok));
 				} else {
 					sendDataItemCmd();
 					

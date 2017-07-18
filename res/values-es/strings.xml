@@ -2,6 +2,9 @@
 <string name="app_name">Software de administrador del medidor</string>
     <string name="load_more"> cargar más ... </string>
     <string name="read_fail">Sin respuesta desde medidor!</string>
+    <string name="language">lenguaje</string>
+    <string name="read_ok">Lectura completa!</string>
+    <string name="write_ok">Escritura completa!</string>
     <string name="no_permission"> Permiso denegado </string>
     <string name="input_can_not_empty"> La entrada no puede estar vacía </string>
     <string name="no_search_result"> Sin resultado de búsqueda </string>

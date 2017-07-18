@@ -248,6 +248,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 					LogUtil.logMessage("wzb", "read completed");
 					CustomDialog.dismissDialog();
 					closeCon();
+					ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.read_ok));
 				} else {
 					sendDataItemCmd();
 				}

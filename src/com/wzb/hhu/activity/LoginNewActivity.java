@@ -57,12 +57,16 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 	
 	private TextView languageValue;
 	private ImageView languageBtn;
+	
+	
+	private Bundle s;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.s=savedInstanceState;
 		setContentView(R.layout.login_new);
 		//testdata();
 		init();
@@ -139,6 +143,9 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 		}
 		languageBtn=(ImageView)findViewById(R.id.language_btn);
 		languageBtn.setOnClickListener(this);
+		
+	
+		
 	}
 
 	@Override
@@ -225,7 +232,8 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 	            	languageValue.setText("Español");
 	    			WApplication.sp.set("app_language", "es");
 	            }
-	            reStartApp();
+	            //reStartApp();
+	            updateUILanguage();
 	        }
 	    });
 	    listDialog.show();
@@ -233,11 +241,17 @@ public class LoginNewActivity extends BaseActivity implements OnClickListener {
 	
 	private void reStartApp(){
 		Intent intent = new Intent(LoginNewActivity.this, LoginNewActivity.class);
-		 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		startActivity(intent);
 		 // 杀掉进程
 		 android.os.Process.killProcess(android.os.Process.myPid());
 		 System.exit(0);
+	}
+	
+	private void updateUILanguage(){
+		onCreate(s);
+		setContentView(R.layout.login_new);
+		init();
 	}
 	
 	void test(){

@@ -321,6 +321,9 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		LogUtil.logMessage("wzb", "####: info:" + info);
 		String ainfo = Common.asciiToString(info);
 		LogUtil.logMessage("wzb", "***: ainfo:" + ainfo);
+		if(TextUtils.isEmpty(ainfo)){
+			ainfo="-/-";
+		}
 		if (id != 0 || id != 1 || id != 23 || id != 27 || id != 31 || id != 36)ElecAdapter.updateDataItem(id, ainfo, "Y");
 		ElecAdapter.notifyDataSetChanged();
 	}

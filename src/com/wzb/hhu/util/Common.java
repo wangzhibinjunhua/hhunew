@@ -1,15 +1,81 @@
 package com.wzb.hhu.util;
 
 import java.io.UnsupportedEncodingException;
+import java.security.Key;
 import java.util.Locale;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
+import android.text.TextUtils;
 import android.util.Log;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author wzb<wangzhibin_x@qq.com>
  * @date Jun 4, 2017 11:24:40 PM
  */
 public class Common {
+	
+	
+	public static String generateMeterKey(String sn){
+		if(TextUtils.isEmpty(sn)){
+			return "";
+		}
+		String temp = StringUtils.leftPad(sn, 16, '0');
+		byte[] ks = AES_Encrypt("2017201720172017", temp);  //为了保密就不写实际的key了，王工以后发新版本请把源码也发来，我改下这个地方，把实际key写上。
+		if(null == ks){
+			return "";
+		}
+		
+		String s = "";
+		for(int i=0;i<8;i++){
+			int xs = ks[i] & 0x00FF;
+			if(xs > 9)
+				xs = xs % 9;
+			s += xs;
+		}
+		
+		return s;
+	}
+	
+	
+	/**
+	 * AES加密
+	 * @param keyStr 密钥
+	 * @param plainText 需要加密的明文
+	 * @return
+	 */
+	public static byte[] AES_Encrypt(String keyStr, String plainText) { 
+        byte[] encrypt = null; 
+        try{ 
+            Key key = generateKey(keyStr); 
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding"); 
+            cipher.init(Cipher.ENCRYPT_MODE, key); 
+            encrypt = cipher.doFinal(plainText.getBytes());     
+        }catch(Exception e){ 
+            e.printStackTrace(); 
+        }
+        Log.e("wzb","encrypt="+bytesToHexString(encrypt));
+        return encrypt; 
+    } 
+	
+	/**
+	 * 通过密钥生成key对象
+	 * @param key 密钥字符串
+	 * @return key对象
+	 * @throws Exception
+	 */
+	private static Key generateKey(String key)throws Exception{ 
+        try{            
+            SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES"); 
+            return keySpec; 
+        }catch(Exception e){ 
+            e.printStackTrace(); 
+            throw e; 
+        } 
+ 
+    } 
 
 	public static String xorHex(String strhex) {
 		byte[] bs = parseHexStringToBytes(strhex);

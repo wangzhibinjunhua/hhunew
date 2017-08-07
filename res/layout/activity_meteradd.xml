@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="@string/password"
+        android:visibility="gone"
         android:textSize="20sp" />
 
     <EditText

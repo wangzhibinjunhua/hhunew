@@ -328,6 +328,9 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 		LogUtil.logMessage("wzb", "####: info:" + info);
 		String ainfo = Common.asciiToString(info);
 		LogUtil.logMessage("wzb", "***: ainfo:" + ainfo);
+		if(TextUtils.isEmpty(ainfo)){
+			ainfo="-/-";
+		}
 		settingAdapter.updateDataItem(id, ainfo, "Y");
 		settingAdapter.notifyDataSetChanged();
 	}

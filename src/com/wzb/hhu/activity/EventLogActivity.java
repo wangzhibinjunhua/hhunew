@@ -273,6 +273,9 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 		LogUtil.logMessage("wzb", "####: info:" + info);
 		String ainfo = Common.asciiToString(info);
 		LogUtil.logMessage("wzb", "***: ainfo:" + ainfo);
+		if(TextUtils.isEmpty(ainfo)){
+			ainfo="-/-";
+		}
 		eventAdapter.updateDataItem(id, ainfo, "Y");
 		eventAdapter.notifyDataSetChanged();
 	}

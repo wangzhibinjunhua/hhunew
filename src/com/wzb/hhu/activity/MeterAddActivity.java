@@ -1,6 +1,7 @@
 package com.wzb.hhu.activity;
 
 import com.wzb.hhu.R;
+import com.wzb.hhu.util.Common;
 import com.wzb.hhu.util.CustomDialog;
 import com.wzb.hhu.util.DbUtil;
 import com.wzb.hhu.util.ResTools;
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -53,6 +55,7 @@ public class MeterAddActivity extends BaseActivity implements OnClickListener{
 		
 		snEt=(EditText)findViewById(R.id.sn_et);
 		passwordEt=(EditText)findViewById(R.id.password_et);
+		passwordEt.setVisibility(View.GONE);
 		locationEt=(EditText)findViewById(R.id.location_et);
 		
 		phrases1=(CheckBox)findViewById(R.id.phrases_1);
@@ -103,7 +106,8 @@ public class MeterAddActivity extends BaseActivity implements OnClickListener{
 	
 	private void addNewMeter(){
 		String sn=snEt.getText().toString();
-		String password=passwordEt.getText().toString();
+		//String password=passwordEt.getText().toString();
+		String password=Common.generateMeterKey(sn);
 		String location=locationEt.getText().toString();
 		String model="";
 		if(phrases1.isChecked()){
@@ -111,7 +115,7 @@ public class MeterAddActivity extends BaseActivity implements OnClickListener{
 		}else if(phrases3.isChecked()){
 			model="3 Phrases";
 		}
-		
+		Log.e("wzb","sn="+sn+",pw="+password+" ,model="+model);
 		if(!TextUtils.isEmpty(sn) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(model)){
 			if(DbUtil.getMeter(sn) !=null){
 				ToastUtil.showShortToast(mContext, mContext.getResources().getString(R.string.meter_sn_exists));

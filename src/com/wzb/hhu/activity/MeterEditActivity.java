@@ -78,6 +78,7 @@ public class MeterEditActivity extends BaseActivity implements OnClickListener{
 		
 		snEt=(EditText)findViewById(R.id.sn_et);
 		passwordEt=(EditText)findViewById(R.id.password_et);
+		passwordEt.setVisibility(View.GONE);
 		locationEt=(EditText)findViewById(R.id.location_et);
 		
 		phrases1=(CheckBox)findViewById(R.id.phrases_1);

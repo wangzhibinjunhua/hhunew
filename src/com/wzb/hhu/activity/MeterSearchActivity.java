@@ -396,6 +396,7 @@ public class MeterSearchActivity extends BaseActivity implements OnScrollListene
 
 			TextView meter_pw = (TextView) convertView.findViewById(R.id.ammeter_password);
 			meter_pw.setText(ammeterItems.get(position).getPassword());
+			meter_pw.setVisibility(View.GONE);
 
 			TextView meter_location = (TextView) convertView.findViewById(R.id.ammeter_location);
 			meter_location.setText(ammeterItems.get(position).getLocation());

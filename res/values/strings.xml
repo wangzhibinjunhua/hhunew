@@ -116,7 +116,7 @@
     <string name="nominal_voltage">Nominal Voltage</string>
     <string name="nominal_current">Nominal Current</string>
     <string name="nominal_frequency">Nominal Frequency</string>
-    <string name="max_current">Mmaximun Current(Imax)</string>
+    <string name="max_current">Maximun Current(Imax)</string>
     <string name="open_closure_times">Open closure times</string>
     <string name="open_closure_event_log">Open closure event log</string>
     <string name="open_cover_times">Open cover times</string>
@@ -153,7 +153,7 @@
     <string name="power_factor_integer_digits">Power factor number of integer digits</string>
     <string name="power_factor_decimal_digits">Power factor number of decimal digits</string>
     <string name="frequency_factor_integer_digits">Frequency number of integer digits</string>
-    <string name="frequency_factor_decimal_digits">Frequency factor number of decimal digits</string>
+    <string name="frequency_factor_decimal_digits">Frequency number of decimal digits</string>
     <string name="day_tariff_table">Day tariff table</string>
     <string name="user_account">Account</string>
     <string name="name">Name</string>

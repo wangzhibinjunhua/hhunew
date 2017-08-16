@@ -109,6 +109,15 @@ public class DbUtil {
 		return null;
 	}
 	
+	public static String getMeterModel(String sn){
+		Cursor cursor = WApplication.db.rawQuery("select * from meter where sn=?", new String[] { sn });
+		if (cursor.moveToNext()) {
+			return cursor.getString(4);
+		}
+		cursor.close();
+		return null;
+	}
+	
 	
 	public static ArrayList<AmmeterBean> getAllMeter(){
 		ArrayList<AmmeterBean> list = new ArrayList<AmmeterBean>();

@@ -17,6 +17,7 @@ import com.wzb.hhu.btcore.IECCommand;
 import com.wzb.hhu.interf.WApplication;
 import com.wzb.hhu.util.Common;
 import com.wzb.hhu.util.CustomDialog;
+import com.wzb.hhu.util.DbUtil;
 import com.wzb.hhu.util.LogUtil;
 import com.wzb.hhu.util.ResTools;
 import com.wzb.hhu.util.ToastUtil;
@@ -78,6 +79,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	private static int curItemId = 0;
 	List<DataItemBean> mdataItems;
 	Drawable drawableUp, drawableDown;
+	private Boolean isTwoPh=false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -231,6 +233,15 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 		meterSn = WApplication.sp.get("current_sn", "");
 		meterPw = WApplication.sp.get("current_pw", "");
 		titleView.setText(ResTools.getResString(mContext, R.string.read_data) + ":\n" + meterSn);
+		
+		if(DbUtil.getMeterModel(meterSn).equals("1 Phrases")){
+			isTwoPh=true;
+		}else{
+			isTwoPh=false;
+		}
+		
+		//test
+
 	}
 
 	private void updateBtState() {
@@ -710,6 +721,19 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 					itemList.setVisibility(View.VISIBLE);
 				}
 			}
+			
+			//test//
+			if(isTwoPh){
+				if(position==29 || position==30 || position==33 || position==34
+						||position==39||position==40 || position==43 || position==44
+						||position==51||position==52 ||position==47||position==48){
+					tvName.setVisibility(View.GONE);
+					tvValue.setVisibility(View.GONE);
+					tvState.setVisibility(View.GONE);
+					cb.setVisibility(View.GONE);
+					itemList.setVisibility(View.GONE);
+				}
+			}
 
 			return convertView;
 		}
@@ -771,6 +795,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				dataItems.get(i).setisHide(select);
 			}
 		}
+		
 
 		public void setEnergyItemsHide(Boolean select) {
 			for (int i = 2; i < 14; i++) {

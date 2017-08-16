@@ -295,9 +295,9 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		int curComItem = selectedItem.get(curItemId);
 		String cmd = ResTools.getResStringArray(mContext, R.array.time_cmd)[curComItem];
 		String writeValue="";
-		if(curComItem==0){
+		if(curComItem==1){
 			writeValue=sysTime.getText().toString();
-		}else if(curComItem==1){
+		}else if(curComItem==0){
 			writeValue=sysDate.getText().toString();
 		}
 		String sendData = "01573102" + Common.stringToAscii(cmd) + "28"+Common.stringToAscii(writeValue)+"2903";

@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -68,8 +69,9 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		initTitleView();
 		setBtListener();
 		initView();
-	}
 
+	}
+	
 	private void initView() {
 		dateCb = (CheckBox) findViewById(R.id.date_cb);
 		dateCb.setChecked(false);
@@ -467,12 +469,12 @@ public class SettingTimeActivity extends BaseActivity implements OnClickListener
 		String[] dateTime = new String[6];
 		Time t = new Time();
 		t.setToNow();
-		dateTime[0] = "" + t.year;
-		dateTime[1] = "" + (t.month + 1);
-		dateTime[2] = "" + t.monthDay;
-		dateTime[3] = "" + t.hour;
-		dateTime[4] = "" + t.minute;
-		dateTime[5] = "" + t.second;
+		dateTime[0] = String.format("%2d", t.year).replace(" ","0");//"" + t.year;
+		dateTime[1] = String.format("%2d", t.month + 1).replace(" ","0");//"" + (t.month + 1);
+		dateTime[2] = String.format("%2d", t.monthDay).replace(" ","0");//"" + t.monthDay;
+		dateTime[3] = String.format("%2d", t.hour).replace(" ","0");//"" + t.hour;
+		dateTime[4] = String.format("%2d", t.minute).replace(" ","0");//"" + t.minute;
+		dateTime[5] = String.format("%2d", t.second).replace(" ","0");//"" + t.second;
 		LogUtil.logMessage("wzb", "month=" + t.month);
 		return dateTime;
 	}

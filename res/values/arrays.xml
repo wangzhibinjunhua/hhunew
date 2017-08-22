@@ -160,6 +160,30 @@
         <!-- 12 合相感性无功电量 -->
         <item>@string/inductive_reactive_power_history</item>
         <!-- 13 合相感性无功历史电量 -->
+        <item>@string/last1_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last2_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last3_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last4_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last5_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last6_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last7_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last8_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last9_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last10_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last11_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
+         <item>@string/last12_inductive_reactive_power_history</item>
+        <!-- 13 合相感性无功历史电量 -->
 
         <item>@string/tariff_rate</item>
         <!-- 14 分费率 -->
@@ -167,17 +191,113 @@
         <!-- 15 合相总有功电量分费率 -->
         <item>@string/total_active_energy_history_tr</item>
         <!-- 16 合相总有功历史电量分费率 -->
+          <item>@string/last1_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last2_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last3_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last4_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last5_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last6_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last7_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last8_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last9_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last10_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last11_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
+            <item>@string/last12_total_active_energy_history_tr</item>
+        <!-- 16 合相总有功历史电量分费率 -->
         <item>@string/positive_active_energy_tr</item>
         <!-- 17 合相正向有功电量分费率 -->
         <item>@string/positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last1_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last2_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last3_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last4_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last5_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last6_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last7_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last8_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last9_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last10_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last11_positive_active_energy_history_tr</item>
+        <!-- 18 合相正向有功历史电量分费率 -->
+         <item>@string/last12_positive_active_energy_history_tr</item>
         <!-- 18 合相正向有功历史电量分费率 -->
         <item>@string/reverse_active_energy_tr</item>
         <!-- 19 合相反向有功电量分费率 -->
         <item>@string/reverse_active_energy_history_tr</item>
         <!-- 20 合相反向有功历史电量分费率 -->
+           <item>@string/last1_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last2_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last3_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last4_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last5_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last6_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last7_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last8_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last9_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last10_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last11_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
+            <item>@string/last12_reverse_active_energy_history_tr</item>
+        <!-- 20 合相反向有功历史电量分费率 -->
         <item>@string/total_reactive_energy_tr</item>
         <!-- 21 合相总无功电量分费率 -->
         <item>@string/total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+          <item>@string/last1_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last2_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last3_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last4_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last5_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last6_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last7_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last8_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last9_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last10_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last11_total_reactive_energy_history_tr</item>
+        <!-- 22 合相总无功历史电量分费率 -->
+                  <item>@string/last12_total_reactive_energy_history_tr</item>
         <!-- 22 合相总无功历史电量分费率 -->
 
         <item>@string/demand</item>
@@ -185,6 +305,30 @@
         <item>@string/total_active_max_demand</item>
         <!-- 24 总有功最大需量 -->
         <item>@string/total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+           <item>@string/last1_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last2_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last3_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last4_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last5_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last6_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last7_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last8_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last9_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last10_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last11_total_active_max_demand_history</item>
+        <!-- 25 总有功历史最大需量 -->
+                 <item>@string/last12_total_active_max_demand_history</item>
         <!-- 25 总有功历史最大需量 -->
         <item>@string/total_reactive_max_demand</item>
         <!-- 26 总无功最大需量 -->
@@ -269,7 +413,7 @@
         <!-- 1 电量 -->
         <item>15.8.0</item>
         <!-- 2 合相总有功电量 -->
-        <item>15.8.0*</item>
+        <item></item>
         <!-- 3 合相总有功历史电量 -->
          <item>15.8.0*1</item>
         <!-- 4 合相总有功历史电量 -->
@@ -297,7 +441,7 @@
         <!-- 15 合相总有功历史电量 -->
         <item>1.8.0</item>
         <!-- 4+12 合相正向有功电量 -->
-        <item>1.8.0*</item>
+        <item></item>
         <!-- 5+12 合相正向有功历史电量 -->
         <item>1.8.0*1</item>
         <!-- 5+12 合相正向有功历史电量 -->
@@ -325,7 +469,7 @@
         <!-- 5+12 合相正向有功历史电量 -->
         <item>2.8.0</item>
         <!-- 6+12+12 合相反向有功电量 -->
-        <item>2.8.0*</item>
+        <item></item>
         <!-- 7+12+12 合相反向有功历史电量 -->
         <item>2.8.0*1</item>
         <!-- 7+12+12 合相反向有功历史电量 -->
@@ -381,7 +525,7 @@
         <!-- 9+12+12+12 合相总无功历史电量 -->
         <item>3.8.0</item>
         <!-- 10+12+12+12+12 合相总感性无功电量 -->
-        <item>3.8.0*</item>
+        <item></item>
         <!-- 11+12+12+12+12 合相总感性无功历史电量 -->
         <item>3.8.0*1</item>
         <!-- 11+12+12+12+12 合相总感性无功历史电量 -->
@@ -409,107 +553,251 @@
         <!-- 11+12+12+12+12 合相总感性无功历史电量 -->
         <item>4.8.0</item>
         <!-- 12+12*5 合相感性无功电量 -->
-        <item>4.8.0*</item>
+        <item></item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+         <item>4.8.0*1</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*2</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*3</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*4</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*5</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*6</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*7</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*8</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*9</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*10</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*11</item>
+        <!-- 13+12*5 合相感性无功历史电量 -->
+          <item>4.8.0*12</item>
         <!-- 13+12*5 合相感性无功历史电量 -->
 
         <item></item>
-        <!-- 14+12*5 分费率 -->
-        <item>15.8.</item>
-        <!-- 15+12*5 合相总有功电量分费率 -->
-        <item>15.8.</item>
-        <!-- 16+12*5 合相总有功历史电量分费率 -->
-        <item>1.8.</item>
-        <!-- 17+12*5 合相正向有功电量分费率 -->
-        <item>1.8.</item>
-        <!-- 18+12*5 合相正向有功历史电量分费率 -->
-        <item>2.8.</item>
-        <!-- 19+12*5 合相反向有功电量分费率 -->
-        <item>2.8.</item>
-        <!-- 20+12*5 合相反向有功历史电量分费率 -->
-        <item>96.81.</item>
-        <!-- 21+12*5 合相总无功电量分费率 -->
-        <item>96.81.</item>
-        <!-- 22+12*5 合相总无功历史电量分费率 -->
+        <!-- 14+12*6 分费率 -->
+        <item>15.8.4</item>
+        <!-- 15+12*6 合相总有功电量分费率 -->
+        <item>15.8.4*</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+        <item>15.8.4*1</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*2</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*3</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*4</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*5</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*6</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*7</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*8</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*9</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*10</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*11</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+           <item>15.8.4*12</item>
+        <!-- 16+12*6 合相总有功历史电量分费率 -->
+        <item>1.8.4</item>
+        <!-- 17+12*7 合相正向有功电量分费率 -->
+        <item>1.8.4*</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                <item>1.8.4*1</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*2</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*3</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*4</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*5</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*6</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*7</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*8</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*9</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*10</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*11</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+                        <item>1.8.4*12</item>
+        <!-- 18+12*7 合相正向有功历史电量分费率 -->
+        <item>2.8.4</item>
+        <!-- 19+12*8 合相反向有功电量分费率 -->
+        <item>2.8.4*</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                <item>2.8.4*1</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*2</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*3</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*4</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*5</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*6</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*7</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*8</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*9</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*10</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*11</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+                        <item>2.8.4*12</item>
+        <!-- 20+12*8 合相反向有功历史电量分费率 -->
+        <item>96.81.4</item>
+        <!-- 21+12*9 合相总无功电量分费率 -->
+        <item>96.81.4*</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+          <item>96.81.4*1</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*2</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*3</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*4</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*5</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*6</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*7</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*8</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*9</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*10</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*11</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
+                  <item>96.81.4*12</item>
+        <!-- 22+12*9 合相总无功历史电量分费率 -->
 
         <item></item>
-        <!-- 23+12*5 需量 -->
+        <!-- 23+12*10 需量 -->
         <item>1.6.0</item>
-        <!-- 24+12*5 总有功最大需量 -->
+        <!-- 24+12*10 总有功最大需量 -->
         <item>1.6.0*</item>
-        <!-- 25+12*5 总有功历史最大需量 -->
+        <!-- 25+12*10 总有功历史最大需量 -->
+                <item>1.6.0*1</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*2</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*3</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*4</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*5</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*6</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*7</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*8</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*9</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*10</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*11</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
+                        <item>1.6.0*12</item>
+        <!-- 25+12*10 总有功历史最大需量 -->
         <item>96.61.0</item>
-        <!-- 26+12*5 总无功最大需量 -->
+        <!-- 26+12*11 总无功最大需量 -->
 
         <item></item>
-        <!-- 27+12*5 电压 -->
+        <!-- 27+12*11 电压 -->
         <item>32.7.0</item>
-        <!-- 28+12*5 A相电压 -->
+        <!-- 28+12*11 A相电压 -->
         <item>52.7.0</item>
-        <!-- 29+12*5 B相电压 -->
+        <!-- 29+12*11 B相电压 -->
         <item>72.7.0</item>
-        <!-- 30+12*5 C相电压 -->
+        <!-- 30+12*11 C相电压 -->
 
         <item>Current</item>
-        <!-- 31+12*5  电流 -->
+        <!-- 31+12*11  电流 -->
         <item>31.7.0</item>
-        <!-- 32+12*5 A相电流 -->
+        <!-- 32+12*11 A相电流 -->
         <item>51.7.0</item>
-        <!-- 33 +12*5B相电流 -->
+        <!-- 33 +12*11 B相电流 -->
         <item>71.7.0</item>
-        <!-- 34+12*5 C相电流 -->
+        <!-- 34+12*11 C相电流 -->
         <item>91.7.0</item>
-        <!-- 35 +12*5零线电流 -->
+        <!-- 35 +12*11 零线电流 -->
 
         <item>Power</item>
-        <!-- 36+12*5 功率 -->
+        <!-- 36+12*11 功率 -->
         <item>1.7.0</item>
-        <!-- 37+12*5 总有功功率 -->
+        <!-- 37+12*11 总有功功率 -->
         <item>21.7.0</item>
-        <!-- 38+12*5 A相有功功率 -->
+        <!-- 38+12*11 A相有功功率 -->
         <item>41.7.0</item>
-        <!-- 39+12*5 B相有功功率 -->
+        <!-- 39+12*11 B相有功功率 -->
         <item>61.7.0</item>
-        <!-- 40 +12*5C相有功功率 -->
+        <!-- 40 +12*11 C相有功功率 -->
         <item>3.7.0</item>
-        <!-- 41+12*5 总无功功率 -->
+        <!-- 41+12*11 总无功功率 -->
         <item>23.7.0</item>
-        <!-- 42+12*5 A相无功功率 -->
+        <!-- 42+12*11 A相无功功率 -->
         <item>43.7.0</item>
-        <!-- 43+12*5 B相无功功率 -->
+        <!-- 43+12*11 B相无功功率 -->
         <item>63.7.0</item>
-        <!-- 44+12*5 C相无功功率 -->
+        <!-- 44+12*11 C相无功功率 -->
         <item>9.7.0</item>
-        <!-- 45+12*5 总视在功率 -->
+        <!-- 45+12*11 总视在功率 -->
         <item>29.7.0</item>
-        <!-- 46+12*5 A相视在功率 -->
+        <!-- 46+12*11 A相视在功率 -->
         <item>49.7.0</item>
-        <!-- 47+12*5 B相视在功率 -->
+        <!-- 47+12*11 B相视在功率 -->
         <item>69.7.0</item>
-        <!-- 48+12*5 C相视在功率 -->
+        <!-- 48+12*11 C相视在功率 -->
         <item>13.7.0</item>
-        <!-- 49+12*5 总功率因数 -->
+        <!-- 49+12*11 总功率因数 -->
         <item>33.7.0</item>
-        <!-- 50+12*5 A相功率因数 -->
+        <!-- 50+12*11 A相功率因数 -->
         <item>53.7.0</item>
-        <!-- 51+12*5 B相功率因数 -->
+        <!-- 51+12*11 B相功率因数 -->
         <item>73.7.0</item>
-        <!-- 52+12*5 C相功率因数 -->
+        <!-- 52+12*11 C相功率因数 -->
 
         <item>14.7.0</item>
-        <!-- 53+12*5 电表当前频率 -->
+        <!-- 53+12*11 电表当前频率 -->
 
         <item>96.1.0</item>
-        <!-- 54+12*5 电表表号 -->
+        <!-- 54+12*11 电表表号 -->
         <item>0.2.0</item>
-        <!-- 55+12*5 软件版本号 -->
+        <!-- 55+12*11 软件版本号 -->
         <item>0.6.0</item>
-        <!-- 56+12*5 额定电压 -->
+        <!-- 56+12*11 额定电压 -->
         <item>0.6.1</item>
-        <!-- 57+12*5 额定电流 -->
+        <!-- 57+12*11 额定电流 -->
         <item>0.6.2</item>
-        <!-- 58+12*5 额定频率 -->
+        <!-- 58+12*11 额定频率 -->
         <item>0.6.3</item>
-        <!-- 59+12*5 最大电流 -->
+        <!-- 59+12*11 最大电流 -->
 
     </string-array>
     <string-array name="event" translatable="false">

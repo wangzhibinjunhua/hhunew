@@ -80,6 +80,7 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	List<DataItemBean> mdataItems;
 	Drawable drawableUp, drawableDown;
 	private Boolean isTwoPh=false;
+	private int historyNum=0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -317,11 +318,24 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 			case 0xfc:
 				if (rString.equals("06") || rString.equals("6")) {
 					// start read
+					curComCmd = 0xfb;
+					getHistoryNum();
+
+				}
+				break;
+			case 0xfb:
+					// start read
+				if(!TextUtils.isEmpty(rString)){
+					historyNum=Integer.parseInt(rString);
+				}else{
+					historyNum=0;
+				}
+				mHandler.removeCallbacks(timeout);
+				mHandler.removeCallbacks(sendtimeout);
 					curComCmd = 0xff0002;
 					curItemId = 0;
 					sendDataItemCmd();
 
-				}
 				break;
 			case 0xff0002:
 				mHandler.removeCallbacks(timeout);
@@ -354,6 +368,15 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				ToastUtil.showLongToast(mContext, mContext.getResources().getString(R.string.read_fail));
         }
     };
+    
+    private  void getHistoryNum(){
+    	String cmd="0.1.1";
+    	String sendData = "01523102" + Common.stringToAscii(cmd) + "282903";
+		String sendDataXor = Common.xorHex(sendData.substring(2));
+		IECCommand.sppSend(sendData + sendDataXor);
+		mHandler.postDelayed(sendtimeout, 2000);
+		
+    }
 
 	private void closeCon() {
 		String string = "01423003";
@@ -379,18 +402,106 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 	private void sendDataItemCmd() {
 		int curComItem = selectedItem.get(curItemId);
 		String cmd = ResTools.getResStringArray(mContext, R.array.elec_cmd)[curComItem];
-		//if (curComItem == 3 || curComItem == 5 || curComItem == 7 || curComItem == 9 || curComItem == 11
-		//		|| curComItem == 13) {
-		//	cmd = cmd + IECCommand.MONTH_DEFAULT_NUM;
-		//}
+		if(curComItem>=4 && curComItem <=15){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="15.8.0*"+num;
+			}else{
+				cmd="15.8.0*"+(historyNum+1-num);
+			}
+		}
+		
+		if(curComItem>5+12 && curComItem <6+12*2){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="1.8.0*"+num;
+			}else{
+				cmd="1.8.0*"+(historyNum+1-num);
+			}
+		}
+		
+		if(curComItem>7+12*2 && curComItem <8+12*3){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="2.8.0*"+num;
+			}else{
+				cmd="2.8.0*"+(historyNum+1-num);
+			}
+		}
+		
+		if(curComItem>9+12*3 && curComItem <10+12*4){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="96.81.0*"+num;
+			}else{
+				cmd="96.81.0*"+(historyNum+1-num);
+			}
+		}
+		
+		if(curComItem>11+12*4 && curComItem <12+12*5){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="3.8.0*"+num;
+			}else{
+				cmd="3.8.0*"+(historyNum+1-num);
+			}
+		}
+		
+		if(curComItem>13+12*5 && curComItem <14+12*6){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="4.8.0*"+num;
+			}else{
+				cmd="4.8.0*"+(historyNum+1-num);
+			}
+		}
+		
+		if(curComItem>16+12*6 && curComItem <17+12*7){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="15.8.4*"+num;
+			}else{
+				cmd="15.8.4*"+(historyNum+1-num);
+			}
+		}
+		
+		if(curComItem>18+12*7 && curComItem <19+12*8){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="1.8.4*"+num;
+			}else{
+				cmd="1.8.4*"+(historyNum+1-num);
+			}
+		}
+		
+		if(curComItem>20+12*8 && curComItem <21+12*9){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="2.8.4*"+num;
+			}else{
+				cmd="2.8.4*"+(historyNum+1-num);
+			}
+		}
+		
+		if(curComItem>22+12*9 && curComItem <23+12*10){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="96.81.4*"+num;
+			}else{
+				cmd="96.81.4*"+(historyNum+1-num);
+			}
+		}
+		
+		if(curComItem>25+12*10 && curComItem <26+12*11){
+			int num=Integer.parseInt(cmd);
+			if(num>historyNum){
+				cmd="1.6.0*"+num;
+			}else{
+				cmd="1.6.0*"+(historyNum+1-num);
+			}
+		}
 
-		//if (curComItem == 15 || curComItem == 17 || curComItem == 19 || curComItem == 21) {
-		//	cmd = cmd + IECCommand.RATE_DEFAULT_NUM;
-		//}
-
-		//if (curComItem == 16 || curComItem == 18 || curComItem == 20 || curComItem == 22) {
-		//	cmd = cmd + IECCommand.RATE_DEFAULT_NUM + "*" + IECCommand.MONTH_DEFAULT_NUM;
-		//}
+	
 		String sendData = "01523102" + Common.stringToAscii(cmd) + "282903";
 		String sendDataXor = Common.xorHex(sendData.substring(2));
 		IECCommand.sppSend(sendData + sendDataXor);

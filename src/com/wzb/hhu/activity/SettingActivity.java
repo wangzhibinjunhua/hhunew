@@ -127,7 +127,7 @@ public class SettingActivity extends BaseActivity implements OnScrollListener, O
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				LogUtil.logMessage("wzb", "setting long click arg2:" + arg2);
-				editSettingValue(arg2);
+				if(arg2!=0 && arg2!=1)editSettingValue(arg2);
 				return true;
 			}
 		});

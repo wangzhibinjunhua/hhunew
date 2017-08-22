@@ -67,6 +67,7 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 
 	private static int curComCmd = 0xff;
 	private static int curItemId = 0;
+	Drawable drawableUp, drawableDown;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,8 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 		mContext = EventLogActivity.this;
 		meterSn = getIntent().getStringExtra("meter_sn");
 		meterPw = getIntent().getStringExtra("meter_pw");
+		drawableUp = mContext.getResources().getDrawable(R.drawable.up_icon);
+		drawableDown = mContext.getResources().getDrawable(R.drawable.down_icon);
 		initTitleView();
 		initView();
 	}
@@ -111,6 +114,23 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 						eventAdapter.unSelectAll();
 					}
 				}
+				
+				if(arg2==2){
+					eventAdapter.set2ItemsSelect(eventAdapter.getDataItem(arg2).getItemSelect());
+				}
+				
+				if(arg2==4+10){
+					eventAdapter.set4ItemsSelect(eventAdapter.getDataItem(arg2).getItemSelect());
+				}
+				if(arg2==6+10*2){
+					eventAdapter.set6ItemsSelect(eventAdapter.getDataItem(arg2).getItemSelect());
+				}
+				if(arg2==8+10*3){
+					eventAdapter.set8ItemsSelect(eventAdapter.getDataItem(arg2).getItemSelect());
+				}
+				if(arg2==10+10*4){
+					eventAdapter.set10ItemsSelect(eventAdapter.getDataItem(arg2).getItemSelect());
+				}
 
 				LogUtil.logMessage("wzb", "cb:" + arg2 + " " + eventAdapter.getDataItem(arg2).getItemSelect());
 				eventAdapter.notifyDataSetChanged();
@@ -138,6 +158,8 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 				item.setItemState("");
 				item.setItemSelect(false);
 			}
+			item.setisHide(false);
+			item.setisUp(false);
 			dataItems.add(item);
 		}
 
@@ -497,7 +519,8 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 				convertView = getLayoutInflater().inflate(R.layout.data_list_item, null);
 			}
 			ImageView itemList = (ImageView) convertView.findViewById(R.id.item_list);
-			itemList.setVisibility(View.GONE);
+			//itemList.setVisibility(View.GONE);
+			itemList.setClickable(true);
 			TextView tvName = (TextView) convertView.findViewById(R.id.data_item_name);
 			TextView tvValue = (TextView) convertView.findViewById(R.id.data_item_value);
 			TextView tvState = (TextView) convertView.findViewById(R.id.data_item_state);
@@ -510,8 +533,164 @@ public class EventLogActivity extends BaseActivity implements OnClickListener, O
 			int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };// RGB颜色
 
 			convertView.setBackgroundColor(colors[position % 2]);// 每隔item之间颜色不同
+			
+			
+			if(position==2){
+				itemList.setVisibility(View.VISIBLE);
+				itemList.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						LogUtil.logMessage("wzb", "11 Energy");
+						dataItems.get(2).isUpToggle();
+						set2ItemsHide(dataItems.get(2).getisUp());
+						eventAdapter.notifyDataSetChanged();
+					}
+				});
+			}
+			
+			if(position==4+10){
+				itemList.setVisibility(View.VISIBLE);
+				itemList.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						LogUtil.logMessage("wzb", "11 Energy");
+						dataItems.get(4+10).isUpToggle();
+						set4ItemsHide(dataItems.get(4+10).getisUp());
+						eventAdapter.notifyDataSetChanged();
+					}
+				});
+			}
+			
+			if(position==6+10*2){
+				itemList.setVisibility(View.VISIBLE);
+				itemList.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						LogUtil.logMessage("wzb", "11 Energy");
+						dataItems.get(6+10*2).isUpToggle();
+						set6ItemsHide(dataItems.get(6+10*2).getisUp());
+						eventAdapter.notifyDataSetChanged();
+					}
+				});
+			}
+			
+			if(position==8+10*3){
+				itemList.setVisibility(View.VISIBLE);
+				itemList.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						LogUtil.logMessage("wzb", "11 Energy");
+						dataItems.get(8+10*3).isUpToggle();
+						set8ItemsHide(dataItems.get(8+10*3).getisUp());
+						eventAdapter.notifyDataSetChanged();
+					}
+				});
+			}
+			
+			if(position==10+10*4){
+				itemList.setVisibility(View.VISIBLE);
+				itemList.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						LogUtil.logMessage("wzb", "11 Energy");
+						dataItems.get(10+10*4).isUpToggle();
+						set10ItemsHide(dataItems.get(10+10*4).getisUp());
+						eventAdapter.notifyDataSetChanged();
+					}
+				});
+			}
+			
+			if (dataItems.get(position).getisUp()) {
+				itemList.setBackground(drawableDown);
+			} else {
+				itemList.setBackground(drawableUp);
+			}
+			
+			if (dataItems.get(position).getisHide()) {
+				tvName.setVisibility(View.GONE);
+				tvValue.setVisibility(View.GONE);
+				tvState.setVisibility(View.GONE);
+				cb.setVisibility(View.GONE);
+				itemList.setVisibility(View.GONE);
+			} else {
+				tvName.setVisibility(View.VISIBLE);
+				tvValue.setVisibility(View.VISIBLE);
+				tvState.setVisibility(View.VISIBLE);
+				cb.setVisibility(View.VISIBLE);
+				itemList.setVisibility(View.INVISIBLE);
+				if (position == 2 || position == 4+10 || position == 6+10*2 
+						|| position == 8+10*3 || position == 10+10*4
+					) {
+					itemList.setVisibility(View.VISIBLE);
+				}
+			}
+			
 
 			return convertView;
+		}
+		
+		
+		public void set2ItemsSelect(Boolean select){
+			for(int i=2;i<3+10;i++){
+				dataItems.get(i).setItemSelect(select);
+			}
+		}
+		public void set4ItemsSelect(Boolean select){
+			for(int i=4+10;i<5+10*2;i++){
+				dataItems.get(i).setItemSelect(select);
+			}
+		}
+		public void set6ItemsSelect(Boolean select){
+			for(int i=6+10*2;i<7+10*3;i++){
+				dataItems.get(i).setItemSelect(select);
+			}
+		}
+		public void set8ItemsSelect(Boolean select){
+			for(int i=8+10*3;i<9+10*4;i++){
+				dataItems.get(i).setItemSelect(select);
+			}
+		}
+		public void set10ItemsSelect(Boolean select){
+			for(int i=10+10*4;i<11+10*5;i++){
+				dataItems.get(i).setItemSelect(select);
+			}
+		}
+		
+		
+		public void set2ItemsHide(Boolean select){
+			for(int i=2+1;i<3+10;i++){
+				dataItems.get(i).setisHide(select);
+			}
+		}
+		public void set4ItemsHide(Boolean select){
+			for(int i=4+1+10;i<5+10*2;i++){
+				dataItems.get(i).setisHide(select);
+			}
+		}
+		public void set6ItemsHide(Boolean select){
+			for(int i=6+1+10*2;i<7+10*3;i++){
+				dataItems.get(i).setisHide(select);
+			}
+		}
+		public void set8ItemsHide(Boolean select){
+			for(int i=8+1+10*3;i<9+10*4;i++){
+				dataItems.get(i).setisHide(select);
+			}
+		}
+		public void set10ItemsHide(Boolean select){
+			for(int i=10+1+10*4;i<11+10*5;i++){
+				dataItems.get(i).setisHide(select);
+			}
 		}
 
 		public DataItemBean getDataItem(int id) {

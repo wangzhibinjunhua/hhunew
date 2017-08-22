@@ -807,21 +807,122 @@
         <!-- 1开端盖事件发生次数 -->
         <item>@string/open_closure_event_log</item>
         <!-- 2 开端盖事件记录 -->
+        <item>@string/last1_open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>@string/last2_open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>@string/last3_open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>@string/last4_open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>@string/last5_open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>@string/last6_open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>@string/last7_open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>@string/last8_open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>@string/last9_open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>@string/last10_open_closure_event_log</item>
+        <!-- 2 开端盖事件记录 -->
+
         <item>@string/open_cover_times</item>
         <!-- 3 开面盖事件发生次数 -->
         <item>@string/open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+        <item>@string/last1_open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+         <item>@string/last2_open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+         <item>@string/last3_open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+         <item>@string/last4_open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+         <item>@string/last5_open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+         <item>@string/last6_open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+         <item>@string/last7_open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+         <item>@string/last8_open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+         <item>@string/last9_open_cover_event_log</item>
+        <!-- 4 开面盖事件记录 -->
+         <item>@string/last10_open_cover_event_log</item>
         <!-- 4 开面盖事件记录 -->
         <item>@string/reverse_event_times</item>
         <!-- 5 反向事件发生次数 -->
         <item>@string/reverse_event_log</item>
         <!-- 6 反向事件记录 -->
+        <item>@string/last1_reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
+        <item>@string/last2_reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
+        <item>@string/last3_reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
+        <item>@string/last4_reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
+        <item>@string/last5_reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
+        <item>@string/last6_reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
+        <item>@string/last7_reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
+        <item>@string/last8_reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
+        <item>@string/last9_reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
+        <item>@string/last10_reverse_event_log</item>
+        <!-- 6 反向事件记录 -->
         <item>@string/magnetic_event_times</item>
         <!-- 7 磁场事件发生次数 -->
         <item>@string/magnetic_event_log</item>
         <!-- 8 磁场事件记录 -->
+        <item>@string/last1_magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
+        <item>@string/last2_magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
+        <item>@string/last3_magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
+        <item>@string/last4_magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
+        <item>@string/last5_magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
+        <item>@string/last6_magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
+        <item>@string/last7_magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
+        <item>@string/last8_magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
+        <item>@string/last9_magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
+        <item>@string/last10_magnetic_event_log</item>
+        <!-- 8 磁场事件记录 -->
         <item>@string/deman_reset_event_times</item>
         <!-- 9 需量复位事件发生次数 -->
         <item>@string/deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
+        <item>@string/last1_deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
+        <item>@string/last2_deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
+        <item>@string/last3_deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
+        <item>@string/last4_deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
+        <item>@string/last5_deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
+        <item>@string/last6_deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
+        <item>@string/last7_deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
+        <item>@string/last8_deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
+        <item>@string/last9_deman_reset_event_log</item>
+        <!-- 10 需量复位事件记录 -->
+        <item>@string/last10_deman_reset_event_log</item>
         <!-- 10 需量复位事件记录 -->
     </string-array>
     <string-array name="event_cmd" translatable="false">
@@ -831,22 +932,124 @@
         <!-- 1开端盖事件发生次数 -->
         <item>99.98.7*</item>
         <!-- 2 开端盖事件记录 -->
+        <item>99.98.7*11</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>99.98.7*12</item>
+        <item>99.98.7*13</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>99.98.7*14</item>
+        <item>99.98.7*15</item>
+        <!-- 2 开端盖事件记录 -->
+        <item>99.98.7*16</item>
+        <!-- 2 开端盖事件记录 -->        
+        <item>99.98.7*17</item>
+        <!-- 2 开端盖事件记录 -->  
+        <item>99.98.7*18</item>
+        <!-- 2 开端盖事件记录 -->  
+        <item>99.98.7*19</item>
+        <!-- 2 开端盖事件记录 -->  
+        <item>99.98.7*20</item>
+        <!-- 2 开端盖事件记录 -->  
+
         <item>99.98.8*0</item>
-        <!-- 3 开面盖事件发生次数 -->
+        <!-- 3+10 开面盖事件发生次数 -->
         <item>99.98.8*</item>
-        <!-- 4 开面盖事件记录 -->
+        <!-- 4+10 开面盖事件记录 -->
+        <item>99.98.8*11</item>
+        <!-- 4+10 开面盖事件记录 -->
+        <item>99.98.8*12</item>
+        <!-- 4+10 开面盖事件记录 -->
+        <item>99.98.8*13</item>
+        <!-- 4+10 开面盖事件记录 -->
+        <item>99.98.8*14</item>
+        <!-- 4+10 开面盖事件记录 -->
+        <item>99.98.8*15</item>
+        <!-- 4+10 开面盖事件记录 -->
+        <item>99.98.8*16</item>
+        <!-- 4+10 开面盖事件记录 -->
+        <item>99.98.8*17</item>
+        <!-- 4+10 开面盖事件记录 -->
+        <item>99.98.8*18</item>
+        <!-- 4+10 开面盖事件记录 -->
+        <item>99.98.8*19</item>
+        <!-- 4+10 开面盖事件记录 -->
+        <item>99.98.8*20</item>
+        <!-- 4+10 开面盖事件记录 -->
+
         <item>99.98.35*0</item>
-        <!-- 5 反向事件发生次数 -->
+        <!-- 5+10*2 反向事件发生次数 -->
         <item>99.98.35*</item>
-        <!-- 6 反向事件记录 -->
+        <!-- 6+10*2 反向事件记录 -->
+        <item>99.98.35*11</item>
+        <!-- 6+10*2 反向事件记录 -->
+         <item>99.98.35*12</item>
+        <!-- 6+10*2 反向事件记录 -->
+         <item>99.98.35*13</item>
+        <!-- 6+10*2 反向事件记录 -->
+         <item>99.98.35*14</item>
+        <!-- 6+10*2 反向事件记录 -->
+         <item>99.98.35*15</item>
+        <!-- 6+10*2 反向事件记录 -->
+         <item>99.98.35*16</item>
+        <!-- 6+10*2 反向事件记录 -->
+         <item>99.98.35*17</item>
+        <!-- 6+10*2 反向事件记录 -->
+         <item>99.98.35*18</item>
+        <!-- 6+10*2 反向事件记录 -->
+         <item>99.98.35*19</item>
+        <!-- 6+10*2 反向事件记录 -->
+         <item>99.98.35*20</item>
+        <!-- 6+10*2 反向事件记录 -->
+
         <item>99.98.58*0</item>
-        <!-- 7 磁场事件发生次数 -->
+        <!-- 7+10*3 磁场事件发生次数 -->
         <item>99.98.58*</item>
-        <!-- 8 磁场事件记录 -->
+        <!-- 8+10*3 磁场事件记录 -->
+        <item>99.98.58*11</item>
+        <!-- 8+10*3 磁场事件记录 -->
+        <item>99.98.58*12</item>
+        <!-- 8+10*3 磁场事件记录 -->
+        <item>99.98.58*13</item>
+        <!-- 8+10*3 磁场事件记录 -->
+        <item>99.98.58*14</item>
+        <!-- 8+10*3 磁场事件记录 -->
+        <item>99.98.58*15</item>
+        <!-- 8+10*3 磁场事件记录 -->
+        <item>99.98.58*16</item>
+        <!-- 8+10*3 磁场事件记录 -->
+        <item>99.98.58*17</item>
+        <!-- 8+10*3 磁场事件记录 -->
+        <item>99.98.58*18</item>
+        <!-- 8+10*3 磁场事件记录 -->
+        <item>99.98.58*19</item>
+        <!-- 8+10*3 磁场事件记录 -->
+        <item>99.98.58*20</item>
+        <!-- 8+10*3 磁场事件记录 -->
+
         <item>99.98.5*0</item>
-        <!-- 9 需量复位事件发生次数 -->
+        <!-- 9+10*4 需量复位事件发生次数 -->
         <item>99.98.5*</item>
-        <!-- 10 需量复位事件记录 -->
+        <!-- 10+10*4 需量复位事件记录 -->
+        <item>99.98.5*11</item>
+        <!-- 10+10*4 需量复位事件记录 -->
+         <item>99.98.5*12</item>
+        <!-- 10+10*4 需量复位事件记录 -->
+         <item>99.98.5*13</item>
+        <!-- 10+10*4 需量复事件记录 -->
+         <item>99.98.5*14</item>
+        <!-- 10+10*4 需量复位事件记录 -->
+         <item>99.98.5*15</item>
+        <!-- 10+10*4 需量复位事件记录 -->
+         <item>99.98.5*16</item>
+        <!-- 10+10*4 需量复位事件记录 -->
+         <item>99.98.5*17</item>
+        <!-- 10+10*4 需量复位事件记录 -->
+         <item>99.98.5*18</item>
+        <!-- 10+10*4 需量复位事件记录 -->
+         <item>99.98.5*19</item>
+        <!-- 10+10*4 需量复位事件记录 -->
+         <item>99.98.5*20</item>
+        <!-- 10+10*5 需量复位事件记录 -->
     </string-array>
     <string-array name="setting" translatable="false">
         <item>@string/item_name</item>

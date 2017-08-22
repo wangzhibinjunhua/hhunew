@@ -325,8 +325,11 @@ public class ReadDataActivity extends BaseActivity implements OnScrollListener, 
 				break;
 			case 0xfb:
 					// start read
-				if(!TextUtils.isEmpty(rString)){
-					historyNum=Integer.parseInt(rString);
+				String info = rString.substring(rString.indexOf("28") + 2, rString.indexOf("29"));
+				LogUtil.logMessage("wzb", "####: info:" + info);
+				String ainfo = Common.asciiToString(info);
+				if(!TextUtils.isEmpty(ainfo)){
+					historyNum=Integer.parseInt(ainfo);
 				}else{
 					historyNum=0;
 				}

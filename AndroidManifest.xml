@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wzb.hhu"
+    package="com.wzb.hhunew"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -32,14 +32,14 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name=".interf.WApplication"
+        android:name="com.wzb.hhunew.interf.WApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
         <activity 
-            android:name=".activity.LoginNewActivity"   
+            android:name="com.wzb.hhunew.activity.LoginNewActivity"   
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -48,67 +48,67 @@
         </activity>
         
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.wzb.hhunew.activity.MainActivity"
             android:screenOrientation="portrait"
             />
           <activity
-            android:name=".activity.ReadDataActivity"
+            android:name="com.wzb.hhunew.activity.ReadDataActivity"
             android:screenOrientation="portrait"
             />
           
           <activity
-              android:name=".activity.EventLogActivity"
+              android:name="com.wzb.hhunew.activity.EventLogActivity"
               android:screenOrientation="portrait"/>
           
           <activity
-              android:name=".activity.SettingTimeActivity"
+              android:name="com.wzb.hhunew.activity.SettingTimeActivity"
               android:screenOrientation="portrait"/>
           
            <activity
-              android:name=".activity.UserManagerActivity"
+              android:name="com.wzb.hhunew.activity.UserManagerActivity"
               android:screenOrientation="portrait"/>
            
            <activity
-              android:name=".activity.SettingActivity"
+              android:name="com.wzb.hhunew.activity.SettingActivity"
               android:screenOrientation="portrait"/>
            
            <activity
-              android:name=".activity.UserAddActivity"
+              android:name="com.wzb.hhunew.activity.UserAddActivity"
               android:screenOrientation="portrait"/>
            <activity
-              android:name=".activity.UserEditActivity"
-              android:screenOrientation="portrait"/>
-           
-           <activity
-              android:name=".activity.MeterAddActivity"
+              android:name="com.wzb.hhunew.activity.UserEditActivity"
               android:screenOrientation="portrait"/>
            
            <activity
-              android:name=".activity.MeterEditActivity"
+              android:name="com.wzb.hhunew.activity.MeterAddActivity"
+              android:screenOrientation="portrait"/>
+           
+           <activity
+              android:name="com.wzb.hhunew.activity.MeterEditActivity"
               android:screenOrientation="portrait"/>
            
              <activity
-              android:name=".activity.MeterSearchActivity"
+              android:name="com.wzb.hhunew.activity.MeterSearchActivity"
               android:screenOrientation="portrait"/>
               <activity
-              android:name=".activity.ApplicationSetting"
+              android:name="com.wzb.hhunew.activity.ApplicationSetting"
               android:screenOrientation="portrait"/>
            
         <activity
-            android:name=".activity.AmmeterListActivity"
+            android:name="com.wzb.hhunew.activity.AmmeterListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
             />
         
         <activity
-            android:name="com.wzb.spp.DeviceList"
+            android:name="com.wzb.sppnew.DeviceList"
             android:screenOrientation="portrait"/>
         
         <activity
-            android:name="com.wzb.spp.test.SimpleActivity"/>
+            android:name="com.wzb.sppnew.test.SimpleActivity"/>
         
         <receiver 
-            android:name="com.wzb.hhu.btcore.BtManager"
+            android:name="com.wzb.hhunew.btcore.BtManager"
              android:enabled="true">
             <intent-filter>
               <action android:name="com.wzb.hhu.ACTION_CONNETION_ADDRESS"/>
